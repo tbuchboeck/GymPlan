@@ -1,0 +1,53 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg8)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Crunch</text>
+
+  <!-- Mat -->
+  <rect x="80" y="220" width="240" height="15" rx="7" fill="#475569"/>
+
+  <!-- Legs (bent) -->
+  <ellipse cx="160" cy="200" rx="30" ry="40" fill="url(#body8)"/>
+  <ellipse cx="240" cy="200" rx="30" ry="40" fill="url(#body8)"/>
+
+  <!-- Lower body -->
+  <rect x="140" y="180" width="120" height="40" rx="20" fill="url(#body8)"/>
+
+  <!-- Upper body (crunching up) -->
+  <g>
+    <ellipse cx="200" cy="140" rx="50" ry="40" fill="url(#body8)">
+      <animate attributeName="cy" values="140;120;140" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="ry" values="40;35;40" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Head -->
+    <circle cx="200" cy="100" r="24" fill="url(#body8)">
+      <animate attributeName="cy" values="100;85;100" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Arms behind head -->
+    <path d="M 160 100 Q 150 80 180 90" stroke="url(#body8)" stroke-width="15" fill="none">
+      <animate attributeName="d" values="M 160 100 Q 150 80 180 90; M 160 85 Q 150 65 180 75; M 160 100 Q 150 80 180 90" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 240 100 Q 250 80 220 90" stroke="url(#body8)" stroke-width="15" fill="none">
+      <animate attributeName="d" values="M 240 100 Q 250 80 220 90; M 240 85 Q 250 65 220 75; M 240 100 Q 250 80 220 90" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Arrow showing upward movement -->
+  <path d="M 320 140 L 320 100 L 310 110 M 320 100 L 330 110" stroke="#22d3ee" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>

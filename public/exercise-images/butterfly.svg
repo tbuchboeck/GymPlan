@@ -1,0 +1,54 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg7)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Butterfly</text>
+
+  <!-- Head -->
+  <circle cx="200" cy="100" r="24" fill="url(#body7)"/>
+
+  <!-- Body -->
+  <ellipse cx="200" cy="180" rx="45" ry="60" fill="url(#body7)"/>
+
+  <!-- Seat back -->
+  <rect x="190" y="130" width="20" height="120" rx="10" fill="#475569" opacity="0.5"/>
+
+  <!-- Left arm (opening/closing) -->
+  <g transform-origin="150 150">
+    <rect x="100" y="140" width="50" height="20" rx="10" fill="url(#body7)">
+      <animateTransform attributeName="transform" type="rotate" values="-30 150 150; -80 150 150; -30 150 150" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="80" y="130" width="20" height="40" rx="10" fill="#64748b">
+      <animateTransform attributeName="transform" type="rotate" values="-30 150 150; -80 150 150; -30 150 150" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Right arm (opening/closing) -->
+  <g transform-origin="250 150">
+    <rect x="250" y="140" width="50" height="20" rx="10" fill="url(#body7)">
+      <animateTransform attributeName="transform" type="rotate" values="30 250 150; 80 250 150; 30 250 150" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="300" y="130" width="20" height="40" rx="10" fill="#64748b">
+      <animateTransform attributeName="transform" type="rotate" values="30 250 150; 80 250 150; 30 250 150" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Arrows showing inward/outward movement -->
+  <path d="M 70 260 L 120 260 L 110 250 M 120 260 L 110 270" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 330 260 L 280 260 L 290 250 M 280 260 L 290 270" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>
