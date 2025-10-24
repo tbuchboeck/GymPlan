@@ -74,18 +74,18 @@ export function ReminderSettings({ onClose }: ReminderSettingsProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900">
       {/* Header */}
-      <div className="bg-white shadow-md">
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-2xl">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4"
+            className="flex items-center gap-2 text-white hover:text-indigo-100 mb-4 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Zurück</span>
           </button>
-          <h1 className="text-3xl font-bold text-gray-800">Erinnerungen</h1>
+          <h1 className="text-3xl font-bold text-white">Erinnerungen</h1>
         </div>
       </div>
 
@@ -99,19 +99,19 @@ export function ReminderSettings({ onClose }: ReminderSettingsProps) {
         ) : (
           <>
             {/* Enable/Disable Toggle */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl shadow-2xl p-6 mb-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   {config.enabled ? (
-                    <Bell className="w-8 h-8 text-indigo-600" />
+                    <Bell className="w-8 h-8 text-white" />
                   ) : (
-                    <BellOff className="w-8 h-8 text-gray-400" />
+                    <BellOff className="w-8 h-8 text-indigo-200" />
                   )}
                   <div>
-                    <h2 className="text-xl font-bold text-gray-800">
+                    <h2 className="text-xl font-bold text-white">
                       Erinnerungen {config.enabled ? 'aktiv' : 'inaktiv'}
                     </h2>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-indigo-100 text-sm">
                       {config.enabled
                         ? 'Du erhältst Benachrichtigungen'
                         : 'Aktiviere Erinnerungen für dein Training'}
@@ -121,11 +121,11 @@ export function ReminderSettings({ onClose }: ReminderSettingsProps) {
                 <button
                   onClick={toggleEnabled}
                   className={`relative w-16 h-8 rounded-full transition-colors ${
-                    config.enabled ? 'bg-indigo-600' : 'bg-gray-300'
+                    config.enabled ? 'bg-white/30' : 'bg-white/10'
                   }`}
                 >
                   <div
-                    className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${
+                    className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform shadow-lg ${
                       config.enabled ? 'translate-x-8' : ''
                     }`}
                   />
@@ -136,22 +136,22 @@ export function ReminderSettings({ onClose }: ReminderSettingsProps) {
             {config.enabled && (
               <>
                 {/* Time Selection */}
-                <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-                  <h3 className="font-bold text-gray-800 mb-4">Uhrzeit</h3>
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl shadow-2xl p-6 mb-6">
+                  <h3 className="font-bold text-white mb-4">Uhrzeit</h3>
                   <input
                     type="time"
                     value={config.time}
                     onChange={(e) => updateTime(e.target.value)}
-                    className="w-full p-4 text-2xl font-mono border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none"
+                    className="w-full p-4 text-2xl font-mono border-2 border-cyan-400 bg-white/90 rounded-xl focus:border-white focus:outline-none focus:ring-2 focus:ring-white"
                   />
-                  <p className="text-gray-600 text-sm mt-2">
+                  <p className="text-blue-100 text-sm mt-2">
                     Du wirst um {config.time} Uhr erinnert
                   </p>
                 </div>
 
                 {/* Day Selection */}
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                  <h3 className="font-bold text-gray-800 mb-4">Wochentage</h3>
+                <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl shadow-2xl p-6 border border-slate-600">
+                  <h3 className="font-bold text-white mb-4">Wochentage</h3>
                   <div className="grid grid-cols-7 gap-2">
                     {DAYS.map((day, index) => (
                       <button
@@ -159,15 +159,15 @@ export function ReminderSettings({ onClose }: ReminderSettingsProps) {
                         onClick={() => toggleDay(index)}
                         className={`p-3 rounded-lg font-semibold transition-all ${
                           config.days.includes(index)
-                            ? 'bg-indigo-600 text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-slate-600 text-slate-300 hover:bg-slate-500'
                         }`}
                       >
                         <div className="text-xs mb-1">{day.substring(0, 2)}</div>
                       </button>
                     ))}
                   </div>
-                  <p className="text-gray-600 text-sm mt-4">
+                  <p className="text-slate-300 text-sm mt-4">
                     {config.days.length === 0
                       ? 'Wähle mindestens einen Tag aus'
                       : `Erinnerungen an ${config.days.length} ${
