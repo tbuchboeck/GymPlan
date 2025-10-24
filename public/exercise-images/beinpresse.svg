@@ -15,32 +15,69 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Beinpresse</text>
 
-  <!-- Seat -->
-  <rect x="40" y="150" width="80" height="100" rx="10" fill="#475569"/>
+  <!-- Seat backrest -->
+  <rect x="50" y="140" width="25" height="120" rx="12" fill="#475569"/>
 
-  <!-- Body -->
-  <ellipse cx="80" cy="180" rx="30" ry="40" fill="url(#leg3)"/>
-  <circle cx="80" cy="150" r="18" fill="url(#leg3)"/>
+  <!-- Seat bottom -->
+  <rect x="50" y="255" width="80" height="25" rx="10" fill="#475569"/>
 
-  <!-- Left leg -->
-  <rect x="60" y="220" width="15" height="80" rx="7" fill="url(#leg3)">
-    <animate attributeName="height" values="80;120;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="220;180;220" dur="2s" repeatCount="indefinite"/>
+  <!-- Head -->
+  <circle cx="90" cy="165" r="22" fill="url(#leg3)"/>
+
+  <!-- Upper body (sitting) -->
+  <ellipse cx="85" cy="210" rx="35" ry="50" fill="url(#leg3)"/>
+
+  <!-- Left thigh -->
+  <ellipse cx="140" cy="240" rx="45" ry="20" fill="url(#leg3)">
+    <animate attributeName="cx" values="140;180;140" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="45;60;45" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Right thigh -->
+  <ellipse cx="140" cy="280" rx="45" ry="20" fill="url(#leg3)">
+    <animate attributeName="cx" values="140;180;140" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="45;60;45" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Left lower leg -->
+  <ellipse cx="200" cy="230" rx="50" ry="18" fill="url(#leg3)">
+    <animate attributeName="cx" values="200;260;200" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="50;65;50" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Right lower leg -->
+  <ellipse cx="200" cy="290" rx="50" ry="18" fill="url(#leg3)">
+    <animate attributeName="cx" values="200;260;200" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="50;65;50" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Leg Press Platform (vertical plate) -->
+  <rect x="250" y="200" width="30" height="120" rx="8" fill="#64748b">
+    <animate attributeName="x" values="250;310;250" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- Right leg -->
-  <rect x="85" y="220" width="15" height="80" rx="7" fill="url(#leg3)">
-    <animate attributeName="height" values="80;120;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="220;180;220" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Platform weight stack indicator -->
+  <g>
+    <rect x="270" y="210" width="15" height="100" rx="3" fill="#475569">
+      <animate attributeName="x" values="270;330;270" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
 
-  <!-- Leg Press Platform -->
-  <rect x="60" y="300" width="160" height="20" rx="5" fill="#64748b">
-    <animate attributeName="x" values="60;100;60" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Movement arrow (pointing in push direction) -->
+  <g>
+    <path d="M 290 260 L 340 260 L 330 250 M 340 260 L 330 270" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <text x="350" y="268" font-family="system-ui" font-size="16" fill="#fbbf24" font-weight="bold">
+      DRÜCKEN
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </text>
+  </g>
 
-  <!-- Arrows -->
-  <path d="M 180 310 L 230 310 L 220 300 M 230 310 L 220 320" stroke="#22d3ee" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Angle indicator (bent to straight) -->
+  <g opacity="0.6">
+    <path d="M 120 260 Q 140 260 160 245" stroke="#22d3ee" stroke-width="2" fill="none" stroke-dasharray="4,4">
+      <animate attributeName="d" values="M 120 260 Q 140 260 160 245; M 120 260 Q 160 260 240 240; M 120 260 Q 140 260 160 245" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
 </svg>
