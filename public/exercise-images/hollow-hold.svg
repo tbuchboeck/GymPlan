@@ -9,7 +9,7 @@
       <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
     </linearGradient>
     <radialGradient id="glow">
-      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.5" />
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.6" />
       <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0" />
     </radialGradient>
   </defs>
@@ -20,80 +20,66 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Hollow Hold</text>
 
   <!-- Mat/Ground -->
-  <ellipse cx="200" cy="315" rx="180" ry="12" fill="#475569" opacity="0.7"/>
+  <ellipse cx="200" cy="325" rx="190" ry="12" fill="#475569" opacity="0.7"/>
 
-  <!-- Shadow to show everything is lifted except lower back -->
-  <ellipse cx="200" cy="310" rx="45" ry="8" fill="#000000" opacity="0.2"/>
+  <!-- Shadow (small - only under lower back) -->
+  <ellipse cx="200" cy="315" rx="40" ry="8" fill="#000000" opacity="0.25"/>
 
-  <!-- Core engagement glow (at contact point) -->
-  <ellipse cx="200" cy="290" rx="50" ry="25" fill="url(#glow)">
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  <!-- Core engagement glow -->
+  <ellipse cx="200" cy="295" rx="55" ry="30" fill="url(#glow)">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Lower back (ONLY contact point - small!) -->
-  <ellipse cx="200" cy="295" rx="35" ry="18" fill="url(#body10)" opacity="0.9"/>
+  <!-- Lower back (ONLY contact point - small!) - with border -->
+  <ellipse cx="200" cy="300" rx="38" ry="20" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.95"/>
 
-  <!-- Torso (clearly lifted/curved) -->
-  <ellipse cx="200" cy="240" rx="50" ry="50" fill="url(#body10)"/>
+  <!-- Torso (clearly lifted/curved) - with border -->
+  <ellipse cx="200" cy="235" rx="52" ry="52" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
 
-  <!-- Head (clearly raised, far from ground) -->
-  <circle cx="220" cy="185" r="26" fill="url(#body10)"/>
+  <!-- Head (clearly raised, far from ground) - with border -->
+  <circle cx="225" cy="170" r="30" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
 
-  <!-- Arms (stretched back and UP, clearly off ground) -->
+  <!-- Arms (stretched back and UP, clearly off ground) - with borders -->
   <g>
-    <!-- Left arm -->
-    <ellipse cx="185" cy="165" rx="14" ry="65" fill="url(#body10)" transform="rotate(-40 185 165)"/>
-    <!-- Right arm (behind) -->
-    <ellipse cx="195" cy="170" rx="12" ry="60" fill="url(#body10)" transform="rotate(-35 195 170)" opacity="0.75"/>
+    <!-- Left arm - with border -->
+    <ellipse cx="180" cy="145" rx="16" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(-42 180 145)"/>
+    <!-- Right arm (slightly behind) - with border -->
+    <ellipse cx="192" cy="150" rx="14" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(-38 192 150)"/>
   </g>
 
-  <!-- Legs (straight, clearly raised and extended) -->
+  <!-- Legs (straight, clearly raised and extended) - with borders -->
   <g>
-    <!-- Left thigh -->
-    <ellipse cx="235" cy="260" rx="24" ry="70" fill="url(#body10)" transform="rotate(30 235 260)"/>
-    <!-- Left lower leg -->
-    <ellipse cx="270" cy="295" rx="20" ry="60" fill="url(#body10)" transform="rotate(25 270 295)"/>
+    <!-- Left thigh - with border -->
+    <ellipse cx="245" cy="260" rx="26" ry="75" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(32 245 260)"/>
+    <!-- Left lower leg - with border -->
+    <ellipse cx="285" cy="300" rx="22" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(28 285 300)"/>
 
-    <!-- Right thigh (behind) -->
-    <ellipse cx="225" cy="265" rx="22" ry="65" fill="url(#body10)" transform="rotate(32 225 265)" opacity="0.75"/>
-    <!-- Right lower leg (behind) -->
-    <ellipse cx="258" cy="300" rx="18" ry="55" fill="url(#body10)" transform="rotate(27 258 300)" opacity="0.75"/>
+    <!-- Right thigh (slightly behind) - with border -->
+    <ellipse cx="235" cy="265" rx="24" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(34 235 265)"/>
+    <!-- Right lower leg (slightly behind) - with border -->
+    <ellipse cx="272" cy="305" rx="20" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(30 272 305)"/>
 
-    <!-- Feet (clearly off ground) -->
-    <ellipse cx="290" cy="315" rx="13" ry="22" fill="url(#body10)" transform="rotate(15 290 315)"/>
+    <!-- Feet - with borders -->
+    <ellipse cx="305" cy="325" rx="15" ry="24" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(18 305 325)"/>
   </g>
 
-  <!-- Dashed line showing the "hollow" curve from head to feet -->
-  <path d="M 160 150 Q 200 300 300 320" stroke="#fbbf24" stroke-width="2" fill="none" stroke-dasharray="8,5" opacity="0.5"/>
+  <!-- Dashed line showing the "hollow" curve -->
+  <path d="M 145 125 Q 200 310 315 330" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-dasharray="10,6" opacity="0.6"/>
 
-  <!-- Gap indicators showing lifted parts -->
-  <g opacity="0.6">
+  <!-- Gap indicators -->
+  <g opacity="0.7">
     <!-- Gap under head/shoulders -->
-    <line x1="165" y1="305" x2="165" y2="270" stroke="#22d3ee" stroke-width="2" stroke-dasharray="3,3"/>
-    <text x="160" y="268" font-family="system-ui" font-size="11" fill="#22d3ee" text-anchor="end">Hoch</text>
+    <line x1="160" y1="312" x2="160" y2="265" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
+    <text x="150" y="263" font-family="system-ui" font-size="13" fill="#22d3ee" font-weight="bold" text-anchor="end">Hoch</text>
 
     <!-- Gap under feet -->
-    <line x1="290" y1="310" x2="290" y2="275" stroke="#22d3ee" stroke-width="2" stroke-dasharray="3,3"/>
-    <text x="295" y="273" font-family="system-ui" font-size="11" fill="#22d3ee" text-anchor="start">Hoch</text>
+    <line x1="305" y1="318" x2="305" y2="270" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
+    <text x="315" y="268" font-family="system-ui" font-size="13" fill="#22d3ee" font-weight="bold" text-anchor="start">Hoch</text>
   </g>
 
   <!-- Hold indicator -->
-  <g>
-    <text x="200" y="365" font-family="system-ui" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">
-      15 SEKUNDEN HALTEN
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-    </text>
-  </g>
-
-  <!-- Static hold pulsing circles -->
-  <g opacity="0.6">
-    <circle cx="50" cy="225" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
-      <animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="350" cy="275" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
-      <animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
-    </circle>
-  </g>
+  <text x="200" y="375" font-family="system-ui" font-size="19" font-weight="bold" fill="#fbbf24" text-anchor="middle">
+    15 SEKUNDEN HALTEN
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  </text>
 </svg>
