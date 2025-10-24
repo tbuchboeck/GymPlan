@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Exercise } from '../types';
 import { CheckCircle, Circle } from 'lucide-react';
 
@@ -18,6 +19,18 @@ export function ExerciseCard({
 }: ExerciseCardProps) {
   const isSetCompleted = (setNumber: number) => setNumber < currentSet;
   const isCurrentSet = (setNumber: number) => setNumber === currentSet;
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(false);
+  };
 
   return (
     <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
@@ -41,13 +54,22 @@ export function ExerciseCard({
       </div>
 
       {/* Exercise Image */}
-      {exercise.imageUrl && (
+      {exercise.imageUrl && !imageError && (
         <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-6">
           <img
             src={exercise.imageUrl}
             alt={exercise.name}
-            className="w-full max-w-md mx-auto rounded-lg shadow-2xl border-2 border-slate-600"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            className={`w-full max-w-md mx-auto rounded-lg shadow-2xl border-2 border-slate-600 transition-opacity duration-300 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
+          {!imageLoaded && (
+            <div className="w-full max-w-md mx-auto h-64 flex items-center justify-center">
+              <div className="animate-pulse text-slate-500">Bild wird geladen...</div>
+            </div>
+          )}
         </div>
       )}
 
