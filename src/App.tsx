@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { workoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -8,21 +8,14 @@ import { WorkoutSummary } from './components/WorkoutSummary';
 import { WorkoutHistory } from './components/WorkoutHistory';
 import { ReminderSettings } from './components/ReminderSettings';
 import { PinLogin } from './components/PinLogin';
-import { PinSetup } from './components/PinSetup';
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [hasPin, setHasPin] = useState(false);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
-
-  useEffect(() => {
-    const savedPin = localStorage.getItem('gymplan-pin');
-    setHasPin(!!savedPin);
-  }, []);
 
   const handleStartWorkout = () => {
     setCurrentView('workout');
@@ -59,19 +52,7 @@ function App() {
     setCurrentView('home');
   };
 
-  // Show PIN setup if no PIN exists
-  if (!hasPin) {
-    return (
-      <PinSetup
-        onComplete={() => {
-          setHasPin(true);
-          setIsUnlocked(true);
-        }}
-      />
-    );
-  }
-
-  // Show PIN login if PIN exists but app is locked
+  // Show PIN login if app is locked
   if (!isUnlocked) {
     return (
       <PinLogin

@@ -5,10 +5,11 @@ interface PinLoginProps {
   onSuccess: () => void;
 }
 
+const CORRECT_PIN = '6062';
+
 export function PinLogin({ onSuccess }: PinLoginProps) {
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
-  const savedPin = localStorage.getItem('gymplan-pin');
 
   const handleNumberClick = (num: number) => {
     if (pin.length < 4) {
@@ -16,8 +17,8 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
       setPin(newPin);
 
       if (newPin.length === 4) {
-        // Check PIN
-        if (newPin === savedPin) {
+        // Check PIN against fixed PIN
+        if (newPin === CORRECT_PIN) {
           onSuccess();
         } else {
           setError(true);
