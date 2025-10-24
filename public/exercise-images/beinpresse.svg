@@ -65,10 +65,10 @@
 
   <!-- Movement arrow (pointing in push direction) -->
   <g>
-    <path d="M 290 260 L 340 260 L 330 250 M 340 260 L 330 270" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M 285 260 L 330 260 L 320 250 M 330 260 L 320 270" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
       <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
     </path>
-    <text x="350" y="268" font-family="system-ui" font-size="16" fill="#fbbf24" font-weight="bold">
+    <text x="290" y="250" font-family="system-ui" font-size="15" fill="#fbbf24" font-weight="bold" text-anchor="start">
       DRÜCKEN
       <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
     </text>

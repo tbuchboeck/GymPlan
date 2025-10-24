@@ -40,8 +40,13 @@
     <animate attributeName="x" values="285;245;285" dur="2s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- Arrows -->
-  <path d="M 150 280 L 200 280 L 190 270 M 200 280 L 190 290" stroke="#fbbf24" stroke-width="3" fill="none">
+  <!-- Arrows showing both arms pushing inward -->
+  <!-- Left arrow (pushing right) -->
+  <path d="M 150 280 L 195 280 L 185 270 M 195 280 L 185 290" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <!-- Right arrow (pushing left) -->
+  <path d="M 250 280 L 205 280 L 215 270 M 205 280 L 215 290" stroke="#fbbf24" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
   </path>
 </svg>
