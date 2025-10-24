@@ -90,27 +90,27 @@ export function WorkoutView({ exercises, onComplete, onExit }: WorkoutViewProps)
   const progress = ((completedExercises + (currentSet - 1) / currentExercise.sets) / exercises.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900">
       {/* Header */}
-      <div className="bg-white shadow-md sticky top-0 z-10">
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-2xl sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <button
               onClick={onExit}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
+              className="flex items-center gap-2 text-white hover:text-indigo-100 transition-colors"
             >
               <Home className="w-5 h-5" />
               <span>Beenden</span>
             </button>
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-indigo-100">
               {completedExercises} / {exercises.length} Übungen
             </div>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-white/20 rounded-full h-3">
             <div
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 h-2 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full transition-all duration-300 shadow-lg"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -140,7 +140,7 @@ export function WorkoutView({ exercises, onComplete, onExit }: WorkoutViewProps)
           <button
             onClick={handlePrevious}
             disabled={currentExerciseIndex === 0 && currentSet === 1}
-            className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 text-gray-800 py-4 px-6 rounded-xl font-semibold shadow-md transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-600 text-white py-4 px-6 rounded-xl font-semibold shadow-2xl transition-all transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
           >
             <ArrowLeft className="w-5 h-5" />
             Zurück
@@ -149,7 +149,7 @@ export function WorkoutView({ exercises, onComplete, onExit }: WorkoutViewProps)
           <button
             onClick={handleNext}
             disabled={isLastExercise && isLastSet}
-            className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 text-gray-800 py-4 px-6 rounded-xl font-semibold shadow-md transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-600 text-white py-4 px-6 rounded-xl font-semibold shadow-2xl transition-all transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
           >
             Weiter
             <ArrowRight className="w-5 h-5" />
