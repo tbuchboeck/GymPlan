@@ -18,18 +18,24 @@
   <!-- Mat/Ground -->
   <ellipse cx="200" cy="320" rx="180" ry="12" fill="#475569" opacity="0.7"/>
 
-  <!-- Lower body (stays on ground) - with border -->
-  <ellipse cx="170" cy="295" rx="42" ry="28" fill="url(#body8)" stroke="#ea580c" stroke-width="2"/>
-
-  <!-- Bent legs (stationary) - with clear separation -->
+  <!-- Feet FLAT on ground - with borders -->
   <g>
+    <!-- Left foot (flat on ground) -->
+    <ellipse cx="125" cy="315" rx="24" ry="12" fill="url(#body8)" stroke="#ea580c" stroke-width="2"/>
+    <!-- Right foot (flat on ground, slightly behind) -->
+    <ellipse cx="125" cy="320" rx="22" ry="10" fill="url(#body8)" stroke="#ea580c" stroke-width="2" opacity="0.8"/>
+  </g>
+
+  <!-- Bent legs (stationary, knees up) - with clear separation -->
+  <g>
+    <!-- Left lower leg - with border -->
+    <ellipse cx="125" cy="255" rx="20" ry="60" fill="url(#body8)" stroke="#ea580c" stroke-width="2" transform="rotate(-80 125 255)"/>
     <!-- Left thigh - with border -->
     <ellipse cx="150" cy="255" rx="24" ry="60" fill="url(#body8)" stroke="#ea580c" stroke-width="2" transform="rotate(-30 150 255)"/>
-    <!-- Left lower leg - with border -->
-    <ellipse cx="120" cy="200" rx="20" ry="50" fill="url(#body8)" stroke="#ea580c" stroke-width="2" transform="rotate(-65 120 200)"/>
-    <!-- Left foot -->
-    <ellipse cx="140" cy="175" rx="14" ry="22" fill="url(#body8)" stroke="#ea580c" stroke-width="2" transform="rotate(-15 140 175)"/>
   </g>
+
+  <!-- Lower body (stays on ground) - with border -->
+  <ellipse cx="170" cy="295" rx="42" ry="28" fill="url(#body8)" stroke="#ea580c" stroke-width="2"/>
 
   <!-- Upper body (crunching up) - with clear separation -->
   <g>

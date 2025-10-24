@@ -23,62 +23,62 @@
   <ellipse cx="200" cy="325" rx="190" ry="12" fill="#475569" opacity="0.7"/>
 
   <!-- Shadow (small - only under lower back) -->
-  <ellipse cx="200" cy="315" rx="40" ry="8" fill="#000000" opacity="0.25"/>
+  <ellipse cx="200" cy="320" rx="42" ry="8" fill="#000000" opacity="0.25"/>
 
   <!-- Core engagement glow -->
-  <ellipse cx="200" cy="295" rx="55" ry="30" fill="url(#glow)">
+  <ellipse cx="200" cy="305" rx="55" ry="25" fill="url(#glow)">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Lower back (ONLY contact point - small!) - with border -->
-  <ellipse cx="200" cy="300" rx="38" ry="20" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.95"/>
+  <ellipse cx="200" cy="310" rx="40" ry="18" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.95"/>
 
-  <!-- Torso (clearly lifted/curved) - with border -->
-  <ellipse cx="200" cy="235" rx="52" ry="52" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Torso (MUCH closer to ground - only slightly lifted) - with border -->
+  <ellipse cx="200" cy="280" rx="52" ry="45" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
 
-  <!-- Head (clearly raised, far from ground) - with border -->
-  <circle cx="225" cy="170" r="30" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Head (MUCH closer to ground - only slightly raised) - with border -->
+  <circle cx="220" cy="250" r="28" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
 
-  <!-- Arms (stretched back and UP, clearly off ground) - with borders -->
+  <!-- Arms (stretched back, LOWER) - with borders -->
   <g>
     <!-- Left arm - with border -->
-    <ellipse cx="180" cy="145" rx="16" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(-42 180 145)"/>
+    <ellipse cx="185" cy="240" rx="16" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(-35 185 240)"/>
     <!-- Right arm (slightly behind) - with border -->
-    <ellipse cx="192" cy="150" rx="14" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(-38 192 150)"/>
+    <ellipse cx="195" cy="245" rx="14" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(-32 195 245)"/>
   </g>
 
-  <!-- Legs (straight, clearly raised and extended) - with borders -->
+  <!-- Legs (straight, raised but not too high) - with borders -->
   <g>
     <!-- Left thigh - with border -->
-    <ellipse cx="245" cy="260" rx="26" ry="75" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(32 245 260)"/>
+    <ellipse cx="235" cy="285" rx="24" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(25 235 285)"/>
     <!-- Left lower leg - with border -->
-    <ellipse cx="285" cy="300" rx="22" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(28 285 300)"/>
+    <ellipse cx="270" cy="310" rx="20" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(20 270 310)"/>
 
     <!-- Right thigh (slightly behind) - with border -->
-    <ellipse cx="235" cy="265" rx="24" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(34 235 265)"/>
+    <ellipse cx="225" cy="290" rx="22" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(27 225 290)"/>
     <!-- Right lower leg (slightly behind) - with border -->
-    <ellipse cx="272" cy="305" rx="20" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(30 272 305)"/>
+    <ellipse cx="258" cy="315" rx="18" ry="55" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(22 258 315)"/>
 
-    <!-- Feet - with borders -->
-    <ellipse cx="305" cy="325" rx="15" ry="24" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(18 305 325)"/>
+    <!-- Feet - with borders (just barely off ground) -->
+    <ellipse cx="290" cy="325" rx="14" ry="20" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(12 290 325)"/>
   </g>
 
-  <!-- Dashed line showing the "hollow" curve -->
-  <path d="M 145 125 Q 200 310 315 330" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-dasharray="10,6" opacity="0.6"/>
+  <!-- Dashed line showing the "hollow" curve (flatter now) -->
+  <path d="M 160 225 Q 200 315 295 328" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-dasharray="10,6" opacity="0.6"/>
 
-  <!-- Gap indicators -->
+  <!-- Gap indicators (smaller gaps now) -->
   <g opacity="0.7">
-    <!-- Gap under head/shoulders -->
-    <line x1="160" y1="312" x2="160" y2="265" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
-    <text x="150" y="263" font-family="system-ui" font-size="13" fill="#22d3ee" font-weight="bold" text-anchor="end">Hoch</text>
+    <!-- Small gap under head/shoulders -->
+    <line x1="175" y1="320" x2="175" y2="305" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
+    <text x="165" y="303" font-family="system-ui" font-size="12" fill="#22d3ee" font-weight="bold" text-anchor="end">Wenig</text>
 
-    <!-- Gap under feet -->
-    <line x1="305" y1="318" x2="305" y2="270" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
-    <text x="315" y="268" font-family="system-ui" font-size="13" fill="#22d3ee" font-weight="bold" text-anchor="start">Hoch</text>
+    <!-- Small gap under feet -->
+    <line x1="290" y1="323" x2="290" y2="308" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
+    <text x="300" y="306" font-family="system-ui" font-size="12" fill="#22d3ee" font-weight="bold" text-anchor="start">Wenig</text>
   </g>
 
   <!-- Hold indicator -->
-  <text x="200" y="375" font-family="system-ui" font-size="19" font-weight="bold" fill="#fbbf24" text-anchor="middle">
+  <text x="200" y="370" font-family="system-ui" font-size="19" font-weight="bold" fill="#fbbf24" text-anchor="middle">
     15 SEKUNDEN HALTEN
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
   </text>
