@@ -15,56 +15,58 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Crunch</text>
 
-  <!-- Mat -->
-  <ellipse cx="200" cy="280" rx="140" ry="15" fill="#475569" opacity="0.8"/>
+  <!-- Mat/Ground -->
+  <ellipse cx="200" cy="310" rx="170" ry="12" fill="#475569" opacity="0.7"/>
 
-  <!-- Legs (bent knees) - stationary -->
+  <!-- Lower body (stays on ground) -->
+  <ellipse cx="180" cy="290" rx="40" ry="25" fill="url(#body8)"/>
+
+  <!-- Legs (bent knees, stationary) -->
   <g>
-    <!-- Left thigh -->
-    <ellipse cx="160" cy="240" rx="18" ry="45" fill="url(#body8)" opacity="0.9"/>
-    <!-- Right thigh -->
-    <ellipse cx="240" cy="240" rx="18" ry="45" fill="url(#body8)" opacity="0.9"/>
-
-    <!-- Left lower leg -->
-    <rect x="145" y="195" width="15" height="40" rx="7" fill="url(#body8)" transform="rotate(-40 152 195)"/>
-    <!-- Right lower leg -->
-    <rect x="240" y="195" width="15" height="40" rx="7" fill="url(#body8)" transform="rotate(40 247 195)"/>
+    <!-- Thigh -->
+    <ellipse cx="160" cy="250" rx="22" ry="55" fill="url(#body8)" transform="rotate(-25 160 250)"/>
+    <!-- Lower leg -->
+    <ellipse cx="135" cy="200" rx="18" ry="45" fill="url(#body8)" transform="rotate(-60 135 200)"/>
+    <!-- Foot -->
+    <ellipse cx="155" cy="180" rx="12" ry="20" fill="url(#body8)" transform="rotate(-10 155 180)"/>
   </g>
 
-  <!-- Lower back (stays on ground) -->
-  <ellipse cx="200" cy="260" rx="55" ry="25" fill="url(#body8)"/>
-
-  <!-- Upper body (crunching up and down) -->
+  <!-- Upper body (crunching up) -->
   <g>
     <!-- Torso -->
-    <ellipse cx="200" cy="200" rx="45" ry="50" fill="url(#body8)">
-      <animate attributeName="cy" values="200;180;200" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="50;45;50" dur="2.5s" repeatCount="indefinite"/>
+    <ellipse cx="225" cy="255" rx="55" ry="45" fill="url(#body8)">
+      <animate attributeName="cy" values="255;230;255" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="transform" values="rotate(0 225 255); rotate(-20 225 230); rotate(0 225 255)" dur="2.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" values="0 225 255; -20 225 230; 0 225 255" dur="2.5s" repeatCount="indefinite" additive="sum"/>
     </ellipse>
 
     <!-- Head -->
-    <circle cx="200" cy="140" r="28" fill="url(#body8)">
-      <animate attributeName="cy" values="140;115;140" dur="2.5s" repeatCount="indefinite"/>
+    <circle cx="250" cy="225" r="24" fill="url(#body8)">
+      <animate attributeName="cy" values="225;195;225" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="250;245;250" dur="2.5s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Left arm behind head -->
-    <ellipse cx="165" cy="145" rx="12" ry="35" fill="url(#body8)" transform="rotate(-50 165 145)">
-      <animateTransform attributeName="transform" type="rotate" values="-50 165 145; -60 165 130; -50 165 145" dur="2.5s" repeatCount="indefinite"/>
-    </ellipse>
-
-    <!-- Right arm behind head -->
-    <ellipse cx="235" cy="145" rx="12" ry="35" fill="url(#body8)" transform="rotate(50 235 145)">
-      <animateTransform attributeName="transform" type="rotate" values="50 235 145; 60 235 130; 50 235 145" dur="2.5s" repeatCount="indefinite"/>
+    <!-- Arm behind head -->
+    <ellipse cx="235" cy="215" rx="15" ry="40" fill="url(#body8)" transform="rotate(-40 235 215)">
+      <animate attributeName="cy" values="215;185;215" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="235;230;235" dur="2.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" values="-40 235 215; -50 230 185; -40 235 215" dur="2.5s" repeatCount="indefinite" additive="sum"/>
     </ellipse>
   </g>
 
-  <!-- Movement indicator -->
+  <!-- Movement arrow -->
   <g opacity="0.8">
-    <path d="M 330 190 L 330 145 L 320 155 M 330 145 L 340 155" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M 310 260 L 310 210 L 300 220 M 310 210 L 320 220" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
       <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
     </path>
-    <text x="355" y="175" font-family="system-ui" font-size="14" fill="#fbbf24" font-weight="bold">
+    <text x="325" y="240" font-family="system-ui" font-size="14" fill="#fbbf24" font-weight="bold">
+      HOCH
       <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
     </text>
   </g>
+
+  <!-- Core engagement indicator -->
+  <ellipse cx="215" cy="265" rx="40" ry="30" fill="#fbbf24" opacity="0.15">
+    <animate attributeName="opacity" values="0.1;0.25;0.1" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
 </svg>

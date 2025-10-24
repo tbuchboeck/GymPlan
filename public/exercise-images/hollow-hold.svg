@@ -9,7 +9,7 @@
       <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
     </linearGradient>
     <radialGradient id="glow">
-      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.5" />
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.4" />
       <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0" />
     </radialGradient>
   </defs>
@@ -19,60 +19,67 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Hollow Hold</text>
 
-  <!-- Mat -->
-  <ellipse cx="200" cy="280" rx="150" ry="15" fill="#475569" opacity="0.7"/>
+  <!-- Mat/Ground -->
+  <ellipse cx="200" cy="310" rx="180" ry="12" fill="#475569" opacity="0.7"/>
 
-  <!-- Core engagement glow effect -->
-  <ellipse cx="200" cy="210" rx="90" ry="50" fill="url(#glow)">
+  <!-- Core engagement glow (concentrated at lower back) -->
+  <ellipse cx="200" cy="285" rx="50" ry="30" fill="url(#glow)">
     <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Lower back touching ground (only contact point) -->
-  <ellipse cx="200" cy="250" rx="45" ry="20" fill="url(#body10)" opacity="0.9"/>
+  <!-- Lower back (only contact point with ground) -->
+  <ellipse cx="200" cy="290" rx="40" ry="22" fill="url(#body10)"/>
 
-  <!-- Torso (curved/hollow) -->
-  <ellipse cx="200" cy="200" rx="50" ry="45" fill="url(#body10)"/>
+  <!-- Torso (hollow/curved position) -->
+  <ellipse cx="200" cy="250" rx="48" ry="55" fill="url(#body10)"/>
 
   <!-- Head (raised, looking at feet) -->
-  <circle cx="200" cy="145" r="24" fill="url(#body10)"/>
+  <circle cx="215" cy="205" r="26" fill="url(#body10)"/>
 
-  <!-- Left arm (straight, raised) -->
-  <ellipse cx="150" cy="120" rx="12" ry="55" fill="url(#body10)" transform="rotate(-25 150 120)"/>
-
-  <!-- Right arm (straight, raised) -->
-  <ellipse cx="250" cy="120" rx="12" ry="55" fill="url(#body10)" transform="rotate(25 250 120)"/>
-
-  <!-- Left leg (straight, raised) -->
+  <!-- Arms (straight, extended back/up) -->
   <g>
-    <ellipse cx="165" cy="235" rx="16" ry="60" fill="url(#body10)" transform="rotate(-15 165 235)"/>
-    <!-- Foot -->
-    <ellipse cx="155" cy="290" rx="18" ry="10" fill="url(#body10)" transform="rotate(-15 155 290)"/>
+    <!-- Left arm -->
+    <ellipse cx="185" cy="190" rx="14" ry="60" fill="url(#body10)" transform="rotate(-35 185 190)"/>
+    <!-- Right arm (behind) -->
+    <ellipse cx="195" cy="195" rx="12" ry="55" fill="url(#body10)" transform="rotate(-30 195 195)" opacity="0.7"/>
   </g>
 
-  <!-- Right leg (straight, raised) -->
+  <!-- Legs (straight, raised) -->
   <g>
-    <ellipse cx="235" cy="235" rx="16" ry="60" fill="url(#body10)" transform="rotate(15 235 235)"/>
-    <!-- Foot -->
-    <ellipse cx="245" cy="290" rx="18" ry="10" fill="url(#body10)" transform="rotate(15 245 290)"/>
+    <!-- Left thigh -->
+    <ellipse cx="230" cy="265" rx="22" ry="65" fill="url(#body10)" transform="rotate(25 230 265)"/>
+    <!-- Left lower leg -->
+    <ellipse cx="260" cy="295" rx="18" ry="55" fill="url(#body10)" transform="rotate(18 260 295)"/>
+
+    <!-- Right thigh (behind) -->
+    <ellipse cx="220" cy="270" rx="20" ry="60" fill="url(#body10)" transform="rotate(28 220 270)" opacity="0.7"/>
+    <!-- Right lower leg (behind) -->
+    <ellipse cx="248" cy="300" rx="16" ry="50" fill="url(#body10)" transform="rotate(20 248 300)" opacity="0.7"/>
+
+    <!-- Feet -->
+    <ellipse cx="280" cy="330" rx="12" ry="20" fill="url(#body10)" transform="rotate(10 280 330)"/>
   </g>
 
-  <!-- Hold indicator with pulsing effect -->
+  <!-- Hold indicator -->
   <g>
-    <text x="200" y="335" font-family="system-ui" font-size="20" font-weight="bold" fill="#fbbf24" text-anchor="middle">
+    <text x="200" y="355" font-family="system-ui" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">
       15 SEKUNDEN HALTEN
       <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
     </text>
   </g>
 
-  <!-- Static hold symbols -->
-  <g opacity="0.7">
-    <circle cx="70" cy="200" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
-      <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  <!-- Static hold pulsing circles -->
+  <g opacity="0.6">
+    <circle cx="60" cy="240" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
+      <animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="330" cy="200" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
-      <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+    <circle cx="340" cy="270" r="8" stroke="#22d3ee" stroke-width="3" fill="none">
+      <animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
     </circle>
   </g>
+
+  <!-- Curved line showing hollow body shape -->
+  <path d="M 155 170 Q 200 290 290 335" stroke="#fbbf24" stroke-width="2" fill="none" stroke-dasharray="6,4" opacity="0.4"/>
 </svg>
