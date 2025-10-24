@@ -16,38 +16,55 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Crunch</text>
 
   <!-- Mat -->
-  <rect x="80" y="220" width="240" height="15" rx="7" fill="#475569"/>
+  <ellipse cx="200" cy="280" rx="140" ry="15" fill="#475569" opacity="0.8"/>
 
-  <!-- Legs (bent) -->
-  <ellipse cx="160" cy="200" rx="30" ry="40" fill="url(#body8)"/>
-  <ellipse cx="240" cy="200" rx="30" ry="40" fill="url(#body8)"/>
-
-  <!-- Lower body -->
-  <rect x="140" y="180" width="120" height="40" rx="20" fill="url(#body8)"/>
-
-  <!-- Upper body (crunching up) -->
+  <!-- Legs (bent knees) - stationary -->
   <g>
-    <ellipse cx="200" cy="140" rx="50" ry="40" fill="url(#body8)">
-      <animate attributeName="cy" values="140;120;140" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="40;35;40" dur="2s" repeatCount="indefinite"/>
+    <!-- Left thigh -->
+    <ellipse cx="160" cy="240" rx="18" ry="45" fill="url(#body8)" opacity="0.9"/>
+    <!-- Right thigh -->
+    <ellipse cx="240" cy="240" rx="18" ry="45" fill="url(#body8)" opacity="0.9"/>
+
+    <!-- Left lower leg -->
+    <rect x="145" y="195" width="15" height="40" rx="7" fill="url(#body8)" transform="rotate(-40 152 195)"/>
+    <!-- Right lower leg -->
+    <rect x="240" y="195" width="15" height="40" rx="7" fill="url(#body8)" transform="rotate(40 247 195)"/>
+  </g>
+
+  <!-- Lower back (stays on ground) -->
+  <ellipse cx="200" cy="260" rx="55" ry="25" fill="url(#body8)"/>
+
+  <!-- Upper body (crunching up and down) -->
+  <g>
+    <!-- Torso -->
+    <ellipse cx="200" cy="200" rx="45" ry="50" fill="url(#body8)">
+      <animate attributeName="cy" values="200;180;200" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="ry" values="50;45;50" dur="2.5s" repeatCount="indefinite"/>
     </ellipse>
 
     <!-- Head -->
-    <circle cx="200" cy="100" r="24" fill="url(#body8)">
-      <animate attributeName="cy" values="100;85;100" dur="2s" repeatCount="indefinite"/>
+    <circle cx="200" cy="140" r="28" fill="url(#body8)">
+      <animate attributeName="cy" values="140;115;140" dur="2.5s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Arms behind head -->
-    <path d="M 160 100 Q 150 80 180 90" stroke="url(#body8)" stroke-width="15" fill="none">
-      <animate attributeName="d" values="M 160 100 Q 150 80 180 90; M 160 85 Q 150 65 180 75; M 160 100 Q 150 80 180 90" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <path d="M 240 100 Q 250 80 220 90" stroke="url(#body8)" stroke-width="15" fill="none">
-      <animate attributeName="d" values="M 240 100 Q 250 80 220 90; M 240 85 Q 250 65 220 75; M 240 100 Q 250 80 220 90" dur="2s" repeatCount="indefinite"/>
-    </path>
+    <!-- Left arm behind head -->
+    <ellipse cx="165" cy="145" rx="12" ry="35" fill="url(#body8)" transform="rotate(-50 165 145)">
+      <animateTransform attributeName="transform" type="rotate" values="-50 165 145; -60 165 130; -50 165 145" dur="2.5s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Right arm behind head -->
+    <ellipse cx="235" cy="145" rx="12" ry="35" fill="url(#body8)" transform="rotate(50 235 145)">
+      <animateTransform attributeName="transform" type="rotate" values="50 235 145; 60 235 130; 50 235 145" dur="2.5s" repeatCount="indefinite"/>
+    </ellipse>
   </g>
 
-  <!-- Arrow showing upward movement -->
-  <path d="M 320 140 L 320 100 L 310 110 M 320 100 L 330 110" stroke="#22d3ee" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Movement indicator -->
+  <g opacity="0.8">
+    <path d="M 330 190 L 330 145 L 320 155 M 330 145 L 340 155" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <text x="355" y="175" font-family="system-ui" font-size="14" fill="#fbbf24" font-weight="bold">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </text>
+  </g>
 </svg>
