@@ -15,7 +15,7 @@ export const workoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 120,
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Hip-Adduction-Machine_1024x1024.gif?v=1684225346"
+      imageUrl: "/exercise-images/adduktion.svg"
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ export const workoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 120,
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Hip-Abduction-Machine_1024x1024.gif?v=1684225347"
+      imageUrl: "/exercise-images/abduktion.svg"
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 50,
       rest: 120,
       instructions: "In den Beinen mind. rechter Winkel, nicht komplett durchstrecken",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Horizontal-Leg-Press_1024x1024.gif?v=1684225349"
+      imageUrl: "/exercise-images/beinpresse.svg"
     },
     {
       id: 4,
@@ -44,7 +44,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 15,
       rest: 120,
       instructions: "Schultern bleiben hinten, Nacken entspannen, Griffe auf Mitte Brust, Ellbogen bleibt auf Griffniveau, Sitzpolster Stufe 5",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Chest-Press-Machine_1024x1024.gif?v=1684225345"
+      imageUrl: "/exercise-images/brustpresse.svg"
     },
     {
       id: 5,
@@ -54,7 +54,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 120,
       instructions: "Nacken entspannen, auf Schulterniveau anheben",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Dumbbell-Lateral-Raise_1024x1024.gif?v=1684225346"
+      imageUrl: "/exercise-images/seitheben.svg"
     },
     {
       id: 6,
@@ -64,7 +64,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 19,
       rest: 120,
       instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Nussknacker hinten",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Cable-Seated-Row_1024x1024.gif?v=1684225345"
+      imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
       id: 7,
@@ -74,7 +74,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 5,
       rest: 120,
       instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Pec-Deck-Fly_1024x1024.gif?v=1684225350"
+      imageUrl: "/exercise-images/butterfly.svg"
     },
     {
       id: 8,
@@ -84,7 +84,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 60,
       instructions: "Unterer Rücken bleibt am Boden",
-      imageUrl: "https://www.burnfit.io/cdn/shop/files/Crunch_1024x1024.gif?v=1684225346"
+      imageUrl: "/exercise-images/crunch.svg"
     },
     {
       id: 9,
@@ -94,7 +94,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 60,
       instructions: "Unterer Rücken bleibt am Boden",
-      imageUrl: "https://homeworkouts.org/wp-content/uploads/anim-alternating-heel-touches.gif"
+      imageUrl: "/exercise-images/heel-touches.svg"
     },
     {
       id: 10,
@@ -104,7 +104,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 60,
       instructions: "Bauch bewusst anspannen (15 Sekunden halten)",
-      imageUrl: "https://homeworkouts.org/wp-content/uploads/anim-hollow-hold.gif"
+      imageUrl: "/exercise-images/hollow-hold.svg"
     }
   ]
 };
