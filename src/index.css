@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors for dark theme */
+  --color-dark-bg: #0f172a;
+  --color-dark-purple: #581c87;
+  --color-dark-indigo: #312e81;
+}
 
 @layer utilities {
   .animate-pulse-slow {
