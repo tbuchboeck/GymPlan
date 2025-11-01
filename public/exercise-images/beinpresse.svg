@@ -22,31 +22,31 @@
   <rect x="50" y="255" width="80" height="25" rx="10" fill="#475569"/>
 
   <!-- Head -->
-  <circle cx="90" cy="165" r="22" fill="url(#leg3)"/>
+  <circle cx="90" cy="165" r="22" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2"/>
 
   <!-- Upper body (sitting) -->
-  <ellipse cx="85" cy="210" rx="35" ry="50" fill="url(#leg3)"/>
+  <ellipse cx="85" cy="210" rx="35" ry="50" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2"/>
 
   <!-- Left thigh -->
-  <ellipse cx="140" cy="240" rx="45" ry="20" fill="url(#leg3)">
+  <ellipse cx="140" cy="240" rx="45" ry="20" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2">
     <animate attributeName="cx" values="140;180;140" dur="2.5s" repeatCount="indefinite"/>
     <animate attributeName="rx" values="45;60;45" dur="2.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Right thigh -->
-  <ellipse cx="140" cy="280" rx="45" ry="20" fill="url(#leg3)">
+  <ellipse cx="140" cy="280" rx="45" ry="20" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2">
     <animate attributeName="cx" values="140;180;140" dur="2.5s" repeatCount="indefinite"/>
     <animate attributeName="rx" values="45;60;45" dur="2.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Left lower leg -->
-  <ellipse cx="200" cy="230" rx="50" ry="18" fill="url(#leg3)">
+  <ellipse cx="200" cy="230" rx="50" ry="18" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2">
     <animate attributeName="cx" values="200;260;200" dur="2.5s" repeatCount="indefinite"/>
     <animate attributeName="rx" values="50;65;50" dur="2.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Right lower leg -->
-  <ellipse cx="200" cy="290" rx="50" ry="18" fill="url(#leg3)">
+  <ellipse cx="200" cy="290" rx="50" ry="18" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2">
     <animate attributeName="cx" values="200;260;200" dur="2.5s" repeatCount="indefinite"/>
     <animate attributeName="rx" values="50;65;50" dur="2.5s" repeatCount="indefinite"/>
   </ellipse>
