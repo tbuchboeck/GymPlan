@@ -37,22 +37,25 @@
   <g>
     <ellipse cx="140" cy="215" rx="40" ry="35" fill="url(#body8)" stroke="#b45309" stroke-width="2">
       <animate attributeName="cy" values="215;195;215" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="140;155;140" dur="2s" repeatCount="indefinite"/>
       <animate attributeName="rx" values="40;38;40" dur="2s" repeatCount="indefinite"/>
     </ellipse>
 
     <!-- Head (side profile) -->
     <circle cx="120" cy="180" r="24" fill="url(#body8)" stroke="#b45309" stroke-width="2">
       <animate attributeName="cy" values="180;165;180" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="120;140;120" dur="2s" repeatCount="indefinite"/>
     </circle>
 
     <!-- Ear -->
     <circle cx="127" cy="180" r="5" fill="#fb923c">
       <animate attributeName="cy" values="180;165;180" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="127;147;127" dur="2s" repeatCount="indefinite"/>
     </circle>
 
     <!-- Arms behind head -->
     <path d="M 110 185 Q 90 175 95 200" stroke="url(#body8)" stroke-width="18" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 110 185 Q 90 175 95 200; M 110 170 Q 90 160 95 185; M 110 185 Q 90 175 95 200" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="d" values="M 110 185 Q 90 175 95 200; M 130 170 Q 110 160 115 185; M 110 185 Q 90 175 95 200" dur="2s" repeatCount="indefinite"/>
     </path>
   </g>
 
