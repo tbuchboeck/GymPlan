@@ -34,8 +34,8 @@
   <rect x="115" y="100" width="16" height="70" rx="8" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Left pad (moving) -->
-  <rect x="100" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
-    <animate attributeName="x" values="100;150;100" dur="2.5s" repeatCount="indefinite"/>
+  <rect x="150" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
+    <animate attributeName="x" values="150;100;150" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Right upper arm (horizontal) -->
@@ -45,8 +45,8 @@
   <rect x="269" y="100" width="16" height="70" rx="8" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Right pad (moving) -->
-  <rect x="275" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
-    <animate attributeName="x" values="275;225;275" dur="2.5s" repeatCount="indefinite"/>
+  <rect x="225" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
+    <animate attributeName="x" values="225;275;225" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Legs -->
@@ -58,20 +58,21 @@
   <ellipse cx="216" cy="315" rx="14" ry="10" fill="#db2777" stroke="#9f1239" stroke-width="2"/>
 
   <!-- Machine arms/levers (left) -->
-  <rect x="95" y="170" width="60" height="8" rx="4" fill="#374151" opacity="0.7">
-    <animate attributeName="width" values="60;40;60" dur="2.5s" repeatCount="indefinite"/>
+  <rect x="135" y="170" width="40" height="8" rx="4" fill="#374151" opacity="0.7">
+    <animate attributeName="width" values="40;60;40" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="x" values="135;95;135" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Machine arms/levers (right) -->
-  <rect x="245" y="170" width="60" height="8" rx="4" fill="#374151" opacity="0.7">
-    <animate attributeName="x" values="245;265;245" dur="2.5s" repeatCount="indefinite"/>
+  <rect x="225" y="170" width="40" height="8" rx="4" fill="#374151" opacity="0.7">
+    <animate attributeName="width" values="40;60;40" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- Arrows showing inward/outward movement -->
-  <path d="M 80 320 L 130 320 L 120 310 M 130 320 L 120 330" stroke="#fbbf24" stroke-width="3" fill="none">
+  <!-- Arrows showing outward movement -->
+  <path d="M 130 320 L 80 320 L 90 310 M 80 320 L 90 330" stroke="#fbbf24" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
-  <path d="M 320 320 L 270 320 L 280 310 M 270 320 L 280 330" stroke="#fbbf24" stroke-width="3" fill="none">
+  <path d="M 270 320 L 320 320 L 310 310 M 320 320 L 310 330" stroke="#fbbf24" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
 </svg>
