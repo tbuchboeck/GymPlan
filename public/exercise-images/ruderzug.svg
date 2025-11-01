@@ -15,66 +15,76 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Ruderzug</text>
 
-  <!-- Cable machine tower (right side) -->
-  <rect x="330" y="90" width="45" height="230" rx="8" fill="#475569"/>
-  <circle cx="352" cy="205" r="14" fill="#64748b"/>
+  <!-- Cable machine -->
+  <rect x="320" y="100" width="30" height="200" rx="5" fill="#475569"/>
 
-  <!-- Ground/Seat -->
-  <ellipse cx="200" cy="315" rx="120" ry="12" fill="#475569" opacity="0.7"/>
+  <!-- Footrest platform -->
+  <rect x="280" y="260" width="40" height="10" rx="2" fill="#475569"/>
 
-  <!-- Lower body (seated) - with border -->
-  <ellipse cx="150" cy="285" rx="42" ry="32" fill="url(#body6)" stroke="#047857" stroke-width="2"/>
+  <!-- Seat -->
+  <rect x="140" y="240" width="50" height="15" rx="5" fill="#64748b"/>
 
-  <!-- Legs (bent, braced) - with borders -->
-  <g>
-    <!-- Thigh - with border -->
-    <ellipse cx="130" cy="265" rx="22" ry="58" fill="url(#body6)" stroke="#047857" stroke-width="2" transform="rotate(-15 130 265)"/>
-    <!-- Lower leg - with border -->
-    <ellipse cx="105" cy="210" rx="18" ry="48" fill="url(#body6)" stroke="#047857" stroke-width="2" transform="rotate(-35 105 210)"/>
-    <!-- Foot - with border -->
-    <ellipse cx="100" cy="180" rx="14" ry="20" fill="url(#body6)" stroke="#047857" stroke-width="2" transform="rotate(-5 100 180)"/>
-  </g>
-
-  <!-- Torso (leaning back when pulling) - with border -->
-  <ellipse cx="185" cy="240" rx="50" ry="55" fill="url(#body6)" stroke="#047857" stroke-width="2">
-    <animate attributeName="cx" values="185;175;185" dur="2.5s" repeatCount="indefinite"/>
-    <animateTransform attributeName="transform" type="rotate" values="0 185 240; -8 175 240; 0 185 240" dur="2.5s" repeatCount="indefinite" additive="sum"/>
-  </ellipse>
-
-  <!-- Head - with border -->
-  <circle cx="200" cy="195" r="26" fill="url(#body6)" stroke="#047857" stroke-width="2">
-    <animate attributeName="cx" values="200;190;200" dur="2.5s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Arm pulling (horizontal) - with border -->
-  <ellipse cx="235" cy="235" rx="55" ry="18" fill="url(#body6)" stroke="#047857" stroke-width="2">
-    <animate attributeName="cx" values="235;185;235" dur="2.5s" repeatCount="indefinite"/>
-    <animate attributeName="rx" values="55;35;55" dur="2.5s" repeatCount="indefinite"/>
-  </ellipse>
-
-  <!-- Cable line -->
-  <line x1="330" y1="205" x2="290" y2="235" stroke="#94a3b8" stroke-width="3">
-    <animate attributeName="x2" values="290;240;290" dur="2.5s" repeatCount="indefinite"/>
-  </line>
-
-  <!-- Handle - with border -->
-  <rect x="280" y="228" width="16" height="14" rx="7" fill="#64748b" stroke="#475569" stroke-width="1">
-    <animate attributeName="x" values="280;230;280" dur="2.5s" repeatCount="indefinite"/>
+  <!-- Left leg (thigh) -->
+  <rect x="170" y="220" width="70" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="70;75;70" dur="2s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- Pull arrow -->
-  <g>
-    <path d="M 300 260 L 250 260 L 260 250 M 250 260 L 260 270" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round">
-      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-    </path>
-    <text x="305" y="255" font-family="system-ui" font-size="15" fill="#fbbf24" font-weight="bold">
-      ZIEHEN
-      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-    </text>
-  </g>
+  <!-- Right leg (thigh) -->
+  <rect x="170" y="240" width="70" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="70;75;70" dur="2s" repeatCount="indefinite"/>
+  </rect>
 
-  <!-- Back engagement glow -->
-  <ellipse cx="185" cy="240" rx="35" ry="45" fill="#fbbf24" opacity="0.15">
-    <animate attributeName="opacity" values="0.1;0.25;0.1" dur="2.5s" repeatCount="indefinite"/>
+  <!-- Left leg (calf) pointing forward -->
+  <rect x="240" y="218" width="50" height="14" rx="7" fill="url(#body6)">
+    <animate attributeName="width" values="50;48;50" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right leg (calf) pointing forward -->
+  <rect x="240" y="244" width="50" height="14" rx="7" fill="url(#body6)">
+    <animate attributeName="width" values="50;48;50" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Left foot pointing forward -->
+  <ellipse cx="295" cy="225" rx="12" ry="8" fill="#0891b2"/>
+
+  <!-- Right foot pointing forward -->
+  <ellipse cx="295" cy="251" rx="12" ry="8" fill="#0891b2"/>
+
+  <!-- Head -->
+  <circle cx="140" cy="140" r="22" fill="url(#body6)">
+    <animate attributeName="cx" values="140;145;140" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Body (torso) -->
+  <ellipse cx="160" cy="190" rx="35" ry="45" fill="url(#body6)">
+    <animate attributeName="cx" values="160;165;160" dur="2s" repeatCount="indefinite"/>
   </ellipse>
+
+  <!-- Left arm (pulling) -->
+  <rect x="130" y="180" width="80" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="80;130;80" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right arm (pulling) -->
+  <rect x="130" y="200" width="80" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="80;130;80" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Cable -->
+  <line x1="320" y1="185" x2="210" y2="185" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="210;260;210" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <line x1="320" y1="210" x2="210" y2="210" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="210;260;210" dur="2s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Handle -->
+  <rect x="200" y="182" width="10" height="32" rx="5" fill="#64748b">
+    <animate attributeName="x" values="200;250;200" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Arrows -->
+  <path d="M 270 310 L 220 310 L 230 300 M 220 310 L 230 320" stroke="#22d3ee" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
 </svg>

@@ -19,67 +19,70 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Hollow Hold</text>
 
-  <!-- Mat/Ground -->
-  <ellipse cx="200" cy="325" rx="190" ry="12" fill="#475569" opacity="0.7"/>
-
-  <!-- Shadow (small - only under lower back) -->
-  <ellipse cx="200" cy="320" rx="42" ry="8" fill="#000000" opacity="0.25"/>
+  <!-- Mat -->
+  <rect x="40" y="240" width="320" height="15" rx="7" fill="#475569"/>
 
   <!-- Core engagement glow -->
-  <ellipse cx="200" cy="305" rx="55" ry="25" fill="url(#glow)">
-    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  <ellipse cx="200" cy="190" rx="100" ry="35" fill="url(#glow)">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Lower back (ONLY contact point - small!) - with border -->
-  <ellipse cx="200" cy="310" rx="40" ry="18" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.95"/>
+  <!-- Lower back on ground -->
+  <ellipse cx="200" cy="210" rx="45" ry="22" fill="url(#body10)">
+    <animate attributeName="cy" values="210;212;210" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Torso (MUCH closer to ground - only slightly lifted) - with border -->
-  <ellipse cx="200" cy="280" rx="52" ry="45" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Left leg (straight, slightly raised) -->
+  <rect x="165" y="165" width="18" height="90" rx="9" fill="url(#body10)" transform="rotate(-8 174 210)">
+    <animateTransform attributeName="transform" type="rotate" values="-8 174 210; -9 174 210; -8 174 210" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
 
-  <!-- Head (MUCH closer to ground - only slightly raised) - with border -->
-  <circle cx="220" cy="250" r="28" fill="url(#body10)" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Right leg (straight, slightly raised) -->
+  <rect x="217" y="165" width="18" height="90" rx="9" fill="url(#body10)" transform="rotate(8 226 210)">
+    <animateTransform attributeName="transform" type="rotate" values="8 226 210; 9 226 210; 8 226 210" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
 
-  <!-- Arms (stretched back, LOWER) - with borders -->
-  <g>
-    <!-- Left arm - with border -->
-    <ellipse cx="185" cy="240" rx="16" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(-35 185 240)"/>
-    <!-- Right arm (slightly behind) - with border -->
-    <ellipse cx="195" cy="245" rx="14" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(-32 195 245)"/>
-  </g>
+  <!-- Left foot (in air) -->
+  <ellipse cx="160" cy="168" rx="16" ry="9" fill="#b91c1c" transform="rotate(-8 160 168)">
+    <animateTransform attributeName="transform" type="rotate" values="-8 160 168; -9 160 168; -8 160 168" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Legs (straight, raised but not too high) - with borders -->
-  <g>
-    <!-- Left thigh - with border -->
-    <ellipse cx="235" cy="285" rx="24" ry="70" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(25 235 285)"/>
-    <!-- Left lower leg - with border -->
-    <ellipse cx="270" cy="310" rx="20" ry="60" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(20 270 310)"/>
+  <!-- Right foot (in air) -->
+  <ellipse cx="240" cy="168" rx="16" ry="9" fill="#b91c1c" transform="rotate(8 240 168)">
+    <animateTransform attributeName="transform" type="rotate" values="8 240 168; 9 240 168; 8 240 168" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
 
-    <!-- Right thigh (slightly behind) - with border -->
-    <ellipse cx="225" cy="290" rx="22" ry="65" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(27 225 290)"/>
-    <!-- Right lower leg (slightly behind) - with border -->
-    <ellipse cx="258" cy="315" rx="18" ry="55" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" opacity="0.8" transform="rotate(22 258 315)"/>
+  <!-- Upper body (raised, shoulders off ground) -->
+  <ellipse cx="200" cy="170" rx="48" ry="38" fill="url(#body10)">
+    <animate attributeName="cy" values="170;172;170" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
 
-    <!-- Feet - with borders (just barely off ground) -->
-    <ellipse cx="290" cy="325" rx="14" ry="20" fill="url(#body10)" stroke="#b91c1c" stroke-width="2" transform="rotate(12 290 325)"/>
-  </g>
+  <!-- Head (raised, looking at feet) -->
+  <circle cx="200" cy="135" r="20" fill="url(#body10)">
+    <animate attributeName="cy" values="135;137;135" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
 
-  <!-- Dashed line showing the "hollow" curve (flatter now) -->
-  <path d="M 160 225 Q 200 315 295 328" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-dasharray="10,6" opacity="0.6"/>
+  <!-- Left arm (extended straight, slightly raised) -->
+  <rect x="105" y="158" width="65" height="12" rx="6" fill="url(#body10)" transform="rotate(-10 137.5 164)">
+    <animateTransform attributeName="transform" type="rotate" values="-10 137.5 164; -11 137.5 164; -10 137.5 164" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
 
-  <!-- Gap indicators (smaller gaps now) -->
-  <g opacity="0.7">
-    <!-- Small gap under head/shoulders -->
-    <line x1="175" y1="320" x2="175" y2="305" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
-    <text x="165" y="303" font-family="system-ui" font-size="12" fill="#22d3ee" font-weight="bold" text-anchor="end">Wenig</text>
+  <!-- Right arm (extended straight, slightly raised) -->
+  <rect x="230" y="158" width="65" height="12" rx="6" fill="url(#body10)" transform="rotate(10 262.5 164)">
+    <animateTransform attributeName="transform" type="rotate" values="10 262.5 164; 11 262.5 164; 10 262.5 164" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
 
-    <!-- Small gap under feet -->
-    <line x1="290" y1="323" x2="290" y2="308" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,3"/>
-    <text x="300" y="306" font-family="system-ui" font-size="12" fill="#22d3ee" font-weight="bold" text-anchor="start">Wenig</text>
-  </g>
-
-  <!-- Hold indicator -->
-  <text x="200" y="370" font-family="system-ui" font-size="19" font-weight="bold" fill="#fbbf24" text-anchor="middle">
-    15 SEKUNDEN HALTEN
-    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  <!-- Text indicating hold -->
+  <text x="200" y="310" font-family="system-ui" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">
+    HALTEN
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
   </text>
+
+  <!-- Icon showing static hold -->
+  <circle cx="340" cy="180" r="25" stroke="#22d3ee" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M 340 170 L 340 190 M 330 180 L 350 180" stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+  </path>
 </svg>

@@ -15,40 +15,63 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Butterfly</text>
 
+  <!-- Machine frame base -->
+  <rect x="160" y="240" width="80" height="120" rx="5" fill="#475569" opacity="0.6"/>
+
+  <!-- Seat back support -->
+  <rect x="185" y="140" width="30" height="130" rx="10" fill="#475569"/>
+
   <!-- Head -->
-  <circle cx="200" cy="100" r="24" fill="url(#body7)"/>
+  <circle cx="200" cy="110" r="24" fill="url(#body7)"/>
 
-  <!-- Body -->
-  <ellipse cx="200" cy="180" rx="45" ry="60" fill="url(#body7)"/>
+  <!-- Body/Torso -->
+  <ellipse cx="200" cy="190" rx="40" ry="55" fill="url(#body7)"/>
 
-  <!-- Seat back -->
-  <rect x="190" y="130" width="20" height="120" rx="10" fill="#475569" opacity="0.5"/>
+  <!-- Left upper arm (horizontal) -->
+  <rect x="130" y="165" width="55" height="18" rx="9" fill="url(#body7)"/>
 
-  <!-- Left arm (opening/closing) -->
-  <g transform-origin="150 150">
-    <rect x="100" y="140" width="50" height="20" rx="10" fill="url(#body7)">
-      <animateTransform attributeName="transform" type="rotate" values="-30 150 150; -80 150 150; -30 150 150" dur="2s" repeatCount="indefinite"/>
-    </rect>
-    <rect x="80" y="130" width="20" height="40" rx="10" fill="#64748b">
-      <animateTransform attributeName="transform" type="rotate" values="-30 150 150; -80 150 150; -30 150 150" dur="2s" repeatCount="indefinite"/>
-    </rect>
-  </g>
+  <!-- Left forearm (vertical) -->
+  <rect x="115" y="100" width="16" height="70" rx="8" fill="url(#body7)"/>
 
-  <!-- Right arm (opening/closing) -->
-  <g transform-origin="250 150">
-    <rect x="250" y="140" width="50" height="20" rx="10" fill="url(#body7)">
-      <animateTransform attributeName="transform" type="rotate" values="30 250 150; 80 250 150; 30 250 150" dur="2s" repeatCount="indefinite"/>
-    </rect>
-    <rect x="300" y="130" width="20" height="40" rx="10" fill="#64748b">
-      <animateTransform attributeName="transform" type="rotate" values="30 250 150; 80 250 150; 30 250 150" dur="2s" repeatCount="indefinite"/>
-    </rect>
-  </g>
+  <!-- Left pad (moving) -->
+  <rect x="100" y="95" width="25" height="80" rx="8" fill="#64748b">
+    <animate attributeName="x" values="100;150;100" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right upper arm (horizontal) -->
+  <rect x="215" y="165" width="55" height="18" rx="9" fill="url(#body7)"/>
+
+  <!-- Right forearm (vertical) -->
+  <rect x="269" y="100" width="16" height="70" rx="8" fill="url(#body7)"/>
+
+  <!-- Right pad (moving) -->
+  <rect x="275" y="95" width="25" height="80" rx="8" fill="#64748b">
+    <animate attributeName="x" values="275;225;275" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Legs -->
+  <rect x="175" y="240" width="18" height="70" rx="9" fill="url(#body7)"/>
+  <rect x="207" y="240" width="18" height="70" rx="9" fill="url(#body7)"/>
+
+  <!-- Feet -->
+  <ellipse cx="184" cy="315" rx="14" ry="10" fill="#db2777"/>
+  <ellipse cx="216" cy="315" rx="14" ry="10" fill="#db2777"/>
+
+  <!-- Machine arms/levers (left) -->
+  <rect x="95" y="170" width="60" height="8" rx="4" fill="#374151" opacity="0.7">
+    <animate attributeName="width" values="60;40;60" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Machine arms/levers (right) -->
+  <rect x="245" y="170" width="60" height="8" rx="4" fill="#374151" opacity="0.7">
+    <animate attributeName="x" values="245;265;245" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
 
   <!-- Arrows showing inward/outward movement -->
-  <path d="M 70 260 L 120 260 L 110 250 M 120 260 L 110 270" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  <path d="M 80 320 L 130 320 L 120 310 M 130 320 L 120 330" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
-  <path d="M 330 260 L 280 260 L 290 250 M 280 260 L 290 270" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  <path d="M 320 320 L 270 320 L 280 310 M 270 320 L 280 330" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
 </svg>
