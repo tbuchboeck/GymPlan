@@ -18,37 +18,73 @@
   <!-- Cable machine -->
   <rect x="320" y="100" width="30" height="200" rx="5" fill="#475569"/>
 
-  <!-- Head -->
-  <circle cx="180" cy="120" r="22" fill="url(#body6)"/>
+  <!-- Footrest platform -->
+  <rect x="280" y="260" width="40" height="10" rx="2" fill="#475569"/>
 
-  <!-- Body -->
-  <ellipse cx="200" cy="180" rx="40" ry="50" fill="url(#body6)"/>
+  <!-- Seat -->
+  <rect x="140" y="240" width="50" height="15" rx="5" fill="#64748b"/>
+
+  <!-- Left leg (thigh) -->
+  <rect x="170" y="220" width="70" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="70;75;70" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right leg (thigh) -->
+  <rect x="170" y="240" width="70" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="70;75;70" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Left leg (calf) pointing forward -->
+  <rect x="240" y="218" width="50" height="14" rx="7" fill="url(#body6)">
+    <animate attributeName="width" values="50;48;50" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right leg (calf) pointing forward -->
+  <rect x="240" y="244" width="50" height="14" rx="7" fill="url(#body6)">
+    <animate attributeName="width" values="50;48;50" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Left foot pointing forward -->
+  <ellipse cx="295" cy="225" rx="12" ry="8" fill="#0891b2"/>
+
+  <!-- Right foot pointing forward -->
+  <ellipse cx="295" cy="251" rx="12" ry="8" fill="#0891b2"/>
+
+  <!-- Head -->
+  <circle cx="140" cy="140" r="22" fill="url(#body6)">
+    <animate attributeName="cx" values="140;145;140" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Body (torso) -->
+  <ellipse cx="160" cy="190" rx="35" ry="45" fill="url(#body6)">
+    <animate attributeName="cx" values="160;165;160" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
 
   <!-- Left arm (pulling) -->
-  <rect x="150" y="170" width="80" height="18" rx="9" fill="url(#body6)">
-    <animate attributeName="width" values="80;140;80" dur="2s" repeatCount="indefinite"/>
+  <rect x="130" y="180" width="80" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="80;130;80" dur="2s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Right arm (pulling) -->
-  <rect x="150" y="195" width="80" height="18" rx="9" fill="url(#body6)">
-    <animate attributeName="width" values="80;140;80" dur="2s" repeatCount="indefinite"/>
+  <rect x="130" y="200" width="80" height="16" rx="8" fill="url(#body6)">
+    <animate attributeName="width" values="80;130;80" dur="2s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Cable -->
-  <line x1="320" y1="180" x2="230" y2="180" stroke="#94a3b8" stroke-width="3">
-    <animate attributeName="x2" values="230;290;230" dur="2s" repeatCount="indefinite"/>
+  <line x1="320" y1="185" x2="210" y2="185" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="210;260;210" dur="2s" repeatCount="indefinite"/>
   </line>
-  <line x1="320" y1="200" x2="230" y2="200" stroke="#94a3b8" stroke-width="3">
-    <animate attributeName="x2" values="230;290;230" dur="2s" repeatCount="indefinite"/>
+  <line x1="320" y1="210" x2="210" y2="210" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="210;260;210" dur="2s" repeatCount="indefinite"/>
   </line>
 
   <!-- Handle -->
-  <rect x="220" y="175" width="10" height="35" rx="5" fill="#64748b">
-    <animate attributeName="x" values="220;280;220" dur="2s" repeatCount="indefinite"/>
+  <rect x="200" y="182" width="10" height="32" rx="5" fill="#64748b">
+    <animate attributeName="x" values="200;250;200" dur="2s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Arrows -->
-  <path d="M 270 250 L 220 250 L 230 240 M 220 250 L 230 260" stroke="#22d3ee" stroke-width="3" fill="none">
+  <path d="M 270 310 L 220 310 L 230 300 M 220 310 L 230 320" stroke="#22d3ee" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
   </path>
 </svg>
