@@ -58,6 +58,16 @@ export const workoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
+      name: "Butterfly Maschine",
+      sets: 3,
+      reps: 15,
+      weight: 5,
+      rest: 120,
+      instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
+      imageUrl: "/exercise-images/butterfly.svg"
+    },
+    {
+      id: 7,
       name: "Seitheben Kurzhantel",
       sets: 3,
       reps: 15,
@@ -67,7 +77,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/seitheben.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -75,16 +85,6 @@ export const workoutPlan: WorkoutPlan = {
       rest: 120,
       instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Nussknacker hinten",
       imageUrl: "/exercise-images/ruderzug.svg"
-    },
-    {
-      id: 8,
-      name: "Butterfly Maschine",
-      sets: 3,
-      reps: 15,
-      weight: 5,
-      rest: 120,
-      instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
-      imageUrl: "/exercise-images/butterfly.svg"
     },
     {
       id: 9,
