@@ -8,12 +8,13 @@ interface WorkoutViewProps {
   exercises: Exercise[];
   onComplete: (session: WorkoutSession) => void;
   onExit: () => void;
+  initialExerciseIndex?: number;
 }
 
 type ViewState = 'exercise' | 'rest';
 
-export function WorkoutView({ exercises, onComplete, onExit }: WorkoutViewProps) {
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+export function WorkoutView({ exercises, onComplete, onExit, initialExerciseIndex = 0 }: WorkoutViewProps) {
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialExerciseIndex);
   const [currentSet, setCurrentSet] = useState(1);
   const [viewState, setViewState] = useState<ViewState>('exercise');
   const [completedExercises, setCompletedExercises] = useState(0);

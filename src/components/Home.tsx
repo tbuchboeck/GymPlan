@@ -5,6 +5,7 @@ interface HomeProps {
   workoutPlan: WorkoutPlan;
   sessions: WorkoutSession[];
   onStartWorkout: () => void;
+  onStartExercise: (exerciseIndex: number) => void;
   onViewHistory: () => void;
   onManageReminders: () => void;
 }
@@ -13,6 +14,7 @@ export function Home({
   workoutPlan,
   sessions,
   onStartWorkout,
+  onStartExercise,
   onViewHistory,
   onManageReminders
 }: HomeProps) {
@@ -129,11 +131,13 @@ export function Home({
         {/* Exercises Preview */}
         <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl shadow-2xl p-6 mt-6 border border-slate-600">
           <h3 className="font-semibold text-white mb-4">Übungen in diesem Plan</h3>
+          <p className="text-sm text-slate-300 mb-4">Klicke auf eine Übung, um direkt damit zu starten</p>
           <div className="space-y-2">
             {workoutPlan.exercises.map((exercise, index) => (
-              <div
+              <button
                 key={exercise.id}
-                className="flex items-center justify-between p-3 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg hover:from-slate-500 hover:to-slate-600 transition-all"
+                onClick={() => onStartExercise(index)}
+                className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-full flex items-center justify-center font-semibold shadow-lg">
@@ -144,7 +148,7 @@ export function Home({
                 <div className="text-sm text-slate-300">
                   {exercise.sets} × {exercise.reps}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
