@@ -23,69 +23,69 @@
   <rect x="60" y="260" width="280" height="12" rx="6" fill="#475569"/>
 
   <!-- Core engagement glow -->
-  <ellipse cx="200" cy="230" rx="120" ry="30" fill="url(#glow)">
+  <ellipse cx="200" cy="235" rx="130" ry="35" fill="url(#glow)">
     <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Lower back on ground (only point touching) -->
-  <ellipse cx="200" cy="248" rx="35" ry="16" fill="url(#body10)">
+  <ellipse cx="200" cy="248" rx="38" ry="16" fill="url(#body10)">
     <animate attributeName="cy" values="248;250;248" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Legs (straight, slightly raised) -->
-  <rect x="220" y="200" width="100" height="20" rx="10" fill="url(#body10)" transform="rotate(-8 270 210)">
-    <animateTransform attributeName="transform" type="rotate" values="-8 270 210; -9 270 210; -8 270 210" dur="1.5s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Feet (in air) -->
-  <ellipse cx="320" cy="190" rx="14" ry="18" fill="#b91c1c" transform="rotate(-8 320 190)">
-    <animateTransform attributeName="transform" type="rotate" values="-8 320 190; -9 320 190; -8 320 190" dur="1.5s" repeatCount="indefinite"/>
-  </ellipse>
-
   <!-- Upper body (raised, shoulders off ground) -->
-  <ellipse cx="170" cy="220" rx="45" ry="38" fill="url(#body10)">
+  <ellipse cx="170" cy="220" rx="42" ry="36" fill="url(#body10)">
     <animate attributeName="cy" values="220;222;220" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Head (raised, looking at feet, side profile) -->
-  <circle cx="140" cy="195" r="22" fill="url(#body10)">
-    <animate attributeName="cy" values="195;197;195" dur="1.5s" repeatCount="indefinite"/>
+  <circle cx="140" cy="190" r="22" fill="url(#body10)">
+    <animate attributeName="cy" values="190;192;190" dur="1.5s" repeatCount="indefinite"/>
   </circle>
 
   <!-- Ear -->
-  <circle cx="147" cy="195" r="5" fill="#dc2626">
-    <animate attributeName="cy" values="195;197;195" dur="1.5s" repeatCount="indefinite"/>
+  <circle cx="147" cy="190" r="5" fill="#dc2626">
+    <animate attributeName="cy" values="190;192;190" dur="1.5s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- Arms extended overhead (straight) -->
-  <rect x="80" y="182" width="75" height="14" rx="7" fill="url(#body10)" transform="rotate(-12 117.5 189)">
-    <animateTransform attributeName="transform" type="rotate" values="-12 117.5 189; -13 117.5 189; -12 117.5 189" dur="1.5s" repeatCount="indefinite"/>
+  <!-- Arms stretched forward (parallel to ground) -->
+  <rect x="100" y="194" width="80" height="14" rx="7" fill="url(#body10)" transform="rotate(-5 140 201)">
+    <animateTransform attributeName="transform" type="rotate" values="-5 140 201; -6 140 201; -5 140 201" dur="1.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Hands -->
-  <ellipse cx="77" cy="175" rx="8" ry="10" fill="#b91c1c" transform="rotate(-12 77 175)">
-    <animateTransform attributeName="transform" type="rotate" values="-12 77 175; -13 77 175; -12 77 175" dur="1.5s" repeatCount="indefinite"/>
+  <ellipse cx="75" cy="190" rx="10" ry="8" fill="#b91c1c" transform="rotate(-5 75 190)">
+    <animateTransform attributeName="transform" type="rotate" values="-5 75 190; -6 75 190; -5 75 190" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Legs (straight, slightly raised) -->
+  <rect x="220" y="204" width="105" height="20" rx="10" fill="url(#body10)" transform="rotate(-6 272 214)">
+    <animateTransform attributeName="transform" type="rotate" values="-6 272 214; -7 272 214; -6 272 214" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Feet (in air) -->
+  <ellipse cx="325" cy="195" rx="14" ry="18" fill="#b91c1c" transform="rotate(-6 325 195)">
+    <animateTransform attributeName="transform" type="rotate" values="-6 325 195; -7 325 195; -6 325 195" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Curved line showing hollow body position -->
-  <path d="M 80 180 Q 200 260 320 195" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5,5" fill="none" opacity="0.4">
+  <path d="M 75 195 Q 200 265 325 200" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5,5" fill="none" opacity="0.4">
     <animate attributeName="opacity" values="0.3;0.5;0.3" dur="1.5s" repeatCount="indefinite"/>
   </path>
 
   <!-- Text indicating hold -->
-  <text x="200" y="320" font-family="system-ui" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">
+  <text x="200" y="310" font-family="system-ui" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">
     HALTEN
     <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
   </text>
 
   <!-- Icon showing static hold -->
-  <circle cx="340" cy="120" r="20" stroke="#22d3ee" stroke-width="3" fill="none">
+  <circle cx="340" cy="130" r="20" stroke="#22d3ee" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
   </circle>
-  <path d="M 340 112 L 340 128 M 332 120 L 348 120" stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
+  <path d="M 340 122 L 340 138 M 332 130 L 348 130" stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
     <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
   </path>
 
   <!-- Text label -->
-  <text x="200" y="345" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Seitenansicht</text>
+  <text x="200" y="335" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Seitenansicht</text>
 </svg>
