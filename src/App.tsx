@@ -16,8 +16,15 @@ function App() {
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
+  const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
 
   const handleStartWorkout = () => {
+    setStartExerciseIndex(0);
+    setCurrentView('workout');
+  };
+
+  const handleStartExercise = (exerciseIndex: number) => {
+    setStartExerciseIndex(exerciseIndex);
     setCurrentView('workout');
   };
 
@@ -69,6 +76,7 @@ function App() {
           workoutPlan={workoutPlan}
           sessions={sessions}
           onStartWorkout={handleStartWorkout}
+          onStartExercise={handleStartExercise}
           onViewHistory={handleViewHistory}
           onManageReminders={handleManageReminders}
         />
@@ -79,6 +87,7 @@ function App() {
           exercises={workoutPlan.exercises}
           onComplete={handleWorkoutComplete}
           onExit={handleExitWorkout}
+          initialExerciseIndex={startExerciseIndex}
         />
       )}
 
