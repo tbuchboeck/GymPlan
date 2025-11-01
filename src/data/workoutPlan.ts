@@ -68,16 +68,6 @@ export const workoutPlan: WorkoutPlan = {
     },
     {
       id: 7,
-      name: "Seitheben Kurzhantel",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 120,
-      instructions: "Nacken entspannen, auf Schulterniveau anheben",
-      imageUrl: "/exercise-images/seitheben.svg"
-    },
-    {
-      id: 8,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -85,6 +75,16 @@ export const workoutPlan: WorkoutPlan = {
       rest: 120,
       instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Nussknacker hinten",
       imageUrl: "/exercise-images/ruderzug.svg"
+    },
+    {
+      id: 8,
+      name: "Seitheben Kurzhantel",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 120,
+      instructions: "Nacken entspannen, auf Schulterniveau anheben",
+      imageUrl: "/exercise-images/seitheben.svg"
     },
     {
       id: 9,
