@@ -7,10 +7,12 @@ import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
 import { WorkoutHistory } from './components/WorkoutHistory';
 import { ReminderSettings } from './components/ReminderSettings';
+import { PinLogin } from './components/PinLogin';
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
 
 function App() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
@@ -50,6 +52,16 @@ function App() {
     setCurrentView('home');
   };
 
+  // Show PIN login if app is locked
+  if (!isUnlocked) {
+    return (
+      <PinLogin
+        onSuccess={() => setIsUnlocked(true)}
+      />
+    );
+  }
+
+  // Show main app once unlocked
   return (
     <>
       {currentView === 'home' && (

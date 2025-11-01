@@ -10,6 +10,16 @@ export const workoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
+      name: "Ausdauertraining",
+      sets: 1,
+      reps: 15, // 15 minutes
+      weight: 0,
+      rest: 120,
+      instructions: "15 Minuten auf Laufband, Crosstrainer oder ähnlichem Gerät",
+      imageUrl: "/exercise-images/cardio.svg"
+    },
+    {
+      id: 2,
       name: "Adduktionsmaschine",
       sets: 3,
       reps: 15,
@@ -18,7 +28,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/adduktion.svg"
     },
     {
-      id: 2,
+      id: 3,
       name: "Abduktionsmaschine",
       sets: 3,
       reps: 15,
@@ -27,7 +37,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/abduktion.svg"
     },
     {
-      id: 3,
+      id: 4,
       name: "Beinpresse horizontal",
       sets: 3,
       reps: 15,
@@ -37,7 +47,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/beinpresse.svg"
     },
     {
-      id: 4,
+      id: 5,
       name: "Brustpresse",
       sets: 3,
       reps: 15,
@@ -47,7 +57,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/brustpresse.svg"
     },
     {
-      id: 5,
+      id: 6,
       name: "Seitheben Kurzhantel",
       sets: 3,
       reps: 15,
@@ -57,7 +67,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/seitheben.svg"
     },
     {
-      id: 6,
+      id: 7,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -67,7 +77,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Butterfly Maschine",
       sets: 3,
       reps: 15,
@@ -77,7 +87,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/butterfly.svg"
     },
     {
-      id: 8,
+      id: 9,
       name: "Crunch",
       sets: 2,
       reps: 15,
@@ -87,7 +97,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/crunch.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Heel Touches",
       sets: 2,
       reps: 15,
@@ -97,7 +107,7 @@ export const workoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/heel-touches.svg"
     },
     {
-      id: 10,
+      id: 11,
       name: "Hollow Hold",
       sets: 2,
       reps: 15, // 15 seconds

@@ -31,24 +31,33 @@ export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
   const progress = ((seconds - timeLeft) / seconds) * 100;
 
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
-      <div className="text-center mb-4">
-        <h3 className="text-xl font-semibold mb-2">Pause</h3>
-        <div className="text-5xl font-bold font-mono">
-          {String(minutes).padStart(2, '0')}:{String(secs).padStart(2, '0')}
+    <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 text-white shadow-2xl border-2 border-cyan-500">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold mb-4 text-cyan-300">Pause</h3>
+        <div className="relative inline-block">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
+          <div className="relative bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 rounded-full p-12 shadow-2xl">
+            <div className="text-7xl font-bold font-mono tracking-tight">
+              {String(minutes).padStart(2, '0')}:{String(secs).padStart(2, '0')}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="w-full bg-white/30 rounded-full h-3 mb-4 overflow-hidden">
+      <div className="w-full bg-slate-700 rounded-full h-4 mb-6 overflow-hidden shadow-inner">
         <div
-          className="bg-white h-full rounded-full transition-all duration-1000 ease-linear"
+          className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 h-full rounded-full transition-all duration-1000 ease-linear shadow-lg"
           style={{ width: `${progress}%` }}
         />
       </div>
 
+      <div className="text-center text-slate-300 mb-4 text-lg">
+        {seconds - timeLeft} von {seconds} Sekunden
+      </div>
+
       <button
         onClick={onSkip}
-        className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm py-3 px-6 rounded-xl font-semibold transition-colors"
+        className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 backdrop-blur-sm py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl"
       >
         Pause überspringen
       </button>
