@@ -19,32 +19,32 @@
   <rect x="60" y="260" width="280" height="12" rx="6" fill="#475569"/>
 
   <!-- Lower back on ground -->
-  <ellipse cx="180" cy="245" rx="40" ry="18" fill="url(#body9)"/>
+  <ellipse cx="180" cy="245" rx="40" ry="18" fill="url(#body9)" stroke="#0e7490" stroke-width="2"/>
 
   <!-- Hips/Glutes on ground -->
-  <ellipse cx="210" cy="250" rx="30" ry="20" fill="url(#body9)"/>
+  <ellipse cx="210" cy="250" rx="30" ry="20" fill="url(#body9)" stroke="#0e7490" stroke-width="2"/>
 
   <!-- Upper legs (thighs in air, bent) -->
-  <rect x="210" y="180" width="28" height="65" rx="14" fill="url(#body9)" transform="rotate(-50 224 212)"/>
+  <rect x="210" y="180" width="28" height="65" rx="14" fill="url(#body9)" stroke="#0e7490" stroke-width="2" transform="rotate(-50 224 212)"/>
 
   <!-- Lower legs (calves in air) -->
-  <rect x="240" y="140" width="22" height="55" rx="11" fill="url(#body9)" transform="rotate(35 251 167)"/>
+  <rect x="240" y="140" width="22" height="55" rx="11" fill="url(#body9)" stroke="#0e7490" stroke-width="2" transform="rotate(35 251 167)"/>
 
   <!-- Feet in air -->
-  <ellipse cx="285" cy="155" rx="14" ry="16" fill="#0e7490" transform="rotate(20 285 155)"/>
+  <ellipse cx="285" cy="155" rx="14" ry="16" fill="#0e7490" stroke="#155e75" stroke-width="2" transform="rotate(20 285 155)"/>
 
   <!-- Upper body (shoulders raised) -->
-  <ellipse cx="150" cy="215" rx="38" ry="32" fill="url(#body9)">
+  <ellipse cx="150" cy="215" rx="38" ry="32" fill="url(#body9)" stroke="#0e7490" stroke-width="2">
     <animate attributeName="transform" values="translate(0,0) rotate(0 150 215); translate(-3,2) rotate(-2 150 215); translate(3,2) rotate(2 150 215); translate(0,0) rotate(0 150 215)" dur="2.5s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Head (side profile, raised) -->
-  <circle cx="130" cy="185" r="22" fill="url(#body9)">
+  <circle cx="130" cy="185" r="22" fill="url(#body9)" stroke="#0e7490" stroke-width="2">
     <animate attributeName="transform" values="translate(0,0); translate(-3,2); translate(3,2); translate(0,0)" dur="2.5s" repeatCount="indefinite"/>
   </circle>
 
   <!-- Ear -->
-  <circle cx="137" cy="185" r="5" fill="#0891b2">
+  <circle cx="137" cy="185" r="5" fill="#67e8f9">
     <animate attributeName="transform" values="translate(0,0); translate(-3,2); translate(3,2); translate(0,0)" dur="2.5s" repeatCount="indefinite"/>
   </circle>
 

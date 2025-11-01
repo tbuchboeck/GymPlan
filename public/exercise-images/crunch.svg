@@ -19,34 +19,34 @@
   <rect x="60" y="260" width="280" height="12" rx="6" fill="#475569"/>
 
   <!-- Feet flat on ground -->
-  <ellipse cx="290" cy="257" rx="14" ry="18" fill="#c2410c"/>
+  <ellipse cx="290" cy="257" rx="14" ry="18" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
 
   <!-- Lower legs (calves) -->
-  <rect x="260" y="210" width="22" height="50" rx="11" fill="url(#body8)"/>
+  <rect x="260" y="210" width="22" height="50" rx="11" fill="url(#body8)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Upper legs (thighs) -->
-  <rect x="200" y="215" width="65" height="24" rx="12" fill="url(#body8)"/>
+  <rect x="200" y="215" width="65" height="24" rx="12" fill="url(#body8)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Hips/Glutes on ground -->
-  <ellipse cx="190" cy="250" rx="28" ry="20" fill="url(#body8)"/>
+  <ellipse cx="190" cy="250" rx="28" ry="20" fill="url(#body8)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Lower back on ground -->
-  <ellipse cx="160" cy="245" rx="35" ry="18" fill="url(#body8)"/>
+  <ellipse cx="160" cy="245" rx="35" ry="18" fill="url(#body8)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Upper body (crunching up) -->
   <g>
-    <ellipse cx="140" cy="215" rx="40" ry="35" fill="url(#body8)">
+    <ellipse cx="140" cy="215" rx="40" ry="35" fill="url(#body8)" stroke="#b45309" stroke-width="2">
       <animate attributeName="cy" values="215;195;215" dur="2s" repeatCount="indefinite"/>
       <animate attributeName="rx" values="40;38;40" dur="2s" repeatCount="indefinite"/>
     </ellipse>
 
     <!-- Head (side profile) -->
-    <circle cx="120" cy="180" r="24" fill="url(#body8)">
+    <circle cx="120" cy="180" r="24" fill="url(#body8)" stroke="#b45309" stroke-width="2">
       <animate attributeName="cy" values="180;165;180" dur="2s" repeatCount="indefinite"/>
     </circle>
 
     <!-- Ear -->
-    <circle cx="127" cy="180" r="5" fill="#ea580c">
+    <circle cx="127" cy="180" r="5" fill="#fb923c">
       <animate attributeName="cy" values="180;165;180" dur="2s" repeatCount="indefinite"/>
     </circle>
 

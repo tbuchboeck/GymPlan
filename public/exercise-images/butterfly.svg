@@ -22,40 +22,40 @@
   <rect x="185" y="140" width="30" height="130" rx="10" fill="#475569"/>
 
   <!-- Head -->
-  <circle cx="200" cy="110" r="24" fill="url(#body7)"/>
+  <circle cx="200" cy="110" r="24" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Body/Torso -->
-  <ellipse cx="200" cy="190" rx="40" ry="55" fill="url(#body7)"/>
+  <ellipse cx="200" cy="190" rx="40" ry="55" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Left upper arm (horizontal) -->
-  <rect x="130" y="165" width="55" height="18" rx="9" fill="url(#body7)"/>
+  <rect x="130" y="165" width="55" height="18" rx="9" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Left forearm (vertical) -->
-  <rect x="115" y="100" width="16" height="70" rx="8" fill="url(#body7)"/>
+  <rect x="115" y="100" width="16" height="70" rx="8" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Left pad (moving) -->
-  <rect x="100" y="95" width="25" height="80" rx="8" fill="#64748b">
+  <rect x="100" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
     <animate attributeName="x" values="100;150;100" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Right upper arm (horizontal) -->
-  <rect x="215" y="165" width="55" height="18" rx="9" fill="url(#body7)"/>
+  <rect x="215" y="165" width="55" height="18" rx="9" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Right forearm (vertical) -->
-  <rect x="269" y="100" width="16" height="70" rx="8" fill="url(#body7)"/>
+  <rect x="269" y="100" width="16" height="70" rx="8" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Right pad (moving) -->
-  <rect x="275" y="95" width="25" height="80" rx="8" fill="#64748b">
+  <rect x="275" y="95" width="25" height="80" rx="8" fill="#64748b" stroke="#334155" stroke-width="2">
     <animate attributeName="x" values="275;225;275" dur="2.5s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Legs -->
-  <rect x="175" y="240" width="18" height="70" rx="9" fill="url(#body7)"/>
-  <rect x="207" y="240" width="18" height="70" rx="9" fill="url(#body7)"/>
+  <rect x="175" y="240" width="18" height="70" rx="9" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
+  <rect x="207" y="240" width="18" height="70" rx="9" fill="url(#body7)" stroke="#86198f" stroke-width="2"/>
 
   <!-- Feet -->
-  <ellipse cx="184" cy="315" rx="14" ry="10" fill="#db2777"/>
-  <ellipse cx="216" cy="315" rx="14" ry="10" fill="#db2777"/>
+  <ellipse cx="184" cy="315" rx="14" ry="10" fill="#db2777" stroke="#9f1239" stroke-width="2"/>
+  <ellipse cx="216" cy="315" rx="14" ry="10" fill="#db2777" stroke="#9f1239" stroke-width="2"/>
 
   <!-- Machine arms/levers (left) -->
   <rect x="95" y="170" width="60" height="8" rx="4" fill="#374151" opacity="0.7">
