@@ -105,16 +105,6 @@ export const workoutPlan: WorkoutPlan = {
       rest: 50,
       instructions: "Unterer Rücken bleibt am Boden",
       imageUrl: "/exercise-images/heel-touches.svg"
-    },
-    {
-      id: 11,
-      name: "Hollow Hold",
-      sets: 2,
-      reps: 15, // 15 seconds
-      weight: 0,
-      rest: 50,
-      instructions: "Bauch bewusst anspannen (15 Sekunden halten)",
-      imageUrl: "/exercise-images/hollow-hold.svg"
     }
   ]
 };
