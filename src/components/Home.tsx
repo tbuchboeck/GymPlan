@@ -39,7 +39,7 @@ export function Home({
               <Dumbbell className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white">GymPlan</h1>
+              <h1 className="text-3xl font-bold text-white">Neli</h1>
               <p className="text-indigo-100">Dein persönlicher Trainingsplan</p>
             </div>
           </div>

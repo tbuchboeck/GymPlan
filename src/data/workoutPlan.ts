@@ -14,7 +14,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 1,
       reps: 15, // 15 minutes
       weight: 0,
-      rest: 120,
+      rest: 50,
       instructions: "15 Minuten auf Laufband, Crosstrainer oder ähnlichem Gerät",
       imageUrl: "/exercise-images/cardio.svg"
     },
@@ -24,7 +24,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 15,
-      rest: 120,
+      rest: 50,
       imageUrl: "/exercise-images/adduktion.svg"
     },
     {
@@ -33,7 +33,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 15,
-      rest: 120,
+      rest: 50,
       imageUrl: "/exercise-images/abduktion.svg"
     },
     {
@@ -42,7 +42,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 50,
-      rest: 120,
+      rest: 50,
       instructions: "In den Beinen mind. rechter Winkel, nicht komplett durchstrecken",
       imageUrl: "/exercise-images/beinpresse.svg"
     },
@@ -52,7 +52,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 15,
-      rest: 120,
+      rest: 50,
       instructions: "Schultern bleiben hinten, Nacken entspannen, Griffe auf Mitte Brust, Ellbogen bleibt auf Griffniveau, Sitzpolster Stufe 5",
       imageUrl: "/exercise-images/brustpresse.svg"
     },
@@ -62,7 +62,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 5,
-      rest: 120,
+      rest: 50,
       instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
       imageUrl: "/exercise-images/butterfly.svg"
     },
@@ -72,7 +72,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 19,
-      rest: 120,
+      rest: 50,
       instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Nussknacker hinten",
       imageUrl: "/exercise-images/ruderzug.svg"
     },
@@ -82,7 +82,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 2,
-      rest: 120,
+      rest: 50,
       instructions: "Nacken entspannen, auf Schulterniveau anheben",
       imageUrl: "/exercise-images/seitheben.svg"
     },
@@ -92,7 +92,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 2,
       reps: 15,
       weight: 0,
-      rest: 60,
+      rest: 50,
       instructions: "Unterer Rücken bleibt am Boden",
       imageUrl: "/exercise-images/crunch.svg"
     },
@@ -102,7 +102,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 2,
       reps: 15,
       weight: 0,
-      rest: 60,
+      rest: 50,
       instructions: "Unterer Rücken bleibt am Boden",
       imageUrl: "/exercise-images/heel-touches.svg"
     },
@@ -112,7 +112,7 @@ export const workoutPlan: WorkoutPlan = {
       sets: 2,
       reps: 15, // 15 seconds
       weight: 0,
-      rest: 60,
+      rest: 50,
       instructions: "Bauch bewusst anspannen (15 Sekunden halten)",
       imageUrl: "/exercise-images/hollow-hold.svg"
     }
