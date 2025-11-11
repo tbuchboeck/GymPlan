@@ -10,12 +10,12 @@ export const workoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
-      name: "Ausdauertraining",
+      name: "Ellipsentrainer",
       sets: 1,
-      reps: 15, // 15 minutes
+      reps: 5, // 5 minutes
       weight: 0,
       rest: 50,
-      instructions: "15 Minuten auf Laufband, Crosstrainer oder ähnlichem Gerät",
+      instructions: "5 Minuten auf Ellipsentrainer",
       imageUrl: "/exercise-images/cardio.svg"
     },
     {
