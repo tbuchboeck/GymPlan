@@ -10,12 +10,12 @@ export const workoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
-      name: "Ausdauertraining",
+      name: "Ellipsentrainer",
       sets: 1,
-      reps: 15, // 15 minutes
+      reps: 5, // 5 minutes
       weight: 0,
       rest: 50,
-      instructions: "15 Minuten auf Laufband, Crosstrainer oder ähnlichem Gerät",
+      instructions: "5 Minuten auf Ellipsentrainer",
       imageUrl: "/exercise-images/cardio.svg"
     },
     {
@@ -88,23 +88,33 @@ export const workoutPlan: WorkoutPlan = {
     },
     {
       id: 9,
-      name: "Crunch",
-      sets: 2,
-      reps: 15,
+      name: "Platzhalter Übung 1",
+      sets: 1,
+      reps: 1,
       weight: 0,
       rest: 50,
-      instructions: "Unterer Rücken bleibt am Boden",
-      imageUrl: "/exercise-images/crunch.svg"
+      instructions: "Wird später definiert",
+      imageUrl: "/exercise-images/cardio.svg"
     },
     {
       id: 10,
-      name: "Heel Touches",
-      sets: 2,
-      reps: 15,
+      name: "Platzhalter Übung 2",
+      sets: 1,
+      reps: 1,
       weight: 0,
       rest: 50,
-      instructions: "Unterer Rücken bleibt am Boden",
-      imageUrl: "/exercise-images/heel-touches.svg"
+      instructions: "Wird später definiert",
+      imageUrl: "/exercise-images/cardio.svg"
+    },
+    {
+      id: 11,
+      name: "Laufband",
+      sets: 1,
+      reps: 20, // 20 minutes
+      weight: 0,
+      rest: 50,
+      instructions: "20 Minuten auf Laufband",
+      imageUrl: "/exercise-images/cardio.svg"
     }
   ]
 };
