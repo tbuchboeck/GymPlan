@@ -16,7 +16,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 50,
       instructions: "5 Minuten auf Ellipsentrainer",
-      imageUrl: "/exercise-images/cardio.svg"
+      imageUrl: "/exercise-images/ellipsentrainer.svg"
     },
     {
       id: 2,
@@ -114,7 +114,7 @@ export const workoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 50,
       instructions: "20 Minuten auf Laufband",
-      imageUrl: "/exercise-images/cardio.svg"
+      imageUrl: "/exercise-images/laufband.svg"
     }
   ]
 };
