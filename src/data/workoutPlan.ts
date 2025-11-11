@@ -78,6 +78,16 @@ export const workoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
+      name: "Seitheben Kurzhantel",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 50,
+      instructions: "Nacken entspannen, auf Schulterniveau anheben",
+      imageUrl: "/exercise-images/seitheben.svg"
+    },
+    {
+      id: 9,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
