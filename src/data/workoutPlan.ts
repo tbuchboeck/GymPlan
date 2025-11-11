@@ -88,6 +88,26 @@ export const workoutPlan: WorkoutPlan = {
     },
     {
       id: 9,
+      name: "Platzhalter Übung 1",
+      sets: 1,
+      reps: 1,
+      weight: 0,
+      rest: 50,
+      instructions: "Wird später definiert",
+      imageUrl: "/exercise-images/cardio.svg"
+    },
+    {
+      id: 10,
+      name: "Platzhalter Übung 2",
+      sets: 1,
+      reps: 1,
+      weight: 0,
+      rest: 50,
+      instructions: "Wird später definiert",
+      imageUrl: "/exercise-images/cardio.svg"
+    },
+    {
+      id: 11,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
