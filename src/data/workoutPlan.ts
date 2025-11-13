@@ -1,7 +1,8 @@
 import type { WorkoutPlan } from '../types';
 
-export const workoutPlan: WorkoutPlan = {
-  name: "Ganzkörper-Trainingsplan",
+// Gym Trainingsplan
+export const gymWorkoutPlan: WorkoutPlan = {
+  name: "Ganzkörper-Trainingsplan (@gym)",
   duration: "Unbegrenzt",
   sessionsPerWeek: 2,
   goal: "Allgemeine Fitness",
@@ -118,3 +119,88 @@ export const workoutPlan: WorkoutPlan = {
     }
   ]
 };
+
+// Home Trainingsplan
+export const homeWorkoutPlan: WorkoutPlan = {
+  name: "Home-Trainingsplan (@home)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 2,
+  goal: "Allgemeine Fitness",
+  trainer: "Martin Schiendorfer",
+  createdAt: "24.10.2025",
+  exercises: [
+    {
+      id: 1,
+      name: "Sit-Ups",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Kontrollierte Ausführung, Nacken entspannt",
+      imageUrl: "/exercise-images/situps.svg"
+    },
+    {
+      id: 2,
+      name: "Theraband Butterfly",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Theraband hinter dem Rücken spannen, Arme nach vorne führen",
+      imageUrl: "/exercise-images/theraband-butterfly.svg"
+    },
+    {
+      id: 3,
+      name: "Theraband Trizeps",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Theraband über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
+      imageUrl: "/exercise-images/theraband-trizeps.svg"
+    },
+    {
+      id: 4,
+      name: "Theraband Bizeps",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Theraband unter den Füßen, Arme beugen",
+      imageUrl: "/exercise-images/theraband-bizeps.svg"
+    },
+    {
+      id: 5,
+      name: "Hula Hoop",
+      sets: 1,
+      reps: 10, // 10 minutes
+      weight: 0,
+      rest: 60,
+      instructions: "10 Minuten Hula Hoop",
+      imageUrl: "/exercise-images/hula-hoop.svg"
+    },
+    {
+      id: 6,
+      name: "Gehen",
+      sets: 1,
+      reps: 15, // 15 minutes
+      weight: 0,
+      rest: 60,
+      instructions: "15 Minuten Gehen (z.B. draußen oder auf der Stelle)",
+      imageUrl: "/exercise-images/walking.svg"
+    },
+    {
+      id: 7,
+      name: "Tanzen",
+      sets: 1,
+      reps: 20, // 20 minutes
+      weight: 0,
+      rest: 0,
+      instructions: "20 Minuten Tanzen - Viel Spaß!",
+      imageUrl: "/exercise-images/dancing.svg"
+    }
+  ]
+};
+
+// Default export für Kompatibilität
+export const workoutPlan = gymWorkoutPlan;
