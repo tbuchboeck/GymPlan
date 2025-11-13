@@ -8,11 +8,14 @@ import { WorkoutSummary } from './components/WorkoutSummary';
 import { WorkoutHistory } from './components/WorkoutHistory';
 import { ReminderSettings } from './components/ReminderSettings';
 import { PinLogin } from './components/PinLogin';
+import LocationSelector from './components/LocationSelector';
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
+type Location = 'gym' | 'home' | null;
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [location, setLocation] = useState<Location>(null);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
@@ -64,6 +67,15 @@ function App() {
     return (
       <PinLogin
         onSuccess={() => setIsUnlocked(true)}
+      />
+    );
+  }
+
+  // Show location selector after PIN login
+  if (!location) {
+    return (
+      <LocationSelector
+        onSelectLocation={(selectedLocation) => setLocation(selectedLocation)}
       />
     );
   }
