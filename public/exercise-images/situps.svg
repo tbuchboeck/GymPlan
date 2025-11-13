@@ -1,0 +1,67 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgSitup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodySitup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgSitup)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Sit-Ups</text>
+
+  <!-- Mat -->
+  <rect x="60" y="280" width="280" height="10" rx="5" fill="#475569"/>
+
+  <!-- Feet flat on ground -->
+  <ellipse cx="110" cy="277" rx="16" ry="20" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="145" cy="277" rx="16" ry="20" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+
+  <!-- Lower legs -->
+  <rect x="105" y="230" width="22" height="50" rx="11" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+  <rect x="140" y="230" width="22" height="50" rx="11" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Thighs -->
+  <ellipse cx="130" cy="215" rx="45" ry="20" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2" transform="rotate(-15 130 215)"/>
+
+  <!-- Hips/Lower back on ground -->
+  <ellipse cx="190" cy="260" rx="35" ry="22" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Upper body (animating up and down) -->
+  <g>
+    <ellipse cx="220" cy="220" rx="45" ry="38" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="220;180;220" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="220;240;220" dur="2.5s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Head -->
+    <circle cx="240" cy="185" r="26" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="185;145;185" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="240;265;240" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Ear -->
+    <circle cx="247" cy="185" r="6" fill="#fb923c">
+      <animate attributeName="cy" values="185;145;185" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="247;272;247" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Arms behind head -->
+    <path d="M 230 190 Q 210 180 215 205" stroke="url(#bodySitup)" stroke-width="20" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 230 190 Q 210 180 215 205; M 250 150 Q 230 140 235 165; M 230 190 Q 210 180 215 205" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Movement arrow -->
+  <path d="M 320 160 L 320 120 L 310 130 M 320 120 L 330 130" stroke="#22d3ee" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Info text -->
+  <text x="200" y="330" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">3 Sets à 10 Wiederholungen</text>
+</svg>

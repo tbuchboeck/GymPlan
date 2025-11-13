@@ -1,0 +1,80 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgTrizeps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyTrizeps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgTrizeps)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Theraband Trizeps</text>
+
+  <!-- Ground line -->
+  <line x1="50" y1="340" x2="350" y2="340" stroke="#475569" stroke-width="3"/>
+
+  <!-- Legs -->
+  <rect x="180" y="260" width="18" height="80" rx="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+  <rect x="210" y="260" width="18" height="80" rx="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Feet -->
+  <ellipse cx="189" cy="337" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="219" cy="337" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+
+  <!-- Body (torso) -->
+  <ellipse cx="200" cy="220" rx="40" ry="50" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Head -->
+  <circle cx="200" cy="160" r="28" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Face details -->
+  <circle cx="190" cy="155" r="3" fill="#1e293b"/>
+  <circle cx="210" cy="155" r="3" fill="#1e293b"/>
+
+  <!-- Left arm holding theraband (fixed position) -->
+  <g>
+    <!-- Upper arm -->
+    <ellipse cx="165" cy="195" rx="12" ry="30" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(-20 165 195)"/>
+    <!-- Lower arm/hand holding band -->
+    <ellipse cx="150" cy="230" rx="10" ry="20" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(-30 150 230)"/>
+    <circle cx="145" cy="245" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+  </g>
+
+  <!-- Theraband -->
+  <path d="M 145 245 Q 180 120 200 80" stroke="#10b981" stroke-width="5" fill="none" opacity="0.8">
+    <animate attributeName="d" values="M 145 245 Q 180 120 200 80; M 145 245 Q 180 100 200 70; M 145 245 Q 180 120 200 80" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Right arm (animated - overhead extension) -->
+  <g>
+    <!-- Upper arm (fixed above head) -->
+    <ellipse cx="220" cy="140" rx="12" ry="32" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(15 220 140)"/>
+
+    <!-- Forearm (animated up and down) -->
+    <path d="M 225 120 L 205 85" stroke="url(#bodyTrizeps)" stroke-width="20" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 225 120 L 205 85; M 225 120 L 200 70; M 225 120 L 205 85" dur="2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Hand -->
+    <circle cx="205" cy="85" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="85;70;85" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="205;200;205" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Movement arrow -->
+  <path d="M 260 90 L 260 70 L 253 77 M 260 70 L 267 77" stroke="#22d3ee" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 260 110 L 260 130 L 253 123 M 260 130 L 267 123" stroke="#22d3ee" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Info text -->
+  <text x="200" y="380" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Ellbogen fixiert, Unterarm strecken</text>
+</svg>
