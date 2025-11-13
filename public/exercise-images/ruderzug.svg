@@ -55,6 +55,17 @@
     <animate attributeName="cx" values="140;145;140" dur="2s" repeatCount="indefinite"/>
   </circle>
 
+  <!-- Face details -->
+  <circle cx="133" cy="137" r="3" fill="#1e293b">
+    <animate attributeName="cx" values="133;138;133" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="147" cy="137" r="3" fill="#1e293b">
+    <animate attributeName="cx" values="147;152;147" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M 133 147 Q 140 152 147 147" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M 133 147 Q 140 152 147 147; M 138 147 Q 145 152 152 147; M 133 147 Q 140 152 147 147" dur="2s" repeatCount="indefinite"/>
+  </path>
+
   <!-- Body (torso) -->
   <ellipse cx="160" cy="190" rx="35" ry="45" fill="url(#body6)" stroke="#047857" stroke-width="2">
     <animate attributeName="cx" values="160;165;160" dur="2s" repeatCount="indefinite"/>

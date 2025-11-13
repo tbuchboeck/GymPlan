@@ -39,6 +39,11 @@
   <!-- Head -->
   <circle cx="200" cy="60" r="20" fill="url(#leg1)"/>
 
+  <!-- Face details -->
+  <circle cx="193" cy="57" r="2.5" fill="#1e293b"/>
+  <circle cx="207" cy="57" r="2.5" fill="#1e293b"/>
+  <path d="M 193 67 Q 200 72 207 67" stroke="#1e293b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
   <!-- Arrows showing inward movement -->
   <path d="M 80 250 L 120 250 L 110 240 M 120 250 L 110 260" stroke="#22d3ee" stroke-width="3" fill="none">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>

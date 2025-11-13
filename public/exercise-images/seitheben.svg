@@ -18,6 +18,11 @@
   <!-- Head -->
   <circle cx="200" cy="90" r="22" fill="url(#body5)"/>
 
+  <!-- Face details -->
+  <circle cx="193" cy="87" r="3" fill="#1e293b"/>
+  <circle cx="207" cy="87" r="3" fill="#1e293b"/>
+  <path d="M 193 97 Q 200 102 207 97" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
   <!-- Body -->
   <rect x="175" y="110" width="50" height="80" rx="25" fill="url(#body5)"/>
   <rect x="185" y="190" width="30" height="80" rx="15" fill="url(#body5)"/>

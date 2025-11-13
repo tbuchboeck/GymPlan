@@ -44,6 +44,17 @@
       <animate attributeName="cy" values="110;108;110;112;110" dur="0.8s" repeatCount="indefinite"/>
     </circle>
 
+    <!-- Face details -->
+    <circle cx="192" cy="107" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="107;105;107;109;107" dur="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="208" cy="107" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="107;105;107;109;107" dur="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M 192 117 Q 200 122 208 117" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 192 117 Q 200 122 208 117; M 192 115 Q 200 120 208 115; M 192 117 Q 200 122 208 117; M 192 119 Q 200 124 208 119; M 192 117 Q 200 122 208 117" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+
     <!-- Torso -->
     <ellipse cx="200" cy="175" rx="40" ry="55" fill="url(#bodyLaufband)" stroke="#0e7490" stroke-width="2">
       <animate attributeName="cy" values="175;173;175;177;175" dur="0.8s" repeatCount="indefinite"/>
