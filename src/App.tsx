@@ -67,6 +67,17 @@ function App() {
     setCurrentView('home');
   };
 
+  const handleImportSessions = (importedSessions: WorkoutSession[]) => {
+    // Kombiniere bestehende und importierte Sessions
+    const existingIds = new Set(sessions.map(s => s.id));
+
+    // Filtere Duplikate basierend auf der ID
+    const uniqueImportedSessions = importedSessions.filter(s => !existingIds.has(s.id));
+
+    // Füge die neuen Sessions hinzu
+    setSessions([...sessions, ...uniqueImportedSessions]);
+  };
+
   // Show PIN login if app is locked
   if (!isUnlocked) {
     return (
@@ -119,6 +130,7 @@ function App() {
         <WorkoutHistory
           sessions={sessions}
           onClose={handleCloseHistory}
+          onImport={handleImportSessions}
         />
       )}
 
