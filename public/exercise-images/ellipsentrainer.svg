@@ -62,6 +62,17 @@
       <animate attributeName="cy" values="100;98;100;102;100" dur="2s" repeatCount="indefinite"/>
     </circle>
 
+    <!-- Face details -->
+    <circle cx="192" cy="97" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="97;95;97;99;97" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="208" cy="97" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="97;95;97;99;97" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M 192 107 Q 200 112 208 107" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 192 107 Q 200 112 208 107; M 192 105 Q 200 110 208 105; M 192 107 Q 200 112 208 107; M 192 109 Q 200 114 208 109; M 192 107 Q 200 112 208 107" dur="2s" repeatCount="indefinite"/>
+    </path>
+
     <!-- Left arm (holding handle) - with border -->
     <ellipse cx="165" cy="155" rx="16" ry="50" fill="url(#bodyEllipse)" stroke="#0e7490" stroke-width="2" transform="rotate(-20 165 155)">
       <animate attributeName="cy" values="155;152;155;158;155" dur="2s" repeatCount="indefinite"/>

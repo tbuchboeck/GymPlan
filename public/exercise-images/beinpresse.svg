@@ -24,6 +24,11 @@
   <!-- Head -->
   <circle cx="90" cy="165" r="22" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2"/>
 
+  <!-- Face details -->
+  <circle cx="83" cy="162" r="3" fill="#1e293b"/>
+  <circle cx="97" cy="162" r="3" fill="#1e293b"/>
+  <path d="M 83 172 Q 90 177 97 172" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
   <!-- Upper body (sitting) -->
   <ellipse cx="85" cy="210" rx="35" ry="50" fill="url(#leg3)" stroke="#b91c1c" stroke-width="2"/>
 
