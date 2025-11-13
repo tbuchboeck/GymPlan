@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { workoutPlan } from './data/workoutPlan';
+import { useState, useMemo } from 'react';
+import { gymWorkoutPlan, homeWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { Home } from './components/Home';
@@ -20,6 +20,11 @@ function App() {
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
   const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
+
+  // Select workout plan based on location
+  const workoutPlan = useMemo(() => {
+    return location === 'home' ? homeWorkoutPlan : gymWorkoutPlan;
+  }, [location]);
 
   const handleStartWorkout = () => {
     setStartExerciseIndex(0);
