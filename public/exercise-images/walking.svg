@@ -1,0 +1,110 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgWalk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyWalk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgWalk)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Gehen</text>
+
+  <!-- Ground line -->
+  <line x1="50" y1="330" x2="350" y2="330" stroke="#475569" stroke-width="3"/>
+
+  <!-- Path/trail marks -->
+  <circle cx="120" cy="330" r="4" fill="#64748b" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="160" cy="330" r="4" fill="#64748b" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Left leg (forward) -->
+  <g>
+    <rect x="175" y="230" width="20" height="75" rx="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2" transform="rotate(-20 185 230)">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        values="-20 185 230; 20 185 230; -20 185 230"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </rect>
+    <!-- Foot -->
+    <ellipse cx="158" cy="322" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+      <animate attributeName="cx" values="158;210;158" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="322;328;322" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Right leg (back) -->
+  <g>
+    <rect x="215" y="230" width="20" height="75" rx="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2" transform="rotate(20 225 230)">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        values="20 225 230; -20 225 230; 20 225 230"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </rect>
+    <!-- Foot -->
+    <ellipse cx="242" cy="322" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+      <animate attributeName="cx" values="242;190;242" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="322;328;322" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Body (torso) -->
+  <ellipse cx="205" cy="195" rx="40" ry="50" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cy" values="195;190;195" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Head -->
+  <circle cx="205" cy="135" r="28" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cy" values="135;130;135" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Face details -->
+  <circle cx="195" cy="130" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="130;125;130" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="215" cy="130" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="130;125;130" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Left arm (swinging) -->
+  <g>
+    <path d="M 170 185 L 150 230" stroke="url(#bodyWalk)" stroke-width="18" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 170 185 L 150 230; M 170 185 L 165 150; M 170 185 L 150 230" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="150" cy="230" r="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="230;150;230" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="150;165;150" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Right arm (swinging opposite) -->
+  <g>
+    <path d="M 240 185 L 245 150" stroke="url(#bodyWalk)" stroke-width="18" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 240 185 L 245 150; M 240 185 L 260 230; M 240 185 L 245 150" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="245" cy="150" r="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="150;230;150" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="245;260;245" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Movement arrow -->
+  <path d="M 280 200 L 320 200 L 310 193 M 320 200 L 310 207" stroke="#22d3ee" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Info text -->
+  <text x="200" y="370" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">15 Minuten Gehen</text>
+</svg>
