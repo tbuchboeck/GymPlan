@@ -1,16 +1,23 @@
 import type { WorkoutSession } from '../types';
-import { Calendar, TrendingUp, Dumbbell, Clock, ArrowLeft, Award, Flame, Target, BarChart3, Download } from 'lucide-react';
+import { Calendar, TrendingUp, Dumbbell, Clock, ArrowLeft, Award, Flame, Target, BarChart3, Download, Upload } from 'lucide-react';
 import { calculateExtendedStatistics } from '../utils/statistics';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { exportToJSON, exportToCSV } from '../utils/export';
+import { exportToJSON, exportToCSV, importFromJSON } from '../utils/export';
 
 interface WorkoutHistoryProps {
   sessions: WorkoutSession[];
   onClose: () => void;
+  onImport?: (sessions: WorkoutSession[]) => void;
 }
 
-export function WorkoutHistory({ sessions, onClose }: WorkoutHistoryProps) {
+export function WorkoutHistory({ sessions, onClose, onImport }: WorkoutHistoryProps) {
   const stats = calculateExtendedStatistics(sessions);
+
+  const handleImport = () => {
+    if (onImport) {
+      importFromJSON(onImport);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900">
@@ -26,27 +33,42 @@ export function WorkoutHistory({ sessions, onClose }: WorkoutHistoryProps) {
               <span>Zurück</span>
             </button>
 
-            {/* Export Buttons */}
-            {sessions.length > 0 && (
-              <div className="flex gap-2">
+            {/* Import & Export Buttons */}
+            <div className="flex gap-2">
+              {onImport && (
                 <button
-                  onClick={() => exportToJSON(sessions)}
-                  className="flex items-center gap-2 px-3 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-lg transition-all text-sm"
-                  title="Als JSON exportieren"
+                  onClick={handleImport}
+                  className="flex items-center gap-2 px-3 py-2 bg-green-500/30 hover:bg-green-500/40 backdrop-blur-sm text-white rounded-lg transition-all text-sm border border-green-400/50"
+                  title="JSON importieren"
                 >
-                  <Download className="w-4 h-4" />
-                  <span className="hidden sm:inline">JSON</span>
+                  <Upload className="w-4 h-4" />
+                  <span className="font-bold">J</span>
+                  <span className="hidden sm:inline">SON</span>
                 </button>
-                <button
-                  onClick={() => exportToCSV(sessions)}
-                  className="flex items-center gap-2 px-3 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-lg transition-all text-sm"
-                  title="Als CSV exportieren"
-                >
-                  <Download className="w-4 h-4" />
-                  <span className="hidden sm:inline">CSV</span>
-                </button>
-              </div>
-            )}
+              )}
+              {sessions.length > 0 && (
+                <>
+                  <button
+                    onClick={() => exportToJSON(sessions)}
+                    className="flex items-center gap-2 px-3 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-lg transition-all text-sm"
+                    title="Als JSON exportieren"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span className="font-bold">J</span>
+                    <span className="hidden sm:inline">SON</span>
+                  </button>
+                  <button
+                    onClick={() => exportToCSV(sessions)}
+                    className="flex items-center gap-2 px-3 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-lg transition-all text-sm"
+                    title="Als CSV exportieren"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span className="font-bold">C</span>
+                    <span className="hidden sm:inline">SV</span>
+                  </button>
+                </>
+              )}
+            </div>
           </div>
           <h1 className="text-3xl font-bold text-white">Trainings-Statistiken</h1>
         </div>
