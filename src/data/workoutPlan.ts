@@ -137,7 +137,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 60,
       instructions: "Hanteltraining 2kg - Arme seitlich anheben und vor der Brust zusammenführen",
-      imageUrl: "/exercise-images/butterfly.svg"
+      imageUrl: "/exercise-images/hantel-butterfly.svg"
     },
     {
       id: 3,
@@ -147,7 +147,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 60,
       instructions: "Hanteltraining 2kg - Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
-      imageUrl: "/exercise-images/theraband-trizeps.svg"
+      imageUrl: "/exercise-images/hantel-trizeps.svg"
     },
     {
       id: 4,
@@ -157,7 +157,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 60,
       instructions: "Hanteltraining 2kg - Bizeps Curls, Ellbogen am Körper fixiert",
-      imageUrl: "/exercise-images/theraband-bizeps.svg"
+      imageUrl: "/exercise-images/hantel-bizeps.svg"
     },
     {
       id: 5,
@@ -167,7 +167,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 60,
       instructions: "Hanteltraining 2kg - Arme gestreckt nach vorne anheben bis Schulterhöhe",
-      imageUrl: "/exercise-images/seitheben.svg"
+      imageUrl: "/exercise-images/front-raises.svg"
     },
     {
       id: 6,
@@ -177,7 +177,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       weight: 2,
       rest: 60,
       instructions: "Hanteltraining 2kg - Hanteln mit neutralem Griff (Daumen nach oben) beugen",
-      imageUrl: "/exercise-images/theraband-bizeps.svg"
+      imageUrl: "/exercise-images/hammer-curls.svg"
     },
     {
       id: 7,

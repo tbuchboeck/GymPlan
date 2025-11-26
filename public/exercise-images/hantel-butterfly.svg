@@ -1,0 +1,116 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgButterflyH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyButterflyH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dumbbellGradB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#94a3b8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#64748b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgButterflyH)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Butterfly mit Hanteln</text>
+
+  <!-- Ground line -->
+  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
+
+  <!-- Slim figure - Legs -->
+  <rect x="182" y="270" width="12" height="80" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+  <rect x="206" y="270" width="12" height="80" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+
+  <!-- Feet -->
+  <ellipse cx="188" cy="348" rx="10" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
+  <ellipse cx="212" cy="348" rx="10" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
+
+  <!-- Slim torso -->
+  <ellipse cx="200" cy="215" rx="25" ry="55" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+
+  <!-- Slim head -->
+  <circle cx="200" cy="140" r="22" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+
+  <!-- Hair -->
+  <ellipse cx="200" cy="125" rx="20" ry="12" fill="#7c3aed"/>
+
+  <!-- Face details -->
+  <circle cx="192" cy="137" r="2.5" fill="#1e293b"/>
+  <circle cx="208" cy="137" r="2.5" fill="#1e293b"/>
+  <path d="M 193 147 Q 200 151 207 147" stroke="#1e293b" stroke-width="1.5" fill="none"/>
+
+  <!-- Left arm with butterfly motion -->
+  <g>
+    <!-- Upper arm -->
+    <rect x="130" y="175" width="45" height="10" rx="5" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Forearm (slightly bent) -->
+    <rect x="110" y="168" width="30" height="8" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Hand -->
+    <circle cx="108" cy="172" r="7" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Left dumbbell -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+      <!-- Vertical dumbbell -->
+      <rect x="101" y="155" width="6" height="35" rx="3" fill="url(#dumbbellGradB)"/>
+      <!-- Top weight -->
+      <rect x="97" y="148" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <!-- Bottom weight -->
+      <rect x="97" y="187" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Right arm with butterfly motion -->
+  <g>
+    <!-- Upper arm -->
+    <rect x="225" y="175" width="45" height="10" rx="5" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Forearm (slightly bent) -->
+    <rect x="260" y="168" width="30" height="8" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Hand -->
+    <circle cx="292" cy="172" r="7" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Right dumbbell -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+      <!-- Vertical dumbbell -->
+      <rect x="289" y="155" width="6" height="35" rx="3" fill="url(#dumbbellGradB)"/>
+      <!-- Top weight -->
+      <rect x="285" y="148" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <!-- Bottom weight -->
+      <rect x="285" y="187" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Movement arrows -->
+  <path d="M 75 130 C 90 100 110 100 130 130" stroke="#fbbf24" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 270 130 C 290 100 310 100 325 130" stroke="#fbbf24" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Arme seitlich anheben, vor Brust zusammenführen</text>
+</svg>

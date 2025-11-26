@@ -1,0 +1,112 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgBizepsH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyBizepsH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dumbbellGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#94a3b8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#64748b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgBizepsH)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Bizeps Curls</text>
+
+  <!-- Ground line -->
+  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
+
+  <!-- Slim figure - Legs -->
+  <rect x="182" y="270" width="12" height="80" rx="6" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="206" y="270" width="12" height="80" rx="6" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- Feet -->
+  <ellipse cx="188" cy="348" rx="10" ry="6" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
+  <ellipse cx="212" cy="348" rx="10" ry="6" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
+
+  <!-- Slim torso -->
+  <ellipse cx="200" cy="220" rx="28" ry="55" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- Slim head -->
+  <circle cx="200" cy="145" r="22" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- Hair -->
+  <ellipse cx="200" cy="130" rx="18" ry="10" fill="#92400e"/>
+
+  <!-- Face details -->
+  <circle cx="192" cy="142" r="2.5" fill="#1e293b"/>
+  <circle cx="208" cy="142" r="2.5" fill="#1e293b"/>
+  <path d="M 193 152 Q 200 156 207 152" stroke="#1e293b" stroke-width="1.5" fill="none"/>
+
+  <!-- Left arm with dumbbell curl -->
+  <g>
+    <!-- Upper arm (fixed at side) -->
+    <rect x="152" y="185" width="10" height="45" rx="5" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5" transform="rotate(5 157 207)"/>
+
+    <!-- Forearm (animated) -->
+    <rect x="148" y="170" width="8" height="40" rx="4" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Hand -->
+    <circle cx="152" cy="175" r="7" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Left dumbbell -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
+      <!-- Dumbbell bar -->
+      <rect x="137" y="168" width="30" height="6" rx="3" fill="url(#dumbbellGrad)"/>
+      <!-- Left weight -->
+      <rect x="132" y="164" width="8" height="14" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <!-- Right weight -->
+      <rect x="164" y="164" width="8" height="14" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Right arm with dumbbell curl -->
+  <g>
+    <!-- Upper arm (fixed at side) -->
+    <rect x="238" y="185" width="10" height="45" rx="5" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5" transform="rotate(-5 243 207)"/>
+
+    <!-- Forearm (animated) -->
+    <rect x="244" y="170" width="8" height="40" rx="4" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Hand -->
+    <circle cx="248" cy="175" r="7" fill="url(#bodyBizepsH)" stroke="#b45309" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Right dumbbell -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
+      <!-- Dumbbell bar -->
+      <rect x="233" y="168" width="30" height="6" rx="3" fill="url(#dumbbellGrad)"/>
+      <!-- Left weight -->
+      <rect x="228" y="164" width="8" height="14" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <!-- Right weight -->
+      <rect x="260" y="164" width="8" height="14" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Movement arrows -->
+  <path d="M 115 200 L 115 165 L 108 175 M 115 165 L 122 175" stroke="#22d3ee" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 285 200 L 285 165 L 278 175 M 285 165 L 292 175" stroke="#22d3ee" stroke-width="2" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Ellbogen am Körper fixiert, 2kg Hanteln</text>
+</svg>
