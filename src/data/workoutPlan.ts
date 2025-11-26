@@ -61,7 +61,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       id: 6,
       name: "Butterfly Maschine",
       sets: 3,
-      reps: 5,
+      reps: 15,
       weight: 5,
       rest: 50,
       instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
@@ -80,11 +80,11 @@ export const gymWorkoutPlan: WorkoutPlan = {
     {
       id: 8,
       name: "Rotary Torso",
-      sets: 3,
+      sets: 6,
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Oberkörper-Rotation. Einmal links, einmal rechts je 15 Wiederholungen. Schulterpolster nutzen, kontrollierte Drehbewegung",
+      instructions: "Oberkörper-Rotation. 6 Sätze abwechselnd: Satz 1 Links, Satz 2 Rechts, Satz 3 Links, Satz 4 Rechts, Satz 5 Links, Satz 6 Rechts. Schulterpolster nutzen, kontrollierte Drehbewegung",
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
