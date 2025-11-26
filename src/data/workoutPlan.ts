@@ -131,36 +131,56 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 2,
-      name: "Theraband Butterfly",
+      name: "Butterfly",
       sets: 3,
       reps: 15,
-      weight: 0,
+      weight: 2,
       rest: 60,
-      instructions: "Theraband hinter dem Rücken spannen, Arme nach vorne führen",
-      imageUrl: "/exercise-images/theraband-butterfly.svg"
+      instructions: "Hanteltraining 2kg - Arme seitlich anheben und vor der Brust zusammenführen",
+      imageUrl: "/exercise-images/butterfly.svg"
     },
     {
       id: 3,
-      name: "Theraband Trizeps",
+      name: "Trizeps",
       sets: 3,
       reps: 15,
-      weight: 0,
+      weight: 2,
       rest: 60,
-      instructions: "Theraband über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
+      instructions: "Hanteltraining 2kg - Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
       imageUrl: "/exercise-images/theraband-trizeps.svg"
     },
     {
       id: 4,
-      name: "Theraband Bizeps",
+      name: "Bizeps",
       sets: 3,
       reps: 15,
-      weight: 0,
+      weight: 2,
       rest: 60,
-      instructions: "Theraband unter den Füßen, Arme beugen",
+      instructions: "Hanteltraining 2kg - Bizeps Curls, Ellbogen am Körper fixiert",
       imageUrl: "/exercise-images/theraband-bizeps.svg"
     },
     {
       id: 5,
+      name: "Front Raises",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Arme gestreckt nach vorne anheben bis Schulterhöhe",
+      imageUrl: "/exercise-images/seitheben.svg"
+    },
+    {
+      id: 6,
+      name: "Hammer Curls",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Hanteln mit neutralem Griff (Daumen nach oben) beugen",
+      imageUrl: "/exercise-images/theraband-bizeps.svg"
+    },
+    {
+      id: 7,
       name: "Hula Hoop",
       sets: 1,
       reps: 10, // 10 minutes
@@ -170,7 +190,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hula-hoop.svg"
     },
     {
-      id: 6,
+      id: 8,
       name: "Gehen",
       sets: 1,
       reps: 15, // 15 minutes
@@ -180,13 +200,13 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/walking.svg"
     },
     {
-      id: 7,
+      id: 9,
       name: "Tanzen",
       sets: 1,
-      reps: 20, // 20 minutes
+      reps: 15, // 15 minutes
       weight: 0,
       rest: 0,
-      instructions: "20 Minuten Tanzen - Viel Spaß!",
+      instructions: "15 Minuten Tanzen - Viel Spaß!",
       imageUrl: "/exercise-images/dancing.svg"
     }
   ]
