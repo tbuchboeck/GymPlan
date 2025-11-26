@@ -16,66 +16,69 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Sit-Ups</text>
 
   <!-- Mat -->
-  <rect x="60" y="290" width="280" height="8" rx="4" fill="#475569"/>
+  <rect x="50" y="295" width="300" height="8" rx="4" fill="#475569"/>
 
-  <!-- Slim figure in sit-up position -->
+  <!-- Side view figure lying on mat -->
 
   <!-- Feet flat on ground -->
-  <ellipse cx="105" cy="287" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
-  <ellipse cx="135" cy="287" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
+  <ellipse cx="90" cy="290" rx="12" ry="18" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
 
-  <!-- Lower legs (slim) -->
-  <rect x="100" y="245" width="10" height="45" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
-  <rect x="130" y="245" width="10" height="45" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
+  <!-- Lower legs (slim, bent) -->
+  <rect x="85" y="250" width="10" height="45" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(10 90 272)"/>
 
-  <!-- Thighs (slim) -->
-  <rect x="108" y="220" width="10" height="40" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(-45 113 240)"/>
-  <rect x="132" y="220" width="10" height="40" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(-45 137 240)"/>
+  <!-- Thighs (slim, angled) -->
+  <rect x="95" y="235" width="10" height="50" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(-50 100 260)"/>
 
-  <!-- Hips/Lower back on ground -->
-  <ellipse cx="180" cy="265" rx="25" ry="15" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
+  <!-- Hips/Lower back on mat -->
+  <ellipse cx="160" cy="275" rx="20" ry="18" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
 
-  <!-- Upper body (slim, animating up and down) -->
+  <!-- Upper body (slim, animating up) -->
   <g>
-    <ellipse cx="210" cy="240" rx="20" ry="40" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5">
-      <animate attributeName="cy" values="240;200;240" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="210;235;210" dur="2.5s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="rotate" values="0 210 265; -45 235 265; 0 210 265" dur="2.5s" repeatCount="indefinite"/>
+    <!-- Torso -->
+    <ellipse cx="200" cy="260" rx="18" ry="45" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
     </ellipse>
 
-    <!-- Head (slim) -->
-    <circle cx="230" cy="200" r="18" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5">
-      <animate attributeName="cy" values="200;165;200" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="230;260;230" dur="2.5s" repeatCount="indefinite"/>
-    </circle>
+    <!-- Head (side profile) -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
 
-    <!-- Hair -->
-    <ellipse cx="230" cy="188" rx="14" ry="8" fill="#92400e">
-      <animate attributeName="cy" values="188;153;188" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="230;260;230" dur="2.5s" repeatCount="indefinite"/>
-    </ellipse>
+      <!-- Head shape -->
+      <ellipse cx="220" cy="220" rx="15" ry="18" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
 
-    <!-- Face details -->
-    <circle cx="225" cy="197" r="2" fill="#1e293b">
-      <animate attributeName="cy" values="197;162;197" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="225;255;225" dur="2.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="235" cy="197" r="2" fill="#1e293b">
-      <animate attributeName="cy" values="197;162;197" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="235;265;235" dur="2.5s" repeatCount="indefinite"/>
-    </circle>
+      <!-- Hair (side) -->
+      <path d="M 208 210 Q 220 195 235 208 Q 238 218 235 228" fill="#92400e" stroke="#78350f" stroke-width="1"/>
 
-    <!-- Arms behind head (slim) -->
-    <path d="M 220 205 Q 200 195 205 220" stroke="url(#bodySitup)" stroke-width="12" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 220 205 Q 200 195 205 220; M 250 170 Q 230 160 235 185; M 220 205 Q 200 195 205 220" dur="2.5s" repeatCount="indefinite"/>
-    </path>
+      <!-- Eye -->
+      <circle cx="228" cy="218" r="2.5" fill="#1e293b"/>
+
+      <!-- Nose -->
+      <path d="M 235 220 L 238 225 L 235 228" stroke="#b45309" stroke-width="1.5" fill="none"/>
+
+      <!-- Mouth -->
+      <path d="M 232 233 Q 235 235 233 237" stroke="#92400e" stroke-width="1" fill="none"/>
+    </g>
+
+    <!-- Arms behind head -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
+
+      <!-- Arm going to back of head -->
+      <path d="M 205 245 Q 195 230 210 215" stroke="url(#bodySitup)" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+      <!-- Hand behind head -->
+      <circle cx="208" cy="212" r="6" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1"/>
+    </g>
   </g>
 
   <!-- Movement arrow -->
-  <path d="M 310 175 L 310 140 L 303 150 M 310 140 L 317 150" stroke="#22d3ee" stroke-width="2" fill="none">
+  <path d="M 300 230 C 320 200 320 170 300 150" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 300 150 L 290 160 M 300 150 L 305 165" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
     <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
 
   <!-- Info text -->
-  <text x="200" y="340" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Kontrollierte Ausführung, Nacken entspannt</text>
+  <text x="200" y="350" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Kontrollierte Ausführung, Nacken entspannt</text>
 </svg>

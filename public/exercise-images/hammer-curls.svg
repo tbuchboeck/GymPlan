@@ -8,10 +8,10 @@
       <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="dumbbellGradH" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#94a3b8;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#64748b;stop-opacity:1" />
+    <linearGradient id="dumbbellGradH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#94a3b8;stop-opacity:1" />
     </linearGradient>
   </defs>
 
@@ -21,92 +21,78 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Hammer Curls</text>
 
   <!-- Ground line -->
-  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
+  <line x1="50" y1="355" x2="350" y2="355" stroke="#475569" stroke-width="3"/>
 
-  <!-- Slim figure - Legs -->
-  <rect x="182" y="270" width="12" height="80" rx="6" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
-  <rect x="206" y="270" width="12" height="80" rx="6" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
+  <!-- Side view figure -->
 
-  <!-- Feet -->
-  <ellipse cx="188" cy="348" rx="10" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5"/>
-  <ellipse cx="212" cy="348" rx="10" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5"/>
+  <!-- Back leg -->
+  <rect x="175" y="280" width="12" height="75" rx="6" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
+  <!-- Front leg -->
+  <rect x="195" y="280" width="12" height="75" rx="6" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
 
-  <!-- Slim torso -->
-  <ellipse cx="200" cy="220" rx="28" ry="55" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
+  <!-- Feet (side view) -->
+  <ellipse cx="181" cy="353" rx="15" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5"/>
+  <ellipse cx="201" cy="353" rx="15" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5"/>
 
-  <!-- Slim head -->
-  <circle cx="200" cy="145" r="22" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
+  <!-- Torso (side view - slim) -->
+  <ellipse cx="190" cy="220" rx="22" ry="60" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
 
-  <!-- Hair -->
-  <ellipse cx="200" cy="130" rx="18" ry="10" fill="#065f46"/>
+  <!-- Head (side view - profile) -->
+  <ellipse cx="195" cy="138" rx="18" ry="22" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
 
-  <!-- Face details -->
-  <circle cx="192" cy="142" r="2.5" fill="#1e293b"/>
-  <circle cx="208" cy="142" r="2.5" fill="#1e293b"/>
-  <path d="M 193 152 Q 200 156 207 152" stroke="#1e293b" stroke-width="1.5" fill="none"/>
+  <!-- Hair (side) -->
+  <path d="M 180 125 Q 195 110 210 125 Q 215 135 210 145" fill="#065f46" stroke="#064e3b" stroke-width="1"/>
 
-  <!-- Left arm with hammer curl (neutral grip - dumbbell vertical) -->
+  <!-- Eye -->
+  <circle cx="205" cy="135" r="3" fill="#1e293b"/>
+
+  <!-- Nose -->
+  <path d="M 213 138 L 218 145 L 213 148" stroke="#047857" stroke-width="2" fill="none"/>
+
+  <!-- Mouth -->
+  <path d="M 210 155 Q 215 158 212 160" stroke="#10b981" stroke-width="1.5" fill="none"/>
+
+  <!-- Upper arm (fixed at side, visible from side) -->
+  <rect x="208" y="175" width="10" height="50" rx="5" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5"/>
+
+  <!-- Forearm with hammer curl animation (side view) -->
   <g>
-    <!-- Upper arm (fixed at side) -->
-    <rect x="152" y="185" width="10" height="45" rx="5" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5" transform="rotate(5 157 207)"/>
-
-    <!-- Forearm (animated) -->
-    <rect x="148" y="170" width="8" height="40" rx="4" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
+    <rect x="210" y="180" width="8" height="45" rx="4" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 214 225; -130 214 225; 0 214 225" dur="2s" repeatCount="indefinite"/>
     </rect>
 
     <!-- Hand -->
-    <circle cx="152" cy="175" r="7" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
+    <circle cx="214" cy="183" r="8" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="0 214 225; -130 214 225; 0 214 225" dur="2s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Left dumbbell (VERTICAL - hammer grip, thumb up) -->
+    <!-- Dumbbell (HORIZONTAL - hammer grip, thumb forward in side view) -->
     <g>
-      <animateTransform attributeName="transform" type="rotate" values="0 152 228; -120 152 228; 0 152 228" dur="2s" repeatCount="indefinite"/>
-      <!-- Dumbbell bar (vertical) -->
-      <rect x="149" y="158" width="6" height="35" rx="3" fill="url(#dumbbellGradH)"/>
-      <!-- Top weight -->
-      <rect x="144" y="150" width="16" height="12" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <!-- Bottom weight -->
-      <rect x="144" y="189" width="16" height="12" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <animateTransform attributeName="transform" type="rotate" values="0 214 225; -130 214 225; 0 214 225" dur="2s" repeatCount="indefinite"/>
+      <!-- Bar (horizontal in side view = neutral grip) -->
+      <rect x="194" y="178" width="40" height="6" rx="3" fill="url(#dumbbellGradH)"/>
+      <!-- Front weight -->
+      <rect x="228" y="172" width="12" height="18" rx="3" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <!-- Back weight -->
+      <rect x="187" y="172" width="12" height="18" rx="3" fill="#475569" stroke="#334155" stroke-width="1"/>
     </g>
   </g>
 
-  <!-- Right arm with hammer curl (neutral grip - dumbbell vertical) -->
-  <g>
-    <!-- Upper arm (fixed at side) -->
-    <rect x="238" y="185" width="10" height="45" rx="5" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5" transform="rotate(-5 243 207)"/>
+  <!-- Highlight showing neutral grip (thumb points forward) -->
+  <text x="310" y="180" font-family="system-ui" font-size="11" fill="#94a3b8" text-anchor="start">
+    <tspan x="280" dy="0">Neutraler</tspan>
+    <tspan x="280" dy="14">Griff</tspan>
+  </text>
+  <path d="M 275 185 L 250 185" stroke="#94a3b8" stroke-width="1" fill="none" marker-end="none"/>
 
-    <!-- Forearm (animated) -->
-    <rect x="244" y="170" width="8" height="40" rx="4" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
-    </rect>
-
-    <!-- Hand -->
-    <circle cx="248" cy="175" r="7" fill="url(#bodyHammerCurls)" stroke="#047857" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Right dumbbell (VERTICAL - hammer grip, thumb up) -->
-    <g>
-      <animateTransform attributeName="transform" type="rotate" values="0 248 228; 120 248 228; 0 248 228" dur="2s" repeatCount="indefinite"/>
-      <!-- Dumbbell bar (vertical) -->
-      <rect x="245" y="158" width="6" height="35" rx="3" fill="url(#dumbbellGradH)"/>
-      <!-- Top weight -->
-      <rect x="240" y="150" width="16" height="12" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <!-- Bottom weight -->
-      <rect x="240" y="189" width="16" height="12" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-    </g>
-  </g>
-
-  <!-- Movement arrows -->
-  <path d="M 115 200 L 115 165 L 108 175 M 115 165 L 122 175" stroke="#22d3ee" stroke-width="2" fill="none">
+  <!-- Movement arrow -->
+  <path d="M 280 220 C 300 180 300 140 280 110" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
   </path>
-  <path d="M 285 200 L 285 165 L 278 175 M 285 165 L 292 175" stroke="#22d3ee" stroke-width="2" fill="none">
+  <path d="M 280 110 L 275 125 M 280 110 L 290 120" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
   </path>
 
   <!-- Info text -->
-  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Neutraler Griff (Daumen oben), 2kg Hanteln</text>
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Neutraler Griff (Daumen nach vorne), 2kg Hanteln</text>
 </svg>

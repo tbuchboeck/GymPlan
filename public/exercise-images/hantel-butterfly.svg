@@ -8,10 +8,10 @@
       <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="dumbbellGradB" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#94a3b8;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#64748b;stop-opacity:1" />
+    <linearGradient id="dumbbellGradB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#94a3b8;stop-opacity:1" />
     </linearGradient>
   </defs>
 
@@ -21,93 +21,84 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Butterfly mit Hanteln</text>
 
   <!-- Ground line -->
-  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
+  <line x1="50" y1="355" x2="350" y2="355" stroke="#475569" stroke-width="3"/>
 
-  <!-- Slim figure - Legs -->
-  <rect x="182" y="270" width="12" height="80" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
-  <rect x="206" y="270" width="12" height="80" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+  <!-- Side view figure -->
 
-  <!-- Feet -->
-  <ellipse cx="188" cy="348" rx="10" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
-  <ellipse cx="212" cy="348" rx="10" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
+  <!-- Back leg -->
+  <rect x="175" y="280" width="12" height="75" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+  <!-- Front leg -->
+  <rect x="195" y="280" width="12" height="75" rx="6" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
 
-  <!-- Slim torso -->
-  <ellipse cx="200" cy="215" rx="25" ry="55" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+  <!-- Feet (side view) -->
+  <ellipse cx="181" cy="353" rx="15" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
+  <ellipse cx="201" cy="353" rx="15" ry="6" fill="#db2777" stroke="#9f1239" stroke-width="1.5"/>
 
-  <!-- Slim head -->
-  <circle cx="200" cy="140" r="22" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
+  <!-- Torso (side view - slim) -->
+  <ellipse cx="190" cy="220" rx="22" ry="60" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
 
-  <!-- Hair -->
-  <ellipse cx="200" cy="125" rx="20" ry="12" fill="#7c3aed"/>
+  <!-- Head (side view - profile) -->
+  <ellipse cx="195" cy="138" rx="18" ry="22" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5"/>
 
-  <!-- Face details -->
-  <circle cx="192" cy="137" r="2.5" fill="#1e293b"/>
-  <circle cx="208" cy="137" r="2.5" fill="#1e293b"/>
-  <path d="M 193 147 Q 200 151 207 147" stroke="#1e293b" stroke-width="1.5" fill="none"/>
+  <!-- Hair (side) -->
+  <path d="M 178 125 Q 195 105 215 120 Q 220 135 215 150 L 210 145" fill="#7c3aed" stroke="#6d28d9" stroke-width="1"/>
 
-  <!-- Left arm with butterfly motion -->
+  <!-- Eye -->
+  <circle cx="205" cy="135" r="3" fill="#1e293b"/>
+
+  <!-- Nose -->
+  <path d="M 213 138 L 218 145 L 213 148" stroke="#86198f" stroke-width="2" fill="none"/>
+
+  <!-- Mouth -->
+  <path d="M 210 155 Q 215 158 212 160" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+
+  <!-- Arms with butterfly motion (side view - arms come forward) -->
+
+  <!-- Back arm (moves forward and back) -->
   <g>
-    <!-- Upper arm -->
-    <rect x="130" y="175" width="45" height="10" rx="5" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
-    </rect>
-
-    <!-- Forearm (slightly bent) -->
-    <rect x="110" y="168" width="30" height="8" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+    <rect x="170" y="172" width="8" height="45" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="-30 174 175; 60 174 175; -30 174 175" dur="2.5s" repeatCount="indefinite"/>
     </rect>
 
     <!-- Hand -->
-    <circle cx="108" cy="172" r="7" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
+    <circle cx="174" cy="215" r="8" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="-30 174 175; 60 174 175; -30 174 175" dur="2.5s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Left dumbbell -->
+    <!-- Dumbbell -->
     <g>
-      <animateTransform attributeName="transform" type="rotate" values="0 175 180; 60 175 180; 0 175 180" dur="2.5s" repeatCount="indefinite"/>
-      <!-- Vertical dumbbell -->
-      <rect x="101" y="155" width="6" height="35" rx="3" fill="url(#dumbbellGradB)"/>
-      <!-- Top weight -->
-      <rect x="97" y="148" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <!-- Bottom weight -->
-      <rect x="97" y="187" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <animateTransform attributeName="transform" type="rotate" values="-30 174 175; 60 174 175; -30 174 175" dur="2.5s" repeatCount="indefinite"/>
+      <rect x="171" y="195" width="6" height="40" rx="3" fill="url(#dumbbellGradB)"/>
+      <rect x="165" y="190" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <rect x="165" y="230" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
     </g>
   </g>
 
-  <!-- Right arm with butterfly motion -->
+  <!-- Front arm (moves forward and back) -->
   <g>
-    <!-- Upper arm -->
-    <rect x="225" y="175" width="45" height="10" rx="5" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
-    </rect>
-
-    <!-- Forearm (slightly bent) -->
-    <rect x="260" y="168" width="30" height="8" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+    <rect x="205" y="172" width="8" height="45" rx="4" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="-30 209 175; 60 209 175; -30 209 175" dur="2.5s" repeatCount="indefinite"/>
     </rect>
 
     <!-- Hand -->
-    <circle cx="292" cy="172" r="7" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
+    <circle cx="209" cy="215" r="8" fill="url(#bodyButterflyH)" stroke="#86198f" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="rotate" values="-30 209 175; 60 209 175; -30 209 175" dur="2.5s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Right dumbbell -->
+    <!-- Dumbbell -->
     <g>
-      <animateTransform attributeName="transform" type="rotate" values="0 225 180; -60 225 180; 0 225 180" dur="2.5s" repeatCount="indefinite"/>
-      <!-- Vertical dumbbell -->
-      <rect x="289" y="155" width="6" height="35" rx="3" fill="url(#dumbbellGradB)"/>
-      <!-- Top weight -->
-      <rect x="285" y="148" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <!-- Bottom weight -->
-      <rect x="285" y="187" width="14" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <animateTransform attributeName="transform" type="rotate" values="-30 209 175; 60 209 175; -30 209 175" dur="2.5s" repeatCount="indefinite"/>
+      <rect x="206" y="195" width="6" height="40" rx="3" fill="url(#dumbbellGradB)"/>
+      <rect x="200" y="190" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <rect x="200" y="230" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
     </g>
   </g>
 
-  <!-- Movement arrows -->
-  <path d="M 75 130 C 90 100 110 100 130 130" stroke="#fbbf24" stroke-width="2" fill="none">
+  <!-- Movement arrows (forward arc) -->
+  <path d="M 280 220 C 300 180 300 140 270 120" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
     <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
-  <path d="M 270 130 C 290 100 310 100 325 130" stroke="#fbbf24" stroke-width="2" fill="none">
+  <path d="M 270 120 L 265 135 M 270 120 L 280 130" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
     <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
   </path>
 
