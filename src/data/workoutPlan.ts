@@ -79,23 +79,23 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
-      name: "Abdominal Crunch Maschine",
-      sets: 3,
-      reps: 15,
-      weight: 0,
-      rest: 50,
-      instructions: "Rolle A hinter Schultern, Rolle B vorne. Kontrollierte Bewegung nach vorne, Bauchmuskeln anspannen",
-      imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
-    },
-    {
-      id: 9,
       name: "Rotary Torso",
       sets: 3,
       reps: 15,
-      weight: 0,
+      weight: 15,
       rest: 50,
-      instructions: "Oberkörper-Rotation. Schulterpolster nutzen, kontrollierte Drehbewegung, seitliche Bauchmuskeln trainieren",
+      instructions: "Oberkörper-Rotation. Einmal links, einmal rechts je 15 Wiederholungen. Schulterpolster nutzen, kontrollierte Drehbewegung",
       imageUrl: "/exercise-images/rotary-torso.svg"
+    },
+    {
+      id: 9,
+      name: "Abdominal Crunch Maschine",
+      sets: 3,
+      reps: 15,
+      weight: 20,
+      rest: 50,
+      instructions: "Rolle A hinter Schultern, Rolle B vorne. Kontrollierte Bewegung nach vorne, Bauchmuskeln anspannen",
+      imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
       id: 10,
