@@ -1,0 +1,105 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgACM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyACM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="machineACM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#475569;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgACM)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">Abdominal Crunch</text>
+
+  <!-- Machine base -->
+  <rect x="80" y="300" width="240" height="18" rx="5" fill="url(#machineACM)" stroke="#374151" stroke-width="2"/>
+
+  <!-- Machine back support -->
+  <rect x="260" y="150" width="30" height="150" rx="8" fill="url(#machineACM)" stroke="#374151" stroke-width="2"/>
+
+  <!-- Seat -->
+  <ellipse cx="200" cy="285" rx="55" ry="18" fill="url(#machineACM)" stroke="#374151" stroke-width="2"/>
+
+  <!-- Machine arm (moving part with handles) -->
+  <g>
+    <!-- Upper arm piece -->
+    <rect x="100" y="110" width="180" height="20" rx="8" fill="url(#machineACM)" stroke="#374151" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="0 280 130;20 280 130;0 280 130" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Handle grips -->
+    <rect x="95" y="100" width="15" height="40" rx="5" fill="#6b7280" stroke="#374151" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="0 280 130;20 280 130;0 280 130" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Roller A (behind shoulders) -->
+  <ellipse cx="245" cy="145" rx="12" ry="20" fill="#6b7280" stroke="#374151" stroke-width="2"/>
+  <text x="270" y="145" font-family="system-ui" font-size="12" fill="#94a3b8">A</text>
+
+  <!-- Roller B (in front) -->
+  <ellipse cx="155" cy="145" rx="12" ry="20" fill="#6b7280" stroke="#374151" stroke-width="2">
+    <animate attributeName="cy" values="145;165;145" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+  <text x="130" y="145" font-family="system-ui" font-size="12" fill="#94a3b8">B</text>
+
+  <!-- Person sitting -->
+  <!-- Hips on seat -->
+  <ellipse cx="200" cy="270" rx="28" ry="18" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Thighs -->
+  <rect x="155" y="260" width="35" height="18" rx="9" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2"/>
+  <rect x="210" y="260" width="35" height="18" rx="9" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Lower legs -->
+  <rect x="145" y="275" width="16" height="35" rx="8" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2"/>
+  <rect x="239" y="275" width="16" height="35" rx="8" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Feet -->
+  <ellipse cx="150" cy="312" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="250" cy="312" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+
+  <!-- Torso (crunching forward) -->
+  <g>
+    <ellipse cx="210" cy="210" rx="32" ry="50" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="0 200 260;15 200 260;0 200 260" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Head (behind arms/handles) -->
+    <circle cx="200" cy="150" r="22" fill="url(#bodyACM)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cy" values="150;170;150" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Eyes -->
+    <circle cx="193" cy="147" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="147;167;147" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="207" cy="147" r="3" fill="#1e293b">
+      <animate attributeName="cy" values="147;167;147" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Arms raised to handles -->
+    <path d="M 190 180 Q 170 150 130 130" stroke="url(#bodyACM)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 190 180 Q 170 150 130 130;M 190 195 Q 170 170 135 155;M 190 180 Q 170 150 130 130" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 230 180 Q 250 150 270 130" stroke="url(#bodyACM)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 230 180 Q 250 150 270 130;M 230 195 Q 250 170 265 155;M 230 180 Q 250 150 270 130" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Arrow showing crunch movement -->
+  <path d="M 70 180 Q 50 200 70 230" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 70 230 L 65 220 M 70 230 L 80 225" stroke="#22d3ee" stroke-width="3" fill="none"/>
+
+  <!-- Text label -->
+  <text x="200" y="355" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Bauchmuskel-Maschine</text>
+</svg>
