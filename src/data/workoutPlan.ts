@@ -61,7 +61,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       id: 6,
       name: "Butterfly Maschine",
       sets: 3,
-      reps: 15,
+      reps: 5,
       weight: 5,
       rest: 50,
       instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
@@ -79,36 +79,26 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
-      name: "Seitheben Kurzhantel",
+      name: "Abdominal Crunch Maschine",
       sets: 3,
       reps: 15,
-      weight: 2,
+      weight: 0,
       rest: 50,
-      instructions: "Nacken entspannen, auf Schulterniveau anheben",
-      imageUrl: "/exercise-images/seitheben.svg"
+      instructions: "Rolle A hinter Schultern, Rolle B vorne. Kontrollierte Bewegung nach vorne, Bauchmuskeln anspannen",
+      imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
       id: 9,
-      name: "Platzhalter Übung 1",
-      sets: 1,
-      reps: 1,
+      name: "Rotary Torso",
+      sets: 3,
+      reps: 15,
       weight: 0,
       rest: 50,
-      instructions: "Wird später definiert",
-      imageUrl: "/exercise-images/cardio.svg"
+      instructions: "Oberkörper-Rotation. Schulterpolster nutzen, kontrollierte Drehbewegung, seitliche Bauchmuskeln trainieren",
+      imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
       id: 10,
-      name: "Platzhalter Übung 2",
-      sets: 1,
-      reps: 1,
-      weight: 0,
-      rest: 50,
-      instructions: "Wird später definiert",
-      imageUrl: "/exercise-images/cardio.svg"
-    },
-    {
-      id: 11,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
