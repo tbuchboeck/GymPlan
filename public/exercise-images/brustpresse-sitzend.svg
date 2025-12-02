@@ -1,0 +1,117 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgCP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyCP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="machineCP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgCP)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Brustpresse sitzend</text>
+
+  <!-- Machine frame -->
+  <rect x="60" y="100" width="20" height="200" rx="5" fill="url(#machineCP)" stroke="#1e293b" stroke-width="2"/>
+  <rect x="50" y="90" width="40" height="20" rx="5" fill="url(#machineCP)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Weight stack -->
+  <rect x="45" y="200" width="30" height="80" rx="3" fill="#64748b" stroke="#1e293b" stroke-width="2">
+    <animate attributeName="y" values="200;180;200" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Cable/lever system -->
+  <circle cx="70" cy="130" r="12" fill="#64748b" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="70" cy="130" r="5" fill="#1e293b"/>
+
+  <!-- Back rest -->
+  <rect x="120" y="130" width="15" height="100" rx="5" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Push handles (animated) -->
+  <rect x="180" y="155" width="60" height="12" rx="4" fill="#475569" stroke="#334155" stroke-width="2">
+    <animate attributeName="width" values="60;100;60" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="180" y="185" width="60" height="12" rx="4" fill="#475569" stroke="#334155" stroke-width="2">
+    <animate attributeName="width" values="60;100;60" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Lever arm connecting to machine -->
+  <line x1="70" y1="130" x2="180" y2="170" stroke="#64748b" stroke-width="4"/>
+
+  <!-- Head (side view) -->
+  <ellipse cx="170" cy="110" rx="22" ry="25" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Face details (side view - looking right) -->
+  <circle cx="185" cy="107" r="3" fill="#1e293b"/>
+  <path d="M 188 117 Q 192 120 188 123" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <rect x="155" y="135" width="25" height="15" rx="5" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Torso (side view - against back rest) -->
+  <ellipse cx="160" cy="195" rx="30" ry="55" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Upper arm (animated - pushing forward) -->
+  <rect x="175" y="150" width="30" height="18" rx="9" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="width" values="30;60;30" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Forearm (animated - extending) -->
+  <rect x="200" y="152" width="35" height="16" rx="8" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="x" values="200;250;200" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="width" values="35;25;35" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Hand/grip -->
+  <rect x="230" y="155" width="15" height="12" rx="4" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="x" values="230;270;230" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Lower arm (second grip) -->
+  <rect x="175" y="180" width="30" height="18" rx="9" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="width" values="30;60;30" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="200" y="182" width="35" height="16" rx="8" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="x" values="200;250;200" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="width" values="35;25;35" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="230" y="185" width="15" height="12" rx="4" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2">
+    <animate attributeName="x" values="230;270;230" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Seat -->
+  <rect x="120" y="250" width="80" height="15" rx="5" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Seat support -->
+  <rect x="155" y="265" width="15" height="50" rx="3" fill="#475569" stroke="#334155" stroke-width="2"/>
+
+  <!-- Upper leg -->
+  <ellipse cx="180" cy="275" rx="40" ry="15" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Lower leg -->
+  <rect x="210" y="285" width="20" height="55" rx="8" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Foot -->
+  <ellipse cx="235" cy="350" rx="20" ry="10" fill="url(#bodyCP)" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- Foot platform -->
+  <rect x="210" y="340" width="50" height="10" rx="3" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Arrow showing push direction -->
+  <path d="M 260 320 L 320 320 L 310 310 M 320 320 L 310 330" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Second arrow for emphasis -->
+  <path d="M 260 340 L 320 340 L 310 330 M 320 340 L 310 350" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>
