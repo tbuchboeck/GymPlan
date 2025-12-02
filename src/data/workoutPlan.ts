@@ -79,6 +79,16 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
+      name: "Low Row",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Adjustable Pulley unten, Griff mit beiden Händen greifen, Rudern zur Hüfte, Rücken gerade, Schulterblätter zusammenziehen",
+      imageUrl: "/exercise-images/low-row.svg"
+    },
+    {
+      id: 9,
       name: "Butterfly Maschine",
       sets: 3,
       reps: 15,
@@ -88,7 +98,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/butterfly.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -98,7 +108,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
-      id: 10,
+      id: 11,
       name: "Rotary Torso",
       sets: 6,
       reps: 15,
@@ -108,7 +118,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
-      id: 11,
+      id: 12,
       name: "Abdominal Crunch Maschine",
       sets: 3,
       reps: 15,
@@ -118,7 +128,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
-      id: 12,
+      id: 13,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
