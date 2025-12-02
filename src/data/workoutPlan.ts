@@ -59,6 +59,16 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
+      name: "Vertical Row",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Brust an Polster, Griffe auf Schulterhöhe greifen, Ellbogen nach hinten ziehen, Schulterblätter zusammen",
+      imageUrl: "/exercise-images/vertical-row.svg"
+    },
+    {
+      id: 7,
       name: "Butterfly Maschine",
       sets: 3,
       reps: 15,
@@ -68,7 +78,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/butterfly.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -78,7 +88,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
-      id: 8,
+      id: 9,
       name: "Rotary Torso",
       sets: 6,
       reps: 15,
@@ -88,7 +98,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Abdominal Crunch Maschine",
       sets: 3,
       reps: 15,
@@ -98,7 +108,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
-      id: 10,
+      id: 11,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes

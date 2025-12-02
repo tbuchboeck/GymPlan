@@ -1,0 +1,99 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgVR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyVR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="machineVR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgVR)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Vertical Row</text>
+
+  <!-- Machine frame -->
+  <rect x="280" y="100" width="20" height="200" rx="5" fill="url(#machineVR)" stroke="#1e293b" stroke-width="2"/>
+  <rect x="270" y="90" width="40" height="20" rx="5" fill="url(#machineVR)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Cable/pulley system -->
+  <circle cx="290" cy="130" r="12" fill="#64748b" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="290" cy="130" r="5" fill="#1e293b"/>
+
+  <!-- Weight stack -->
+  <rect x="285" y="200" width="30" height="80" rx="3" fill="#64748b" stroke="#1e293b" stroke-width="2">
+    <animate attributeName="y" values="200;180;200" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Cable -->
+  <line x1="290" y1="130" x2="220" y2="170" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="220;170;220" dur="2s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Chest pad -->
+  <rect x="200" y="140" width="15" height="80" rx="5" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Head (side view) -->
+  <ellipse cx="130" cy="120" rx="22" ry="25" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Face details (side view) -->
+  <circle cx="145" cy="117" r="3" fill="#1e293b"/>
+  <path d="M 148 127 Q 152 130 148 133" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <rect x="125" y="145" width="25" height="15" rx="5" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Torso/Back (side view) -->
+  <ellipse cx="140" cy="200" rx="30" ry="50" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Upper arm (animated - pulling back) -->
+  <rect x="150" y="155" width="50" height="18" rx="9" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2" transform-origin="155 165">
+    <animate attributeName="width" values="50;25;50" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Forearm (animated - pulling) -->
+  <rect x="190" y="155" width="40" height="16" rx="8" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2">
+    <animate attributeName="x" values="190;165;190" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="width" values="40;25;40" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Hand/grip -->
+  <rect x="220" y="160" width="15" height="12" rx="4" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2">
+    <animate attributeName="x" values="220;170;220" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Seat -->
+  <rect x="90" y="250" width="80" height="15" rx="5" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Seat support -->
+  <rect x="125" y="265" width="15" height="50" rx="3" fill="#475569" stroke="#334155" stroke-width="2"/>
+
+  <!-- Upper leg -->
+  <ellipse cx="150" cy="275" rx="40" ry="15" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Lower leg -->
+  <rect x="100" y="285" width="20" height="60" rx="8" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Foot -->
+  <ellipse cx="115" cy="355" rx="20" ry="10" fill="url(#bodyVR)" stroke="#0891b2" stroke-width="2"/>
+
+  <!-- Foot platform -->
+  <rect x="80" y="340" width="50" height="10" rx="3" fill="#64748b" stroke="#475569" stroke-width="2"/>
+
+  <!-- Arrow showing pull direction -->
+  <path d="M 240 320 L 180 320 L 190 310 M 180 320 L 190 330" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Second arrow for emphasis -->
+  <path d="M 240 340 L 180 340 L 190 330 M 180 340 L 190 350" stroke="#fbbf24" stroke-width="3" fill="none">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>
