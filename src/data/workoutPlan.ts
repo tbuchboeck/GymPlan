@@ -59,6 +59,16 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
+      name: "Brustpresse sitzend",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Sitzend nach vorne drücken, Schultern bleiben hinten, kontrollierte Bewegung",
+      imageUrl: "/exercise-images/brustpresse-sitzend.svg"
+    },
+    {
+      id: 7,
       name: "Vertical Row",
       sets: 3,
       reps: 15,
@@ -68,7 +78,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/vertical-row.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Butterfly Maschine",
       sets: 3,
       reps: 15,
@@ -78,7 +88,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/butterfly.svg"
     },
     {
-      id: 8,
+      id: 9,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -88,7 +98,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Rotary Torso",
       sets: 6,
       reps: 15,
@@ -98,7 +108,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
-      id: 10,
+      id: 11,
       name: "Abdominal Crunch Maschine",
       sets: 3,
       reps: 15,
@@ -108,7 +118,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
-      id: 11,
+      id: 12,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
