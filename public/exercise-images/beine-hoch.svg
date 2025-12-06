@@ -16,56 +16,60 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Beine Hoch</text>
 
   <!-- Mat -->
-  <rect x="50" y="320" width="300" height="10" rx="5" fill="#475569"/>
+  <rect x="50" y="310" width="300" height="10" rx="5" fill="#475569"/>
 
-  <!-- Body (torso lying flat) -->
-  <ellipse cx="200" cy="280" rx="50" ry="35" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
+  <!-- Complete body lying flat -->
+  <!-- Body (torso + neck + head connected) -->
+  <ellipse cx="220" cy="280" rx="60" ry="28" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Head -->
-  <circle cx="300" cy="275" r="28" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
+  <!-- Head (overlapping/connected to body) -->
+  <circle cx="310" cy="278" r="26" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Face details -->
-  <circle cx="290" cy="270" r="3" fill="#1e293b"/>
-  <circle cx="310" cy="270" r="3" fill="#1e293b"/>
+  <circle cx="300" cy="273" r="3" fill="#1e293b"/>
+  <circle cx="318" cy="273" r="3" fill="#1e293b"/>
   <!-- Happy smile -->
-  <path d="M 288 285 Q 300 293 312 285" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 298 288 Q 309 296 320 288" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Arms at sides -->
-  <path d="M 250 285 L 280 310" stroke="url(#bodyBeineHoch)" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <circle cx="280" cy="310" r="9" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
+  <!-- Arm at side on mat -->
+  <path d="M 275 290 L 295 305" stroke="url(#bodyBeineHoch)" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <circle cx="295" cy="305" r="8" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Hips (connection for legs) -->
+  <ellipse cx="155" cy="280" rx="22" ry="18" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Left leg (animated up/down) -->
-  <rect x="130" y="200" width="20" height="80" rx="10" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
+  <rect x="138" y="205" width="16" height="70" rx="8" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
     <animateTransform
       attributeName="transform"
       type="rotate"
-      values="-70 140 280; -20 140 280; -70 140 280"
+      values="-70 146 280; -20 146 280; -70 146 280"
       dur="1.5s"
       repeatCount="indefinite"/>
   </rect>
-  <ellipse cx="140" cy="200" rx="12" ry="10" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+  <ellipse cx="146" cy="205" rx="10" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
     <animateTransform
       attributeName="transform"
       type="rotate"
-      values="-70 140 280; -20 140 280; -70 140 280"
+      values="-70 146 280; -20 146 280; -70 146 280"
       dur="1.5s"
       repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Right leg (animated opposite) -->
-  <rect x="160" y="200" width="20" height="80" rx="10" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
+  <rect x="158" y="205" width="16" height="70" rx="8" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
     <animateTransform
       attributeName="transform"
       type="rotate"
-      values="-20 170 280; -70 170 280; -20 170 280"
+      values="-20 166 280; -70 166 280; -20 166 280"
       dur="1.5s"
       repeatCount="indefinite"/>
   </rect>
-  <ellipse cx="170" cy="200" rx="12" ry="10" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+  <ellipse cx="166" cy="205" rx="10" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
     <animateTransform
       attributeName="transform"
       type="rotate"
-      values="-20 170 280; -70 170 280; -20 170 280"
+      values="-20 166 280; -70 166 280; -20 166 280"
       dur="1.5s"
       repeatCount="indefinite"/>
   </ellipse>
@@ -81,5 +85,5 @@
   </circle>
 
   <!-- Info text -->
-  <text x="200" y="375" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Beine abwechselnd anheben und senken</text>
+  <text x="200" y="365" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Beine abwechselnd anheben und senken</text>
 </svg>
