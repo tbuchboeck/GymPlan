@@ -15,86 +15,56 @@
   <!-- Title -->
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Trizeps Boden</text>
 
-  <!-- Ground line -->
-  <line x1="30" y1="320" x2="370" y2="320" stroke="#475569" stroke-width="3"/>
+  <!-- Ground/Mat -->
+  <rect x="40" y="310" width="320" height="12" rx="6" fill="#475569"/>
 
-  <!-- Side view push-up position -->
+  <!-- Hands on ground (fixed) -->
+  <ellipse cx="80" cy="308" rx="14" ry="8" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Upper arm (animated bending) -->
-  <rect x="90" y="220" width="14" height="50" rx="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="0 97 220; 40 97 220; 0 97 220"
-      dur="2s"
-      repeatCount="indefinite"/>
-  </rect>
+  <!-- Feet on ground (fixed) -->
+  <ellipse cx="330" cy="308" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="350" cy="308" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
 
-  <!-- Forearm (animated bending) -->
-  <rect x="85" y="265" width="12" height="45" rx="6" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="0 91 265; -40 91 265; 0 91 265"
-      dur="2s"
-      repeatCount="indefinite"/>
-  </rect>
+  <!-- Arms (animate bending) -->
+  <path d="M 80 300 Q 85 240 120 200" stroke="url(#bodyTrizepsBoden)" stroke-width="16" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M 80 300 Q 85 240 120 200; M 80 300 Q 100 270 120 250; M 80 300 Q 85 240 120 200" dur="2s" repeatCount="indefinite"/>
+  </path>
 
-  <!-- Hand on ground -->
-  <ellipse cx="91" cy="315" rx="12" ry="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2"/>
-
-  <!-- Body/Torso (horizontal, moves up/down with push-up) -->
-  <ellipse cx="200" cy="210" rx="90" ry="30" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
-    <animate attributeName="cy" values="210;250;210" dur="2s" repeatCount="indefinite"/>
+  <!-- Body/Torso (horizontal plank, moves up/down) -->
+  <ellipse cx="200" cy="195" rx="85" ry="28" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cy" values="195;245;195" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Head (moves with body) -->
-  <circle cx="95" cy="185" r="28" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
-    <animate attributeName="cy" values="185;225;185" dur="2s" repeatCount="indefinite"/>
+  <!-- Head -->
+  <circle cx="100" cy="175" r="26" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cy" values="175;225;175" dur="2s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- Face details - side view -->
-  <circle cx="80" cy="180" r="3" fill="#1e293b">
-    <animate attributeName="cy" values="180;220;180" dur="2s" repeatCount="indefinite"/>
+  <!-- Face - side view (one eye visible) -->
+  <circle cx="85" cy="170" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="170;220;170" dur="2s" repeatCount="indefinite"/>
   </circle>
-  <!-- Happy smile -->
-  <path d="M 75 195 Q 82 202 90 197" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round">
-    <animate attributeName="d" values="M 75 195 Q 82 202 90 197; M 75 235 Q 82 242 90 237; M 75 195 Q 82 202 90 197" dur="2s" repeatCount="indefinite"/>
+  <!-- Smile -->
+  <path d="M 80 185 Q 88 192 96 185" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M 80 185 Q 88 192 96 185; M 80 235 Q 88 242 96 235; M 80 185 Q 88 192 96 185" dur="2s" repeatCount="indefinite"/>
   </path>
 
   <!-- Hips -->
-  <ellipse cx="295" cy="215" rx="25" ry="22" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
-    <animate attributeName="cy" values="215;255;215" dur="2s" repeatCount="indefinite"/>
+  <ellipse cx="290" cy="200" rx="22" ry="20" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cy" values="200;250;200" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Legs (straight, connecting hips to feet) -->
-  <rect x="305" y="220" width="14" height="80" rx="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2" transform="rotate(60 312 260)">
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="60 312 260; 50 312 280; 60 312 260"
-      dur="2s"
-      repeatCount="indefinite"/>
-  </rect>
-  <rect x="315" y="220" width="14" height="80" rx="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2" transform="rotate(60 322 260)">
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="60 322 260; 50 322 280; 60 322 260"
-      dur="2s"
-      repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Feet on ground (fixed position) -->
-  <ellipse cx="350" cy="315" rx="12" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
-  <ellipse cx="365" cy="315" rx="12" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <!-- Legs (connect hips to feet) -->
+  <path d="M 300 210 Q 320 260 335 300" stroke="url(#bodyTrizepsBoden)" stroke-width="16" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M 300 210 Q 320 260 335 300; M 300 260 Q 320 280 335 300; M 300 210 Q 320 260 335 300" dur="2s" repeatCount="indefinite"/>
+  </path>
 
   <!-- Sparkle effects -->
-  <circle cx="50" cy="140" r="3" fill="#fbbf24" opacity="0">
+  <circle cx="60" cy="130" r="3" fill="#fbbf24" opacity="0">
     <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
     <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="350" cy="160" r="3" fill="#22d3ee" opacity="0">
+  <circle cx="340" cy="150" r="3" fill="#22d3ee" opacity="0">
     <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
     <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
   </circle>
