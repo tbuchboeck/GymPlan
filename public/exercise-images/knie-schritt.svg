@@ -16,62 +16,73 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Knie Schritt</text>
 
   <!-- Ground line -->
-  <line x1="30" y1="355" x2="370" y2="355" stroke="#475569" stroke-width="3"/>
+  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
 
-  <!-- Figure - side view in lunge position -->
+  <!-- Back leg (animated) -->
+  <rect x="140" y="270" width="18" height="70" rx="9" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="20 149 290; -20 149 290; 20 149 290"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </rect>
+  <ellipse cx="149" cy="347" rx="12" ry="7" fill="#be185d" stroke="#9f1239" stroke-width="2">
+    <animate attributeName="cx" values="165;135;165" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Back foot -->
-  <ellipse cx="100" cy="352" rx="15" ry="6" fill="#be185d" stroke="#9f1239" stroke-width="1.5"/>
+  <!-- Front leg (animated) -->
+  <rect x="230" y="270" width="18" height="70" rx="9" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 239 290; 20 239 290; -20 239 290"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </rect>
+  <ellipse cx="239" cy="347" rx="12" ry="7" fill="#be185d" stroke="#9f1239" stroke-width="2">
+    <animate attributeName="cx" values="225;255;225" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Back lower leg (angled back) -->
-  <rect x="95" y="290" width="10" height="65" rx="5" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5" transform="rotate(-20 100 355)"/>
+  <!-- Body (animated down) -->
+  <ellipse cx="195" cy="190" rx="42" ry="55" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="190;220;190" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Back thigh (angled) -->
-  <rect x="110" y="225" width="12" height="70" rx="6" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5" transform="rotate(30 116 260)"/>
+  <!-- Head (animated) -->
+  <circle cx="195" cy="110" r="30" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="110;140;110" dur="2s" repeatCount="indefinite"/>
+  </circle>
 
-  <!-- Back knee on/near ground -->
-  <ellipse cx="115" cy="325" rx="12" ry="8" fill="#be185d" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Front foot -->
-  <ellipse cx="260" cy="352" rx="18" ry="7" fill="#be185d" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Front lower leg (vertical) -->
-  <rect x="254" y="290" width="12" height="62" rx="6" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Front thigh (horizontal) -->
-  <rect x="180" y="240" width="14" height="60" rx="7" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5" transform="rotate(-75 187 270)"/>
-
-  <!-- Hips/Torso -->
-  <ellipse cx="195" cy="185" rx="22" ry="55" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Head -->
-  <ellipse cx="200" cy="110" rx="18" ry="22" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Hair -->
-  <path d="M 184 98 Q 200 78 218 95 Q 222 110 218 122" fill="#be185d" stroke="#9f1239" stroke-width="1"/>
-
-  <!-- Eye -->
-  <circle cx="208" cy="107" r="2.5" fill="#1e293b"/>
-
-  <!-- Arms at hips -->
-  <ellipse cx="175" cy="185" rx="10" ry="8" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5"/>
-  <ellipse cx="215" cy="185" rx="10" ry="8" fill="url(#bodyLunge)" stroke="#9f1239" stroke-width="1.5"/>
-
-  <!-- Movement arrow (down) -->
-  <path d="M 320 150 L 320 250" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  <!-- Face details -->
+  <circle cx="185" cy="105" r="4" fill="#1e293b">
+    <animate attributeName="cy" values="105;135;105" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="205" cy="105" r="4" fill="#1e293b">
+    <animate attributeName="cy" values="105;135;105" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Happy smile -->
+  <path d="M 183 122 Q 195 132 207 122" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M 183 122 Q 195 132 207 122; M 183 152 Q 195 162 207 152; M 183 122 Q 195 132 207 122" dur="2s" repeatCount="indefinite"/>
   </path>
-  <path d="M 320 250 L 310 235 M 320 250 L 330 235" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </path>
 
-  <!-- Movement arrow (forward step) -->
-  <path d="M 60 320 L 140 320" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 140 320 L 125 310 M 140 320 L 125 330" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
-  </path>
+  <!-- Arms at hips (animated) -->
+  <ellipse cx="155" cy="195" rx="12" ry="10" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="195;225;195" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="235" cy="195" rx="12" ry="10" fill="url(#bodyLunge)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="195;225;195" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Sparkle effects -->
+  <circle cx="320" cy="120" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="80" cy="140" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+  </circle>
 
   <!-- Info text -->
   <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Ausfallschritte, abwechselnd links und rechts</text>

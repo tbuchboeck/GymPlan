@@ -16,60 +16,70 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Beine Hoch</text>
 
   <!-- Mat -->
-  <rect x="50" y="295" width="300" height="8" rx="4" fill="#475569"/>
+  <rect x="50" y="320" width="300" height="10" rx="5" fill="#475569"/>
 
-  <!-- Figure lying on back -->
+  <!-- Body (torso lying flat) -->
+  <ellipse cx="200" cy="280" rx="50" ry="35" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
   <!-- Head -->
-  <ellipse cx="310" cy="260" rx="18" ry="22" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5"/>
+  <circle cx="300" cy="275" r="28" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Hair -->
-  <path d="M 295 248 Q 310 230 328 245 Q 332 260 328 270" fill="#92400e" stroke="#78350f" stroke-width="1"/>
-
-  <!-- Eye -->
-  <circle cx="305" cy="255" r="2.5" fill="#1e293b"/>
-
-  <!-- Nose -->
-  <path d="M 295 260 L 290 265 L 295 268" stroke="#b45309" stroke-width="1.5" fill="none"/>
-
-  <!-- Torso (lying flat) -->
-  <ellipse cx="250" cy="275" rx="45" ry="18" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5"/>
-
-  <!-- Hips -->
-  <ellipse cx="190" cy="275" rx="22" ry="20" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5"/>
+  <!-- Face details -->
+  <circle cx="290" cy="270" r="3" fill="#1e293b"/>
+  <circle cx="310" cy="270" r="3" fill="#1e293b"/>
+  <!-- Happy smile -->
+  <path d="M 288 285 Q 300 293 312 285" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
   <!-- Arms at sides -->
-  <rect x="270" y="285" width="50" height="8" rx="4" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5"/>
-  <circle cx="320" cy="289" r="6" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1"/>
+  <path d="M 250 285 L 280 310" stroke="url(#bodyBeineHoch)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="280" cy="310" r="9" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Left leg (up position, animated) -->
-  <g>
-    <rect x="165" y="200" width="12" height="70" rx="6" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="-70 171 275; -30 171 275; -70 171 275" dur="2s" repeatCount="indefinite"/>
-    </rect>
-    <ellipse cx="171" cy="200" rx="10" ry="14" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="-70 171 275; -30 171 275; -70 171 275" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
-  </g>
+  <!-- Left leg (animated up/down) -->
+  <rect x="130" y="200" width="20" height="80" rx="10" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-70 140 280; -20 140 280; -70 140 280"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </rect>
+  <ellipse cx="140" cy="200" rx="12" ry="10" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-70 140 280; -20 140 280; -70 140 280"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Right leg (down position, animated opposite) -->
-  <g>
-    <rect x="145" y="200" width="12" height="70" rx="6" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="-30 151 275; -70 151 275; -30 151 275" dur="2s" repeatCount="indefinite"/>
-    </rect>
-    <ellipse cx="151" cy="200" rx="10" ry="14" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="-30 151 275; -70 151 275; -30 151 275" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
-  </g>
+  <!-- Right leg (animated opposite) -->
+  <rect x="160" y="200" width="20" height="80" rx="10" fill="url(#bodyBeineHoch)" stroke="#b45309" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 170 280; -70 170 280; -20 170 280"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </rect>
+  <ellipse cx="170" cy="200" rx="12" ry="10" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 170 280; -70 170 280; -20 170 280"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Movement arrows -->
-  <path d="M 100 180 C 80 150 80 120 100 100" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 100 100 L 90 115 M 100 100 L 110 110" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Sparkle effects -->
+  <circle cx="100" cy="120" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="80" cy="160" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
 
   <!-- Info text -->
-  <text x="200" y="350" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Beine abwechselnd anheben und senken</text>
+  <text x="200" y="375" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Beine abwechselnd anheben und senken</text>
 </svg>
