@@ -53,12 +53,18 @@
       <animate attributeName="cy" values="260;160;260" dur="2.5s" repeatCount="indefinite"/>
     </circle>
     <!-- Dumbbell left -->
-    <g>
-      <animate attributeName="transform" values="translate(0,0);translate(-40,-100);translate(0,0)" dur="2.5s" repeatCount="indefinite"/>
-      <rect x="127" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
-      <rect x="121" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <rect x="121" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-    </g>
+    <rect x="127" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)">
+      <animate attributeName="x" values="127;87;127" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;140;240" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="121" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="121;81;121" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="235;135;235" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="121" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="121;81;121" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="275;175;275" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
   </g>
 
   <!-- Right arm with dumbbell (animated front raise, opposite phase) -->
@@ -71,12 +77,18 @@
       <animate attributeName="cy" values="260;160;260" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
     </circle>
     <!-- Dumbbell right -->
-    <g>
-      <animate attributeName="transform" values="translate(0,0);translate(40,-100);translate(0,0)" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
-      <rect x="267" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
-      <rect x="261" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <rect x="261" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-    </g>
+    <rect x="267" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)">
+      <animate attributeName="x" values="267;307;267" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;140;240" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="261" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="261;301;261" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="235;135;235" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="261" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="261;301;261" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="275;175;275" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+    </rect>
   </g>
 
   <!-- Sparkle effects -->

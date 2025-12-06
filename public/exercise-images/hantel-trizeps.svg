@@ -43,46 +43,68 @@
   <!-- Happy smile -->
   <path d="M 188 142 Q 200 152 212 142" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Upper arms (raised up) -->
-  <path d="M 170 175 L 180 110" stroke="url(#bodyTrizeps)" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M 230 175 L 220 110" stroke="url(#bodyTrizeps)" stroke-width="14" fill="none" stroke-linecap="round"/>
-
-  <!-- Forearms with dumbbell (animated behind head) -->
+  <!-- Left arm with dumbbell (animated trizeps extension) -->
   <g>
-    <!-- Left forearm -->
-    <path d="M 180 110 L 195 80" stroke="url(#bodyTrizeps)" stroke-width="12" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 180 110 L 195 80; M 180 110 L 200 140; M 180 110 L 195 80" dur="1.8s" repeatCount="indefinite"/>
+    <!-- Upper arm (raised) -->
+    <path d="M 160 175 L 150 110" stroke="url(#bodyTrizeps)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 160 175 L 150 110; M 160 175 L 150 110; M 160 175 L 140 200; M 160 175 L 140 200" dur="4s" repeatCount="indefinite"/>
     </path>
 
-    <!-- Right forearm -->
-    <path d="M 220 110 L 205 80" stroke="url(#bodyTrizeps)" stroke-width="12" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 220 110 L 205 80; M 220 110 L 200 140; M 220 110 L 205 80" dur="1.8s" repeatCount="indefinite"/>
+    <!-- Forearm (animated extension) -->
+    <path d="M 150 110 L 160 70" stroke="url(#bodyTrizeps)" stroke-width="12" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 150 110 L 160 70; M 150 110 L 170 140; M 140 200 L 120 230; M 140 200 L 120 230" dur="4s" repeatCount="indefinite"/>
     </path>
 
-    <!-- Hands holding dumbbell -->
-    <circle cx="200" cy="80" r="10" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2">
-      <animate attributeName="cy" values="80;140;80" dur="1.8s" repeatCount="indefinite"/>
+    <!-- Hand -->
+    <circle cx="160" cy="70" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cx" values="160;170;120;120" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="70;140;230;230" dur="4s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Dumbbell -->
-    <g>
-      <animate attributeName="transform" values="translate(0,0);translate(0,60);translate(0,0)" dur="1.8s" repeatCount="indefinite"/>
-      <rect x="197" y="55" width="6" height="50" rx="3" fill="url(#dumbbellGradT)"/>
-      <rect x="188" y="48" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <rect x="188" y="100" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1"/>
-    </g>
+    <!-- Dumbbell (moves with left hand) -->
+    <rect x="157" y="45" width="6" height="50" rx="3" fill="url(#dumbbellGradT)">
+      <animate attributeName="x" values="157;167;117;117" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="45;115;205;205" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="148" y="38" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="148;158;108;108" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="38;108;198;198" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="148" y="90" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="148;158;108;108" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="90;160;250;250" dur="4s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Right arm (animated trizeps extension, opposite phase) -->
+  <g>
+    <!-- Upper arm -->
+    <path d="M 240 175 L 260 200" stroke="url(#bodyTrizeps)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 240 175 L 260 200; M 240 175 L 260 200; M 240 175 L 250 110; M 240 175 L 250 110" dur="4s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Forearm -->
+    <path d="M 260 200 L 280 230" stroke="url(#bodyTrizeps)" stroke-width="12" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 260 200 L 280 230; M 260 200 L 280 230; M 250 110 L 240 70; M 250 110 L 230 140" dur="4s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Hand -->
+    <circle cx="280" cy="230" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2">
+      <animate attributeName="cx" values="280;280;240;230" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="230;230;70;140" dur="4s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
   <!-- Sparkle effects -->
-  <circle cx="150" cy="80" r="3" fill="#fbbf24" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="1.8s" repeatCount="indefinite"/>
+  <circle cx="120" cy="60" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0;0;0;0" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2;2;2;2" dur="4s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="250" cy="80" r="3" fill="#22d3ee" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="1.8s" begin="0.4s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="1.8s" repeatCount="indefinite"/>
+  <circle cx="280" cy="60" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;0;1;0" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;2;2;2;4;2" dur="4s" repeatCount="indefinite"/>
   </circle>
 
   <!-- Info text -->
-  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Ellbogen fixiert, Hantel hinter Kopf senken</text>
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Abwechselnd links und rechts, 3kg Hantel</text>
 </svg>
