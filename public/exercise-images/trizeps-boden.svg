@@ -67,18 +67,27 @@
     <animate attributeName="cy" values="215;255;215" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Leg (straight back) -->
-  <rect x="310" y="205" width="16" height="65" rx="8" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2" transform="rotate(70 318 238)">
+  <!-- Legs (straight, connecting hips to feet) -->
+  <rect x="305" y="220" width="14" height="80" rx="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2" transform="rotate(60 312 260)">
     <animateTransform
       attributeName="transform"
       type="rotate"
-      values="70 318 238; 55 318 268; 70 318 238"
+      values="60 312 260; 50 312 280; 60 312 260"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </rect>
+  <rect x="315" y="220" width="14" height="80" rx="7" fill="url(#bodyTrizepsBoden)" stroke="#b45309" stroke-width="2" transform="rotate(60 322 260)">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="60 322 260; 50 322 280; 60 322 260"
       dur="2s"
       repeatCount="indefinite"/>
   </rect>
 
-  <!-- Foot on ground -->
-  <ellipse cx="355" cy="315" rx="12" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <!-- Feet on ground (fixed position) -->
+  <ellipse cx="350" cy="315" rx="12" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="365" cy="315" rx="12" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
 
   <!-- Sparkle effects -->
   <circle cx="50" cy="140" r="3" fill="#fbbf24" opacity="0">
