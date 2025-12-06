@@ -93,6 +93,20 @@
       <animate attributeName="cx" values="280;280;240;230" dur="4s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="230;230;70;140" dur="4s" repeatCount="indefinite"/>
     </circle>
+
+    <!-- Dumbbell (moves with right hand) -->
+    <rect x="277" y="205" width="6" height="50" rx="3" fill="url(#dumbbellGradT)">
+      <animate attributeName="x" values="277;277;237;227" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="205;205;45;115" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="268" y="198" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="268;268;228;218" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="198;198;38;108" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="268" y="250" width="24" height="12" rx="3" fill="#475569" stroke="#334155" stroke-width="1">
+      <animate attributeName="x" values="268;268;228;218" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="250;250;90;160" dur="4s" repeatCount="indefinite"/>
+    </rect>
   </g>
 
   <!-- Sparkle effects -->
@@ -106,5 +120,5 @@
   </circle>
 
   <!-- Info text -->
-  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Abwechselnd links und rechts, 3kg Hantel</text>
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Abwechselnd links und rechts, je 3kg Hantel</text>
 </svg>

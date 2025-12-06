@@ -43,58 +43,54 @@
   <!-- Hips -->
   <ellipse cx="280" cy="225" rx="25" ry="20" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2"/>
 
-  <!-- Left leg (supporting, on ground) -->
-  <rect x="290" y="235" width="16" height="70" rx="8" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2" transform="rotate(20 298 270)"/>
-  <ellipse cx="320" cy="315" rx="10" ry="6" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
-
-  <!-- Right leg (kicking up, animated) -->
+  <!-- Leg 1 - kicks up first, then down -->
   <g>
-    <rect x="270" y="200" width="16" height="70" rx="8" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2">
+    <rect x="275" y="225" width="16" height="70" rx="8" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="rotate"
-        values="20 278 235; -60 278 235; 20 278 235; 20 278 235"
-        dur="3s"
+        values="70 283 225; -70 283 225; 70 283 225"
+        dur="2s"
         repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="278" cy="270" rx="10" ry="6" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2">
+    <ellipse cx="283" cy="295" rx="10" ry="6" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="rotate"
-        values="20 278 235; -60 278 235; 20 278 235; 20 278 235"
-        dur="3s"
+        values="70 283 225; -70 283 225; 70 283 225"
+        dur="2s"
         repeatCount="indefinite"/>
     </ellipse>
   </g>
 
-  <!-- Left leg kicks when right is down -->
+  <!-- Leg 2 - down first, then kicks up -->
   <g>
-    <rect x="305" y="200" width="16" height="70" rx="8" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2">
+    <rect x="275" y="225" width="16" height="70" rx="8" fill="url(#bodyBBP)" stroke="#6d28d9" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="rotate"
-        values="20 313 235; 20 313 235; -60 313 235; 20 313 235"
-        dur="3s"
+        values="-70 283 225; 70 283 225; -70 283 225"
+        dur="2s"
         repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="313" cy="270" rx="10" ry="6" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2">
+    <ellipse cx="283" cy="295" rx="10" ry="6" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="rotate"
-        values="20 313 235; 20 313 235; -60 313 235; 20 313 235"
-        dur="3s"
+        values="-70 283 225; 70 283 225; -70 283 225"
+        dur="2s"
         repeatCount="indefinite"/>
     </ellipse>
   </g>
 
   <!-- Sparkle effects -->
   <circle cx="330" cy="120" r="3" fill="#fbbf24" opacity="0">
-    <animate attributeName="opacity" values="0;1;0;0;0" dur="3s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2;2;2" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
   </circle>
   <circle cx="350" cy="150" r="3" fill="#22d3ee" opacity="0">
-    <animate attributeName="opacity" values="0;0;0;1;0" dur="3s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;2;2;4;2" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
   </circle>
 
   <!-- Info text -->
