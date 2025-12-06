@@ -2,7 +2,7 @@ import React from 'react';
 import './LocationSelector.css';
 
 interface LocationSelectorProps {
-  onSelectLocation: (location: 'gym' | 'home') => void;
+  onSelectLocation: (location: 'gym' | 'home' | 'home2') => void;
 }
 
 const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation }) => {
@@ -32,6 +32,17 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
             <div className="location-text">
               <span className="location-label">home</span>
               <span className="location-description">Zu Hause</span>
+            </div>
+          </button>
+
+          <button
+            className="location-btn location-btn-home2"
+            onClick={() => onSelectLocation('home2')}
+          >
+            <div className="location-icon">@</div>
+            <div className="location-text">
+              <span className="location-label">home2</span>
+              <span className="location-description">Cardio zu Hause</span>
             </div>
           </button>
         </div>

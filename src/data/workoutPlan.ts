@@ -262,5 +262,47 @@ export const homeWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Zweiter Home Trainingsplan (Cardio-fokussiert)
+export const homeWorkoutPlan2: WorkoutPlan = {
+  name: "Zweite Home-Trainingsplan (@home2)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 2,
+  goal: "Cardio & Beweglichkeit",
+  trainer: "Martin Schiendorfer",
+  createdAt: "06.12.2025",
+  exercises: [
+    {
+      id: 1,
+      name: "Hula Hoop",
+      sets: 1,
+      reps: 10, // 10 minutes
+      weight: 0,
+      rest: 60,
+      instructions: "10 Minuten Hula Hoop - Hüften kreisen, Reifen in Bewegung halten",
+      imageUrl: "/exercise-images/hula-hoop.svg"
+    },
+    {
+      id: 2,
+      name: "Laufband Gehen",
+      sets: 1,
+      reps: 20, // 20 minutes
+      weight: 0,
+      rest: 60,
+      instructions: "20 Minuten zügiges Gehen auf dem Laufband",
+      imageUrl: "/exercise-images/walking.svg"
+    },
+    {
+      id: 3,
+      name: "Tanzen",
+      sets: 1,
+      reps: 20, // 20 minutes
+      weight: 0,
+      rest: 60,
+      instructions: "20 Minuten frei tanzen - Musik genießen und bewegen!",
+      imageUrl: "/exercise-images/dancing.svg"
+    }
+  ]
+};
+
 // Default export für Kompatibilität
 export const workoutPlan = gymWorkoutPlan;
