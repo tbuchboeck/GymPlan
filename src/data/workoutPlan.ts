@@ -161,6 +161,46 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 2,
+      name: "Beine Hoch",
+      sets: 3,
+      reps: 30,
+      weight: 0,
+      rest: 60,
+      instructions: "Auf dem Rücken liegen, Beine abwechselnd anheben und senken (Schere)",
+      imageUrl: "/exercise-images/beine-hoch.svg"
+    },
+    {
+      id: 3,
+      name: "Bauch Beine Po",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Vierfüßlerstand, Bein nach hinten oben strecken (Donkey Kicks)",
+      imageUrl: "/exercise-images/bauch-beine-po.svg"
+    },
+    {
+      id: 4,
+      name: "Kniebeugen",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Arme nach vorne gestreckt, Knie nicht über die Zehenspitzen",
+      imageUrl: "/exercise-images/kniebeugen.svg"
+    },
+    {
+      id: 5,
+      name: "Knie Schritt",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Ausfallschritte, abwechselnd links und rechts",
+      imageUrl: "/exercise-images/knie-schritt.svg"
+    },
+    {
+      id: 6,
       name: "Butterfly",
       sets: 3,
       reps: 15,
@@ -170,7 +210,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-butterfly.svg"
     },
     {
-      id: 3,
+      id: 7,
       name: "Trizeps",
       sets: 3,
       reps: 15,
@@ -180,7 +220,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-trizeps.svg"
     },
     {
-      id: 4,
+      id: 8,
       name: "Bizeps",
       sets: 3,
       reps: 15,
@@ -190,7 +230,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-bizeps.svg"
     },
     {
-      id: 5,
+      id: 9,
       name: "Front Raises",
       sets: 3,
       reps: 15,
@@ -200,7 +240,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/front-raises.svg"
     },
     {
-      id: 6,
+      id: 10,
       name: "Hammer Curls",
       sets: 3,
       reps: 15,
@@ -210,34 +250,14 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hammer-curls.svg"
     },
     {
-      id: 7,
-      name: "Hula Hoop",
-      sets: 1,
-      reps: 10, // 10 minutes
+      id: 11,
+      name: "Trizeps Boden",
+      sets: 3,
+      reps: 15,
       weight: 0,
       rest: 60,
-      instructions: "10 Minuten Hula Hoop",
-      imageUrl: "/exercise-images/hula-hoop.svg"
-    },
-    {
-      id: 8,
-      name: "Gehen",
-      sets: 1,
-      reps: 15, // 15 minutes
-      weight: 0,
-      rest: 60,
-      instructions: "15 Minuten Gehen (z.B. draußen oder auf der Stelle)",
-      imageUrl: "/exercise-images/walking.svg"
-    },
-    {
-      id: 9,
-      name: "Tanzen",
-      sets: 1,
-      reps: 15, // 15 minutes
-      weight: 0,
-      rest: 0,
-      instructions: "15 Minuten Tanzen - Viel Spaß!",
-      imageUrl: "/exercise-images/dancing.svg"
+      instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze",
+      imageUrl: "/exercise-images/trizeps-boden.svg"
     }
   ]
 };
