@@ -45,7 +45,15 @@
     <!-- Torso (connected to hips) -->
     <ellipse cx="160" cy="260" rx="35" ry="45" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
 
-    <!-- Head -->
+    <!-- Arms behind head (drawn first so they appear behind) -->
+    <path d="M 155 240 Q 120 220 115 185" stroke="url(#bodySitup)" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M 155 240 Q 170 220 165 185" stroke="url(#bodySitup)" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+    <!-- Hands behind head -->
+    <circle cx="115" cy="180" r="8" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+    <circle cx="165" cy="180" r="8" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+
+    <!-- Head (drawn after arms so face is in front) -->
     <circle cx="140" cy="200" r="28" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
 
     <!-- Face details - facing forward/up -->
@@ -53,14 +61,6 @@
     <circle cx="150" cy="195" r="3" fill="#1e293b"/>
     <!-- Happy smile -->
     <path d="M 128 210 Q 140 218 152 210" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-    <!-- Arms behind head -->
-    <path d="M 155 240 Q 140 210 125 195" stroke="url(#bodySitup)" stroke-width="12" fill="none" stroke-linecap="round"/>
-    <path d="M 155 240 Q 155 210 155 195" stroke="url(#bodySitup)" stroke-width="12" fill="none" stroke-linecap="round"/>
-
-    <!-- Hands behind head -->
-    <circle cx="125" cy="188" r="8" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
-    <circle cx="155" cy="188" r="8" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
   </g>
 
   <!-- Sparkle effects -->
