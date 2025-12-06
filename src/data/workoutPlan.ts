@@ -69,7 +69,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 7,
-      name: "Vertical Row",
+      name: "Vertikales Rudern",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -79,7 +79,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
-      name: "Low Row",
+      name: "Tiefes Rudern",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -89,7 +89,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 9,
-      name: "Butterfly Maschine",
+      name: "Reverse Butterfly",
       sets: 3,
       reps: 15,
       weight: 5,
@@ -109,7 +109,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 11,
-      name: "Rotary Torso",
+      name: "Rumpfrotation",
       sets: 6,
       reps: 15,
       weight: 15,
@@ -119,7 +119,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 12,
-      name: "Abdominal Crunch Maschine",
+      name: "Bauchpresse",
       sets: 3,
       reps: 15,
       weight: 20,
@@ -151,7 +151,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
-      name: "Sit-Ups",
+      name: "Bauchtraining",
       sets: 3,
       reps: 10,
       weight: 0,
@@ -161,7 +161,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 2,
-      name: "Butterfly",
+      name: "Fliegende",
       sets: 3,
       reps: 15,
       weight: 2,
@@ -191,7 +191,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 5,
-      name: "Front Raises",
+      name: "Frontheben",
       sets: 3,
       reps: 15,
       weight: 2,
@@ -201,7 +201,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
-      name: "Hammer Curls",
+      name: "Hammercurls",
       sets: 3,
       reps: 15,
       weight: 2,
