@@ -16,69 +16,72 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Sit-Ups</text>
 
   <!-- Mat -->
-  <rect x="50" y="295" width="300" height="8" rx="4" fill="#475569"/>
+  <rect x="50" y="320" width="300" height="10" rx="5" fill="#475569"/>
 
-  <!-- Side view figure lying on mat -->
+  <!-- Legs (bent, feet flat) -->
+  <rect x="270" y="260" width="20" height="60" rx="10" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2" transform="rotate(30 280 290)"/>
+  <rect x="295" y="260" width="20" height="60" rx="10" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2" transform="rotate(30 305 290)"/>
 
-  <!-- Feet flat on ground -->
-  <ellipse cx="90" cy="290" rx="12" ry="18" fill="#c2410c" stroke="#7c2d12" stroke-width="1.5"/>
+  <!-- Feet -->
+  <ellipse cx="310" cy="318" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <ellipse cx="340" cy="318" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
 
-  <!-- Lower legs (slim, bent) -->
-  <rect x="85" y="250" width="10" height="45" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(10 90 272)"/>
+  <!-- Body (torso with sit-up animation) -->
+  <ellipse cx="180" cy="260" rx="45" ry="35" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 220 290; 30 220 290; -20 220 290"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Thighs (slim, angled) -->
-  <rect x="95" y="235" width="10" height="50" rx="5" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5" transform="rotate(-50 100 260)"/>
-
-  <!-- Hips/Lower back on mat -->
-  <ellipse cx="160" cy="275" rx="20" ry="18" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
-
-  <!-- Upper body (slim, animating up) -->
+  <!-- Head (with sit-up animation) -->
   <g>
-    <!-- Torso -->
-    <ellipse cx="200" cy="260" rx="18" ry="45" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
-    </ellipse>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 220 290; 30 220 290; -20 220 290"
+      dur="2s"
+      repeatCount="indefinite"/>
 
-    <!-- Head (side profile) -->
-    <g>
-      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
+    <circle cx="120" cy="230" r="30" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
 
-      <!-- Head shape -->
-      <ellipse cx="220" cy="220" rx="15" ry="18" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1.5"/>
-
-      <!-- Hair (side) -->
-      <path d="M 208 210 Q 220 195 235 208 Q 238 218 235 228" fill="#92400e" stroke="#78350f" stroke-width="1"/>
-
-      <!-- Eye -->
-      <circle cx="228" cy="218" r="2.5" fill="#1e293b"/>
-
-      <!-- Nose -->
-      <path d="M 235 220 L 238 225 L 235 228" stroke="#b45309" stroke-width="1.5" fill="none"/>
-
-      <!-- Mouth -->
-      <path d="M 232 233 Q 235 235 233 237" stroke="#92400e" stroke-width="1" fill="none"/>
-    </g>
-
-    <!-- Arms behind head -->
-    <g>
-      <animateTransform attributeName="transform" type="rotate" values="70 180 280; 20 180 280; 70 180 280" dur="2.5s" repeatCount="indefinite"/>
-
-      <!-- Arm going to back of head -->
-      <path d="M 205 245 Q 195 230 210 215" stroke="url(#bodySitup)" stroke-width="10" fill="none" stroke-linecap="round"/>
-
-      <!-- Hand behind head -->
-      <circle cx="208" cy="212" r="6" fill="url(#bodySitup)" stroke="#b45309" stroke-width="1"/>
-    </g>
+    <!-- Face details -->
+    <circle cx="110" cy="225" r="4" fill="#1e293b"/>
+    <circle cx="130" cy="225" r="4" fill="#1e293b"/>
+    <!-- Happy smile -->
+    <path d="M 108 240 Q 120 250 132 240" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   </g>
 
-  <!-- Movement arrow -->
-  <path d="M 300 230 C 320 200 320 170 300 150" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 300 150 L 290 160 M 300 150 L 305 165" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </path>
+  <!-- Arms (behind head, animated) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-20 220 290; 30 220 290; -20 220 290"
+      dur="2s"
+      repeatCount="indefinite"/>
+
+    <!-- Left arm behind head -->
+    <path d="M 145 250 L 130 210" stroke="url(#bodySitup)" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <circle cx="130" cy="210" r="10" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+
+    <!-- Right arm behind head -->
+    <path d="M 145 250 L 110 215" stroke="url(#bodySitup)" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <circle cx="110" cy="215" r="10" fill="url(#bodySitup)" stroke="#b45309" stroke-width="2"/>
+  </g>
+
+  <!-- Sparkle effects -->
+  <circle cx="80" cy="180" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="320" cy="200" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+  </circle>
 
   <!-- Info text -->
-  <text x="200" y="350" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Kontrollierte Ausführung, Nacken entspannt</text>
+  <text x="200" y="375" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Kontrollierte Ausführung, Nacken entspannt</text>
 </svg>

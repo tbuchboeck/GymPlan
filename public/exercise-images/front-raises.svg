@@ -6,7 +6,7 @@
     </linearGradient>
     <linearGradient id="bodyFrontRaises" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="dumbbellGradF" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" />
@@ -21,85 +21,73 @@
   <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Front Raises</text>
 
   <!-- Ground line -->
-  <line x1="50" y1="355" x2="350" y2="355" stroke="#475569" stroke-width="3"/>
+  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
 
-  <!-- Side view figure -->
+  <!-- Legs -->
+  <rect x="170" y="270" width="20" height="75" rx="10" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2"/>
+  <rect x="210" y="270" width="20" height="75" rx="10" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2"/>
 
-  <!-- Back leg -->
-  <rect x="175" y="280" width="12" height="75" rx="6" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5"/>
-  <!-- Front leg -->
-  <rect x="195" y="280" width="12" height="75" rx="6" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5"/>
+  <!-- Feet -->
+  <ellipse cx="180" cy="347" rx="14" ry="8" fill="#1d4ed8" stroke="#1e40af" stroke-width="2"/>
+  <ellipse cx="220" cy="347" rx="14" ry="8" fill="#1d4ed8" stroke="#1e40af" stroke-width="2"/>
 
-  <!-- Feet (side view) -->
-  <ellipse cx="181" cy="353" rx="15" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5"/>
-  <ellipse cx="201" cy="353" rx="15" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5"/>
+  <!-- Body -->
+  <ellipse cx="200" cy="210" rx="42" ry="55" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2"/>
 
-  <!-- Torso (side view - slim) -->
-  <ellipse cx="190" cy="220" rx="22" ry="60" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5"/>
+  <!-- Head -->
+  <circle cx="200" cy="130" r="30" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2"/>
 
-  <!-- Head (side view - profile) -->
-  <ellipse cx="195" cy="138" rx="18" ry="22" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5"/>
+  <!-- Face details -->
+  <circle cx="190" cy="125" r="4" fill="#1e293b"/>
+  <circle cx="210" cy="125" r="4" fill="#1e293b"/>
+  <!-- Happy smile -->
+  <path d="M 188 142 Q 200 152 212 142" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Hair (side) -->
-  <path d="M 180 125 Q 195 110 210 125 Q 215 135 210 145" fill="#1e40af" stroke="#1e3a8a" stroke-width="1"/>
-
-  <!-- Eye -->
-  <circle cx="205" cy="135" r="3" fill="#1e293b"/>
-
-  <!-- Nose -->
-  <path d="M 213 138 L 218 145 L 213 148" stroke="#1d4ed8" stroke-width="2" fill="none"/>
-
-  <!-- Mouth -->
-  <path d="M 210 155 Q 215 158 212 160" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
-
-  <!-- Arm with front raise motion (side view - arm raises forward) -->
+  <!-- Left arm with dumbbell (animated front raise) -->
   <g>
-    <rect x="205" y="172" width="8" height="50" rx="4" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 209 175; -90 209 175; 0 209 175" dur="2.5s" repeatCount="indefinite"/>
-    </rect>
-
-    <!-- Hand -->
-    <circle cx="209" cy="220" r="8" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5">
-      <animateTransform attributeName="transform" type="rotate" values="0 209 175; -90 209 175; 0 209 175" dur="2.5s" repeatCount="indefinite"/>
+    <path d="M 155 195 L 130 260" stroke="url(#bodyFrontRaises)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 155 195 L 130 260; M 155 195 L 90 160; M 155 195 L 130 260" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="130" cy="260" r="10" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2">
+      <animate attributeName="cx" values="130;90;130" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="260;160;260" dur="2.5s" repeatCount="indefinite"/>
     </circle>
-
-    <!-- Dumbbell (horizontal when raised) -->
+    <!-- Dumbbell left -->
     <g>
-      <animateTransform attributeName="transform" type="rotate" values="0 209 175; -90 209 175; 0 209 175" dur="2.5s" repeatCount="indefinite"/>
-      <!-- Bar -->
-      <rect x="206" y="200" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
-      <!-- Top weight -->
-      <rect x="200" y="195" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <!-- Bottom weight -->
-      <rect x="200" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <animate attributeName="transform" values="translate(0,0);translate(-40,-100);translate(0,0)" dur="2.5s" repeatCount="indefinite"/>
+      <rect x="127" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
+      <rect x="121" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <rect x="121" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
     </g>
   </g>
 
-  <!-- Second arm (slightly behind, same motion) -->
+  <!-- Right arm with dumbbell (animated front raise, opposite phase) -->
   <g>
-    <rect x="175" y="172" width="8" height="50" rx="4" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5" opacity="0.7">
-      <animateTransform attributeName="transform" type="rotate" values="0 179 175; -90 179 175; 0 179 175" dur="2.5s" repeatCount="indefinite"/>
-    </rect>
-
-    <circle cx="179" cy="220" r="8" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="1.5" opacity="0.7">
-      <animateTransform attributeName="transform" type="rotate" values="0 179 175; -90 179 175; 0 179 175" dur="2.5s" repeatCount="indefinite"/>
+    <path d="M 245 195 L 270 260" stroke="url(#bodyFrontRaises)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 245 195 L 270 260; M 245 195 L 310 160; M 245 195 L 270 260" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="270" cy="260" r="10" fill="url(#bodyFrontRaises)" stroke="#1d4ed8" stroke-width="2">
+      <animate attributeName="cx" values="270;310;270" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="260;160;260" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
     </circle>
-
-    <g opacity="0.7">
-      <animateTransform attributeName="transform" type="rotate" values="0 179 175; -90 179 175; 0 179 175" dur="2.5s" repeatCount="indefinite"/>
-      <rect x="176" y="200" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
-      <rect x="170" y="195" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
-      <rect x="170" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+    <!-- Dumbbell right -->
+    <g>
+      <animate attributeName="transform" values="translate(0,0);translate(40,-100);translate(0,0)" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+      <rect x="267" y="240" width="6" height="40" rx="3" fill="url(#dumbbellGradF)"/>
+      <rect x="261" y="235" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
+      <rect x="261" y="275" width="18" height="10" rx="2" fill="#475569" stroke="#334155" stroke-width="1"/>
     </g>
   </g>
 
-  <!-- Movement arrow (upward arc) -->
-  <path d="M 280 200 C 300 160 300 120 280 90" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 280 90 L 270 100 M 280 90 L 285 105" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </path>
+  <!-- Sparkle effects -->
+  <circle cx="80" cy="120" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="320" cy="120" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2.5s" begin="1.25s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
 
   <!-- Info text -->
   <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Arme gestreckt nach vorne bis Schulterhöhe</text>
