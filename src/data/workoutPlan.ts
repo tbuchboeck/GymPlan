@@ -69,7 +69,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 7,
-      name: "Vertical Row",
+      name: "Vertikales Rudern",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -79,7 +79,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 8,
-      name: "Low Row",
+      name: "Tiefes Rudern",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -109,7 +109,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 11,
-      name: "Rotary Torso",
+      name: "Rumpfrotation",
       sets: 6,
       reps: 15,
       weight: 15,
@@ -119,7 +119,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 12,
-      name: "Abdominal Crunch Maschine",
+      name: "Bauchpresse",
       sets: 3,
       reps: 15,
       weight: 20,

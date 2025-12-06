@@ -143,7 +143,7 @@ export function WorkoutHistory({ sessions, onClose, onImport }: WorkoutHistoryPr
                 <Flame className="w-8 h-8 text-white" />
               </div>
               <div>
-                <div className="text-sm text-red-100">Streak</div>
+                <div className="text-sm text-red-100">Serie</div>
                 <div className="text-3xl font-bold text-white">{stats.currentStreak} Tage</div>
               </div>
             </div>
