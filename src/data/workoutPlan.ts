@@ -201,6 +201,16 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
+      name: "Sessel Step-Up",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Po-Übung: Auf einen Sessel aufsteigen. 10 Wiederholungen pro Seite, abwechselnd links und rechts. Arme zur Balance nach vorne strecken.",
+      imageUrl: "/exercise-images/sessel-step-up.svg"
+    },
+    {
+      id: 7,
       name: "Butterfly",
       sets: 3,
       reps: 15,
@@ -210,7 +220,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-butterfly.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Trizeps",
       sets: 3,
       reps: 15,
@@ -220,7 +230,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-trizeps.svg"
     },
     {
-      id: 8,
+      id: 9,
       name: "Bizeps",
       sets: 3,
       reps: 15,
@@ -230,7 +240,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hantel-bizeps.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Front Raises",
       sets: 3,
       reps: 15,
@@ -240,7 +250,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/front-raises.svg"
     },
     {
-      id: 10,
+      id: 11,
       name: "Hammer Curls",
       sets: 3,
       reps: 15,
@@ -250,7 +260,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/hammer-curls.svg"
     },
     {
-      id: 11,
+      id: 12,
       name: "Trizeps Boden",
       sets: 3,
       reps: 15,
