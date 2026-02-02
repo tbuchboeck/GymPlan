@@ -140,9 +140,9 @@ export const gymWorkoutPlan: WorkoutPlan = {
   ]
 };
 
-// Home Trainingsplan
+// Hanteltraining
 export const homeWorkoutPlan: WorkoutPlan = {
-  name: "Home-Trainingsplan (@home)",
+  name: "Hanteltraining (@hantel)",
   duration: "Unbegrenzt",
   sessionsPerWeek: 2,
   goal: "Allgemeine Fitness",
@@ -272,9 +272,9 @@ export const homeWorkoutPlan: WorkoutPlan = {
   ]
 };
 
-// Zweiter Home Trainingsplan (Cardio-fokussiert)
+// Cardio Trainingsplan
 export const homeWorkoutPlan2: WorkoutPlan = {
-  name: "Zweite Home-Trainingsplan (@home2)",
+  name: "Cardio (@cardio)",
   duration: "Unbegrenzt",
   sessionsPerWeek: 2,
   goal: "Cardio & Beweglichkeit",
