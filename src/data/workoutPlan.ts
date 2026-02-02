@@ -151,6 +151,78 @@ export const homeWorkoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
+      name: "Butterfly",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Arme seitlich anheben und vor der Brust zusammenführen",
+      imageUrl: "/exercise-images/hantel-butterfly.svg"
+    },
+    {
+      id: 2,
+      name: "Trizeps",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
+      imageUrl: "/exercise-images/hantel-trizeps.svg"
+    },
+    {
+      id: 3,
+      name: "Bizeps",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Bizeps Curls, Ellbogen am Körper fixiert",
+      imageUrl: "/exercise-images/hantel-bizeps.svg"
+    },
+    {
+      id: 4,
+      name: "Front Raises",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Arme gestreckt nach vorne anheben bis Schulterhöhe",
+      imageUrl: "/exercise-images/front-raises.svg"
+    },
+    {
+      id: 5,
+      name: "Hammer Curls",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Hanteln mit neutralem Griff (Daumen nach oben) beugen",
+      imageUrl: "/exercise-images/hammer-curls.svg"
+    },
+    {
+      id: 6,
+      name: "Trizeps Boden",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze",
+      imageUrl: "/exercise-images/trizeps-boden.svg"
+    }
+  ]
+};
+
+// Cardio Trainingsplan
+export const homeWorkoutPlan2: WorkoutPlan = {
+  name: "Cardio (@cardio)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 2,
+  goal: "Cardio & Beweglichkeit",
+  trainer: "Martin Schiendorfer",
+  createdAt: "06.12.2025",
+  exercises: [
+    {
+      id: 1,
       name: "Sit-Ups",
       sets: 3,
       reps: 10,
@@ -211,78 +283,6 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 7,
-      name: "Butterfly",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Arme seitlich anheben und vor der Brust zusammenführen",
-      imageUrl: "/exercise-images/hantel-butterfly.svg"
-    },
-    {
-      id: 8,
-      name: "Trizeps",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
-      imageUrl: "/exercise-images/hantel-trizeps.svg"
-    },
-    {
-      id: 9,
-      name: "Bizeps",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Bizeps Curls, Ellbogen am Körper fixiert",
-      imageUrl: "/exercise-images/hantel-bizeps.svg"
-    },
-    {
-      id: 10,
-      name: "Front Raises",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Arme gestreckt nach vorne anheben bis Schulterhöhe",
-      imageUrl: "/exercise-images/front-raises.svg"
-    },
-    {
-      id: 11,
-      name: "Hammer Curls",
-      sets: 3,
-      reps: 15,
-      weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Hanteln mit neutralem Griff (Daumen nach oben) beugen",
-      imageUrl: "/exercise-images/hammer-curls.svg"
-    },
-    {
-      id: 12,
-      name: "Trizeps Boden",
-      sets: 3,
-      reps: 15,
-      weight: 0,
-      rest: 60,
-      instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze",
-      imageUrl: "/exercise-images/trizeps-boden.svg"
-    }
-  ]
-};
-
-// Cardio Trainingsplan
-export const homeWorkoutPlan2: WorkoutPlan = {
-  name: "Cardio (@cardio)",
-  duration: "Unbegrenzt",
-  sessionsPerWeek: 2,
-  goal: "Cardio & Beweglichkeit",
-  trainer: "Martin Schiendorfer",
-  createdAt: "06.12.2025",
-  exercises: [
-    {
-      id: 1,
       name: "Hula Hoop",
       sets: 1,
       reps: 10, // 10 minutes
@@ -292,7 +292,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       imageUrl: "/exercise-images/hula-hoop.svg"
     },
     {
-      id: 2,
+      id: 8,
       name: "Laufband Gehen",
       sets: 1,
       reps: 20, // 20 minutes
@@ -302,7 +302,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       imageUrl: "/exercise-images/walking.svg"
     },
     {
-      id: 3,
+      id: 9,
       name: "Tanzen",
       sets: 1,
       reps: 20, // 20 minutes
