@@ -161,7 +161,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 2,
-      name: "Trizeps",
+      name: "Trizeps 1",
       sets: 3,
       reps: 15,
       weight: 2,
@@ -201,13 +201,67 @@ export const homeWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 6,
-      name: "Trizeps Boden",
+      name: "Trizeps 2",
       sets: 3,
       reps: 15,
       weight: 0,
       rest: 60,
       instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze",
       imageUrl: "/exercise-images/trizeps-boden.svg"
+    },
+    {
+      id: 7,
+      name: "Bizeps plus über Kopf",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Bizeps Curl mit anschließendem Überkopfdrücken"
+    },
+    {
+      id: 8,
+      name: "Kreuzheben",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Rücken gerade, Hanteln vor dem Körper nach unten und wieder hoch"
+    },
+    {
+      id: 9,
+      name: "Butterfly reverse",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Vorgebeugt, Arme seitlich nach außen anheben"
+    },
+    {
+      id: 10,
+      name: "Seitheben Frontheben",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Abwechselnd seitlich und frontal anheben"
+    },
+    {
+      id: 11,
+      name: "Butterfly Boden",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Auf dem Rücken liegend, Arme seitlich zusammenführen"
+    },
+    {
+      id: 12,
+      name: "Sit-ups plus Hanteln",
+      sets: 3,
+      reps: 15,
+      weight: 2,
+      rest: 60,
+      instructions: "Hanteltraining 2kg - Sit-ups mit Hantel vor der Brust"
     }
   ]
 };
