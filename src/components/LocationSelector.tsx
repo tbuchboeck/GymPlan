@@ -9,8 +9,8 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
   return (
     <div className="location-selector">
       <div className="location-container">
-        <h1 className="location-title">Wo trainierst du heute?</h1>
-        <p className="location-subtitle">Wähle deinen Trainingsort</p>
+        <h1 className="location-title">Was trainierst du heute?</h1>
+        <p className="location-subtitle">Wähle deinen Trainingsplan</p>
 
         <div className="location-buttons">
           <button
@@ -30,8 +30,8 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
           >
             <div className="location-icon">@</div>
             <div className="location-text">
-              <span className="location-label">home</span>
-              <span className="location-description">Zu Hause</span>
+              <span className="location-label">hantel</span>
+              <span className="location-description">Hanteltraining</span>
             </div>
           </button>
 
@@ -41,8 +41,8 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
           >
             <div className="location-icon">@</div>
             <div className="location-text">
-              <span className="location-label">home2</span>
-              <span className="location-description">Cardio zu Hause</span>
+              <span className="location-label">cardio</span>
+              <span className="location-description">Cardio Training</span>
             </div>
           </button>
         </div>
