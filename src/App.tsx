@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2 } from './data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { Home } from './components/Home';
@@ -11,7 +11,7 @@ import { PinLogin } from './components/PinLogin';
 import LocationSelector from './components/LocationSelector';
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
-type Location = 'gym' | 'home' | 'home2' | null;
+type Location = 'gym' | 'home' | 'home2' | 'back' | null;
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -25,6 +25,7 @@ function App() {
   const workoutPlan = useMemo(() => {
     if (location === 'home') return homeWorkoutPlan;
     if (location === 'home2') return homeWorkoutPlan2;
+    if (location === 'back') return backWorkoutPlan;
     return gymWorkoutPlan;
   }, [location]);
 

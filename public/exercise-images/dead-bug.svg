@@ -1,0 +1,82 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgDB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyDB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgDB)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Dead Bug</text>
+
+  <!-- Mat -->
+  <rect x="40" y="310" width="320" height="10" rx="5" fill="#475569"/>
+
+  <!-- Body lying on back -->
+  <!-- Torso -->
+  <ellipse cx="200" cy="280" rx="75" ry="25" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Head -->
+  <circle cx="310" cy="280" r="24" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="318" cy="275" r="3" fill="#1e293b"/>
+  <circle cx="305" cy="275" r="3" fill="#1e293b"/>
+  <path d="M 302 290 Q 311 296 320 290" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Hips -->
+  <ellipse cx="130" cy="280" rx="28" ry="20" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Right arm (stays up toward ceiling) -->
+  <rect x="240" y="200" width="14" height="55" rx="7" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="247" cy="197" r="7" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Left arm (extends back behind head - animated) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 220 268;-60 220 268;0 220 268"
+      dur="3.5s"
+      repeatCount="indefinite"/>
+    <rect x="213" y="200" width="14" height="55" rx="7" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2"/>
+    <circle cx="220" cy="197" r="7" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+  </g>
+
+  <!-- Right leg (stays in tabletop - 90 degree) -->
+  <rect x="155" y="230" width="16" height="48" rx="8" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2" transform="rotate(-10 163 254)"/>
+  <rect x="150" y="195" width="14" height="40" rx="7" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2" transform="rotate(80 157 215)"/>
+
+  <!-- Left leg (extends out - animated) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 130 270;50 130 270;0 130 270"
+      dur="3.5s"
+      repeatCount="indefinite"/>
+    <rect x="108" y="230" width="16" height="48" rx="8" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2" transform="rotate(-10 116 254)"/>
+    <rect x="96" y="195" width="14" height="40" rx="7" fill="url(#bodyDB)" stroke="#0f766e" stroke-width="2" transform="rotate(80 103 215)"/>
+    <ellipse cx="108" cy="190" rx="9" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+  </g>
+
+  <!-- Cue: flat back -->
+  <text x="200" y="340" font-family="system-ui" font-size="11" fill="#fbbf24" text-anchor="middle">Rücken bleibt flach am Boden</text>
+
+  <!-- Sparkle effects -->
+  <circle cx="60" cy="130" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="350" cy="150" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="3.5s" begin="0.7s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Info text -->
+  <text x="200" y="380" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Gegengleich Arm/Bein strecken, langsam zurück</text>
+</svg>

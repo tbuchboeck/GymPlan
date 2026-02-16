@@ -368,5 +368,77 @@ export const homeWorkoutPlan2: WorkoutPlan = {
   ]
 };
 
+// Rücken-Aufbau Trainingsplan (nach Hexenschuss / LWS-Blockade)
+export const backWorkoutPlan: WorkoutPlan = {
+  name: "Rücken-Aufbau (@rücken)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 4,
+  goal: "Rumpfstabilität & Rückfallprävention",
+  trainer: "Physiotherapie-basiert",
+  createdAt: "16.02.2026",
+  exercises: [
+    {
+      id: 1,
+      name: "Aufwärmen – Locker Gehen",
+      sets: 1,
+      reps: 2, // 2 Minuten
+      weight: 0,
+      rest: 30,
+      instructions: "2 Minuten locker gehen oder am Stand marschieren. Ziel: Durchblutung, Rücken entspannt in Bewegung bringen. Ruhig atmen.",
+      imageUrl: "/exercise-images/marschieren.svg"
+    },
+    {
+      id: 2,
+      name: "Glute Bridge (Beckenheben)",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 45,
+      instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen, Becken anheben bis Knie–Hüfte–Schulter eine Linie bilden. Oben 3–5 Sek. halten, dann kontrolliert absenken. Druck über die Fersen, nicht ins Hohlkreuz kippen. Tempo: 2s hoch / 3–5s halten / 2s runter.",
+      imageUrl: "/exercise-images/glute-bridge.svg"
+    },
+    {
+      id: 3,
+      name: "Dead Bug",
+      sets: 3,
+      reps: 10, // pro Seite
+      weight: 0,
+      rest: 45,
+      instructions: "Rückenlage, Hüfte/Knie 90° (Tischposition), Arme Richtung Decke. Bauchspannung aufbauen, dann gegengleich: rechtes Bein strecken + linker Arm nach hinten. Rücken bleibt flach am Boden! Zurück zur Mitte, Seite wechseln. Tempo: 3s raus / 1s halten / 3s zurück. 10 Wdh. pro Seite.",
+      imageUrl: "/exercise-images/dead-bug.svg"
+    },
+    {
+      id: 4,
+      name: "Bird Dog",
+      sets: 3,
+      reps: 8, // pro Seite
+      weight: 0,
+      rest: 45,
+      instructions: "Vierfüßlerstand: Hände unter Schultern, Knie unter Hüften. Bauchspannung setzen, dann rechtes Bein nach hinten + linker Arm nach vorne strecken. 5 Sek. halten, kontrolliert zurück. Becken bleibt gerade – keine Rotation! Tempo: 2s raus / 5s halten / 2s zurück. 8 Wdh. pro Seite.",
+      imageUrl: "/exercise-images/bird-dog.svg"
+    },
+    {
+      id: 5,
+      name: "Seitstütz (Knie-Variante)",
+      sets: 3,
+      reps: 25, // Sekunden halten
+      weight: 0,
+      rest: 45,
+      instructions: "Seitlage, Ellenbogen unter Schulter, Knie angewinkelt. Becken anheben bis Schulter–Hüfte–Knie eine Linie bilden. 20–30 Sek. halten, dann kontrolliert absetzen. Schulter weg vom Ohr, Becken nicht kippen. Ruhig atmen. Beide Seiten!",
+      imageUrl: "/exercise-images/side-plank-knee.svg"
+    },
+    {
+      id: 6,
+      name: "Cool-Down – Entspanntes Gehen",
+      sets: 1,
+      reps: 2, // 2 Minuten
+      weight: 0,
+      rest: 0,
+      instructions: "1–2 Minuten entspannt gehen. Kein aggressives Dehnen direkt nach der Einheit nötig. Wenn du dich morgen gleich gut oder besser fühlst, kannst du beim nächsten Mal leicht steigern.",
+      imageUrl: "/exercise-images/walking.svg"
+    }
+  ]
+};
+
 // Default export für Kompatibilität
 export const workoutPlan = gymWorkoutPlan;
