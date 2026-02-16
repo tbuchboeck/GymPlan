@@ -1,0 +1,82 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgBD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyBD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgBD)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Bird Dog</text>
+
+  <!-- Ground line -->
+  <line x1="30" y1="330" x2="370" y2="330" stroke="#475569" stroke-width="3"/>
+
+  <!-- Person in quadruped (all fours) position -->
+
+  <!-- Torso (horizontal) -->
+  <ellipse cx="200" cy="220" rx="75" ry="25" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Hips -->
+  <ellipse cx="275" cy="225" rx="22" ry="18" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Head -->
+  <circle cx="110" cy="205" r="22" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="102" cy="200" r="3" fill="#1e293b"/>
+  <circle cx="117" cy="200" r="3" fill="#1e293b"/>
+  <path d="M 100 213 Q 110 220 120 213" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Left arm (on ground, supporting) -->
+  <rect x="148" y="240" width="14" height="70" rx="7" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+  <ellipse cx="155" cy="325" rx="10" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Right arm (extending forward - animated) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="60 140 230;-10 140 230;60 140 230"
+      dur="4s"
+      repeatCount="indefinite"/>
+    <rect x="133" y="230" width="14" height="65" rx="7" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+    <circle cx="140" cy="297" r="7" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+  </g>
+
+  <!-- Right leg (on ground, supporting) -->
+  <rect x="252" y="245" width="16" height="65" rx="8" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+  <ellipse cx="260" cy="325" rx="11" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Left leg (extending back - animated) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-60 275 235;10 275 235;-60 275 235"
+      dur="4s"
+      repeatCount="indefinite"/>
+    <rect x="270" y="235" width="16" height="65" rx="8" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+    <ellipse cx="278" cy="302" rx="10" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+  </g>
+
+  <!-- Cue: pelvis stays level -->
+  <text x="200" y="350" font-family="system-ui" font-size="11" fill="#fbbf24" text-anchor="middle">Becken bleibt parallel – keine Rotation</text>
+
+  <!-- Sparkle effects -->
+  <circle cx="60" cy="130" r="3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="350" cy="120" r="3" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="4s" begin="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Gegengleich Arm/Bein strecken, 5s halten</text>
+</svg>

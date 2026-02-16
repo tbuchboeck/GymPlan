@@ -82,6 +82,11 @@
   color: white;
 }
 
+.location-btn-back .location-icon {
+  background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);
+  color: white;
+}
+
 .location-text {
   display: flex;
   flex-direction: column;
