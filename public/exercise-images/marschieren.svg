@@ -1,94 +1,97 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgMar" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyMar" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+    <linearGradient id="bodyMar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="limbMar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#0d9488"/>
     </linearGradient>
   </defs>
 
   <rect width="400" height="400" fill="url(#bgMar)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Aufwärmen</text>
+  <text x="200" y="38" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Aufwärmen</text>
 
   <!-- Ground -->
-  <line x1="30" y1="340" x2="370" y2="340" stroke="#475569" stroke-width="3"/>
+  <line x1="40" y1="348" x2="360" y2="348" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Person walking/marching -->
+  <!-- Left arm (swings opposite to right leg) -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="25 200 148;-25 200 148;25 200 148" dur="1s" repeatCount="indefinite"/>
+    <line x1="175" y1="148" x2="158" y2="200" stroke="url(#limbMar)" stroke-width="9" stroke-linecap="round"/>
+    <line x1="158" y1="200" x2="155" y2="240" stroke="url(#limbMar)" stroke-width="8" stroke-linecap="round"/>
+  </g>
 
-  <!-- Head -->
-  <circle cx="200" cy="110" r="26" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-  <circle cx="192" cy="105" r="3" fill="#1e293b"/>
-  <circle cx="208" cy="105" r="3" fill="#1e293b"/>
-  <path d="M 190 120 Q 200 127 210 120" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Right arm (swings opposite to left leg) -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-25 200 148;25 200 148;-25 200 148" dur="1s" repeatCount="indefinite"/>
+    <line x1="225" y1="148" x2="242" y2="200" stroke="url(#limbMar)" stroke-width="9" stroke-linecap="round"/>
+    <line x1="242" y1="200" x2="245" y2="240" stroke="url(#limbMar)" stroke-width="8" stroke-linecap="round"/>
+  </g>
 
   <!-- Torso -->
-  <ellipse cx="200" cy="195" rx="32" ry="60" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
+  <rect x="180" y="130" width="40" height="90" rx="18" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
 
-  <!-- Right arm swinging forward -->
+  <!-- Neck -->
+  <rect x="192" y="115" width="16" height="22" rx="8" fill="url(#bodyMar)"/>
+
+  <!-- Head -->
+  <circle cx="200" cy="90" r="25" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
+  <!-- Eyes -->
+  <circle cx="191" cy="86" r="3" fill="#1e293b"/>
+  <circle cx="209" cy="86" r="3" fill="#1e293b"/>
+  <!-- Smile -->
+  <path d="M191 97 Q200 104 209 97" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Hip joint area -->
+  <ellipse cx="200" cy="225" rx="24" ry="12" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="1.5"/>
+
+  <!-- Left leg (marching up) -->
   <g>
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="-20 200 155;20 200 155;-20 200 155"
-      dur="1.5s"
-      repeatCount="indefinite"/>
-    <rect x="225" y="155" width="14" height="50" rx="7" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <rect x="227" y="195" width="12" height="40" rx="6" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-30 200 228;20 200 228;-30 200 228" dur="1s" repeatCount="indefinite"/>
+    <!-- Thigh -->
+    <line x1="188" y1="228" x2="178" y2="282" stroke="url(#limbMar)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Shin -->
+    <line x1="178" y1="282" x2="175" y2="338" stroke="url(#limbMar)" stroke-width="9" stroke-linecap="round"/>
+    <!-- Foot -->
+    <ellipse cx="170" cy="344" rx="16" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
   </g>
 
-  <!-- Left arm swinging back -->
+  <!-- Right leg -->
   <g>
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="20 200 155;-20 200 155;20 200 155"
-      dur="1.5s"
-      repeatCount="indefinite"/>
-    <rect x="161" y="155" width="14" height="50" rx="7" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <rect x="161" y="195" width="12" height="40" rx="6" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="20 200 228;-30 200 228;20 200 228" dur="1s" repeatCount="indefinite"/>
+    <!-- Thigh -->
+    <line x1="212" y1="228" x2="222" y2="282" stroke="url(#limbMar)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Shin -->
+    <line x1="222" y1="282" x2="225" y2="338" stroke="url(#limbMar)" stroke-width="9" stroke-linecap="round"/>
+    <!-- Foot -->
+    <ellipse cx="230" cy="344" rx="16" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
   </g>
 
-  <!-- Right leg stepping forward -->
-  <g>
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="20 200 250;-20 200 250;20 200 250"
-      dur="1.5s"
-      repeatCount="indefinite"/>
-    <rect x="210" y="250" width="16" height="55" rx="8" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <rect x="212" y="295" width="14" height="45" rx="7" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <ellipse cx="219" cy="338" rx="12" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+  <!-- Subtle motion lines -->
+  <g opacity="0.5">
+    <line x1="280" y1="130" x2="300" y2="130" stroke="#22d3ee" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="1s" repeatCount="indefinite"/>
+    </line>
+    <line x1="285" y1="145" x2="310" y2="145" stroke="#22d3ee" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.5;0.7;0.5" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+    </line>
+    <line x1="280" y1="160" x2="295" y2="160" stroke="#22d3ee" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+    </line>
   </g>
-
-  <!-- Left leg stepping back -->
-  <g>
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values="-20 200 250;20 200 250;-20 200 250"
-      dur="1.5s"
-      repeatCount="indefinite"/>
-    <rect x="174" y="250" width="16" height="55" rx="8" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <rect x="174" y="295" width="14" height="45" rx="7" fill="url(#bodyMar)" stroke="#0f766e" stroke-width="2"/>
-    <ellipse cx="181" cy="338" rx="12" ry="6" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
-  </g>
-
-  <!-- Sparkle effects -->
-  <circle cx="100" cy="160" r="3" fill="#fbbf24" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="310" cy="180" r="3" fill="#22d3ee" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
-  </circle>
 
   <!-- Info text -->
-  <text x="200" y="375" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">2 Min. locker gehen – Rücken entspannen</text>
+  <text x="200" y="382" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">2 Min. locker marschieren</text>
 </svg>
