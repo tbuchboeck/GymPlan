@@ -22,58 +22,56 @@
   <!-- Ground -->
   <line x1="20" y1="340" x2="380" y2="340" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Side view: facing LEFT. Quadruped position. -->
+  <!-- Side view: facing LEFT. Extended position (arm forward, opposite leg back). -->
+  <!-- Z-order: extending limbs first, then supporting limbs, then torso on top to cover joints -->
 
-  <!-- Back / Torso (horizontal) -->
-  <line x1="145" y1="195" x2="265" y2="195" stroke="url(#bodyBD)" stroke-width="22" stroke-linecap="round"/>
-
-  <!-- Neck -->
-  <line x1="145" y1="195" x2="120" y2="175" stroke="url(#bodyBD)" stroke-width="14" stroke-linecap="round"/>
-
-  <!-- Head -->
-  <circle cx="108" cy="165" r="20" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
-  <circle cx="100" cy="160" r="2.5" fill="#1e293b"/>
-  <circle cx="110" cy="160" r="2.5" fill="#1e293b"/>
-  <path d="M96 173 Q103 178 110 173" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-  <!-- Hip area -->
-  <ellipse cx="265" cy="198" rx="16" ry="14" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="1.5"/>
-
-  <!-- === SUPPORTING ARM (front, on ground) === -->
-  <line x1="160" y1="200" x2="155" y2="332" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round"/>
-  <!-- Hand on ground -->
-  <ellipse cx="155" cy="335" rx="10" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
-
-  <!-- === EXTENDING ARM (animated: from tucked to forward) === -->
-  <line x1="148" y1="200" x2="120" y2="260" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
-    <animate attributeName="x2" values="120;40;120" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="y2" values="260;195;260" dur="4s" repeatCount="indefinite"/>
+  <!-- === EXTENDED ARM (reaching forward, behind body) === -->
+  <line x1="145" y1="192" x2="38" y2="186" stroke="url(#limbBD)" stroke-width="9" stroke-linecap="round">
+    <animate attributeName="y2" values="186;194;186" dur="3s" repeatCount="indefinite"/>
   </line>
-  <!-- Extending hand -->
-  <circle cx="120" cy="264" r="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
-    <animate attributeName="cx" values="120;35;120" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="264;195;264" dur="4s" repeatCount="indefinite"/>
+  <circle cx="34" cy="186" r="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
+    <animate attributeName="cy" values="186;194;186" dur="3s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- === SUPPORTING LEG (back, knee on ground) === -->
-  <line x1="255" y1="202" x2="260" y2="332" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round"/>
-  <!-- Knee on ground -->
-  <ellipse cx="262" cy="335" rx="10" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
-
-  <!-- === EXTENDING LEG (animated: from tucked to back/horizontal) === -->
-  <line x1="270" y1="202" x2="295" y2="260" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
-    <animate attributeName="x2" values="295;375;295" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="y2" values="260;195;260" dur="4s" repeatCount="indefinite"/>
+  <!-- === EXTENDED LEG (reaching back, behind body) === -->
+  <line x1="265" y1="197" x2="372" y2="190" stroke="url(#limbBD)" stroke-width="9" stroke-linecap="round">
+    <animate attributeName="y2" values="190;198;190" dur="3s" repeatCount="indefinite"/>
   </line>
-  <!-- Extending foot -->
-  <ellipse cx="295" cy="264" rx="8" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
-    <animate attributeName="cx" values="295;378;295" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="264;195;264" dur="4s" repeatCount="indefinite"/>
+  <ellipse cx="376" cy="190" rx="9" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
+    <animate attributeName="cy" values="190;198;190" dur="3s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Alignment line (shows straight line at full extension) -->
-  <line x1="40" y1="195" x2="375" y2="195" stroke="#fbbf24" stroke-width="1" stroke-dasharray="6 4" opacity="0">
-    <animate attributeName="opacity" values="0;0.5;0" dur="4s" repeatCount="indefinite"/>
+  <!-- === SUPPORTING ARM (front, two segments with elbow bend) === -->
+  <!-- Upper arm -->
+  <line x1="155" y1="216" x2="148" y2="272" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Forearm -->
+  <line x1="148" y1="272" x2="145" y2="330" stroke="url(#limbBD)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Hand flat on ground -->
+  <ellipse cx="145" cy="336" rx="12" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
+
+  <!-- === SUPPORTING LEG (back, two segments with knee bend) === -->
+  <!-- Thigh -->
+  <line x1="258" y1="216" x2="263" y2="272" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Shin -->
+  <line x1="263" y1="272" x2="266" y2="330" stroke="url(#limbBD)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Knee on ground -->
+  <ellipse cx="266" cy="336" rx="12" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
+
+  <!-- === TORSO (filled ellipse - covers limb connection points) === -->
+  <ellipse cx="205" cy="197" rx="68" ry="25" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Neck -->
+  <line x1="142" y1="188" x2="120" y2="168" stroke="url(#bodyBD)" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Head -->
+  <circle cx="108" cy="158" r="20" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="100" cy="153" r="2.5" fill="#1e293b"/>
+  <circle cx="110" cy="153" r="2.5" fill="#1e293b"/>
+  <path d="M98 166 Q105 172 112 166" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Alignment line (hand → body → foot, shows the straight line) -->
+  <line x1="38" y1="190" x2="376" y2="190" stroke="#fbbf24" stroke-width="1" stroke-dasharray="6 4" opacity="0.25">
+    <animate attributeName="opacity" values="0.15;0.4;0.15" dur="3s" repeatCount="indefinite"/>
   </line>
 
   <!-- Cue text -->
