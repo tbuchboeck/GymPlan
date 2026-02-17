@@ -33,7 +33,7 @@
   <!-- Head -->
   <circle cx="108" cy="165" r="20" fill="url(#bodyBD)" stroke="#0f766e" stroke-width="2"/>
   <circle cx="100" cy="160" r="2.5" fill="#1e293b"/>
-  <circle cx="100" cy="160" r="2.5" fill="#1e293b"/>
+  <circle cx="110" cy="160" r="2.5" fill="#1e293b"/>
   <path d="M96 173 Q103 178 110 173" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
   <!-- Hip area -->
@@ -44,15 +44,15 @@
   <!-- Hand on ground -->
   <ellipse cx="155" cy="335" rx="10" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
 
-  <!-- === EXTENDING ARM (animated: from down to forward) === -->
-  <line x1="148" y1="200" x2="143" y2="310" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
-    <animate attributeName="x2" values="143;40;143" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="y2" values="310;195;310" dur="4s" repeatCount="indefinite"/>
+  <!-- === EXTENDING ARM (animated: from tucked to forward) === -->
+  <line x1="148" y1="200" x2="120" y2="260" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" values="120;40;120" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="260;195;260" dur="4s" repeatCount="indefinite"/>
   </line>
   <!-- Extending hand -->
-  <circle cx="143" cy="313" r="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
-    <animate attributeName="cx" values="143;35;143" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="313;195;313" dur="4s" repeatCount="indefinite"/>
+  <circle cx="120" cy="264" r="6" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
+    <animate attributeName="cx" values="120;35;120" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="264;195;264" dur="4s" repeatCount="indefinite"/>
   </circle>
 
   <!-- === SUPPORTING LEG (back, knee on ground) === -->
@@ -60,15 +60,15 @@
   <!-- Knee on ground -->
   <ellipse cx="262" cy="335" rx="10" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
 
-  <!-- === EXTENDING LEG (animated: from down to back/horizontal) === -->
-  <line x1="270" y1="202" x2="275" y2="310" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
-    <animate attributeName="x2" values="275;375;275" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="y2" values="310;195;310" dur="4s" repeatCount="indefinite"/>
+  <!-- === EXTENDING LEG (animated: from tucked to back/horizontal) === -->
+  <line x1="270" y1="202" x2="295" y2="260" stroke="url(#limbBD)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" values="295;375;295" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="260;195;260" dur="4s" repeatCount="indefinite"/>
   </line>
   <!-- Extending foot -->
-  <ellipse cx="275" cy="313" rx="8" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
-    <animate attributeName="cx" values="275;378;275" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="313;195;313" dur="4s" repeatCount="indefinite"/>
+  <ellipse cx="295" cy="264" rx="8" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5">
+    <animate attributeName="cx" values="295;378;295" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="264;195;264" dur="4s" repeatCount="indefinite"/>
   </ellipse>
 
   <!-- Alignment line (shows straight line at full extension) -->

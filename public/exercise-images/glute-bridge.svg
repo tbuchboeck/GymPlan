@@ -26,7 +26,8 @@
 
   <!-- Head (resting on mat) -->
   <circle cx="338" cy="280" r="19" fill="url(#bodyGB)" stroke="#0f766e" stroke-width="2"/>
-  <circle cx="334" cy="274" r="2.5" fill="#1e293b"/>
+  <circle cx="331" cy="274" r="2.5" fill="#1e293b"/>
+  <circle cx="341" cy="274" r="2.5" fill="#1e293b"/>
   <path d="M330 285 Q335 290 340 285" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
   <!-- Arms flat on mat -->
