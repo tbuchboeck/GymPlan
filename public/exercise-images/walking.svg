@@ -1,110 +1,106 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgWalk" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bgWk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyWalk" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    <linearGradient id="bodyWk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="limbWk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#0d9488"/>
     </linearGradient>
   </defs>
 
-  <rect width="400" height="400" fill="url(#bgWalk)"/>
+  <rect width="400" height="400" fill="url(#bgWk)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Gehen</text>
+  <text x="200" y="38" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Cool-Down</text>
 
-  <!-- Ground line -->
-  <line x1="50" y1="330" x2="350" y2="330" stroke="#475569" stroke-width="3"/>
+  <!-- Ground -->
+  <line x1="40" y1="348" x2="360" y2="348" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Path/trail marks -->
-  <circle cx="120" cy="330" r="4" fill="#64748b" opacity="0.5">
-    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="160" cy="330" r="4" fill="#64748b" opacity="0.4">
-    <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" begin="0.3s" repeatCount="indefinite"/>
-  </circle>
+  <!-- Side view: person walking to the right, relaxed -->
 
-  <!-- Left leg (forward) -->
+  <!-- Left arm (swings forward when right leg goes back) -->
   <g>
-    <rect x="175" y="230" width="20" height="75" rx="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2" transform="rotate(-20 185 230)">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        values="-20 185 230; 20 185 230; -20 185 230"
-        dur="2s"
-        repeatCount="indefinite"/>
-    </rect>
-    <!-- Foot -->
-    <ellipse cx="158" cy="322" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
-      <animate attributeName="cx" values="158;210;158" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="322;328;322" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
+    <animateTransform attributeName="transform" type="rotate"
+      values="15 200 148;-15 200 148;15 200 148" dur="1.6s" repeatCount="indefinite"/>
+    <line x1="200" y1="148" x2="188" y2="210" stroke="url(#limbWk)" stroke-width="8" stroke-linecap="round"/>
+    <line x1="188" y1="210" x2="185" y2="240" stroke="url(#limbWk)" stroke-width="7" stroke-linecap="round"/>
   </g>
 
-  <!-- Right leg (back) -->
+  <!-- Right arm -->
   <g>
-    <rect x="215" y="230" width="20" height="75" rx="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2" transform="rotate(20 225 230)">
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        values="20 225 230; -20 225 230; 20 225 230"
-        dur="2s"
-        repeatCount="indefinite"/>
-    </rect>
-    <!-- Foot -->
-    <ellipse cx="242" cy="322" rx="14" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
-      <animate attributeName="cx" values="242;190;242" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="322;328;322" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-15 200 148;15 200 148;-15 200 148" dur="1.6s" repeatCount="indefinite"/>
+    <line x1="200" y1="148" x2="212" y2="210" stroke="url(#limbWk)" stroke-width="8" stroke-linecap="round"/>
+    <line x1="212" y1="210" x2="215" y2="240" stroke="url(#limbWk)" stroke-width="7" stroke-linecap="round"/>
   </g>
 
-  <!-- Body (torso) -->
-  <ellipse cx="205" cy="195" rx="40" ry="50" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
-    <animate attributeName="cy" values="195;190;195" dur="2s" repeatCount="indefinite"/>
-  </ellipse>
+  <!-- Torso -->
+  <rect x="182" y="132" width="36" height="88" rx="16" fill="url(#bodyWk)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Neck -->
+  <rect x="193" y="118" width="14" height="20" rx="7" fill="url(#bodyWk)"/>
 
   <!-- Head -->
-  <circle cx="205" cy="135" r="28" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
-    <animate attributeName="cy" values="135;130;135" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <circle cx="200" cy="95" r="24" fill="url(#bodyWk)" stroke="#0f766e" stroke-width="2"/>
+  <!-- Eyes (relaxed/peaceful) -->
+  <line x1="189" y1="91" x2="195" y2="91" stroke="#0f766e" stroke-width="2" stroke-linecap="round"/>
+  <line x1="205" y1="91" x2="211" y2="91" stroke="#0f766e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Gentle smile -->
+  <path d="M192 101 Q200 107 208 101" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-  <!-- Face details -->
-  <circle cx="195" cy="130" r="3" fill="#1e293b">
-    <animate attributeName="cy" values="130;125;130" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="215" cy="130" r="3" fill="#1e293b">
-    <animate attributeName="cy" values="130;125;130" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <!-- Hip area -->
+  <ellipse cx="200" cy="224" rx="22" ry="11" fill="url(#bodyWk)" stroke="#0f766e" stroke-width="1.5"/>
 
-  <!-- Left arm (swinging) -->
+  <!-- Left leg (gentle stride) -->
   <g>
-    <path d="M 170 185 L 150 230" stroke="url(#bodyWalk)" stroke-width="18" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 170 185 L 150 230; M 170 185 L 165 150; M 170 185 L 150 230" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <circle cx="150" cy="230" r="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
-      <animate attributeName="cy" values="230;150;230" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="150;165;150" dur="2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-18 200 226;18 200 226;-18 200 226" dur="1.6s" repeatCount="indefinite"/>
+    <line x1="192" y1="226" x2="185" y2="286" stroke="url(#limbWk)" stroke-width="10" stroke-linecap="round"/>
+    <line x1="185" y1="286" x2="183" y2="340" stroke="url(#limbWk)" stroke-width="9" stroke-linecap="round"/>
+    <ellipse cx="179" cy="344" rx="15" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
+  </g>
+
+  <!-- Right leg -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="18 200 226;-18 200 226;18 200 226" dur="1.6s" repeatCount="indefinite"/>
+    <line x1="208" y1="226" x2="215" y2="286" stroke="url(#limbWk)" stroke-width="10" stroke-linecap="round"/>
+    <line x1="215" y1="286" x2="217" y2="340" stroke="url(#limbWk)" stroke-width="9" stroke-linecap="round"/>
+    <ellipse cx="221" cy="344" rx="15" ry="5" fill="#0d9488" stroke="#0f766e" stroke-width="1.5"/>
+  </g>
+
+  <!-- Relaxation sparkles (calmer, slower) -->
+  <g opacity="0.4">
+    <circle cx="100" cy="130" r="2" fill="#fbbf24">
+      <animate attributeName="opacity" values="0;0.6;0" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1;3;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="310" cy="150" r="2" fill="#22d3ee">
+      <animate attributeName="opacity" values="0;0.5;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1;3;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="85" cy="200" r="2" fill="#22d3ee">
+      <animate attributeName="opacity" values="0;0.4;0" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1;2.5;1" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- Right arm (swinging opposite) -->
-  <g>
-    <path d="M 240 185 L 245 150" stroke="url(#bodyWalk)" stroke-width="18" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 240 185 L 245 150; M 240 185 L 260 230; M 240 185 L 245 150" dur="2s" repeatCount="indefinite"/>
+  <!-- Movement arrow (gentle, to the right) -->
+  <g opacity="0.4">
+    <path d="M270 180 L295 180" stroke="#22d3ee" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" repeatCount="indefinite"/>
     </path>
-    <circle cx="245" cy="150" r="10" fill="url(#bodyWalk)" stroke="#b45309" stroke-width="2">
-      <animate attributeName="cy" values="150;230;150" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="245;260;245" dur="2s" repeatCount="indefinite"/>
-    </circle>
+    <path d="M288 175 L296 180 L288 185" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" repeatCount="indefinite"/>
+    </path>
   </g>
-
-  <!-- Movement arrow -->
-  <path d="M 280 200 L 320 200 L 310 193 M 320 200 L 310 207" stroke="#22d3ee" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
-  </path>
 
   <!-- Info text -->
-  <text x="200" y="370" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">15 Minuten Gehen</text>
+  <text x="200" y="382" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">2 Min. entspannt gehen – Rücken lockern</text>
 </svg>
