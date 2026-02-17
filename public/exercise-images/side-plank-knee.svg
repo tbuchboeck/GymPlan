@@ -55,7 +55,8 @@
 
   <!-- Head -->
   <circle cx="173" cy="205" r="20" fill="url(#bodySP)" stroke="#0f766e" stroke-width="2"/>
-  <circle cx="167" cy="200" r="2.5" fill="#1e293b"/>
+  <circle cx="166" cy="200" r="2.5" fill="#1e293b"/>
+  <circle cx="178" cy="200" r="2.5" fill="#1e293b"/>
   <path d="M164 212 Q170 217 176 212" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
   <!-- Top arm (resting on hip) -->
