@@ -85,7 +85,7 @@ npm run preview
 1. Adduktionsmaschine (3×15 @ 15 kg)
 2. Abduktionsmaschine (3×15 @ 15 kg)
 3. Beinpresse horizontal (3×15 @ 50 kg)
-4. Brustpresse (3×15 @ 15 kg)
+4. Schulterpresse (3×15 @ 15 kg)
 5. Seitheben Kurzhantel (3×15 @ 2 kg)
 6. Ruderzug Maschine (3×15 @ 19 kg)
 7. Butterfly Maschine (3×15 @ 5 kg)

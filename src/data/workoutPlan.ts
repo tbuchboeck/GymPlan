@@ -49,13 +49,13 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 5,
-      name: "Brustpresse",
+      name: "Schulterpresse",
       sets: 3,
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Schultern bleiben hinten, Nacken entspannen, Griffe auf Mitte Brust, Ellbogen bleibt auf Griffniveau, Sitzpolster Stufe 5",
-      imageUrl: "/exercise-images/brustpresse.svg"
+      instructions: "Griffe auf Schulterhöhe, Ellbogen nicht über 90° hinaus, Nacken entspannen, kontrolliert nach oben drücken, nicht komplett durchstrecken",
+      imageUrl: "/exercise-images/schulterpresse.svg"
     },
     {
       id: 6,
