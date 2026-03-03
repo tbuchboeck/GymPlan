@@ -1,0 +1,70 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgBKP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyBKP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgBKP)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Bicycle Kicks</text>
+
+  <!-- Mat -->
+  <rect x="40" y="290" width="320" height="10" rx="5" fill="#475569"/>
+
+  <!-- Head -->
+  <circle cx="100" cy="230" r="22" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2"/>
+  <circle cx="90" cy="226" r="3" fill="#1e293b"/>
+
+  <!-- Upper arms (propped on forearms) -->
+  <rect x="95" y="250" width="14" height="42" rx="7" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2" transform="rotate(-15 102 270)"/>
+  <rect x="120" y="255" width="14" height="38" rx="7" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2" transform="rotate(10 127 270)"/>
+
+  <!-- Torso (prone) -->
+  <ellipse cx="200" cy="270" rx="75" ry="22" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Hips -->
+  <ellipse cx="280" cy="275" rx="22" ry="18" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Left leg - bicycle motion (bending and extending) -->
+  <g>
+    <!-- Thigh -->
+    <rect x="287" y="235" width="15" height="48" rx="7" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="-30 294 278;10 294 278;-30 294 278" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Lower leg -->
+    <rect x="283" y="205" width="13" height="38" rx="6" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="-30 294 278;10 294 278;-30 294 278" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <ellipse cx="289" cy="205" rx="8" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="-30 294 278;10 294 278;-30 294 278" dur="1.5s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Right leg - opposite bicycle motion -->
+  <g>
+    <rect x="305" y="235" width="15" height="48" rx="7" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="10 312 278;-30 312 278;10 312 278" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="301" y="205" width="13" height="38" rx="6" fill="url(#bodyBKP)" stroke="#b45309" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="10 312 278;-30 312 278;10 312 278" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <ellipse cx="307" cy="205" rx="8" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="10 312 278;-30 312 278;10 312 278" dur="1.5s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Circular arrow for pedaling motion -->
+  <circle cx="305" cy="210" r="25" stroke="#22d3ee" stroke-width="2" fill="none" stroke-dasharray="20 60">
+    <animateTransform attributeName="transform" type="rotate" values="0 305 210;360 305 210" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Info text -->
+  <text x="200" y="345" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Tretbewegung wie Fahrradfahren</text>
+</svg>
