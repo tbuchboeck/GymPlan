@@ -337,6 +337,66 @@ export const homeWorkoutPlan2: WorkoutPlan = {
     },
     {
       id: 7,
+      name: "Reverse Crunch",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Rückenlage, Knie angewinkelt. Knie kontrolliert Richtung Brust ziehen und langsam absenken, ohne den Boden zu berühren. Trainiert den unteren Bauch.",
+      imageUrl: "/exercise-images/reverse-crunch.svg"
+    },
+    {
+      id: 8,
+      name: "Bauchlage-Beinheben",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Bauchlage auf der Matte, Oberkörper leicht angehoben, auf die Unterarme gestützt. Beide Beine gestreckt vom Boden anheben. Trainiert den unteren Rücken und die untere Bauchmuskulatur.",
+      imageUrl: "/exercise-images/prone-leg-lifts.svg"
+    },
+    {
+      id: 9,
+      name: "Scissor Kicks (Schere)",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Bauchlage, Oberkörper aufgestützt. Die gestreckten Beine abwechselnd auf und ab bewegen (Scherenbewegung). Zielt auf den unteren Bauch und die Hüftbeuger.",
+      imageUrl: "/exercise-images/scissor-kicks.svg"
+    },
+    {
+      id: 10,
+      name: "Bauchlage-Crunch",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Bauchlage, Oberkörper aufgestützt. Die Knie abwechselnd angewinkelt Richtung Brust ziehen. Trainiert den gesamten Core.",
+      imageUrl: "/exercise-images/prone-crunch.svg"
+    },
+    {
+      id: 11,
+      name: "Bicycle Kicks (Bauchlage)",
+      sets: 3,
+      reps: 15,
+      weight: 0,
+      rest: 60,
+      instructions: "Bauchlage, Oberkörper aufgestützt. Abwechselndes Anziehen und Strecken der Beine in einer Tretbewegung (ähnlich Fahrradfahren). Trainiert den unteren Bauch und die schrägen Bauchmuskeln.",
+      imageUrl: "/exercise-images/bicycle-kicks-prone.svg"
+    },
+    {
+      id: 12,
+      name: "Reverse Crunch (gestreckt)",
+      sets: 3,
+      reps: 10,
+      weight: 0,
+      rest: 60,
+      instructions: "Bauchlage, seitlich gestützt. Die Beine angewinkelt anziehen und dann gestreckt wieder absenken. Trainiert die gesamte Rumpfmuskulatur.",
+      imageUrl: "/exercise-images/reverse-crunch-extended.svg"
+    },
+    {
+      id: 13,
       name: "Hula Hoop",
       sets: 1,
       reps: 10, // 10 minutes
@@ -346,7 +406,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       imageUrl: "/exercise-images/hula-hoop.svg"
     },
     {
-      id: 8,
+      id: 14,
       name: "Laufband Gehen",
       sets: 1,
       reps: 20, // 20 minutes
@@ -356,7 +416,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       imageUrl: "/exercise-images/walking.svg"
     },
     {
-      id: 9,
+      id: 15,
       name: "Tanzen",
       sets: 1,
       reps: 20, // 20 minutes
