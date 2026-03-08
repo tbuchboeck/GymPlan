@@ -49,27 +49,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 5,
-      name: "Schulterpresse",
-      sets: 3,
-      reps: 15,
-      weight: 15,
-      rest: 50,
-      instructions: "Griffe auf Schulterhöhe, Ellbogen nicht über 90° hinaus, Nacken entspannen, kontrolliert nach oben drücken, nicht komplett durchstrecken",
-      imageUrl: "/exercise-images/schulterpresse.svg"
-    },
-    {
-      id: 6,
-      name: "Brustpresse sitzend",
-      sets: 3,
-      reps: 15,
-      weight: 15,
-      rest: 50,
-      instructions: "Sitzend nach vorne drücken, Schultern bleiben hinten, kontrollierte Bewegung",
-      imageUrl: "/exercise-images/brustpresse-sitzend.svg"
-    },
-    {
-      id: 7,
-      name: "Vertikales Rudern",
+      name: "Trizeps Zug (Vertikales Rudern)",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -78,27 +58,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/vertical-row.svg"
     },
     {
-      id: 8,
-      name: "Tiefes Rudern",
-      sets: 3,
-      reps: 15,
-      weight: 15,
-      rest: 50,
-      instructions: "Adjustable Pulley unten, Griff mit beiden Händen greifen, Rudern zur Hüfte, Rücken gerade, Schulterblätter zusammenziehen",
-      imageUrl: "/exercise-images/low-row.svg"
-    },
-    {
-      id: 9,
-      name: "Butterfly Maschine",
-      sets: 3,
-      reps: 15,
-      weight: 5,
-      rest: 50,
-      instructions: "Reverse Ausführung, Ellbogen auf Schulterhöhe, Halbkreisbewegung, Nacken entspannen",
-      imageUrl: "/exercise-images/butterfly.svg"
-    },
-    {
-      id: 10,
+      id: 6,
       name: "Ruderzug Maschine",
       sets: 3,
       reps: 15,
@@ -108,7 +68,37 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
-      id: 11,
+      id: 7,
+      name: "Schulterpresse",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Griffe auf Schulterhöhe, Ellbogen nicht über 90° hinaus, Nacken entspannen, kontrolliert nach oben drücken, nicht komplett durchstrecken",
+      imageUrl: "/exercise-images/schulterpresse.svg"
+    },
+    {
+      id: 8,
+      name: "Brustpresse sitzend",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Sitzend nach vorne drücken, Schultern bleiben hinten, kontrollierte Bewegung",
+      imageUrl: "/exercise-images/brustpresse-sitzend.svg"
+    },
+    {
+      id: 9,
+      name: "Low Row Maschine",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      instructions: "Adjustable Pulley unten, Griff mit beiden Händen greifen, Rudern zur Hüfte, Rücken gerade, Schulterblätter zusammenziehen",
+      imageUrl: "/exercise-images/low-row.svg"
+    },
+    {
+      id: 10,
       name: "Rumpfrotation",
       sets: 6,
       reps: 15,
@@ -118,7 +108,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
-      id: 12,
+      id: 11,
       name: "Bauchpresse",
       sets: 3,
       reps: 15,
@@ -128,7 +118,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
-      id: 13,
+      id: 12,
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
