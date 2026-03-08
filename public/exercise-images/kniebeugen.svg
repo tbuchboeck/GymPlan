@@ -1,86 +1,278 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgKnie" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="bodyKnie" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    <linearGradient id="skinTone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0c4a8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0a882;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4338ca;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pantsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="muscleGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a3728;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3a2718;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="floorGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
   </defs>
 
+  <!-- Background -->
   <rect width="400" height="400" fill="url(#bgKnie)"/>
 
-  <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Kniebeugen</text>
+  <!-- Grid floor effect -->
+  <line x1="50" y1="360" x2="350" y2="360" stroke="#2a2a4a" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="370" x2="320" y2="370" stroke="#2a2a4a" stroke-width="1" opacity="0.3"/>
+  <line x1="110" y1="380" x2="290" y2="380" stroke="#2a2a4a" stroke-width="1" opacity="0.15"/>
 
-  <!-- Ground line -->
-  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
-
-  <!-- Legs (animated bending) -->
-  <rect x="170" y="260" width="20" height="80" rx="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="height" values="80;50;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="260;290;260" dur="2s" repeatCount="indefinite"/>
-  </rect>
-  <rect x="210" y="260" width="20" height="80" rx="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="height" values="80;50;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="260;290;260" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Feet -->
-  <ellipse cx="180" cy="347" rx="14" ry="8" fill="#be185d" stroke="#9f1239" stroke-width="2"/>
-  <ellipse cx="220" cy="347" rx="14" ry="8" fill="#be185d" stroke="#9f1239" stroke-width="2"/>
-
-  <!-- Body (animated up/down) -->
-  <ellipse cx="200" cy="200" rx="45" ry="55" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="cy" values="200;250;200" dur="2s" repeatCount="indefinite"/>
+  <!-- Floor glow -->
+  <ellipse cx="200" cy="360" rx="120" ry="20" fill="url(#floorGlow)">
+    <animate attributeName="rx" values="120;130;120" dur="2s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- Head (animated up/down) -->
-  <circle cx="200" cy="120" r="30" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="cy" values="120;170;120" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <!-- Title with glow -->
+  <text x="200" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" fill="#a5b4fc" text-anchor="middle" filter="url(#glow)">KNIEBEUGEN</text>
+  <text x="200" y="52" font-family="system-ui" font-size="11" fill="#64748b" text-anchor="middle" letter-spacing="3">SQUATS</text>
 
-  <!-- Face details (animated) -->
-  <circle cx="190" cy="115" r="4" fill="#1e293b">
-    <animate attributeName="cy" values="115;165;115" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="210" cy="115" r="4" fill="#1e293b">
-    <animate attributeName="cy" values="115;165;115" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Happy smile -->
-  <path d="M 188 130 Q 200 140 212 130" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round">
-    <animate attributeName="d" values="M 188 130 Q 200 140 212 130; M 188 180 Q 200 190 212 180; M 188 130 Q 200 140 212 130" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Shadow on floor -->
+  <ellipse cx="200" cy="358" rx="50" ry="6" fill="#000" opacity="0.25">
+    <animate attributeName="rx" values="50;65;50" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.25;0.15;0.25" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- Arms stretched forward (animated) -->
-  <g>
-    <path d="M 160 185 L 100 170" stroke="url(#bodyKnie)" stroke-width="16" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 160 185 L 100 170; M 160 235 L 100 220; M 160 185 L 100 170" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <circle cx="100" cy="170" r="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-      <animate attributeName="cy" values="170;220;170" dur="2s" repeatCount="indefinite"/>
+  <!-- === FIGURE (with drop shadow) === -->
+  <g filter="url(#softShadow)">
+
+    <!-- LEFT SHOE -->
+    <g>
+      <ellipse cx="168" cy="354" rx="18" ry="8" fill="url(#shoeGrad)" stroke="#b91c1c" stroke-width="1"/>
+      <rect x="155" y="346" width="26" height="10" rx="3" fill="url(#shoeGrad)"/>
+      <line x1="158" y1="350" x2="178" y2="350" stroke="#fff" stroke-width="1" opacity="0.4"/>
+    </g>
+
+    <!-- RIGHT SHOE -->
+    <g>
+      <ellipse cx="232" cy="354" rx="18" ry="8" fill="url(#shoeGrad)" stroke="#b91c1c" stroke-width="1"/>
+      <rect x="219" y="346" width="26" height="10" rx="3" fill="url(#shoeGrad)"/>
+      <line x1="222" y1="350" x2="242" y2="350" stroke="#fff" stroke-width="1" opacity="0.4"/>
+    </g>
+
+    <!-- LEFT LEG (shin) -->
+    <rect x="160" y="300" width="18" height="50" rx="8" fill="url(#pantsGrad)" stroke="#334155" stroke-width="1">
+      <animate attributeName="height" values="50;30;50" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="300;320;300" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- RIGHT LEG (shin) -->
+    <rect x="222" y="300" width="18" height="50" rx="8" fill="url(#pantsGrad)" stroke="#334155" stroke-width="1">
+      <animate attributeName="height" values="50;30;50" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="300;320;300" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- LEFT THIGH -->
+    <rect x="157" y="240" width="22" height="65" rx="10" fill="url(#pantsGrad)" stroke="#334155" stroke-width="1">
+      <animate attributeName="height" values="65;40;65" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;275;240" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- RIGHT THIGH -->
+    <rect x="221" y="240" width="22" height="65" rx="10" fill="url(#pantsGrad)" stroke="#334155" stroke-width="1">
+      <animate attributeName="height" values="65;40;65" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;275;240" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- KNEE JOINTS -->
+    <circle cx="169" cy="300" r="7" fill="#1e293b" stroke="#334155" stroke-width="1">
+      <animate attributeName="cy" values="300;312;300" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="232" cy="300" r="7" fill="#1e293b" stroke="#334155" stroke-width="1">
+      <animate attributeName="cy" values="300;312;300" dur="2s" repeatCount="indefinite"/>
     </circle>
 
-    <path d="M 240 185 L 300 170" stroke="url(#bodyKnie)" stroke-width="16" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 240 185 L 300 170; M 240 235 L 300 220; M 240 185 L 300 170" dur="2s" repeatCount="indefinite"/>
+    <!-- MUSCLE GLOW on thighs (activated during squat) -->
+    <rect x="157" y="240" width="22" height="65" rx="10" fill="url(#muscleGlow)" opacity="0">
+      <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="65;40;65" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;275;240" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="221" y="240" width="22" height="65" rx="10" fill="url(#muscleGlow)" opacity="0">
+      <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="65;40;65" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="240;275;240" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- TORSO / SHIRT -->
+    <rect x="155" y="150" width="90" height="95" rx="20" fill="url(#shirtGrad)" stroke="#4338ca" stroke-width="1">
+      <animate attributeName="y" values="150;200;150" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Shirt detail - collar -->
+    <path d="M 185 155 Q 200 165 215 155" stroke="#818cf8" stroke-width="1.5" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M 185 155 Q 200 165 215 155;M 185 205 Q 200 215 215 205;M 185 155 Q 200 165 215 155" dur="2s" repeatCount="indefinite"/>
     </path>
-    <circle cx="300" cy="170" r="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-      <animate attributeName="cy" values="170;220;170" dur="2s" repeatCount="indefinite"/>
+    <!-- Shirt logo -->
+    <circle cx="200" cy="195" r="8" fill="none" stroke="#818cf8" stroke-width="1" opacity="0.4">
+      <animate attributeName="cy" values="195;245;195" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- LEFT ARM (upper) -->
+    <path d="M 160 165 L 120 180" stroke="url(#skinTone)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 160 165 L 120 180;M 160 215 L 115 210;M 160 165 L 120 180" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- LEFT ARM (forearm) -->
+    <path d="M 120 180 L 95 160" stroke="url(#skinTone)" stroke-width="12" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 120 180 L 95 160;M 115 210 L 90 195;M 120 180 L 95 160" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- LEFT HAND -->
+    <circle cx="95" cy="160" r="7" fill="url(#skinTone)">
+      <animate attributeName="cx" values="95;90;95" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="160;195;160" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- RIGHT ARM (upper) -->
+    <path d="M 240 165 L 280 180" stroke="url(#skinTone)" stroke-width="14" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 240 165 L 280 180;M 240 215 L 285 210;M 240 165 L 280 180" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- RIGHT ARM (forearm) -->
+    <path d="M 280 180 L 305 160" stroke="url(#skinTone)" stroke-width="12" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 280 180 L 305 160;M 285 210 L 310 195;M 280 180 L 305 160" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- RIGHT HAND -->
+    <circle cx="305" cy="160" r="7" fill="url(#skinTone)">
+      <animate attributeName="cx" values="305;310;305" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="160;195;160" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- NECK -->
+    <rect x="192" y="115" width="16" height="20" rx="6" fill="url(#skinTone)">
+      <animate attributeName="y" values="115;165;115" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- HEAD -->
+    <circle cx="200" cy="95" r="28" fill="url(#skinTone)" stroke="#d4a574" stroke-width="1">
+      <animate attributeName="cy" values="95;145;95" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- HAIR -->
+    <path d="M 172 85 Q 175 60 200 55 Q 225 60 228 85 Q 225 72 200 70 Q 175 72 172 85" fill="url(#hairGrad)">
+      <animate attributeName="d" values="M 172 85 Q 175 60 200 55 Q 225 60 228 85 Q 225 72 200 70 Q 175 72 172 85;M 172 135 Q 175 110 200 105 Q 225 110 228 135 Q 225 122 200 120 Q 175 122 172 135;M 172 85 Q 175 60 200 55 Q 225 60 228 85 Q 225 72 200 70 Q 175 72 172 85" dur="2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- EYES -->
+    <ellipse cx="190" cy="92" rx="3.5" ry="4" fill="#1e293b">
+      <animate attributeName="cy" values="92;142;92" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="210" cy="92" rx="3.5" ry="4" fill="#1e293b">
+      <animate attributeName="cy" values="92;142;92" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Eye highlights -->
+    <circle cx="191" cy="90" r="1.5" fill="#fff" opacity="0.7">
+      <animate attributeName="cy" values="90;140;90" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="211" cy="90" r="1.5" fill="#fff" opacity="0.7">
+      <animate attributeName="cy" values="90;140;90" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- EYEBROWS -->
+    <path d="M 185 86 Q 190 83 195 86" stroke="#3a2718" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 185 86 Q 190 83 195 86;M 185 136 Q 190 132 195 135;M 185 86 Q 190 83 195 86" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 205 86 Q 210 83 215 86" stroke="#3a2718" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 205 86 Q 210 83 215 86;M 205 136 Q 210 132 215 135;M 205 86 Q 210 83 215 86" dur="2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- MOUTH - determined expression during effort -->
+    <path d="M 193 104 Q 200 108 207 104" stroke="#c47a5a" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M 193 104 Q 200 108 207 104;M 193 154 Q 200 152 207 154;M 193 104 Q 200 108 207 104" dur="2s" repeatCount="indefinite"/>
+    </path>
+
+  </g>
+
+  <!-- === EFFECT PARTICLES === -->
+
+  <!-- Energy rings during squat -->
+  <circle cx="200" cy="300" r="30" fill="none" stroke="#6366f1" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="30;80;80" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.4;0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Sparkle effects -->
+  <circle cx="320" cy="100" r="2" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="1;3;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="80" cy="120" r="2" fill="#22d3ee" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="1;3;1" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="340" cy="200" r="2" fill="#a78bfa" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2.2s" begin="0.7s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="1;3;1" dur="2.2s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="60" cy="250" r="2" fill="#f472b6" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1.6s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="1;3;1" dur="1.6s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Motion lines during down phase -->
+  <line x1="140" y1="170" x2="140" y2="190" stroke="#6366f1" stroke-width="2" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="y1" values="170;200;170" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="190;230;190" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <line x1="260" y1="170" x2="260" y2="190" stroke="#6366f1" stroke-width="2" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="y1" values="170;200;170" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="190;230;190" dur="2s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Muscle activation indicators -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    <!-- Left quad indicator -->
+    <circle cx="140" cy="265" r="4" fill="none" stroke="#f97316" stroke-width="1.5">
+      <animate attributeName="cy" values="265;285;265" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="140" cy="265" r="2" fill="#f97316">
+      <animate attributeName="cy" values="265;285;265" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Right quad indicator -->
+    <circle cx="260" cy="265" r="4" fill="none" stroke="#f97316" stroke-width="1.5">
+      <animate attributeName="cy" values="265;285;265" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="260" cy="265" r="2" fill="#f97316">
+      <animate attributeName="cy" values="265;285;265" dur="2s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- Sparkle effects -->
-  <circle cx="330" cy="130" r="3" fill="#fbbf24" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="70" cy="140" r="3" fill="#22d3ee" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Info text -->
-  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Knie nicht über die Zehenspitzen</text>
+  <!-- Muscle label -->
+  <text x="200" y="390" font-family="system-ui" font-size="11" fill="#64748b" text-anchor="middle">
+    <tspan fill="#f97316">&#9679;</tspan> Quadrizeps &amp; Gluteus aktiv
+  </text>
 </svg>
