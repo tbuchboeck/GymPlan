@@ -99,7 +99,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 10,
-      name: "Rumpfrotation",
+      name: "Rotary Torso",
       sets: 6,
       reps: 15,
       weight: 15,
