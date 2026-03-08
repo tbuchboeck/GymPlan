@@ -21,21 +21,21 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 2,
-      name: "Abduktionsmaschine",
-      sets: 3,
-      reps: 15,
-      weight: 15,
-      rest: 50,
-      imageUrl: "/exercise-images/abduktion.svg"
-    },
-    {
-      id: 3,
       name: "Adduktionsmaschine",
       sets: 3,
       reps: 15,
       weight: 15,
       rest: 50,
       imageUrl: "/exercise-images/adduktion.svg"
+    },
+    {
+      id: 3,
+      name: "Abduktionsmaschine",
+      sets: 3,
+      reps: 15,
+      weight: 15,
+      rest: 50,
+      imageUrl: "/exercise-images/abduktion.svg"
     },
     {
       id: 4,
