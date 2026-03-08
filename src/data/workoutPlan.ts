@@ -49,7 +49,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 5,
-      name: "Trizeps Zug (Vertikales Rudern)",
+      name: "Trizepszug",
       sets: 3,
       reps: 15,
       weight: 15,
@@ -99,7 +99,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 10,
-      name: "Rumpfrotation",
+      name: "Rotary Torso",
       sets: 6,
       reps: 15,
       weight: 15,
