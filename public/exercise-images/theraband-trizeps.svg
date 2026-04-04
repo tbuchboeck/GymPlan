@@ -1,80 +1,78 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgTrizeps" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bgTBT" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyTrizeps" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    <linearGradient id="bodyTBT" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
 
-  <rect width="400" height="400" fill="url(#bgTrizeps)"/>
+  <rect width="400" height="400" fill="url(#bgTBT)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Theraband Trizeps</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Theraband Trizeps</text>
 
   <!-- Ground line -->
-  <line x1="50" y1="340" x2="350" y2="340" stroke="#475569" stroke-width="3"/>
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Legs -->
-  <rect x="180" y="260" width="18" height="80" rx="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
-  <rect x="210" y="260" width="18" height="80" rx="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+  <!-- Left leg: thigh -->
+  <line x1="180" y1="260" x2="175" y2="310" stroke="url(#bodyTBT)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Left leg: shin -->
+  <line x1="175" y1="310" x2="172" y2="342" stroke="url(#bodyTBT)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Left foot -->
+  <ellipse cx="172" cy="346" rx="16" ry="6" fill="#d97706" stroke="#b45309" stroke-width="1.5"/>
 
-  <!-- Feet -->
-  <ellipse cx="189" cy="337" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
-  <ellipse cx="219" cy="337" rx="12" ry="8" fill="#c2410c" stroke="#7c2d12" stroke-width="2"/>
+  <!-- Right leg: thigh -->
+  <line x1="220" y1="260" x2="225" y2="310" stroke="url(#bodyTBT)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Right leg: shin -->
+  <line x1="225" y1="310" x2="228" y2="342" stroke="url(#bodyTBT)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Right foot -->
+  <ellipse cx="228" cy="346" rx="16" ry="6" fill="#d97706" stroke="#b45309" stroke-width="1.5"/>
 
-  <!-- Body (torso) -->
-  <ellipse cx="200" cy="220" rx="40" ry="50" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+  <!-- Torso -->
+  <ellipse cx="200" cy="210" rx="38" ry="55" fill="url(#bodyTBT)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Head -->
-  <circle cx="200" cy="160" r="28" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
+  <!-- Theraband (from lower left hand behind back to upper right hand) -->
+  <line x1="155" y1="240" x2="215" y2="80" stroke="#10b981" stroke-width="4" stroke-linecap="round" opacity="0.7">
+    <animate attributeName="x2" values="215;225;215" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="80;60;80" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-  <!-- Face details -->
-  <circle cx="190" cy="155" r="3" fill="#1e293b"/>
-  <circle cx="210" cy="155" r="3" fill="#1e293b"/>
+  <!-- Left arm (holding band at lower back, fixed) -->
+  <!-- Upper arm -->
+  <line x1="165" y1="185" x2="155" y2="220" stroke="url(#bodyTBT)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Forearm -->
+  <line x1="155" y1="220" x2="155" y2="240" stroke="url(#bodyTBT)" stroke-width="10" stroke-linecap="round"/>
 
-  <!-- Left arm holding theraband (fixed position) -->
-  <g>
-    <!-- Upper arm -->
-    <ellipse cx="165" cy="195" rx="12" ry="30" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(-20 165 195)"/>
-    <!-- Lower arm/hand holding band -->
-    <ellipse cx="150" cy="230" rx="10" ry="20" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(-30 150 230)"/>
-    <circle cx="145" cy="245" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2"/>
-  </g>
-
-  <!-- Theraband -->
-  <path d="M 145 245 Q 180 120 200 80" stroke="#10b981" stroke-width="5" fill="none" opacity="0.8">
-    <animate attributeName="d" values="M 145 245 Q 180 120 200 80; M 145 245 Q 180 100 200 70; M 145 245 Q 180 120 200 80" dur="2s" repeatCount="indefinite"/>
-  </path>
-
-  <!-- Right arm (animated - overhead extension) -->
-  <g>
-    <!-- Upper arm (fixed above head) -->
-    <ellipse cx="220" cy="140" rx="12" ry="32" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2" transform="rotate(15 220 140)"/>
-
-    <!-- Forearm (animated up and down) -->
-    <path d="M 225 120 L 205 85" stroke="url(#bodyTrizeps)" stroke-width="20" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 225 120 L 205 85; M 225 120 L 200 70; M 225 120 L 205 85" dur="2s" repeatCount="indefinite"/>
-    </path>
-
-    <!-- Hand -->
-    <circle cx="205" cy="85" r="9" fill="url(#bodyTrizeps)" stroke="#b45309" stroke-width="2">
-      <animate attributeName="cy" values="85;70;85" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="cx" values="205;200;205" dur="2s" repeatCount="indefinite"/>
-    </circle>
-  </g>
+  <!-- Right arm (overhead extension, animated) -->
+  <!-- Upper arm (raised) -->
+  <line x1="225" y1="170" x2="220" y2="115" stroke="url(#bodyTBT)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Forearm (animated extension) -->
+  <line x1="220" y1="115" x2="210" y2="145" stroke="url(#bodyTBT)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" values="210;225;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="145;65;145" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
   <!-- Movement arrow -->
-  <path d="M 260 90 L 260 70 L 253 77 M 260 70 L 267 77" stroke="#22d3ee" stroke-width="2" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 260 110 L 260 130 L 253 123 M 260 130 L 267 123" stroke="#22d3ee" stroke-width="2" fill="none">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <g opacity="0.6">
+    <line x1="250" y1="100" x2="250" y2="70" stroke="#22d3ee" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </line>
+    <path d="M245 76 L250 66 L255 76" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </path>
+  </g>
+
+  <!-- Head -->
+  <circle cx="200" cy="130" r="24" fill="url(#bodyTBT)" stroke="#b45309" stroke-width="2"/>
+  <!-- Face -->
+  <circle cx="192" cy="126" r="3" fill="#1e293b"/>
+  <circle cx="208" cy="126" r="3" fill="#1e293b"/>
+  <path d="M191 138 Q200 144 209 138" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
 
   <!-- Info text -->
-  <text x="200" y="380" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Ellbogen fixiert, Unterarm strecken</text>
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Ellbogen fixiert, Unterarm nach oben strecken</text>
 </svg>

@@ -1,115 +1,105 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgCardio" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyCardio" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    <linearGradient id="bodyCardio" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
     </linearGradient>
   </defs>
 
   <rect width="400" height="400" fill="url(#bgCardio)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Ausdauertraining</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Ausdauertraining</text>
 
-  <!-- Crosstrainer/Elliptical machine base -->
-  <ellipse cx="200" cy="310" rx="140" ry="15" fill="#475569" opacity="0.8"/>
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Machine structure -->
-  <rect x="120" y="250" width="15" height="70" rx="7" fill="#64748b"/>
-  <rect x="265" y="250" width="15" height="70" rx="7" fill="#64748b"/>
+  <!-- Running figure - jumping jacks style -->
 
-  <!-- Left pedal platform -->
-  <ellipse cx="150" cy="285" rx="35" ry="12" fill="#475569" stroke="#64748b" stroke-width="2">
-    <animate attributeName="cy" values="285;275;285;295;285" dur="2s" repeatCount="indefinite"/>
+  <!-- Left leg - thigh -->
+  <line x1="185" y1="240" x2="140" y2="295" stroke="url(#bodyCardio)" stroke-width="16" stroke-linecap="round">
+    <animate attributeName="x2" values="140;170;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left leg - shin -->
+  <line x1="140" y1="295" x2="130" y2="342" stroke="url(#bodyCardio)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="140;170;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="130;165;130" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left foot -->
+  <ellipse cx="130" cy="346" rx="16" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5">
+    <animate attributeName="cx" values="130;165;130" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </ellipse>
 
-  <!-- Right pedal platform -->
-  <ellipse cx="250" cy="285" rx="35" ry="12" fill="#475569" stroke="#64748b" stroke-width="2">
-    <animate attributeName="cy" values="285;295;285;275;285" dur="2s" repeatCount="indefinite"/>
+  <!-- Right leg - thigh -->
+  <line x1="215" y1="240" x2="260" y2="295" stroke="url(#bodyCardio)" stroke-width="16" stroke-linecap="round">
+    <animate attributeName="x2" values="260;230;260" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right leg - shin -->
+  <line x1="260" y1="295" x2="270" y2="342" stroke="url(#bodyCardio)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="260;230;260" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="270;235;270" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right foot -->
+  <ellipse cx="270" cy="346" rx="16" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5">
+    <animate attributeName="cx" values="270;235;270" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </ellipse>
 
-  <!-- Person - Lower body -->
-  <g>
-    <!-- Left leg - with border -->
-    <ellipse cx="150" cy="245" rx="18" ry="50" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
-      <animate attributeName="cy" values="245;235;245;255;245" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="50;55;50;45;50" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
+  <!-- Torso -->
+  <ellipse cx="200" cy="185" rx="36" ry="52" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
+    <animate attributeName="cy" values="185;180;185" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </ellipse>
 
-    <!-- Right leg - with border -->
-    <ellipse cx="250" cy="245" rx="18" ry="50" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
-      <animate attributeName="cy" values="245;255;245;235;245" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="50;45;50;55;50" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
+  <!-- Head -->
+  <circle cx="200" cy="108" r="24" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
+    <animate attributeName="cy" values="108;103;108" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <!-- Face -->
+  <circle cx="192" cy="104" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="104;99;104" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <circle cx="208" cy="104" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="104;99;104" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <path d="M192 116 Q200 122 208 116" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M192 116 Q200 122 208 116;M192 111 Q200 117 208 111;M192 116 Q200 122 208 116" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </path>
 
-    <!-- Hips - with border -->
-    <ellipse cx="200" cy="215" rx="40" ry="25" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2"/>
-  </g>
+  <!-- Left arm - upper (raising out) -->
+  <line x1="166" y1="160" x2="120" y2="140" stroke="url(#bodyCardio)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" values="120;150;120" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="140;155;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left forearm -->
+  <line x1="120" y1="140" x2="95" y2="110" stroke="url(#bodyCardio)" stroke-width="9" stroke-linecap="round">
+    <animate attributeName="x1" values="120;150;120" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="140;155;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="95;140;95" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="110;135;110" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-  <!-- Person - Upper body -->
-  <g>
-    <!-- Torso - with border -->
-    <ellipse cx="200" cy="165" rx="45" ry="60" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
-      <animate attributeName="cy" values="165;163;165;167;165" dur="2s" repeatCount="indefinite"/>
-    </ellipse>
+  <!-- Right arm - upper (raising out) -->
+  <line x1="234" y1="160" x2="280" y2="140" stroke="url(#bodyCardio)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" values="280;250;280" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="140;155;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right forearm -->
+  <line x1="280" y1="140" x2="305" y2="110" stroke="url(#bodyCardio)" stroke-width="9" stroke-linecap="round">
+    <animate attributeName="x1" values="280;250;280" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="140;155;140" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="305;260;305" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="110;135;110" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-    <!-- Head - with border -->
-    <circle cx="200" cy="100" r="26" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2">
-      <animate attributeName="cy" values="100;98;100;102;100" dur="2s" repeatCount="indefinite"/>
-    </circle>
+  <!-- Heart rate pulse indicator -->
+  <circle cx="330" cy="80" r="6" fill="#ef4444" opacity="0.7">
+    <animate attributeName="r" values="6;9;6" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="1s" repeatCount="indefinite"/>
+  </circle>
 
-    <!-- Face details -->
-    <circle cx="192" cy="97" r="3" fill="#1e293b">
-      <animate attributeName="cy" values="97;95;97;99;97" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="208" cy="97" r="3" fill="#1e293b">
-      <animate attributeName="cy" values="97;95;97;99;97" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <path d="M 192 107 Q 200 112 208 107" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 192 107 Q 200 112 208 107; M 192 105 Q 200 110 208 105; M 192 107 Q 200 112 208 107; M 192 109 Q 200 114 208 109; M 192 107 Q 200 112 208 107" dur="2s" repeatCount="indefinite"/>
-    </path>
-
-    <!-- Left arm (holding handle) - with border -->
-    <ellipse cx="165" cy="155" rx="16" ry="50" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2" transform="rotate(-20 165 155)">
-      <animate attributeName="cy" values="155;152;155;158;155" dur="2s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="rotate" values="-20 165 155; -25 165 152; -20 165 155; -15 165 158; -20 165 155" dur="2s" repeatCount="indefinite" additive="sum"/>
-    </ellipse>
-
-    <!-- Right arm (holding handle) - with border -->
-    <ellipse cx="235" cy="155" rx="16" ry="50" fill="url(#bodyCardio)" stroke="#0e7490" stroke-width="2" transform="rotate(20 235 155)">
-      <animate attributeName="cy" values="155;158;155;152;155" dur="2s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="rotate" values="20 235 155; 15 235 158; 20 235 155; 25 235 152; 20 235 155" dur="2s" repeatCount="indefinite" additive="sum"/>
-    </ellipse>
-  </g>
-
-  <!-- Handles for arms -->
-  <rect x="145" y="135" width="10" height="70" rx="5" fill="#64748b">
-    <animate attributeName="y" values="135;132;135;138;135" dur="2s" repeatCount="indefinite"/>
-  </rect>
-  <rect x="245" y="135" width="10" height="70" rx="5" fill="#64748b">
-    <animate attributeName="y" values="135;138;135;132;135" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Movement indicator -->
-  <g opacity="0.9">
-    <text x="200" y="360" font-family="system-ui" font-size="18" fill="#fbbf24" font-weight="bold" text-anchor="middle">
-      15 MINUTEN
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-    </text>
-  </g>
-
-  <!-- Heart rate indicator (pulse) -->
-  <g opacity="0.8">
-    <circle cx="320" cy="100" r="8" fill="#ef4444">
-      <animate attributeName="r" values="8;12;8" dur="1s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
-    </circle>
-    <text x="335" y="105" font-family="system-ui" font-size="14" fill="#ef4444" font-weight="bold">
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
-    </text>
-  </g>
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Jumping Jacks - Arme und Beine gleichzeitig bewegen</text>
 </svg>
