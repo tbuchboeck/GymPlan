@@ -1,0 +1,94 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgKh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="bodyKh" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgKh)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Kreuzheben</text>
+
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Side view: person facing right -->
+
+  <!-- Back foot (stationary) -->
+  <ellipse cx="180" cy="346" rx="22" ry="6" fill="#d97706" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- Back leg: shin (slight knee bend when hinged) -->
+  <line x1="180" y1="342" stroke="url(#bodyKh)" stroke-width="13" stroke-linecap="round">
+    <animate attributeName="x2" values="182;178;182" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="300;305;300" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Back leg: thigh (bends with hip hinge) -->
+  <line stroke="url(#bodyKh)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="182;178;182" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="300;305;300" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="195;185;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="255;260;255" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Torso (pivots at hip: upright <-> bent forward) -->
+  <!-- Using ellipse with animated position and rotation -->
+  <ellipse rx="30" ry="52" fill="url(#bodyKh)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cx" values="210;230;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="cy" values="200;225;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animateTransform attributeName="transform" type="rotate" values="0 210 255;55 230 260;0 210 255" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </ellipse>
+
+  <!-- Head (follows torso tilt) -->
+  <circle r="22" fill="url(#bodyKh)" stroke="#b45309" stroke-width="2">
+    <animate attributeName="cx" values="220;270;220" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="cy" values="135;185;135" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <!-- Eye -->
+  <circle r="3" fill="#1e293b">
+    <animate attributeName="cx" values="228;278;228" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="cy" values="132;182;132" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <!-- Smile -->
+  <path d="M0 0 Q4 5 8 0" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="translate" values="224,140;274,190;224,140" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </path>
+
+  <!-- Arm (hangs down with dumbbell, side view = one arm visible) -->
+  <!-- Upper arm -->
+  <line stroke="url(#bodyKh)" stroke-width="11" stroke-linecap="round">
+    <animate attributeName="x1" values="215;255;215" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="175;210;175" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="210;240;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="225;260;225" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Forearm (hangs straight down from elbow) -->
+  <line stroke="url(#bodyKh)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x1" values="210;240;210" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="225;260;225" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="208;235;208" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="275;310;275" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Dumbbell -->
+  <rect width="6" height="14" rx="2" fill="#64748b" stroke="#475569" stroke-width="1">
+    <animate attributeName="x" values="205;232;205" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y" values="275;310;275" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </rect>
+
+  <!-- Straight back indicator (dashed line along spine when bent) -->
+  <line stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5">
+    <animate attributeName="x1" values="200;195;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="255;260;255" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="220;270;220" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="148;190;148" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Rücken gerade, Hüfte nach hinten</text>
+</svg>

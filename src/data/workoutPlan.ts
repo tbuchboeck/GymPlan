@@ -206,7 +206,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Bizeps Curl mit anschließendem Überkopfdrücken"
+      instructions: "Hanteltraining 2kg - Bizeps Curl mit anschließendem Überkopfdrücken",
+      imageUrl: "/exercise-images/bizeps-ueber-kopf.svg"
     },
     {
       id: 8,
@@ -215,7 +216,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Rücken gerade, Hanteln vor dem Körper nach unten und wieder hoch"
+      instructions: "Hanteltraining 2kg - Rücken gerade, Hanteln vor dem Körper nach unten und wieder hoch",
+      imageUrl: "/exercise-images/kreuzheben.svg"
     },
     {
       id: 9,
@@ -224,7 +226,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Vorgebeugt, Arme seitlich nach außen anheben"
+      instructions: "Hanteltraining 2kg - Vorgebeugt, Arme seitlich nach außen anheben",
+      imageUrl: "/exercise-images/butterfly-reverse.svg"
     },
     {
       id: 10,
@@ -233,7 +236,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Abwechselnd seitlich und frontal anheben"
+      instructions: "Hanteltraining 2kg - Abwechselnd seitlich und frontal anheben",
+      imageUrl: "/exercise-images/seitheben-frontheben.svg"
     },
     {
       id: 11,
@@ -242,7 +246,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Auf dem Rücken liegend, Arme seitlich zusammenführen"
+      instructions: "Hanteltraining 2kg - Auf dem Rücken liegend, Arme seitlich zusammenführen",
+      imageUrl: "/exercise-images/butterfly-boden.svg"
     },
     {
       id: 12,
@@ -251,7 +256,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Sit-ups mit Hantel vor der Brust"
+      instructions: "Hanteltraining 2kg - Sit-ups mit Hantel vor der Brust",
+      imageUrl: "/exercise-images/situps-hantel.svg"
     }
   ]
 };

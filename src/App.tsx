@@ -1,7 +1,8 @@
-import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
 import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { pushSession, syncAllSessions } from './lib/session-sync';
 import { Home } from './components/Home';
 import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
@@ -21,11 +22,24 @@ function App() {
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
   const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
+  const hasSynced = useRef(false);
 
-  // Scroll to top on every view change — prevents "starting mid-page"
+  // Scroll to top on every view change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
+
+  // Sync with Supabase once after unlock
+  useEffect(() => {
+    if (!isUnlocked || hasSynced.current) return;
+    hasSynced.current = true;
+
+    syncAllSessions(sessions).then((merged) => {
+      if (merged.length !== sessions.length) {
+        setSessions(merged);
+      }
+    });
+  }, [isUnlocked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const workoutPlan = useMemo(() => {
     if (location === 'home') return homeWorkoutPlan;
@@ -48,6 +62,8 @@ function App() {
     setSessions([...sessions, session]);
     setCurrentSession(session);
     setCurrentView('summary');
+    // Fire-and-forget push to Supabase
+    pushSession(session);
   };
 
   const handleSummaryClose = () => {
@@ -58,7 +74,12 @@ function App() {
   const handleImportSessions = (importedSessions: WorkoutSession[]) => {
     const existingIds = new Set(sessions.map(s => s.id));
     const uniqueImportedSessions = importedSessions.filter(s => !existingIds.has(s.id));
-    setSessions([...sessions, ...uniqueImportedSessions]);
+    const allSessions = [...sessions, ...uniqueImportedSessions];
+    setSessions(allSessions);
+    // Sync imported sessions to Supabase too
+    for (const s of uniqueImportedSessions) {
+      pushSession(s);
+    }
   };
 
   if (!isUnlocked) {
@@ -79,6 +100,7 @@ function App() {
           onStartExercise={handleStartExercise}
           onViewHistory={() => setCurrentView('history')}
           onManageReminders={() => setCurrentView('reminders')}
+          onSwitchPlan={() => setLocation(null)}
         />
       )}
 
