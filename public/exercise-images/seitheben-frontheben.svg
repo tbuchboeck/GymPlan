@@ -1,0 +1,100 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgSF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="bodySF" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgSF)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Seitheben / Frontheben</text>
+
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Legs -->
+  <!-- Left leg -->
+  <line x1="188" y1="268" x2="180" y2="340" stroke="url(#bodySF)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Right leg -->
+  <line x1="212" y1="268" x2="220" y2="340" stroke="url(#bodySF)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Feet -->
+  <ellipse cx="178" cy="346" rx="16" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5"/>
+  <ellipse cx="222" cy="346" rx="16" ry="6" fill="#0891b2" stroke="#0e7490" stroke-width="1.5"/>
+
+  <!-- Torso -->
+  <ellipse cx="200" cy="200" rx="38" ry="60" fill="url(#bodySF)" stroke="#0e7490" stroke-width="2"/>
+
+  <!-- Left arm: lateral raise (side) - Phase 1: up, Phase 2: down while right goes up -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="0 170 155;-75 170 155;-75 170 155;0 170 155" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0 0 1 1;0.4 0 0.6 1"/>
+    <!-- Upper arm -->
+    <line x1="170" y1="155" x2="135" y2="195" stroke="url(#bodySF)" stroke-width="11" stroke-linecap="round"/>
+    <!-- Forearm -->
+    <line x1="135" y1="195" x2="108" y2="225" stroke="url(#bodySF)" stroke-width="9" stroke-linecap="round"/>
+    <!-- Dumbbell -->
+    <rect x="101" y="222" width="14" height="6" rx="2" fill="#64748b" stroke="#475569" stroke-width="1"/>
+  </g>
+
+  <!-- Right arm: front raise (forward, shown as shrinking in front view) -->
+  <!-- Upper arm animated: starts down, raises forward (y goes up, slight x toward center) -->
+  <line x1="230" y1="155" x2="250" y2="225" stroke="url(#bodySF)" stroke-width="11" stroke-linecap="round">
+    <animate attributeName="x2" values="250;240;240;250" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="225;225;155;225" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right forearm -->
+  <line x1="250" y1="225" x2="265" y2="250" stroke="url(#bodySF)" stroke-width="9" stroke-linecap="round">
+    <animate attributeName="x1" values="250;240;240;250" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="225;225;155;225" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="265;252;245;265" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="250;250;130;250" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right dumbbell -->
+  <rect x="258" y="247" width="14" height="6" rx="2" fill="#64748b" stroke="#475569" stroke-width="1">
+    <animate attributeName="x" values="258;245;238;258" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y" values="247;247;127;247" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"
+      calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </rect>
+
+  <!-- Head -->
+  <circle cx="200" cy="118" r="26" fill="url(#bodySF)" stroke="#0e7490" stroke-width="2"/>
+
+  <!-- Face -->
+  <circle cx="192" cy="114" r="3" fill="#1e293b"/>
+  <circle cx="208" cy="114" r="3" fill="#1e293b"/>
+  <path d="M190 126 Q200 132 210 126" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Labels for L/R -->
+  <text x="80" y="170" font-family="system-ui,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" opacity="0.8">seitlich</text>
+  <text x="305" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" opacity="0">
+    frontal
+    <animate attributeName="opacity" values="0;0;0.8;0" dur="5s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75"/>
+  </text>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Abwechselnd seitlich und frontal anheben</text>
+</svg>

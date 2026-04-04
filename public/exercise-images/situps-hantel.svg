@@ -1,0 +1,88 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgSH2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="bodySH2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bgSH2)"/>
+
+  <!-- Title -->
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Sit-Ups mit Hantel</text>
+
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Mat -->
+  <rect x="60" y="290" width="280" height="10" rx="5" fill="#475569"/>
+
+  <!-- Side view: head left, feet right -->
+
+  <!-- Foot on mat -->
+  <ellipse cx="315" cy="296" rx="16" ry="6" fill="#d97706" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- Shin -->
+  <line x1="315" y1="290" x2="290" y2="238" stroke="url(#bodySH2)" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Thigh -->
+  <line x1="290" y1="238" x2="220" y2="275" stroke="url(#bodySH2)" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Animated upper body group: sit-up rotation around hip -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-10 220 275;55 220 275;-10 220 275" dur="2.5s" repeatCount="indefinite"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+
+    <!-- Torso -->
+    <ellipse cx="170" cy="268" rx="42" ry="24" fill="url(#bodySH2)" stroke="#b45309" stroke-width="2"/>
+
+    <!-- Arms holding dumbbell at chest -->
+    <!-- Left upper arm -->
+    <line x1="158" y1="258" x2="148" y2="248" stroke="url(#bodySH2)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Left forearm curled to chest -->
+    <line x1="148" y1="248" x2="155" y2="258" stroke="url(#bodySH2)" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Right upper arm -->
+    <line x1="182" y1="262" x2="172" y2="252" stroke="url(#bodySH2)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Right forearm curled to chest -->
+    <line x1="172" y1="252" x2="175" y2="260" stroke="url(#bodySH2)" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Dumbbell held at chest -->
+    <rect x="148" y="250" width="18" height="8" rx="3" fill="#64748b" stroke="#475569" stroke-width="1.5"/>
+    <!-- Dumbbell weight plates -->
+    <rect x="145" y="248" width="5" height="12" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1"/>
+    <rect x="164" y="248" width="5" height="12" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1"/>
+
+    <!-- Head -->
+    <circle cx="130" cy="240" r="24" fill="url(#bodySH2)" stroke="#b45309" stroke-width="2"/>
+
+    <!-- Face -->
+    <circle cx="122" cy="236" r="3" fill="#1e293b"/>
+    <circle cx="136" cy="236" r="3" fill="#1e293b"/>
+    <path d="M121 248 Q130 254 139 248" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Arc arrow showing sit-up motion -->
+  <g opacity="0.7">
+    <path d="M80 200 Q100 130 150 120" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M144 126 L155 115 L152 130" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Dumbbell label -->
+  <text x="80" y="100" font-family="system-ui,sans-serif" font-size="11" fill="#fbbf24" text-anchor="middle" opacity="0.7">
+    <tspan x="80" dy="0">Hantel</tspan>
+    <tspan x="80" dy="14">vor Brust</tspan>
+  </text>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Sit-ups mit Hantel vor der Brust</text>
+</svg>
