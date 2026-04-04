@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import type { Exercise } from '../types';
-import { CheckCircle, Circle } from 'lucide-react';
 
 interface ExerciseCardProps {
   exercise: Exercise;
   currentSet: number;
   onSetComplete: () => void;
   exerciseNumber: number;
-  totalExercises: number;
 }
 
 export function ExerciseCard({
@@ -15,111 +13,83 @@ export function ExerciseCard({
   currentSet,
   onSetComplete,
   exerciseNumber,
-  totalExercises
 }: ExerciseCardProps) {
-  const isSetCompleted = (setNumber: number) => setNumber < currentSet;
-  const isCurrentSet = (setNumber: number) => setNumber === currentSet;
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  const handleImageError = () => {
-    setImageLoaded(false);
-  };
-
   return (
-    <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
+    <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 overflow-hidden animate-fade-in">
       {/* Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6">
-        <div className="text-sm font-medium mb-2 text-indigo-100">
-          Übung {exerciseNumber} von {totalExercises}
+      <div className="bg-indigo-600 p-4 rounded-t-2xl">
+        <div className="flex items-center gap-3 mb-1">
+          <span className="bg-indigo-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">
+            {exerciseNumber}
+          </span>
+          <h2 className="text-xl font-bold text-white leading-tight">{exercise.name}</h2>
         </div>
-        <h2 className="text-3xl font-bold mb-2">{exercise.name}</h2>
-        <div className="flex items-center gap-4 text-sm text-indigo-100">
-          <span>{exercise.sets} Sätze</span>
-          <span>•</span>
-          <span>{exercise.reps} Wiederholungen</span>
-          {exercise.weight > 0 && (
-            <>
-              <span>•</span>
-              <span>{exercise.weight} kg</span>
-            </>
-          )}
+        <div className="text-sm text-indigo-200 ml-9">
+          {exercise.sets} × {exercise.reps} Wdh
+          {exercise.weight > 0 && ` × ${exercise.weight} kg`}
         </div>
       </div>
 
-      {/* Exercise Image - Hidden loader */}
+      {/* Exercise Image */}
       {exercise.imageUrl && (
-        <img
-          src={exercise.imageUrl}
-          alt={exercise.name}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          className="hidden"
-        />
-      )}
-
-      {/* Exercise Image Display - Only shown when loaded */}
-      {imageLoaded && (
-        <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-6">
+        <div className={`bg-slate-800 p-3 ${imageLoaded ? '' : 'hidden'}`}>
           <img
             src={exercise.imageUrl}
             alt={exercise.name}
-            className="w-full max-w-md mx-auto rounded-lg shadow-2xl border-2 border-slate-600 animate-fade-in"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(false)}
+            className="w-full max-h-48 object-contain rounded-lg mx-auto"
           />
         </div>
       )}
 
       {/* Instructions */}
       {exercise.instructions && (
-        <div className="p-6 bg-gradient-to-r from-blue-600 to-cyan-600 border-l-4 border-cyan-400">
-          <h3 className="font-semibold text-white mb-2">Anweisungen:</h3>
-          <p className="text-blue-50">{exercise.instructions}</p>
+        <div className="mx-4 mt-3 bg-slate-800 border-l-2 border-indigo-400 px-4 py-2 rounded-r-lg">
+          <p className="text-sm text-slate-300">{exercise.instructions}</p>
         </div>
       )}
 
-      {/* Sets Progress */}
-      <div className="p-6">
-        <h3 className="font-semibold text-white mb-4">Sätze</h3>
-        <div className="space-y-3">
-          {Array.from({ length: exercise.sets }, (_, i) => i + 1).map((setNumber) => (
-            <div
-              key={setNumber}
-              className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all ${
-                isSetCompleted(setNumber)
-                  ? 'bg-gradient-to-r from-emerald-600 to-green-600 border-emerald-400 shadow-lg'
-                  : isCurrentSet(setNumber)
-                  ? 'bg-gradient-to-r from-blue-600 to-cyan-600 border-cyan-400 ring-2 ring-cyan-300 shadow-lg'
-                  : 'bg-gradient-to-r from-slate-700 to-slate-600 border-slate-500'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                {isSetCompleted(setNumber) ? (
-                  <CheckCircle className="w-6 h-6 text-emerald-200" />
-                ) : (
-                  <Circle className="w-6 h-6 text-slate-400" />
-                )}
-                <div>
-                  <div className="font-semibold text-white">Satz {setNumber}</div>
-                  <div className="text-sm text-slate-200">
-                    {exercise.reps} × {exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}
-                  </div>
-                </div>
+      {/* Set indicators */}
+      <div className="p-4">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          {Array.from({ length: exercise.sets }, (_, i) => i + 1).map((setNumber) => {
+            const isCompleted = setNumber < currentSet;
+            const isCurrent = setNumber === currentSet;
+            return (
+              <div
+                key={setNumber}
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                  isCompleted
+                    ? 'bg-emerald-500 text-white'
+                    : isCurrent
+                    ? 'bg-indigo-500 text-white ring-2 ring-indigo-300'
+                    : 'bg-slate-700 text-slate-500'
+                }`}
+              >
+                {setNumber}
               </div>
-
-              {isCurrentSet(setNumber) && (
-                <button
-                  onClick={onSetComplete}
-                  className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-6 py-2 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg"
-                >
-                  Fertig
-                </button>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {/* Current set info */}
+        <div className="text-center mb-4">
+          <div className="text-sm font-medium text-slate-400">Satz {currentSet}</div>
+          <div className="text-slate-300">
+            {exercise.reps} × {exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}
+          </div>
+        </div>
+
+        {/* Action button */}
+        <button
+          onClick={onSetComplete}
+          className="w-full bg-indigo-500 hover:bg-indigo-400 text-white py-3 rounded-xl font-semibold transition-colors"
+        >
+          Fertig ✓
+        </button>
       </div>
     </div>
   );

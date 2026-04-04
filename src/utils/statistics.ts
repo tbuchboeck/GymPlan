@@ -124,7 +124,7 @@ function calculateStreaks(sessions: WorkoutSession[]): { currentStreak: number; 
     currentStreak = 0;
   } else {
     currentStreak = 1;
-    let expectedDate = new Date(sortedDays[0]);
+    const expectedDate = new Date(sortedDays[0]);
 
     for (let i = 1; i < sortedDays.length; i++) {
       expectedDate.setDate(expectedDate.getDate() - 1);

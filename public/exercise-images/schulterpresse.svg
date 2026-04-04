@@ -1,58 +1,110 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bgSP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="body4" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    <linearGradient id="bodySP" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
     </linearGradient>
   </defs>
 
-  <rect width="400" height="400" fill="url(#bg4)"/>
+  <rect width="400" height="400" fill="url(#bgSP)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Schulterpresse</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Schulterpresse</text>
+
+  <!-- Machine seat back -->
+  <rect x="182" y="145" width="16" height="110" rx="6" fill="#475569"/>
+  <!-- Machine seat bottom -->
+  <rect x="165" y="250" width="70" height="14" rx="6" fill="#475569"/>
+  <!-- Machine base -->
+  <rect x="175" y="264" width="50" height="8" rx="4" fill="#64748b"/>
+
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Legs (seated, bent at knee) -->
+  <!-- Left thigh -->
+  <line x1="195" y1="252" x2="225" y2="302" stroke="url(#bodySP)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Left shin -->
+  <line x1="225" y1="302" x2="215" y2="342" stroke="url(#bodySP)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Right thigh -->
+  <line x1="210" y1="252" x2="240" y2="302" stroke="url(#bodySP)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Right shin -->
+  <line x1="240" y1="302" x2="230" y2="342" stroke="url(#bodySP)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Feet -->
+  <ellipse cx="212" cy="346" rx="16" ry="6" fill="#db2777" stroke="#be185d" stroke-width="1.5"/>
+  <ellipse cx="228" cy="346" rx="16" ry="6" fill="#db2777" stroke="#be185d" stroke-width="1.5"/>
+
+  <!-- Torso (seated upright against backrest) -->
+  <ellipse cx="208" cy="195" rx="38" ry="52" fill="url(#bodySP)" stroke="#be185d" stroke-width="2"/>
+
+  <!-- Left upper arm (shoulder to elbow, animated up) -->
+  <line x1="170" y1="170" x2="138" y2="195" stroke="url(#bodySP)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="138;128;138" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="195;150;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left forearm (elbow to hand, pushing up) -->
+  <line x1="138" y1="195" x2="135" y2="140" stroke="url(#bodySP)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x1" values="138;128;138" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="195;150;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="140;78;140" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left hand -->
+  <circle cx="135" cy="140" r="7" fill="url(#bodySP)" stroke="#be185d" stroke-width="1.5">
+    <animate attributeName="cy" values="140;78;140" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+
+  <!-- Right upper arm -->
+  <line x1="246" y1="170" x2="278" y2="195" stroke="url(#bodySP)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="278;288;278" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="195;150;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right forearm -->
+  <line x1="278" y1="195" x2="281" y2="140" stroke="url(#bodySP)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x1" values="278;288;278" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="195;150;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="140;78;140" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right hand -->
+  <circle cx="281" cy="140" r="7" fill="url(#bodySP)" stroke="#be185d" stroke-width="1.5">
+    <animate attributeName="cy" values="140;78;140" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+
+  <!-- Machine handles -->
+  <rect x="125" y="130" width="8" height="22" rx="3" fill="#64748b">
+    <animate attributeName="y" values="130;68;130" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </rect>
+  <rect x="283" y="130" width="8" height="22" rx="3" fill="#64748b">
+    <animate attributeName="y" values="130;68;130" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </rect>
 
   <!-- Head -->
-  <circle cx="200" cy="100" r="25" fill="url(#body4)" stroke="#86198f" stroke-width="2"/>
+  <circle cx="208" cy="120" r="26" fill="url(#bodySP)" stroke="#be185d" stroke-width="2"/>
 
   <!-- Face details -->
-  <circle cx="192" cy="97" r="3" fill="#1e293b"/>
-  <circle cx="208" cy="97" r="3" fill="#1e293b"/>
-  <path d="M 192 107 Q 200 112 208 107" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="116" r="3" fill="#1e293b"/>
+  <circle cx="216" cy="116" r="3" fill="#1e293b"/>
+  <path d="M198 128 Q208 134 218 128" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-  <!-- Body/Torso -->
-  <ellipse cx="200" cy="200" rx="50" ry="65" fill="url(#body4)" stroke="#86198f" stroke-width="2"/>
+  <!-- Push direction arrows -->
+  <g opacity="0.7">
+    <line x1="135" y1="90" x2="135" y2="65" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </line>
+    <path d="M130 72 L135 60 L140 72" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <line x1="281" y1="90" x2="281" y2="65" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </line>
+    <path d="M276 72 L281 60 L286 72" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
 
-  <!-- Left arm pushing up -->
-  <rect x="140" y="110" width="20" height="70" rx="10" fill="url(#body4)" stroke="#86198f" stroke-width="2">
-    <animate attributeName="y" values="110;60;110" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="height" values="70;40;70" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Right arm pushing up -->
-  <rect x="240" y="110" width="20" height="70" rx="10" fill="url(#body4)" stroke="#86198f" stroke-width="2">
-    <animate attributeName="y" values="110;60;110" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="height" values="70;40;70" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Left weight -->
-  <rect x="130" y="100" width="25" height="30" rx="5" fill="#64748b" stroke="#334155" stroke-width="2">
-    <animate attributeName="y" values="100;50;100" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Right weight -->
-  <rect x="245" y="100" width="25" height="30" rx="5" fill="#64748b" stroke="#334155" stroke-width="2">
-    <animate attributeName="y" values="100;50;100" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Arrows showing upward push -->
-  <path d="M 170 300 L 170 260 L 160 270 M 170 260 L 180 270" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 230 300 L 230 260 L 220 270 M 230 260 L 240 270" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Arme kontrolliert nach oben drücken</text>
 </svg>
