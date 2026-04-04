@@ -1,54 +1,89 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bgAbd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="leg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:1" />
+    <linearGradient id="bodyAbd" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
     </linearGradient>
   </defs>
 
-  <rect width="400" height="400" fill="url(#bg2)"/>
+  <rect width="400" height="400" fill="url(#bgAbd)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Abduktion</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Abduktion</text>
 
-  <!-- Left leg -->
-  <path d="M 150 180 L 170 180 L 180 320 L 160 320 Z" fill="url(#leg2)" opacity="0.6">
-    <animate attributeName="d"
-             values="M 150 180 L 170 180 L 180 320 L 160 320 Z;
-                     M 120 180 L 140 180 L 150 320 L 130 320 Z;
-                     M 150 180 L 170 180 L 180 320 L 160 320 Z"
-             dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Machine seat -->
+  <rect x="155" y="200" width="90" height="20" rx="8" fill="#475569"/>
+  <rect x="185" y="220" width="30" height="40" rx="4" fill="#475569"/>
+  <rect x="165" y="260" width="70" height="8" rx="4" fill="#64748b"/>
 
-  <!-- Right leg -->
-  <path d="M 250 180 L 230 180 L 220 320 L 240 320 Z" fill="url(#leg2)" opacity="0.6">
-    <animate attributeName="d"
-             values="M 250 180 L 230 180 L 220 320 L 240 320 Z;
-                     M 280 180 L 260 180 L 250 320 L 270 320 Z;
-                     M 250 180 L 230 180 L 220 320 L 240 320 Z"
-             dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Ground line -->
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Body -->
-  <rect x="170" y="80" width="60" height="100" rx="30" fill="url(#leg2)"/>
+  <!-- Left leg (abducting outward) -->
+  <!-- Thigh -->
+  <line x1="175" y1="210" x2="135" y2="280" stroke="url(#bodyAbd)" stroke-width="16" stroke-linecap="round">
+    <animate attributeName="x2" values="135;100;135" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Shin -->
+  <line x1="135" y1="280" x2="130" y2="340" stroke="url(#bodyAbd)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="135;100;135" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="130;90;130" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Foot -->
+  <ellipse cx="130" cy="346" rx="16" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5">
+    <animate attributeName="cx" values="130;90;130" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </ellipse>
+
+  <!-- Right leg (abducting outward) -->
+  <!-- Thigh -->
+  <line x1="225" y1="210" x2="265" y2="280" stroke="url(#bodyAbd)" stroke-width="16" stroke-linecap="round">
+    <animate attributeName="x2" values="265;300;265" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Shin -->
+  <line x1="265" y1="280" x2="270" y2="340" stroke="url(#bodyAbd)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="265;300;265" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="270;310;270" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Foot -->
+  <ellipse cx="270" cy="346" rx="16" ry="6" fill="#059669" stroke="#047857" stroke-width="1.5">
+    <animate attributeName="cx" values="270;310;270" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </ellipse>
+
+  <!-- Torso (seated) -->
+  <ellipse cx="200" cy="165" rx="38" ry="48" fill="url(#bodyAbd)" stroke="#047857" stroke-width="2"/>
+
+  <!-- Arms resting on machine pads -->
+  <line x1="162" y1="155" x2="140" y2="180" stroke="url(#bodyAbd)" stroke-width="10" stroke-linecap="round"/>
+  <line x1="238" y1="155" x2="260" y2="180" stroke="url(#bodyAbd)" stroke-width="10" stroke-linecap="round"/>
 
   <!-- Head -->
-  <circle cx="200" cy="60" r="20" fill="url(#leg2)"/>
+  <circle cx="200" cy="100" r="24" fill="url(#bodyAbd)" stroke="#047857" stroke-width="2"/>
 
   <!-- Face details -->
-  <circle cx="193" cy="57" r="2.5" fill="#1e293b"/>
-  <circle cx="207" cy="57" r="2.5" fill="#1e293b"/>
-  <path d="M 193 67 Q 200 72 207 67" stroke="#1e293b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="192" cy="96" r="3" fill="#1e293b"/>
+  <circle cx="208" cy="96" r="3" fill="#1e293b"/>
+  <path d="M191 108 Q200 114 209 108" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
 
   <!-- Arrows showing outward movement -->
-  <path d="M 120 250 L 80 250 L 90 240 M 80 250 L 90 260" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 280 250 L 320 250 L 310 240 M 320 250 L 310 260" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <g opacity="0.7">
+    <path d="M100 285 L70 285" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M76 280 L66 285 L76 290" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M300 285 L330 285" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M324 280 L334 285 L324 290" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Beine kontrolliert nach außen drücken</text>
 </svg>

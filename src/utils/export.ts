@@ -30,14 +30,19 @@ export function importFromJSON(onImport: (sessions: WorkoutSession[]) => void): 
         return;
       }
 
-      // Überprüfung der Datenstruktur
-      const isValid = data.every(session =>
-        session.id &&
-        session.date &&
-        session.planName &&
+      // Validate structure and types of each session
+      const isValid = data.every((session: Record<string, unknown>) =>
+        typeof session.id === 'string' &&
+        typeof session.date === 'string' &&
+        !isNaN(Date.parse(session.date as string)) &&
+        typeof session.planName === 'string' &&
         typeof session.completedExercises === 'number' &&
+        Number.isFinite(session.completedExercises) &&
         typeof session.totalExercises === 'number' &&
-        typeof session.duration === 'number'
+        Number.isFinite(session.totalExercises) &&
+        typeof session.duration === 'number' &&
+        Number.isFinite(session.duration) &&
+        session.duration >= 0
       );
 
       if (!isValid) {
@@ -45,7 +50,15 @@ export function importFromJSON(onImport: (sessions: WorkoutSession[]) => void): 
         return;
       }
 
-      const importedSessions = data as WorkoutSession[];
+      const importedSessions: WorkoutSession[] = data.map((s: Record<string, unknown>) => ({
+        id: String(s.id),
+        date: String(s.date),
+        planName: String(s.planName),
+        completedExercises: Number(s.completedExercises),
+        totalExercises: Number(s.totalExercises),
+        duration: Number(s.duration),
+        ...(typeof s.notes === 'string' ? { notes: s.notes } : {}),
+      }));
 
       // Bestätigungsdialog
       const confirmMessage = `Möchtest du ${importedSessions.length} Training(s) importieren?\n\nAchtung: Dies wird zu den bestehenden Daten hinzugefügt.`;

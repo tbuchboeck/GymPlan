@@ -8,65 +8,49 @@ interface WorkoutSummaryProps {
 
 export function WorkoutSummary({ session, onClose }: WorkoutSummaryProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl shadow-2xl max-w-md w-full p-8 border-2 border-yellow-500 animate-pulse-slow">
-        <div className="text-center mb-8">
-          <div className="inline-block p-6 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full mb-6 animate-bounce-slow shadow-2xl">
-            <Trophy className="w-20 h-20 text-white" />
+    <div className="min-h-dvh bg-slate-900 flex items-center justify-center p-4">
+      <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl max-w-sm w-full p-8 animate-fade-in">
+        <div className="text-center">
+          <div className="bg-amber-500/20 p-4 rounded-2xl inline-flex">
+            <Trophy className="w-12 h-12 text-amber-400" />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-3">
-            Geschafft!
-          </h1>
-          <p className="text-xl text-slate-200">
-            Fantastisches Training! Du bist großartig!
-          </p>
+          <h1 className="text-3xl font-bold text-white mt-4">Geschafft!</h1>
+          <p className="text-slate-400 mt-1">Fantastisches Training!</p>
         </div>
 
-        <div className="space-y-4 mb-8">
-          <div className="flex items-center gap-4 p-5 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-            <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg">
-              <Dumbbell className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <div className="text-sm text-blue-100">Übungen abgeschlossen</div>
-              <div className="text-3xl font-bold text-white">
-                {session.completedExercises} / {session.totalExercises}
-              </div>
-            </div>
+        <div className="space-y-3 mt-6">
+          <div className="flex items-center gap-3 p-3 bg-slate-800 rounded-xl">
+            <Dumbbell className="w-5 h-5 text-indigo-400" />
+            <span className="text-sm text-slate-400">Übungen</span>
+            <span className="text-lg font-semibold text-white ml-auto">
+              {session.completedExercises} / {session.totalExercises}
+            </span>
           </div>
 
-          <div className="flex items-center gap-4 p-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-            <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg">
-              <Clock className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <div className="text-sm text-purple-100">Dauer</div>
-              <div className="text-3xl font-bold text-white">
-                {session.duration} Minuten
-              </div>
-            </div>
+          <div className="flex items-center gap-3 p-3 bg-slate-800 rounded-xl">
+            <Clock className="w-5 h-5 text-indigo-400" />
+            <span className="text-sm text-slate-400">Dauer</span>
+            <span className="text-lg font-semibold text-white ml-auto">
+              {session.duration} Min
+            </span>
           </div>
 
-          <div className="flex items-center gap-4 p-5 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-            <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg">
-              <Calendar className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <div className="text-sm text-emerald-100">Datum</div>
-              <div className="text-xl font-bold text-white">
-                {new Date(session.date).toLocaleDateString('de-DE', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric'
-                })}
-              </div>
-            </div>
+          <div className="flex items-center gap-3 p-3 bg-slate-800 rounded-xl">
+            <Calendar className="w-5 h-5 text-indigo-400" />
+            <span className="text-sm text-slate-400">Datum</span>
+            <span className="text-lg font-semibold text-white ml-auto">
+              {new Date(session.date).toLocaleDateString('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              })}
+            </span>
           </div>
         </div>
 
         <button
           onClick={onClose}
-          className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white py-5 px-6 rounded-xl font-bold text-xl shadow-2xl transition-all transform hover:scale-105"
+          className="w-full mt-6 bg-indigo-500 hover:bg-indigo-400 text-white py-3 rounded-xl font-semibold transition-colors"
         >
           Fertig
         </button>

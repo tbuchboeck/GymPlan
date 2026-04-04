@@ -1,40 +1,72 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Lock } from 'lucide-react';
+import { verifyPin, isSessionValid } from '../lib/pin-service';
+
+const PIN_LENGTH = 4;
 
 interface PinLoginProps {
   onSuccess: () => void;
 }
 
-const CORRECT_PIN = '6062';
-
 export function PinLogin({ onSuccess }: PinLoginProps) {
   const [pin, setPin] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
+  const [shake, setShake] = useState(false);
+  const [checking, setChecking] = useState(false);
 
-  const handleNumberClick = (num: number) => {
-    if (pin.length < 4) {
-      const newPin = pin + num;
-      setPin(newPin);
-
-      if (newPin.length === 4) {
-        // Check PIN against fixed PIN
-        if (newPin === CORRECT_PIN) {
-          onSuccess();
-        } else {
-          setError(true);
-          setTimeout(() => {
-            setPin('');
-            setError(false);
-          }, 500);
-        }
-      }
+  // Skip PIN if session is still valid
+  useEffect(() => {
+    if (isSessionValid()) {
+      onSuccess();
     }
-  };
+  }, [onSuccess]);
 
-  const handleDelete = () => {
-    setPin(pin.slice(0, -1));
-    setError(false);
-  };
+  const handleDigit = useCallback(
+    (digit: string) => {
+      if (checking) return;
+      setError('');
+      setPin((prev) => {
+        if (prev.length >= PIN_LENGTH) return prev;
+        return prev + digit;
+      });
+    },
+    [checking]
+  );
+
+  const handleDelete = useCallback(() => {
+    if (checking) return;
+    setPin((prev) => prev.slice(0, -1));
+    setError('');
+  }, [checking]);
+
+  // Auto-submit when PIN is complete
+  useEffect(() => {
+    if (pin.length !== PIN_LENGTH) return;
+    setChecking(true);
+    verifyPin(pin).then((result) => {
+      if (result.success) {
+        onSuccess();
+      } else {
+        setError(result.error ?? 'Falscher PIN');
+        setShake(true);
+        setTimeout(() => {
+          setShake(false);
+          setPin('');
+          setChecking(false);
+        }, 600);
+      }
+    });
+  }, [pin, onSuccess]);
+
+  // Keyboard support
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9') handleDigit(e.key);
+      else if (e.key === 'Backspace') handleDelete();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [handleDigit, handleDelete]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
@@ -48,8 +80,8 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
         </div>
 
         {/* PIN Dots */}
-        <div className="flex justify-center gap-4 mb-12">
-          {[0, 1, 2, 3].map((i) => (
+        <div className={`flex justify-center gap-4 mb-12 ${shake ? 'animate-shake' : ''}`}>
+          {Array.from({ length: PIN_LENGTH }).map((_, i) => (
             <div
               key={i}
               className={`w-4 h-4 rounded-full transition-all duration-200 ${
@@ -65,7 +97,7 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
 
         {error && (
           <div className="text-center mb-6">
-            <p className="text-red-400 font-semibold">Falscher PIN!</p>
+            <p className="text-red-400 font-semibold">{error}</p>
           </div>
         )}
 
@@ -74,7 +106,7 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
-              onClick={() => handleNumberClick(num)}
+              onClick={() => handleDigit(String(num))}
               className="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 rounded-xl text-white text-2xl font-bold hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/50 active:scale-95 transition-all"
             >
               {num}
@@ -85,7 +117,7 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
         <div className="grid grid-cols-3 gap-4">
           <div />
           <button
-            onClick={() => handleNumberClick(0)}
+            onClick={() => handleDigit('0')}
             className="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 rounded-xl text-white text-2xl font-bold hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/50 active:scale-95 transition-all"
           >
             0
@@ -97,6 +129,12 @@ export function PinLogin({ onSuccess }: PinLoginProps) {
             ←
           </button>
         </div>
+
+        {checking && (
+          <div className="mt-6 flex justify-center">
+            <div className="w-6 h-6 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
       </div>
     </div>
   );

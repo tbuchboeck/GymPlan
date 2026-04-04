@@ -6,17 +6,16 @@ import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
 
 interface WorkoutViewProps {
   exercises: Exercise[];
+  planName: string;
   onComplete: (session: WorkoutSession) => void;
   onExit: () => void;
   initialExerciseIndex?: number;
 }
 
-type ViewState = 'exercise' | 'rest';
-
-export function WorkoutView({ exercises, onComplete, onExit, initialExerciseIndex = 0 }: WorkoutViewProps) {
+export function WorkoutView({ exercises, planName, onComplete, onExit, initialExerciseIndex = 0 }: WorkoutViewProps) {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialExerciseIndex);
   const [currentSet, setCurrentSet] = useState(1);
-  const [viewState, setViewState] = useState<ViewState>('exercise');
+  const [isResting, setIsResting] = useState(false);
   const [completedExercises, setCompletedExercises] = useState(0);
   const [startTime] = useState(Date.now());
 
@@ -34,19 +33,19 @@ export function WorkoutView({ exercises, onComplete, onExit, initialExerciseInde
         const session: WorkoutSession = {
           id: Date.now().toString(),
           date: new Date().toISOString(),
-          planName: 'Ganzkörper-Trainingsplan',
+          planName,
           completedExercises: exercises.length,
           totalExercises: exercises.length,
           duration
         };
         onComplete(session);
       } else {
-        // Move to rest before next exercise
-        setViewState('rest');
+        // Rest before next exercise
+        setIsResting(true);
       }
     } else {
-      // Move to rest before next set
-      setViewState('rest');
+      // Rest before next set
+      setIsResting(true);
     }
   };
 
@@ -59,7 +58,7 @@ export function WorkoutView({ exercises, onComplete, onExit, initialExerciseInde
       // Move to next set
       setCurrentSet((prev) => prev + 1);
     }
-    setViewState('exercise');
+    setIsResting(false);
   };
 
   const handleSkipRest = () => {
@@ -74,7 +73,7 @@ export function WorkoutView({ exercises, onComplete, onExit, initialExerciseInde
       setCurrentSet(exercises[currentExerciseIndex - 1].sets);
       setCompletedExercises((prev) => Math.max(0, prev - 1));
     }
-    setViewState('exercise');
+    setIsResting(false);
   };
 
   const handleNext = () => {
@@ -85,63 +84,69 @@ export function WorkoutView({ exercises, onComplete, onExit, initialExerciseInde
       setCurrentSet(1);
       setCompletedExercises((prev) => prev + 1);
     }
-    setViewState('exercise');
+    setIsResting(false);
   };
 
   const progress = ((completedExercises + (currentSet - 1) / currentExercise.sets) / exercises.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900">
+    <div className="h-dvh flex flex-col bg-slate-900">
       {/* Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-2xl sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between mb-3">
+      <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-10">
+        <div className="max-w-4xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between mb-2">
             <button
               onClick={onExit}
-              className="flex items-center gap-2 text-white hover:text-indigo-100 transition-colors"
+              className="text-slate-400 hover:text-white transition-colors p-1"
+              aria-label="Beenden"
             >
               <Home className="w-5 h-5" />
-              <span>Beenden</span>
             </button>
-            <div className="text-sm text-indigo-100">
-              {completedExercises} / {exercises.length} Übungen
-            </div>
+            <span className="text-sm font-medium text-slate-300">
+              {currentExerciseIndex + 1} / {exercises.length}
+            </span>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-white/20 rounded-full h-3">
+          <div className="w-full bg-slate-800 rounded-full h-1.5">
             <div
-              className="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full transition-all duration-300 shadow-lg"
+              className="bg-indigo-500 h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {viewState === 'exercise' ? (
+      {/* Content area */}
+      <div className="flex-1 overflow-y-auto relative">
+        <div className="max-w-4xl mx-auto px-4 py-4">
           <ExerciseCard
             exercise={currentExercise}
             currentSet={currentSet}
             onSetComplete={handleSetComplete}
             exerciseNumber={currentExerciseIndex + 1}
-            totalExercises={exercises.length}
           />
-        ) : (
-          <RestTimer
-            seconds={currentExercise.rest}
-            onComplete={handleRestComplete}
-            onSkip={handleSkipRest}
-          />
-        )}
+        </div>
 
-        {/* Navigation */}
-        <div className="flex gap-4 mt-6">
+        {/* Rest Timer Overlay */}
+        {isResting && (
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-20 animate-fade-in">
+            <RestTimer
+              seconds={currentExercise.rest}
+              onComplete={handleRestComplete}
+              onSkip={handleSkipRest}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Bottom nav */}
+      <div className="bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 z-10">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex gap-3">
           <button
             onClick={handlePrevious}
             disabled={currentExerciseIndex === 0 && currentSet === 1}
-            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-600 text-white py-4 px-6 rounded-xl font-semibold shadow-2xl transition-all transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Zurück
@@ -150,7 +155,7 @@ export function WorkoutView({ exercises, onComplete, onExit, initialExerciseInde
           <button
             onClick={handleNext}
             disabled={isLastExercise && isLastSet}
-            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-600 text-white py-4 px-6 rounded-xl font-semibold shadow-2xl transition-all transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition-colors"
           >
             Weiter
             <ArrowRight className="w-5 h-5" />

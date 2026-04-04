@@ -1,14 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { Home } from './components/Home';
 import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
-import { WorkoutHistory } from './components/WorkoutHistory';
 import { ReminderSettings } from './components/ReminderSettings';
 import { PinLogin } from './components/PinLogin';
 import LocationSelector from './components/LocationSelector';
+
+const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
 type Location = 'gym' | 'home' | 'home2' | 'back' | null;
@@ -21,7 +22,11 @@ function App() {
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
   const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
 
-  // Select workout plan based on location
+  // Scroll to top on every view change — prevents "starting mid-page"
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
+
   const workoutPlan = useMemo(() => {
     if (location === 'home') return homeWorkoutPlan;
     if (location === 'home2') return homeWorkoutPlan2;
@@ -50,74 +55,39 @@ function App() {
     setCurrentView('home');
   };
 
-  const handleViewHistory = () => {
-    setCurrentView('history');
-  };
-
-  const handleManageReminders = () => {
-    setCurrentView('reminders');
-  };
-
-  const handleExitWorkout = () => {
-    setCurrentView('home');
-  };
-
-  const handleCloseHistory = () => {
-    setCurrentView('home');
-  };
-
-  const handleCloseReminders = () => {
-    setCurrentView('home');
-  };
-
   const handleImportSessions = (importedSessions: WorkoutSession[]) => {
-    // Kombiniere bestehende und importierte Sessions
     const existingIds = new Set(sessions.map(s => s.id));
-
-    // Filtere Duplikate basierend auf der ID
     const uniqueImportedSessions = importedSessions.filter(s => !existingIds.has(s.id));
-
-    // Füge die neuen Sessions hinzu
     setSessions([...sessions, ...uniqueImportedSessions]);
   };
 
-  // Show PIN login if app is locked
   if (!isUnlocked) {
-    return (
-      <PinLogin
-        onSuccess={() => setIsUnlocked(true)}
-      />
-    );
+    return <PinLogin onSuccess={() => setIsUnlocked(true)} />;
   }
 
-  // Show location selector after PIN login
   if (!location) {
-    return (
-      <LocationSelector
-        onSelectLocation={(selectedLocation) => setLocation(selectedLocation)}
-      />
-    );
+    return <LocationSelector onSelectLocation={(loc) => setLocation(loc)} />;
   }
 
-  // Show main app once unlocked
   return (
-    <>
+    <div className="min-h-dvh bg-slate-900">
       {currentView === 'home' && (
         <Home
           workoutPlan={workoutPlan}
           sessions={sessions}
           onStartWorkout={handleStartWorkout}
           onStartExercise={handleStartExercise}
-          onViewHistory={handleViewHistory}
-          onManageReminders={handleManageReminders}
+          onViewHistory={() => setCurrentView('history')}
+          onManageReminders={() => setCurrentView('reminders')}
         />
       )}
 
       {currentView === 'workout' && (
         <WorkoutView
           exercises={workoutPlan.exercises}
+          planName={workoutPlan.name}
           onComplete={handleWorkoutComplete}
-          onExit={handleExitWorkout}
+          onExit={() => setCurrentView('home')}
           initialExerciseIndex={startExerciseIndex}
         />
       )}
@@ -130,19 +100,23 @@ function App() {
       )}
 
       {currentView === 'history' && (
-        <WorkoutHistory
-          sessions={sessions}
-          onClose={handleCloseHistory}
-          onImport={handleImportSessions}
-        />
+        <Suspense fallback={
+          <div className="h-dvh bg-slate-900 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+          </div>
+        }>
+          <WorkoutHistory
+            sessions={sessions}
+            onClose={() => setCurrentView('home')}
+            onImport={handleImportSessions}
+          />
+        </Suspense>
       )}
 
       {currentView === 'reminders' && (
-        <ReminderSettings
-          onClose={handleCloseReminders}
-        />
+        <ReminderSettings onClose={() => setCurrentView('home')} />
       )}
-    </>
+    </div>
   );
 }
 

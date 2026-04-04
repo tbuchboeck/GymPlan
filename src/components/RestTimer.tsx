@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface RestTimerProps {
   seconds: number;
@@ -8,6 +8,8 @@ interface RestTimerProps {
 
 export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
   const [timeLeft, setTimeLeft] = useState(seconds);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     setTimeLeft(seconds);
@@ -15,7 +17,7 @@ export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      onComplete();
+      onCompleteRef.current();
       return;
     }
 
@@ -24,43 +26,60 @@ export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, onComplete]);
+  }, [timeLeft]);
 
   const minutes = Math.floor(timeLeft / 60);
   const secs = timeLeft % 60;
-  const progress = ((seconds - timeLeft) / seconds) * 100;
+  const circumference = 2 * Math.PI * 54;
+  const dashOffset = circumference * (timeLeft / seconds);
 
   return (
-    <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 text-white shadow-2xl border-2 border-cyan-500">
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold mb-4 text-cyan-300">Pause</h3>
-        <div className="relative inline-block">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
-          <div className="relative bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 rounded-full p-12 shadow-2xl">
-            <div className="text-7xl font-bold font-mono tracking-tight">
+    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl animate-fade-in max-w-xs w-full">
+      {/* Label */}
+      <div className="text-center mb-4">
+        <span className="text-sm text-slate-400 uppercase tracking-wider">Pause</span>
+      </div>
+
+      {/* Circular progress */}
+      <div className="flex justify-center mb-4">
+        <div className="relative w-40 h-40">
+          <svg viewBox="0 0 120 120" className="w-40 h-40">
+            <circle
+              cx="60" cy="60" r="54"
+              fill="none"
+              stroke="#1e293b"
+              strokeWidth="8"
+            />
+            <circle
+              cx="60" cy="60" r="54"
+              fill="none"
+              stroke="#6366f1"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={dashOffset}
+              className="timer-ring"
+              transform="rotate(-90 60 60)"
+            />
+          </svg>
+          {/* Time display centered over ring */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-4xl font-mono font-bold text-white">
               {String(minutes).padStart(2, '0')}:{String(secs).padStart(2, '0')}
-            </div>
+            </span>
           </div>
         </div>
       </div>
 
-      <div className="w-full bg-slate-700 rounded-full h-4 mb-6 overflow-hidden shadow-inner">
-        <div
-          className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 h-full rounded-full transition-all duration-1000 ease-linear shadow-lg"
-          style={{ width: `${progress}%` }}
-        />
+      {/* Skip button */}
+      <div className="text-center">
+        <button
+          onClick={onSkip}
+          className="text-slate-400 hover:text-white transition-colors text-sm"
+        >
+          Überspringen →
+        </button>
       </div>
-
-      <div className="text-center text-slate-300 mb-4 text-lg">
-        {seconds - timeLeft} von {seconds} Sekunden
-      </div>
-
-      <button
-        onClick={onSkip}
-        className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 backdrop-blur-sm py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl"
-      >
-        Pause überspringen
-      </button>
     </div>
   );
 }
