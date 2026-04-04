@@ -79,6 +79,7 @@ function App() {
           onStartExercise={handleStartExercise}
           onViewHistory={() => setCurrentView('history')}
           onManageReminders={() => setCurrentView('reminders')}
+          onSwitchPlan={() => setLocation(null)}
         />
       )}
 
