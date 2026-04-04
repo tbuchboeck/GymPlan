@@ -1,97 +1,107 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgLR" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyLR" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="machineLR" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    <linearGradient id="bodyLR" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
     </linearGradient>
   </defs>
 
   <rect width="400" height="400" fill="url(#bgLR)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Low Row</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Low Row</text>
 
-  <!-- Machine frame (Adjustable Pulley) -->
-  <rect x="300" y="80" width="20" height="270" rx="5" fill="url(#machineLR)" stroke="#1e293b" stroke-width="2"/>
-  <rect x="290" y="70" width="40" height="20" rx="5" fill="url(#machineLR)" stroke="#1e293b" stroke-width="2"/>
+  <!-- Machine frame -->
+  <rect x="300" y="80" width="22" height="260" rx="5" fill="#475569"/>
+  <rect x="290" y="70" width="42" height="18" rx="5" fill="#64748b"/>
 
-  <!-- Lower pulley system -->
-  <circle cx="310" cy="320" r="15" fill="#64748b" stroke="#1e293b" stroke-width="2"/>
-  <circle cx="310" cy="320" r="6" fill="#1e293b"/>
+  <!-- Lower pulley -->
+  <circle cx="311" cy="310" r="12" fill="#64748b" stroke="#334155" stroke-width="2"/>
+  <circle cx="311" cy="310" r="5" fill="#334155"/>
 
   <!-- Weight stack -->
-  <rect x="305" y="150" width="30" height="100" rx="3" fill="#64748b" stroke="#1e293b" stroke-width="2">
-    <animate attributeName="y" values="150;120;150" dur="2s" repeatCount="indefinite"/>
+  <rect x="305" y="150" width="25" height="90" rx="3" fill="#64748b" stroke="#334155" stroke-width="1.5">
+    <animate attributeName="y" values="150;125;150" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </rect>
 
-  <!-- Cable from pulley to hands -->
-  <line x1="310" y1="320" x2="200" y2="230" stroke="#94a3b8" stroke-width="3">
-    <animate attributeName="x2" values="200;170;200" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y2" values="230;200;230" dur="2s" repeatCount="indefinite"/>
+  <!-- Cable -->
+  <line x1="311" y1="310" x2="195" y2="200" stroke="#94a3b8" stroke-width="3">
+    <animate attributeName="x2" values="195;145;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </line>
 
-  <!-- Head (side view, leaning forward) -->
-  <ellipse cx="120" cy="110" rx="22" ry="25" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
-
-  <!-- Face details -->
-  <circle cx="135" cy="107" r="3" fill="#1e293b"/>
-  <path d="M 138 117 Q 142 120 138 123" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-  <!-- Neck -->
-  <rect x="115" y="130" width="25" height="15" rx="5" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2" transform="rotate(15, 127, 137)"/>
-
-  <!-- Torso (leaning slightly forward) -->
-  <ellipse cx="140" cy="200" rx="32" ry="55" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2" transform="rotate(10, 140, 200)"/>
-
-  <!-- Upper arm (animated - pulling back) -->
-  <rect x="155" y="185" width="45" height="18" rx="9" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2">
-    <animate attributeName="width" values="45;30;45" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="185;175;185" dur="2s" repeatCount="indefinite"/>
+  <!-- Handle -->
+  <rect x="188" y="192" width="12" height="20" rx="4" fill="#64748b">
+    <animate attributeName="x" values="188;138;188" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </rect>
 
-  <!-- Forearm (animated - pulling) -->
-  <rect x="180" y="195" width="35" height="16" rx="8" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2">
-    <animate attributeName="x" values="180;155;180" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="195;180;195" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="width" values="35;30;35" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Seat -->
+  <rect x="85" y="255" width="75" height="15" rx="6" fill="#475569"/>
+  <rect x="112" y="270" width="20" height="35" rx="4" fill="#475569"/>
+  <rect x="90" y="305" width="65" height="8" rx="4" fill="#64748b"/>
 
-  <!-- Hands/grip (handle) -->
-  <rect x="195" y="220" width="20" height="25" rx="5" fill="#64748b" stroke="#475569" stroke-width="2">
-    <animate attributeName="x" values="195;165;195" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="220;190;220" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Foot plate -->
+  <rect x="255" y="280" width="35" height="12" rx="3" fill="#475569"/>
 
-  <!-- Hip/lower torso -->
-  <ellipse cx="135" cy="270" rx="28" ry="20" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
+  <!-- Ground line -->
+  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Upper leg (standing, slight bend) -->
-  <rect x="115" y="280" width="22" height="55" rx="10" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2" transform="rotate(5, 126, 307)"/>
+  <!-- Legs (seated, feet on plate) -->
+  <!-- Left thigh -->
+  <line x1="130" y1="255" x2="210" y2="242" stroke="url(#bodyLR)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Left shin -->
+  <line x1="210" y1="242" x2="260" y2="272" stroke="url(#bodyLR)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Left foot -->
+  <ellipse cx="265" cy="275" rx="12" ry="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="1.5"/>
 
-  <!-- Lower leg -->
-  <rect x="110" y="330" width="20" height="50" rx="8" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
+  <!-- Right thigh -->
+  <line x1="130" y1="270" x2="210" y2="282" stroke="url(#bodyLR)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Right shin -->
+  <line x1="210" y1="282" x2="260" y2="292" stroke="url(#bodyLR)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Right foot -->
+  <ellipse cx="265" cy="295" rx="12" ry="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="1.5"/>
 
-  <!-- Foot -->
-  <ellipse cx="125" cy="385" rx="25" ry="10" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
+  <!-- Torso -->
+  <ellipse cx="130" cy="195" rx="35" ry="55" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
 
-  <!-- Floor -->
-  <rect x="50" y="390" width="300" height="8" rx="2" fill="#475569" stroke="#334155" stroke-width="2"/>
+  <!-- Left upper arm (pulling back) -->
+  <line x1="158" y1="180" x2="200" y2="190" stroke="url(#bodyLR)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="200;155;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left forearm -->
+  <line x1="200" y1="190" x2="198" y2="200" stroke="url(#bodyLR)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x1" values="200;155;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="198;148;198" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-  <!-- Arrow showing pull direction -->
-  <path d="M 250 280 L 190 230 L 200 225 M 190 230 L 195 240" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  <!-- Right upper arm -->
+  <line x1="158" y1="205" x2="200" y2="210" stroke="url(#bodyLR)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="200;155;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right forearm -->
+  <line x1="200" y1="210" x2="198" y2="200" stroke="url(#bodyLR)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x1" values="200;155;200" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="x2" values="198;148;198" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Head -->
+  <circle cx="130" cy="118" r="24" fill="url(#bodyLR)" stroke="#0891b2" stroke-width="2"/>
+  <!-- Face -->
+  <circle cx="122" cy="114" r="3" fill="#1e293b"/>
+  <circle cx="138" cy="114" r="3" fill="#1e293b"/>
+  <path d="M121 124 Q130 130 139 124" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Pull arrow -->
+  <path d="M260 330 L220 330" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M226 325 L216 330 L226 335" stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
   </path>
 
-  <!-- Second arrow -->
-  <path d="M 260 300 L 200 250 L 210 245 M 200 250 L 205 260" stroke="#fbbf24" stroke-width="3" fill="none">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Info text -->
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Tiefes Rudern mit Kabelzug</text>
 </svg>

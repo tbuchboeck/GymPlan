@@ -1,86 +1,96 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgKnie" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bgKB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodyKnie" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    <linearGradient id="bodyKB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
     </linearGradient>
   </defs>
 
-  <rect width="400" height="400" fill="url(#bgKnie)"/>
+  <rect width="400" height="400" fill="url(#bgKB)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Kniebeugen</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Kniebeugen</text>
 
   <!-- Ground line -->
-  <line x1="50" y1="350" x2="350" y2="350" stroke="#475569" stroke-width="3"/>
+  <line x1="60" y1="350" x2="340" y2="350" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Legs (animated bending) -->
-  <rect x="170" y="260" width="20" height="80" rx="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="height" values="80;50;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="260;290;260" dur="2s" repeatCount="indefinite"/>
-  </rect>
-  <rect x="210" y="260" width="20" height="80" rx="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="height" values="80;50;80" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="y" values="260;290;260" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Left foot -->
+  <ellipse cx="168" cy="346" rx="16" ry="6" fill="#db2777" stroke="#be185d" stroke-width="1.5"/>
+  <!-- Right foot -->
+  <ellipse cx="232" cy="346" rx="16" ry="6" fill="#db2777" stroke="#be185d" stroke-width="1.5"/>
 
-  <!-- Feet -->
-  <ellipse cx="180" cy="347" rx="14" ry="8" fill="#be185d" stroke="#9f1239" stroke-width="2"/>
-  <ellipse cx="220" cy="347" rx="14" ry="8" fill="#be185d" stroke="#9f1239" stroke-width="2"/>
+  <!-- Left leg: shin (fixed bottom, knee moves forward in squat) -->
+  <line x1="168" y1="342" x2="165" y2="295" stroke="url(#bodyKB)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="165;158;165" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="295;310;295" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left leg: thigh (knee to hip) -->
+  <line x1="165" y1="295" x2="180" y2="245" stroke="url(#bodyKB)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="165;158;165" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="295;310;295" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="245;285;245" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-  <!-- Body (animated up/down) -->
-  <ellipse cx="200" cy="200" rx="45" ry="55" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="cy" values="200;250;200" dur="2s" repeatCount="indefinite"/>
+  <!-- Right leg: shin -->
+  <line x1="232" y1="342" x2="235" y2="295" stroke="url(#bodyKB)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="x2" values="235;242;235" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="295;310;295" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right leg: thigh -->
+  <line x1="235" y1="295" x2="220" y2="245" stroke="url(#bodyKB)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="x1" values="235;242;235" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y1" values="295;310;295" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="245;285;245" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Torso (moves up/down with squat) -->
+  <ellipse cx="200" cy="195" rx="38" ry="55" fill="url(#bodyKB)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="195;235;195" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </ellipse>
 
-  <!-- Head (animated up/down) -->
-  <circle cx="200" cy="120" r="30" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-    <animate attributeName="cy" values="120;170;120" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <!-- Left arm stretched forward (balance) -->
+  <!-- Upper arm -->
+  <line x1="162" y1="175" x2="120" y2="168" stroke="url(#bodyKB)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="y1" values="175;215;175" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="168;208;168" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Forearm -->
+  <line x1="120" y1="168" x2="90" y2="165" stroke="url(#bodyKB)" stroke-width="8" stroke-linecap="round">
+    <animate attributeName="y1" values="168;208;168" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="165;205;165" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
 
-  <!-- Face details (animated) -->
-  <circle cx="190" cy="115" r="4" fill="#1e293b">
-    <animate attributeName="cy" values="115;165;115" dur="2s" repeatCount="indefinite"/>
+  <!-- Right arm stretched forward -->
+  <!-- Upper arm -->
+  <line x1="238" y1="175" x2="280" y2="168" stroke="url(#bodyKB)" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="y1" values="175;215;175" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="168;208;168" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Forearm -->
+  <line x1="280" y1="168" x2="310" y2="165" stroke="url(#bodyKB)" stroke-width="8" stroke-linecap="round">
+    <animate attributeName="y1" values="168;208;168" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="165;205;165" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+
+  <!-- Head (moves with body) -->
+  <circle cx="200" cy="118" r="24" fill="url(#bodyKB)" stroke="#be185d" stroke-width="2">
+    <animate attributeName="cy" values="118;158;118" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </circle>
-  <circle cx="210" cy="115" r="4" fill="#1e293b">
-    <animate attributeName="cy" values="115;165;115" dur="2s" repeatCount="indefinite"/>
+  <!-- Face -->
+  <circle cx="192" cy="114" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="114;154;114" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </circle>
-  <!-- Happy smile -->
-  <path d="M 188 130 Q 200 140 212 130" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round">
-    <animate attributeName="d" values="M 188 130 Q 200 140 212 130; M 188 180 Q 200 190 212 180; M 188 130 Q 200 140 212 130" dur="2s" repeatCount="indefinite"/>
+  <circle cx="208" cy="114" r="3" fill="#1e293b">
+    <animate attributeName="cy" values="114;154;114" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <path d="M191 126 Q200 132 209 126" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round">
+    <animate attributeName="d" values="M191 126 Q200 132 209 126;M191 166 Q200 172 209 166;M191 126 Q200 132 209 126" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </path>
 
-  <!-- Arms stretched forward (animated) -->
-  <g>
-    <path d="M 160 185 L 100 170" stroke="url(#bodyKnie)" stroke-width="16" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 160 185 L 100 170; M 160 235 L 100 220; M 160 185 L 100 170" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <circle cx="100" cy="170" r="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-      <animate attributeName="cy" values="170;220;170" dur="2s" repeatCount="indefinite"/>
-    </circle>
-
-    <path d="M 240 185 L 300 170" stroke="url(#bodyKnie)" stroke-width="16" fill="none" stroke-linecap="round">
-      <animate attributeName="d" values="M 240 185 L 300 170; M 240 235 L 300 220; M 240 185 L 300 170" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <circle cx="300" cy="170" r="10" fill="url(#bodyKnie)" stroke="#be185d" stroke-width="2">
-      <animate attributeName="cy" values="170;220;170" dur="2s" repeatCount="indefinite"/>
-    </circle>
-  </g>
-
-  <!-- Sparkle effects -->
-  <circle cx="330" cy="130" r="3" fill="#fbbf24" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="70" cy="140" r="3" fill="#22d3ee" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
-  </circle>
-
   <!-- Info text -->
-  <text x="200" y="385" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Knie nicht über die Zehenspitzen</text>
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Knie nicht über die Zehenspitzen schieben</text>
 </svg>

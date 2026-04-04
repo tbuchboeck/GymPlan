@@ -1,58 +1,75 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgSK" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="bodySK" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    <linearGradient id="bodySK" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
 
   <rect width="400" height="400" fill="url(#bgSK)"/>
 
   <!-- Title -->
-  <text x="200" y="40" font-family="system-ui" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Scissor Kicks</text>
+  <text x="200" y="40" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">Scissor Kicks</text>
 
-  <!-- Mat -->
-  <rect x="40" y="290" width="320" height="10" rx="5" fill="#475569"/>
+  <!-- Mat / ground line -->
+  <line x1="40" y1="300" x2="360" y2="300" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Head facing forward -->
-  <circle cx="100" cy="232" r="22" fill="url(#bodySK)" stroke="#b45309" stroke-width="2"/>
-  <circle cx="90" cy="228" r="3" fill="#1e293b"/>
+  <!-- Head (lying on back, side view) -->
+  <circle cx="100" cy="248" r="22" fill="url(#bodySK)" stroke="#b45309" stroke-width="2"/>
+  <!-- Face -->
+  <circle cx="93" cy="244" r="2.5" fill="#1e293b"/>
+  <circle cx="104" cy="244" r="2.5" fill="#1e293b"/>
+  <path d="M93 254 Q100 258 107 254" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-  <!-- Upper arms (propped on forearms) -->
-  <rect x="95" y="252" width="14" height="40" rx="7" fill="url(#bodySK)" stroke="#b45309" stroke-width="2" transform="rotate(-15 102 270)"/>
-  <rect x="118" y="256" width="14" height="36" rx="7" fill="url(#bodySK)" stroke="#b45309" stroke-width="2" transform="rotate(10 125 270)"/>
+  <!-- Torso (lying flat) -->
+  <ellipse cx="195" cy="275" rx="75" ry="22" fill="url(#bodySK)" stroke="#b45309" stroke-width="2"/>
 
-  <!-- Torso (prone, slightly elevated) -->
-  <ellipse cx="200" cy="272" rx="75" ry="20" fill="url(#bodySK)" stroke="#b45309" stroke-width="2"/>
+  <!-- Arms behind head for support -->
+  <line x1="122" y1="260" x2="100" y2="240" stroke="url(#bodySK)" stroke-width="10" stroke-linecap="round"/>
+  <line x1="122" y1="285" x2="105" y2="295" stroke="url(#bodySK)" stroke-width="10" stroke-linecap="round"/>
 
-  <!-- Hips -->
-  <ellipse cx="280" cy="275" rx="22" ry="18" fill="url(#bodySK)" stroke="#b45309" stroke-width="2"/>
-
-  <!-- Left leg - scissor up -->
-  <rect x="290" y="220" width="15" height="60" rx="7" fill="url(#bodySK)" stroke="#b45309" stroke-width="2">
-    <animateTransform attributeName="transform" type="rotate" values="-20 297 280;10 297 280;-20 297 280" dur="1.2s" repeatCount="indefinite"/>
-  </rect>
-  <ellipse cx="297" cy="220" rx="9" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
-    <animateTransform attributeName="transform" type="rotate" values="-20 297 280;10 297 280;-20 297 280" dur="1.2s" repeatCount="indefinite"/>
+  <!-- Left leg - thigh -->
+  <line x1="270" y1="275" x2="320" y2="240" stroke="url(#bodySK)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="y2" values="240;290;240" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left leg - shin -->
+  <line x1="320" y1="240" x2="355" y2="210" stroke="url(#bodySK)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="y1" values="240;290;240" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="210;280;210" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Left foot -->
+  <ellipse cx="358" cy="208" rx="14" ry="5" fill="#d97706" stroke="#b45309" stroke-width="1.5">
+    <animate attributeName="cy" values="208;278;208" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </ellipse>
 
-  <!-- Right leg - scissor down (opposite timing) -->
-  <rect x="305" y="220" width="15" height="60" rx="7" fill="url(#bodySK)" stroke="#b45309" stroke-width="2">
-    <animateTransform attributeName="transform" type="rotate" values="10 312 280;-20 312 280;10 312 280" dur="1.2s" repeatCount="indefinite"/>
-  </rect>
-  <ellipse cx="312" cy="220" rx="9" ry="7" fill="#c2410c" stroke="#7c2d12" stroke-width="2">
-    <animateTransform attributeName="transform" type="rotate" values="10 312 280;-20 312 280;10 312 280" dur="1.2s" repeatCount="indefinite"/>
+  <!-- Right leg - thigh -->
+  <line x1="270" y1="275" x2="320" y2="290" stroke="url(#bodySK)" stroke-width="14" stroke-linecap="round">
+    <animate attributeName="y2" values="290;240;290" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right leg - shin -->
+  <line x1="320" y1="290" x2="355" y2="280" stroke="url(#bodySK)" stroke-width="12" stroke-linecap="round">
+    <animate attributeName="y1" values="290;240;290" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animate attributeName="y2" values="280;210;280" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </line>
+  <!-- Right foot -->
+  <ellipse cx="358" cy="278" rx="14" ry="5" fill="#d97706" stroke="#b45309" stroke-width="1.5">
+    <animate attributeName="cy" values="278;208;278" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
   </ellipse>
 
-  <!-- Scissors motion arrows -->
-  <path d="M 335 190 L 340 170 M 335 240 L 340 260" stroke="#22d3ee" stroke-width="2.5" fill="none">
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
-  </path>
+  <!-- Motion arrows -->
+  <g opacity="0.6">
+    <path d="M370 200 L370 180" stroke="#22d3ee" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M370 290 L370 310" stroke="#22d3ee" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
 
   <!-- Info text -->
-  <text x="200" y="345" font-family="system-ui" font-size="14" fill="#94a3b8" text-anchor="middle">Beine abwechselnd auf und ab bewegen</text>
+  <text x="200" y="385" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Beine gestreckt abwechselnd auf und ab bewegen</text>
 </svg>
