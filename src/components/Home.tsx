@@ -1,5 +1,5 @@
 import type { WorkoutPlan, WorkoutSession } from '../types';
-import { Play, BarChart3, Calendar, Bell, Dumbbell } from 'lucide-react';
+import { Play, BarChart3, Calendar, Bell, Dumbbell, ArrowLeftRight } from 'lucide-react';
 
 interface HomeProps {
   workoutPlan: WorkoutPlan;
@@ -8,6 +8,7 @@ interface HomeProps {
   onStartExercise: (exerciseIndex: number) => void;
   onViewHistory: () => void;
   onManageReminders: () => void;
+  onSwitchPlan: () => void;
 }
 
 export function Home({
@@ -16,7 +17,8 @@ export function Home({
   onStartWorkout,
   onStartExercise,
   onViewHistory,
-  onManageReminders
+  onManageReminders,
+  onSwitchPlan
 }: HomeProps) {
   const lastWorkout = sessions.length > 0
     ? sessions.toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
@@ -46,7 +48,16 @@ export function Home({
 
       {/* Plan Card */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl mx-4 mt-4 p-5">
-        <h2 className="text-lg font-semibold text-white">{workoutPlan.name}</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-white">{workoutPlan.name}</h2>
+          <button
+            onClick={onSwitchPlan}
+            className="flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+          >
+            <ArrowLeftRight className="w-3.5 h-3.5" />
+            Wechseln
+          </button>
+        </div>
         <p className="text-sm text-slate-400 mt-1">
           {workoutPlan.exercises.length} Übungen &bull; {workoutPlan.sessionsPerWeek} Einheiten/Woche
         </p>
