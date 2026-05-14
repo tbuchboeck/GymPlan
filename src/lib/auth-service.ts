@@ -190,6 +190,16 @@ class AuthService {
     return Date.now() / 1000 < payload.exp - 5;
   }
 
+  /** Returns the authenticated user's UUID (the `sub` claim) or null if no
+   * valid session. Used by session-sync to scope gym_sessions per user. */
+  getCurrentUserId(): string | null {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const payload = decodeJwtPayload(raw);
+    if (!payload) return null;
+    return typeof payload.sub === 'string' ? payload.sub : null;
+  }
+
   clearSession(): void {
     sessionStorage.removeItem(SESSION_KEY);
   }
