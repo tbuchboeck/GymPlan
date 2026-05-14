@@ -7,7 +7,7 @@ import { Home } from './components/Home';
 import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
 import { ReminderSettings } from './components/ReminderSettings';
-import { PinLogin } from './components/PinLogin';
+import { AuthScreen } from './components/AuthScreen';
 import LocationSelector from './components/LocationSelector';
 
 const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
@@ -83,7 +83,7 @@ function App() {
   };
 
   if (!isUnlocked) {
-    return <PinLogin onSuccess={() => setIsUnlocked(true)} />;
+    return <AuthScreen onUnlock={() => setIsUnlocked(true)} />;
   }
 
   if (!location) {
