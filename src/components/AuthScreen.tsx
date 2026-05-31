@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Dumbbell, Fingerprint, Key } from 'lucide-react';
-import { authService } from '../lib/auth-service';
+import { authService, type Person } from '../lib/auth-service';
 
 interface AuthScreenProps {
   onUnlock: () => void;
@@ -9,6 +9,30 @@ interface AuthScreenProps {
 interface AuthError extends Error {
   kind?: 'network' | 'http';
   status?: number;
+}
+
+// Remembers who logged in last on this device so the shared GymPlan install
+// (Neli + Thomas) opens on the right person. Defaults to Neli — it's her app.
+const PERSON_KEY = 'gym.auth.person';
+const PEOPLE: Person[] = ['neli', 'thomas'];
+const PERSON_LABEL: Record<Person, string> = { neli: 'Neli', thomas: 'Thomas' };
+
+function loadPerson(): Person {
+  try {
+    const saved = localStorage.getItem(PERSON_KEY);
+    if (saved === 'neli' || saved === 'thomas') return saved;
+  } catch {
+    // localStorage unavailable (private mode) — fall through to default.
+  }
+  return 'neli';
+}
+
+function savePerson(person: Person): void {
+  try {
+    localStorage.setItem(PERSON_KEY, person);
+  } catch {
+    // Best-effort; the in-memory state still drives this session.
+  }
 }
 
 function normalizeRecoveryCode(raw: string): string {
@@ -26,8 +50,12 @@ function formatRecoveryCode(normalized: string): string {
  *   - "Recovery-Code verwenden" — bootstraps a new passkey on this device
  *
  * No PIN UI — GymPlan joins the per-app passkey rollout (Plan D).
+ *
+ * Multi-user: a Neli/Thomas tab selects whose passkey to use. The choice is
+ * threaded to the auth service as the `label` and persisted per device.
  */
 export function AuthScreen({ onUnlock }: AuthScreenProps) {
+  const [person, setPerson] = useState<Person>(loadPerson);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showRecovery, setShowRecovery] = useState(false);
@@ -36,11 +64,18 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
   const normalized = useMemo(() => normalizeRecoveryCode(recoveryInput), [recoveryInput]);
   const formatted = useMemo(() => formatRecoveryCode(normalized), [normalized]);
 
+  const selectPerson = (next: Person) => {
+    if (loading || next === person) return;
+    setPerson(next);
+    savePerson(next);
+    setError('');
+  };
+
   const handleLogin = async () => {
     setError('');
     setLoading(true);
     try {
-      await authService.loginWithPasskey();
+      await authService.loginWithPasskey(person);
       onUnlock();
     } catch (err) {
       const e = err as AuthError;
@@ -50,7 +85,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
       } else if (e.kind === 'network') {
         setError(`Netzwerk-/CORS-Fehler: ${e.message}`);
       } else if (e.status === 404) {
-        setError('Noch kein Passkey für dieses Gerät. Recovery-Code verwenden.');
+        setError(`Noch kein Passkey für ${PERSON_LABEL[person]} auf diesem Gerät. Recovery-Code verwenden.`);
       } else {
         setError(`Login fehlgeschlagen: ${e.message}`);
       }
@@ -67,15 +102,15 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
     setError('');
     setLoading(true);
     try {
-      await authService.consumeRecoveryCode(formatted);
+      await authService.consumeRecoveryCode(formatted, person);
       onUnlock();
     } catch (err) {
       const e = err as AuthError;
       console.error('[auth] recovery error', e);
       if (e.kind === 'network') {
         setError(`Netzwerk-/CORS-Fehler: ${e.message}`);
-      } else if (e.status === 404 || e.status === 410) {
-        setError('Recovery-Code ungültig oder bereits verwendet.');
+      } else if (e.status === 404 || e.status === 410 || e.status === 401) {
+        setError('Recovery-Code ungültig, bereits verwendet oder falsche Person.');
       } else if (e.name === 'NotAllowedError') {
         setError('Passkey-Erstellung abgebrochen.');
       } else {
@@ -93,7 +128,35 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
           <Dumbbell size={32} strokeWidth={2.2} />
         </div>
         <h2 className="mb-1 text-xl font-semibold">GymPlan</h2>
-        <p className="mb-5 text-sm text-slate-500 dark:text-slate-400">Entsperren</p>
+        <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">Entsperren</p>
+
+        <div
+          role="tablist"
+          aria-label="Person auswählen"
+          className="mb-5 grid grid-cols-2 gap-1 rounded-xl bg-slate-100 dark:bg-slate-700/60 p-1"
+        >
+          {PEOPLE.map((p) => {
+            const active = p === person;
+            return (
+              <button
+                key={p}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => selectPerson(p)}
+                disabled={loading}
+                className={
+                  'rounded-lg px-3 py-2 text-sm font-semibold transition disabled:cursor-progress ' +
+                  (active
+                    ? 'bg-pink-500 text-white shadow'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100')
+                }
+              >
+                {PERSON_LABEL[p]}
+              </button>
+            );
+          })}
+        </div>
 
         {error && (
           <div className="mb-3 rounded-lg bg-rose-100 dark:bg-rose-900/40 px-3 py-2 text-sm text-rose-700 dark:text-rose-200">
@@ -127,7 +190,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
         ) : (
           <div className="mt-4 text-left">
             <label htmlFor="recovery-code" className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-300">
-              Recovery-Code (5 Gruppen à 5 Zeichen)
+              Recovery-Code für {PERSON_LABEL[person]} (5 Gruppen à 5 Zeichen)
             </label>
             <input
               id="recovery-code"
