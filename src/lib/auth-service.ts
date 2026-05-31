@@ -2,10 +2,21 @@
 // served by auth.apps.buchboeck.at. Ported from Coffee Tracker's
 // authService.js, with APP_ID='gym' and the same singleton surface
 // (isSessionValid / clearSession / loginWithPasskey / consumeRecoveryCode).
+//
+// Multi-user: GymPlan is shared by Neli and Thomas. The auth-buchboeck
+// service keys every user off a `label` (defaulting to 'thomas' server-side
+// when omitted). We thread the chosen person's label through the login and
+// recovery-code flows so each enrolls and authenticates against their own
+// auth_users row and gets their own JWT `sub` — which session-sync then uses
+// to keep gym_sessions scoped per person.
 
 const APP_ID = 'gym';
 const AUTH_API = 'https://auth.apps.buchboeck.at/api/auth';
 const SESSION_KEY = 'gym.auth.session.v1';
+
+/** Who is logging in. Must match the `label` of the auth_users row in the
+ * shared auth-buchboeck Supabase project. */
+export type Person = 'neli' | 'thomas';
 
 interface JwtPayload {
   exp?: number;
@@ -204,8 +215,10 @@ class AuthService {
     sessionStorage.removeItem(SESSION_KEY);
   }
 
-  async loginWithPasskey(): Promise<string> {
-    const optsResp = await api<OptionsResponse>('login?step=options', { app_id: APP_ID });
+  /** Authenticate `person` with an existing passkey for this app. The label
+   * selects which auth_users row (and thus which passkeys) the server offers. */
+  async loginWithPasskey(person: Person): Promise<string> {
+    const optsResp = await api<OptionsResponse>('login?step=options', { app_id: APP_ID, label: person });
     const cred = (await navigator.credentials.get({
       publicKey: decodeRequestOptions(optsResp.options as PublicKeyCredentialRequestOptionsJSON),
     })) as PublicKeyCredential;
@@ -218,14 +231,19 @@ class AuthService {
     return verifyResp.session;
   }
 
-  async consumeRecoveryCode(code: string): Promise<string> {
+  /** Redeem a recovery code for `person` and bootstrap-enroll a new passkey on
+   * this device. The label must match the user the code was issued for. */
+  async consumeRecoveryCode(code: string, person: Person): Promise<string> {
     const { bootstrap_token } = await api<RecoveryCodeResponse>('recovery-code?action=consume', {
       code,
       app_id: APP_ID,
+      label: person,
     });
     return this.enrollWithBootstrapToken(bootstrap_token);
   }
 
+  // The register flow derives the user from the bootstrap token (server-side),
+  // so it needs no label of its own.
   private async enrollWithBootstrapToken(bootstrap_token: string): Promise<string> {
     const optsResp = await api<OptionsResponse>('register?step=options', {
       bootstrap_token,
