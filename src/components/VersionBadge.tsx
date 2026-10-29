@@ -32,7 +32,7 @@ export function VersionBadge() {
       <div>
         Version {BUILD_INFO.version} · {BUILD_INFO.sha}
       </div>
-      <div>Deployt am {formatBuildTime(BUILD_INFO.builtAt)}</div>
+      <div>Veröffentlicht am {formatBuildTime(BUILD_INFO.builtAt)}</div>
       {outdated && (
         <button
           type="button"
