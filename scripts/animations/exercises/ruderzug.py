@@ -11,7 +11,7 @@ SLUG = "ruderzug"
 FLOOR_Y = 250
 HIP = (182.0, 149.0)
 ANK_N, ANK_F = (192.0, FLOOR_Y - 8.0), (180.0, FLOOR_Y - 8.0)
-PULLEY = (338.0, 108.0)
+PULLEY = (338.0, 114.0)
 FAR_OFF = (-4.0, -1.0)
 SCALE = 0.86
 
@@ -21,7 +21,7 @@ def post(pose, P):
     scap = min(1.0, max(0.0, (p - 0.35) / 0.55))
     s = shoulder_side(P, scap)
     # Handgelenk: vorne (Arme lang, Richtung Seilrolle) -> am Bauch
-    belly = body_pt(P, "lumbar", 6, 10)
+    belly = body_pt(P, "lumbar", 0, 10)
     w0 = (s[0] + 61, s[1] + 22)
     w1 = belly
     u = p

@@ -7,7 +7,7 @@ SLUG = "reverse-crunch"
 # Knie zur Brust ziehen – das Becken rollt leicht ein und hebt ab, Schultern und
 # Hände bleiben liegen. Langsam zurück, ohne die Füße abzulegen.
 SHOULDER = (160, FLOOR_Y - 15)
-WRIST = (226, FLOOR_Y - 8)
+WRIST = (227, FLOOR_Y - 8)
 
 START = dict(y=FLOOR_Y - 15, rot=90, neck=-8, head=8,
              **{"thigh_n@": 42, "shin_n@": -44, "foot_n@": 18,

@@ -145,7 +145,7 @@ def build():
     tl = Timeline([(0, BASE), (0.5, BASE), (1.7, T), (2.0, T), (3.2, TOGETHER), (3.8, TOGETHER),
                    (5.0, T), (5.3, T), (6.4, BASE), (6.8, BASE)], skeleton=FRONT)
 
-    pecs = [focus("chest", rx=11, ry=9, offset=(dx, 12), show=[(2.0, 3.8)]) for dx in (-13, 13)]
+    pecs = [focus("chest", rx=12, ry=9, offset=(dx, 6), show=[(2.0, 3.8)]) for dx in (-18, 18)]
     fig = front_body(pecs + arm_prims(-1) + arm_prims(1))
     ghost_t = ghost(arm_prims(-1) + arm_prims(1), FRONT, T, 0.15)
     main = group([

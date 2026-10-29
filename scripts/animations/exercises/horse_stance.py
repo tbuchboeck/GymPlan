@@ -28,8 +28,8 @@ def tilt_pose(tilt, shift):
 
 
 NEUT = tilt_pose(0, 0)
-FWD = tilt_pose(-14, 4)
-BACK = tilt_pose(16, -5)
+FWD = tilt_pose(-17, 5)
+BACK = tilt_pose(19, -6)
 
 
 def on_thigh(leg, k, lift=-11):
@@ -95,7 +95,6 @@ def build():
     main = group([
         lot_line,
         *figure,
-        focus("lumbar", rx=9, ry=16, offset=(-14, 8), end=False, color=GOOD, show=[(0, dur)]),
         roll_fwd, roll_back,
     ], scale=SC, origin=(CX, FLOOR_Y))
 
