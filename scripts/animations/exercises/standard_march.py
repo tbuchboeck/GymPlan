@@ -28,7 +28,8 @@ def blend(p, ik, w):
     out = dict(p)
     for k in (ik.upper, ik.lower, ik.end_seg):
         if k:
-            out[k] = p.get(k, 0.0) + (q[k] - p.get(k, 0.0)) * w
+            d = (q[k] - p.get(k, 0.0) + 180.0) % 360.0 - 180.0   # kürzester Weg
+            out[k] = p.get(k, 0.0) + d * w
     return out
 
 
@@ -87,7 +88,7 @@ def build():
         caption("Linkes Knie hoch – rechte Hand tippt", 0, 1.2),
         caption("Rechtes Knie hoch – linke Hand tippt", 1.2, dur),
         static_text("Aufrecht bleiben – Kinn leicht zurück", 200, 24, 13, MUTED),
-        label("Kinn zurück", 300, 84, 0, dur, size=11),
+        label("Kinn zurück", 236, 68, 0, dur, size=11, anchor="start"),
         nose_hint(dur=dur),
     ]
     return render(prims, tl, SIDE, title="Standard March", fps=15)
