@@ -9,8 +9,8 @@ SLUG = "situps-hantel"
 
 MAT_Y = 246
 HIP = (214, MAT_Y - 15)
-ANK_N = (300, MAT_Y - 8)
-ANK_F = (296, MAT_Y - 8)
+ANK_N = (266, MAT_Y - 8)
+ANK_F = (262, MAT_Y - 8)
 
 ARMS = dict(upperarm_n=52, forearm_n=112, hand_n=-10, upperarm_f=48, forearm_f=116, hand_f=-10)
 LIE = dict(x=HIP[0], y=HIP[1], rot=90, neck=-6, head=0, **ARMS)
@@ -19,8 +19,8 @@ UP = dict(x=HIP[0], y=HIP[1], rot=34, lumbar=-14, thorax=-12, chest=-8, neck=-14
 
 def build():
     iks = [
-        IK("thigh_n", "shin_n", ANK_N, bend=-1, end_seg="foot_n", end_abs=0),
-        IK("thigh_f", "shin_f", ANK_F, bend=-1, end_seg="foot_f", end_abs=0),
+        IK("thigh_n", "shin_n", ANK_N, bend=1, end_seg="foot_n", end_abs=0),
+        IK("thigh_f", "shin_f", ANK_F, bend=1, end_seg="foot_f", end_abs=0),
     ]
     tl = Timeline([(0, LIE), (0.6, LIE), (2.1, UP), (2.7, UP), (4.4, LIE), (4.9, LIE)], iks=iks, skeleton=SIDE)
 
@@ -64,7 +64,7 @@ def build():
         arrow("M176 124 Q128 142 116 196", show=[(2.7, 4.4)]),
         Prim("path", {"d": f"M{ANK_N[0] - 14} {MAT_Y - 1}L{ANK_N[0] + 22} {MAT_Y - 1}", "stroke": GOOD,
                       "stroke-width": 3, "stroke-linecap": "round", "opacity": 0.8}),
-        label("Füße bleiben am Boden", 318, 228, 0.0, 4.9, 11, GOOD),
+        label("Füße bleiben am Boden", 294, 236, 0.0, 4.9, 11, GOOD, anchor="start"),
         caption_band(),
         caption("Rückenlage, Knie gebeugt, Hantel vor der Brust", 0, 0.6),
         caption("Ausatmen – Oberkörper aufrollen", 0.6, 2.1),

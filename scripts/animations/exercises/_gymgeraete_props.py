@@ -184,3 +184,162 @@ def side_fig(torso_w=30, head=True, extras_behind=(), extras_mid=(), extras_fron
     prims += limb_j(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
     prims += list(extras_front)
     return prims
+
+
+# --- Frontansicht sitzend mit einfacher 3D-Projektion -----------------------
+# Welt: x nach rechts (Bildschirm), y nach oben, z zum Betrachter. Die Kamera
+# schaut leicht von oben (ELEV), dadurch werden Oberschenkel, die zum
+# Betrachter zeigen, sichtbar verkürzt, und Drehungen um die Längsachse
+# verkürzen die Schulterbreite.
+
+ELEV = math.radians(22)
+
+
+def v_add(a, b):
+    return (a[0] + b[0], a[1] + b[1], a[2] + b[2])
+
+
+def v_sub(a, b):
+    return (a[0] - b[0], a[1] - b[1], a[2] - b[2])
+
+
+def v_mul(a, k):
+    return (a[0] * k, a[1] * k, a[2] * k)
+
+
+def v_len(a):
+    return math.sqrt(a[0] ** 2 + a[1] ** 2 + a[2] ** 2)
+
+
+def v_norm(a):
+    l = v_len(a) or 1e-9
+    return (a[0] / l, a[1] / l, a[2] / l)
+
+
+def v_dot(a, b):
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+
+
+def rot_y(p, deg, about=(0.0, 0.0, 0.0)):
+    """Drehung um die senkrechte Achse; +deg = Front dreht nach Bild-rechts."""
+    r = math.radians(deg)
+    x, y, z = v_sub(p, about)
+    return v_add((x * math.cos(r) + z * math.sin(r), y, -x * math.sin(r) + z * math.cos(r)), about)
+
+
+def ik3(a, t, l1, l2, pole):
+    """Zwei-Knochen-IK im Raum: Gelenkpunkt (Knie/Ellbogen) zwischen a und t,
+    zur Richtung `pole` hin geknickt."""
+    d_vec = v_sub(t, a)
+    d = max(1e-6, min(v_len(d_vec), l1 + l2 - 1e-3))
+    u = v_norm(d_vec)
+    along = (l1 * l1 - l2 * l2 + d * d) / (2 * d)
+    h = math.sqrt(max(0.0, l1 * l1 - along * along))
+    p = v_sub(pole, v_mul(u, v_dot(pole, u)))
+    p = v_norm(p)
+    return v_add(v_add(a, v_mul(u, along)), v_mul(p, h))
+
+
+class Proj3D(Skeleton):
+    """Skeleton-Ersatz: joints(pose) -> {name: (x, y, z)}; segs = [(name, a, b)].
+    fk liefert das gewohnte {seg: (sx, sy, ex, ey, winkel)} in Bildkoordinaten,
+    damit limb(), head_front(), focus(), ghost() unverändert funktionieren."""
+
+    def __init__(self, joints, segs, origin=(200.0, 190.0)):
+        super().__init__([])
+        self.joints = joints
+        self.seglist = segs
+        self.origin = origin
+
+    def proj(self, p):
+        return (self.origin[0] + p[0],
+                self.origin[1] - p[1] * math.cos(ELEV) + p[2] * math.sin(ELEV))
+
+    def fk(self, pose):
+        J = self.joints(pose)
+        out = {}
+        for name, a, b in self.seglist:
+            sx, sy = self.proj(J[a])
+            ex, ey = self.proj(J[b])
+            ang = math.degrees(math.atan2(-(ey - sy), ex - sx))
+            out[name] = (sx, sy, ex, ey, ang)
+        out["_J"] = J
+        return out
+
+
+def seated_joints(pose, arms):
+    """Sitzende Person frontal. pose: yaw (Oberkörperdrehung, Grad), spread
+    (Oberschenkel-Abspreizung je Seite, Grad), knee_z/ank (Fußposition),
+    arms(J, pose) ergänzt Ellbogen/Hände."""
+    yaw = pose.get("yaw", 0.0)
+    J = {"root": (0.0, 0.0, 0.0)}
+    J["lumbar"] = (0.0, 26.0, 0.0)
+    J["thorax"] = (0.0, 52.0, 0.0)
+    J["chest"] = (0.0, 78.0, 0.0)
+    J["neck"] = (0.0, 95.0, 0.0)
+    J["head"] = (0.0, 110.0, 0.0)
+    J["clav_L"] = rot_y((-24.0, 77.0, 0.0), yaw)
+    J["clav_R"] = rot_y((24.0, 77.0, 0.0), yaw)
+    J["waist_L"] = rot_y((-19.0, 30.0, 0.0), yaw * 0.45)
+    J["waist_R"] = rot_y((19.0, 30.0, 0.0), yaw * 0.45)
+    sp = pose.get("spread", 10.0)
+    for side, s in (("L", -1), ("R", 1)):
+        hip = (s * 15.0, 0.0, 0.0)
+        a = math.radians(sp)
+        knee = v_add(hip, (s * 50 * math.sin(a), -4.0, 50 * math.cos(a)))
+        ank = v_add(knee, (s * 3.0, -46.0, 8.0))
+        J["hip_" + side] = hip
+        J["knee_" + side] = knee
+        J["ank_" + side] = ank
+        J["toe_" + side] = v_add(ank, (s * 1.0, -2.0, 11.0))
+    arms(J, pose)
+    return J
+
+
+SEATED_SEGS = [
+    ("lumbar", "root", "lumbar"), ("thorax", "lumbar", "thorax"), ("chest", "thorax", "chest"),
+    ("neck", "chest", "neck"), ("head", "neck", "head"),
+    ("clav_L", "chest", "clav_L"), ("clav_R", "chest", "clav_R"),
+    ("upperarm_L", "clav_L", "elb_L"), ("forearm_L", "elb_L", "wri_L"), ("hand_L", "wri_L", "hand_L"),
+    ("upperarm_R", "clav_R", "elb_R"), ("forearm_R", "elb_R", "wri_R"), ("hand_R", "wri_R", "hand_R"),
+    ("hip_L", "root", "hip_L"), ("thigh_L", "hip_L", "knee_L"), ("shin_L", "knee_L", "ank_L"),
+    ("foot_L", "ank_L", "toe_L"),
+    ("hip_R", "root", "hip_R"), ("thigh_R", "hip_R", "knee_R"), ("shin_R", "knee_R", "ank_R"),
+    ("foot_R", "ank_R", "toe_R"),
+    ("waist_L", "lumbar", "waist_L"), ("waist_R", "lumbar", "waist_R"),
+]
+
+
+def arm_to(J, side, hand, pole):
+    """Arm von der Schulter zur Hand (3D-IK), Handgelenk auf dem Unterarm."""
+    sh = J["clav_" + side]
+    elb = ik3(sh, hand, 36.0, 42.0, pole)
+    J["elb_" + side] = elb
+    J["wri_" + side] = v_add(elb, v_mul(v_norm(v_sub(hand, elb)), 32.0))
+    J["hand_" + side] = hand
+
+
+def seated_front_figure(torso_w=44, extras_after_trunk=(), extras_after_arms=(), legs_front=()) -> list[Prim]:
+    """Reihenfolge: Rumpf, Arme, Kopf, dann Beine (die zum Betrachter zeigen)."""
+    prims: list[Prim] = []
+    prims += limb(["neck"], 13, TORSO)
+    trunk = limb(["lumbar", "thorax", "chest"], torso_w, TORSO)
+    sh = lambda c: {"d": smooth_path([pt(c["P"], "clav_L"), pt(c["P"], "chest"), pt(c["P"], "clav_R")])}
+    pelvis = lambda c: {"d": smooth_path([pt(c["P"], "hip_L"), pt(c["P"], "hip_R")])}
+    prims += [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 33, "stroke-linecap": "round"},
+                   pelvis),
+              Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 25, "stroke-linecap": "round"}, sh),
+              trunk[0],
+              Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 30, "stroke-linecap": "round"}, pelvis),
+              Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 22, "stroke-linecap": "round"}, sh),
+              trunk[1]]
+    prims += list(extras_after_trunk)
+    prims += limb_j(["upperarm_L", "forearm_L", "hand_L"], 12, NEAR)
+    prims += limb_j(["upperarm_R", "forearm_R", "hand_R"], 12, NEAR)
+    prims += head_front()
+    prims += list(extras_after_arms)
+    for s in ("L", "R"):
+        prims += limb_j(["shin_" + s, "foot_" + s], 15, NEAR)
+        prims += limb(["thigh_" + s], 18, NEAR)
+    prims += list(legs_front)
+    return prims

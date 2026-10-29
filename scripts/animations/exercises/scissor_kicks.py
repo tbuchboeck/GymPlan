@@ -6,8 +6,8 @@ SLUG = "scissor-kicks"
 # Bauchlage, Unterarmstütz. Gestreckte Beine schweben knapp über der Matte und
 # bewegen sich abwechselnd auf und ab (Schere). Becken bleibt liegen.
 HOVER = dict(PRONE, thigh_n=-6, shin_n=0, foot_n=-74, thigh_f=-6, shin_f=0, foot_f=-74)
-A = dict(HOVER, thigh_n=-17, thigh_f=1)    # nahes Bein oben
-B = dict(HOVER, thigh_n=1, thigh_f=-17)    # fernes Bein oben
+A = dict(HOVER, thigh_n=-19, thigh_f=1)    # nahes Bein oben
+B = dict(HOVER, thigh_n=1, thigh_f=-19)    # fernes Bein oben
 
 
 def build():

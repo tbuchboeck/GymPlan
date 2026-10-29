@@ -19,12 +19,13 @@ def nose_hint(x=330, y=36, dur=4.0):
     out = [Prim("rect", {"x": x, "y": y, "width": w, "height": h, "rx": 10, "fill": "#0b1220",
                          "opacity": 0.7, "stroke": "#334155", "stroke-width": 1})]
     nx, ny = x + 20, y + 4          # Stirnpunkt; Profil blickt nach links
-    out.append(Prim("path", {"d": f"M{nx} {ny}L{nx - 6} {ny + 9}L{nx - 1} {ny + 11}",
-                             "fill": "none", "stroke": HEAD, "stroke-width": 1.8,
-                             "stroke-linecap": "round", "stroke-linejoin": "round"}))
+    out.append(Prim("path", {"d": f"M{nx + 1} {ny - 1}Q{nx} {ny + 5} {nx - 7} {ny + 10}"
+                                  f"Q{nx - 7} {ny + 12.5} {nx - 2} {ny + 12.5}Q{nx + 1} {ny + 12.5} {nx + 2} {ny + 10}Z",
+                             "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1, "stroke-linejoin": "round"}))
+    out.append(Prim("ellipse", {"cx": nx - 2.5, "cy": ny + 11.2, "rx": 1.6, "ry": 0.9, "fill": SKIN_LINE}))
     for i in range(3):
         x0, x1 = x + 5, nx - 6
-        yy = ny + 10.5
+        yy = ny + 12
         b = f"{i * 0.22:.2f}s"
         out.append(Prim("circle", {"cx": x0, "cy": yy, "r": 1.3, "fill": GOOD, "opacity": 0}, children=[
             anim("cx", f"{x0};{x1};{x1};{x0};{x0}", dur, "0;0.4;0.5;0.9;1", begin=b),
