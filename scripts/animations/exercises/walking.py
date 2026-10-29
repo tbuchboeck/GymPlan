@@ -112,12 +112,11 @@ def build():
 
     relax = focus("lumbar", rx=10, ry=14, offset=(-8, 0), color=GOOD, end=False)
     T = CYCLE
+    scene = group([shadow, *prims_fig, relax], scale=0.84, origin=(CX, FLOOR_Y))
     prims = [
         floor(FLOOR_Y, 20, 380),
         dashes,
-        shadow,
-        *prims_fig,
-        relax,
+        scene,
         caption_band(),
         static_text("Locker gehen – Schultern entspannt, ruhig atmen", 200, 22, 13, MUTED),
         caption("Ferse setzt auf, Fuß rollt ab", 0, T),
