@@ -7,22 +7,74 @@ import { BUILD_INFO, fetchLatestBuildInfo, formatBuildTime, type BuildInfo } fro
  * Anzeigen, ob online schon eine neuere Version liegt (PWA-Cache), und bietet
  * dann ein Neu-Laden an.
  */
+const UPDATE_TRY_KEY = 'gym.updateTry';
+const AUTO_UPDATE_KEY = 'gym.autoUpdate';
+
+/** Neue Service-Worker-Version holen und warten, bis sie die Seite übernimmt –
+ *  sonst lädt der Browser beim Neuladen wieder die alte Version aus dem Cache. */
+async function updateServiceWorker(): Promise<void> {
+  const sw = navigator.serviceWorker;
+  const reg = await sw?.getRegistration();
+  if (!sw || !reg) return;
+  const takeover = new Promise<void>((resolve) => {
+    sw.addEventListener('controllerchange', () => resolve(), { once: true });
+    setTimeout(resolve, 8000);
+  });
+  await reg.update();
+  if (reg.installing || reg.waiting) {
+    reg.waiting?.postMessage({ type: 'SKIP_WAITING' });
+    await takeover;
+  }
+}
+
 export function VersionBadge() {
   const [latest, setLatest] = useState<BuildInfo | null>(null);
 
   useEffect(() => {
-    fetchLatestBuildInfo().then(setLatest);
+    fetchLatestBuildInfo().then((info) => {
+      setLatest(info);
+      // Neue Version online: einmal pro Version automatisch holen und neu laden,
+      // damit niemand auf den Knopf tippen muss. Klappt das nicht, bleibt der Knopf.
+      if (!info || info.sha === BUILD_INFO.sha) return;
+      try {
+        if (sessionStorage.getItem(AUTO_UPDATE_KEY) === info.sha) return;
+        sessionStorage.setItem(AUTO_UPDATE_KEY, info.sha);
+      } catch {
+        return;
+      }
+      updateServiceWorker()
+        .catch(() => {})
+        .finally(() => window.location.reload());
+    });
   }, []);
 
   const outdated = latest !== null && latest.sha !== BUILD_INFO.sha;
 
+  const [updating, setUpdating] = useState(false);
+
   const reload = async () => {
-    // Service Worker aktualisieren, damit nicht wieder die alte Version kommt
+    if (updating || !latest) return;
+    setUpdating(true);
+    // Hat der normale Weg für genau diese Version schon einmal nicht gereicht,
+    // räumen wir Service Worker und Cache komplett ab.
+    let hard = false;
     try {
-      const reg = await navigator.serviceWorker?.getRegistration();
-      await reg?.update();
+      hard = sessionStorage.getItem(UPDATE_TRY_KEY) === latest.sha;
+      sessionStorage.setItem(UPDATE_TRY_KEY, latest.sha);
     } catch {
-      // ohne Service Worker einfach neu laden
+      // ohne sessionStorage einfach der normale Weg
+    }
+    try {
+      if (hard) {
+        const regs = (await navigator.serviceWorker?.getRegistrations()) ?? [];
+        await Promise.all(regs.map((r) => r.unregister()));
+        const keys = (await caches?.keys()) ?? [];
+        await Promise.all(keys.map((k) => caches.delete(k)));
+      } else {
+        await updateServiceWorker();
+      }
+    } catch {
+      // egal – neu laden hilft trotzdem oft
     }
     window.location.reload();
   };
@@ -37,10 +89,11 @@ export function VersionBadge() {
         <button
           type="button"
           onClick={reload}
+          disabled={updating}
           className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition hover:bg-amber-200"
         >
-          <RefreshCw size={14} />
-          Neue Version vom {formatBuildTime(latest.builtAt)} – neu laden
+          <RefreshCw size={14} className={updating ? 'animate-spin' : undefined} />
+          {updating ? 'Neue Version wird geladen …' : `Neue Version vom ${formatBuildTime(latest.builtAt)} – neu laden`}
         </button>
       )}
     </div>
