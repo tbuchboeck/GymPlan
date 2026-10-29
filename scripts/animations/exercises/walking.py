@@ -62,8 +62,7 @@ class WalkTimeline(Timeline):
         # Beckenhöhe: Standbein(e) fast gestreckt
         ys = []
         for k, (dx, ay, a) in feet.items():
-            if ay >= ANK_Y - 0.5 or True:
-                ys.append(ay - math.sqrt(max(1.0, LEGLEN ** 2 - dx ** 2)))
+            ys.append(ay - math.sqrt(max(1.0, LEGLEN ** 2 - dx ** 2)))
         y = max(ys)
         # x der Pose ist Becken, Füße relativ dazu
         pose = {"x": CX, "y": y, "rot": -3, "neck": 4, "head": -1}
@@ -88,7 +87,7 @@ def build():
     dur = tl.duration
 
     def ground(c):
-        return {"stroke-dashoffset": f"{(c['t'] * SPEED) % 40:.1f}"}
+        return {"stroke-dashoffset": c["t"] * SPEED}   # SPEED*dur = 360 = 9 Muster
 
     # Bodenmarkierungen ziehen mit der Geschwindigkeit des Standfußes nach hinten
     dashes = Prim("line", {"x1": 20, "y1": FLOOR_Y + 5, "x2": 380, "y2": FLOOR_Y + 5, "stroke": "#475569",
@@ -112,8 +111,6 @@ def build():
     prims_fig += arms(False)
 
     relax = focus("lumbar", rx=10, ry=14, offset=(-8, 0), color=GOOD, end=False)
-    breath = Prim("text", {"x": 304, "y": 92, "font-size": 12, "fill": MUTED, "text-anchor": "middle",
-                           "_show": [(0, dur)]}, text="")
     T = CYCLE
     prims = [
         floor(FLOOR_Y, 20, 380),
