@@ -9,8 +9,8 @@ SLUG = "ruderzug"
 # drücken hinten zusammen („Nussknacker“). Füße fix, Knie locker.
 
 FLOOR_Y = 250
-HIP = (160.0, 149.0)
-ANK_N, ANK_F = (170.0, FLOOR_Y - 8.0), (158.0, FLOOR_Y - 8.0)
+HIP = (182.0, 149.0)
+ANK_N, ANK_F = (192.0, FLOOR_Y - 8.0), (180.0, FLOOR_Y - 8.0)
 PULLEY = (338.0, 108.0)
 FAR_OFF = (-4.0, -1.0)
 SCALE = 0.86

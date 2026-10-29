@@ -16,11 +16,12 @@ SC = 0.86
 CX = 168
 UA, FA, HD = 36.0, 32.0, 8.0
 BEND = 22.0          # Ellbogen leicht gebeugt (horizontal)
+OBL = 0.28           # Kamera leicht von oben: Tiefe verschiebt etwas nach unten
 
 BASE = dict(x=CX, y=FLOOR_Y - 103, hip_L=0, hip_R=0, thigh_L=-3, thigh_R=3, shin_L=1, shin_R=-1,
             e=4.0, h=0.0)
 T = dict(BASE, e=86.0, h=0.0)
-TOGETHER = dict(BASE, e=80.0, h=95.0)
+TOGETHER = dict(BASE, e=92.0, h=88.0)
 
 
 def arm(c, side):
@@ -32,9 +33,9 @@ def arm(c, side):
     se, ce = math.sin(e), math.cos(e)
     hu, hf = math.radians(h), math.radians(h + b)
     ex = sx + side * UA * se * math.cos(hu)
-    ey = sy + UA * ce
+    ey = sy + UA * ce + OBL * UA * se * math.sin(hu)
     fx = ex + side * (FA + HD) * se * math.cos(hf)
-    fy = ey + (FA + HD) * ce
+    fy = ey + (FA + HD) * ce + OBL * (FA + HD) * se * math.sin(hf)
     depth = se * (UA * math.sin(hu) + (FA + HD) * math.sin(hf)) / (UA + FA + HD)
     return (sx, sy), (ex, ey), (fx, fy), max(0.0, depth)
 
@@ -103,7 +104,7 @@ def top_view():
     def track(side):
         pts = []
         for i in range(11):
-            h = 95 * i / 10
+            h = 88 * i / 10
             b = BEND
             se = math.sin(math.radians(83))
             x = OX + side * (24 + UA * se * math.cos(math.radians(h)) + (FA + HD) * se * math.cos(math.radians(h + b))) * IS

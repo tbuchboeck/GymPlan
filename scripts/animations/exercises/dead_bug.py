@@ -53,7 +53,7 @@ def build():
     out1 = [(A0, A1)]
     out2 = [(B0, B1)]
     scene = group([
-        mat(FLOOR_Y, 40, 340),
+        mat(FLOOR_Y, 62, 330),
         *side_figure_r(r=9, round_arms=False),
         back,
         focus("lumbar", rx=22, ry=9, offset=(-4, -6), show=[(A0, A3), (B0, B3)]),
