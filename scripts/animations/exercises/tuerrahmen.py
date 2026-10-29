@@ -2,25 +2,26 @@ from rig import *
 
 SLUG = "tuerrahmen-dehnung"
 
-# Seitansicht (Blick nach rechts) + kleine Draufsicht links oben.
-# Der nahe Arm liegt mit dem Unterarm senkrecht am Türrahmen. Weil der
-# Oberarm dabei zur Seite (zum Betrachter) zeigt, wird er hier aus einem
-# kleinen 3D-Modell projiziert: Ellbogen E bleibt fix am Rahmen, die
-# Schulter wandert mit dem Körper nach vorn -> Oberarm zeigt nach hinten.
+# Hauptansicht: Draufsicht (vorwärts = nach oben). Wand mit Türöffnung, die
+# Person steht in der Öffnung, rechter Unterarm senkrecht an der Wand direkt
+# neben der Rahmenkante (von oben: kurzer Block). Der Ellbogen E bleibt fix;
+# die nahe Schulter S bewegt sich auf einem Kreis (Oberarmlänge) um E nach
+# vorn -> der Oberarm zeigt immer weiter nach hinten = Brustdehnung.
+# Zusätzlich dreht die Schulterlinie leicht auf (ferne Schulter geht vor).
+# Inset rechts oben: Armhaltung 90/90 am Pfosten (FRONT-Skelett, statisch).
 
-FLOOR_Y = 248
-ANK_FRONT = (200, 240)
-ANK_BACK = (128, 240)
-ELBOW = (157.0, 76.0)          # fix am Rahmen (Schulterhöhe in der Startpose)
-POST_X = ELBOW[0] + 6          # Vorderkante des Unterarms liegt an der Rahmen-Rückseite
-POST_W = 14
-UA, FA, HA = 36.0, 32.0, 13.0  # Oberarm, Unterarm, Hand
-HALF_SH = 20.0                 # halbe Schulterbreite (Draufsicht)
-EDGE_Z = 50.0                  # Türöffnung: halbe Breite (Draufsicht)
+WALL_Y0, WALL_Y1 = 122, 140          # Wand (Vorder-/Rückseite)
+OPEN_X0, OPEN_X1 = 104, 260          # Türöffnung
+ELBOW = (267.0, 148.0)               # Unterarm-Block an der Wand-Rückseite, neben der Kante
+UA = 57.0                            # Oberarm (Draufsicht)
+HS = 37.0                            # halbe Schulterbreite
+ALPHA, PHI = 40.0, 12.0              # max. Oberarm-Winkel nach hinten / Aufdrehen
+FOOT_FRONT = (196, 62)
+FOOT_BACK = (150, 188)
 
-START = dict(x=165, y=152, upperarm_f=4, forearm_f=6, neck=2, head=-2)
-LEAN = dict(x=173, y=155, rot=-6, upperarm_f=12, forearm_f=8, neck=6, head=4)
-LEAN_IN = dict(LEAN, x=175)  # in der Haltephase minimal tiefer
+START = dict(lean=0.0)
+LEAN = dict(lean=1.0)
+LEAN_IN = dict(lean=1.06)            # in der Haltephase minimal tiefer
 
 
 def label(text, x, y, t0, t1, size=12, color=ACCENT, anchor="start"):
@@ -28,162 +29,174 @@ def label(text, x, y, t0, t1, size=12, color=ACCENT, anchor="start"):
                          "text-anchor": anchor, "_show": [(t0, t1)]}, text=text)
 
 
-def shoulder(c):
-    return pt(c["P"], "chest")
-
-
-def elbow_z(c):
-    """Seitliche Tiefe (z) der nahen Schulter so, dass |S-E| = Oberarmlänge."""
-    sx, sy = shoulder(c)
-    dx, dy = ELBOW[0] - sx, ELBOW[1] - sy
-    dz = math.sqrt(max(0.0, UA * UA - dx * dx - dy * dy))
-    return dz
-
-
-def stroke(fn, width, color, outline=True, **extra):
-    """Dicker runder Strich entlang fn(c) -> Punktliste (mit Umriss)."""
+def stroke(fn, width, color, outline=True):
     out = []
     if outline:
         out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
                                  "stroke-linecap": "round", "stroke-linejoin": "round"},
                         lambda c: {"d": smooth_path(fn(c))}))
-    attrs = {"fill": "none", "stroke": color, "stroke-width": width,
-             "stroke-linecap": "round", "stroke-linejoin": "round"}
-    attrs.update(extra)
-    out.append(Prim("path", attrs, lambda c: {"d": smooth_path(fn(c))}))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"},
+                    lambda c: {"d": smooth_path(fn(c))}))
     return out
 
 
-def near_arm():
-    ex, ey = ELBOW
-    hand = (ex, ey - FA)
-    tip = (ex, ey - FA - HA + 2)
-    upper = stroke(lambda c: [shoulder(c), ELBOW], 12, NEAR)
-    fore = stroke(lambda c: [ELBOW, hand], 12, NEAR)
-    palm = stroke(lambda c: [hand, tip], 10, NEAR)
-    return fore + palm + upper
+def body(lean):
+    """Draufsicht-Geometrie aus dem Skalar lean (0..1)."""
+    a = math.radians(ALPHA * lean)
+    f = math.radians(PHI * lean)
+    S = (ELBOW[0] - UA * math.cos(a), ELBOW[1] - UA * math.sin(a))     # nahe Schulter
+    u = (math.cos(f), math.sin(f))                                     # fern -> nah
+    F = (S[0] - 2 * HS * u[0], S[1] - 2 * HS * u[1])                   # ferne Schulter
+    C = ((S[0] + F[0]) / 2, (S[1] + F[1]) / 2)
+    n = (u[1], -u[0])                                                  # vorwärts
+    return S, F, C, u, n
 
 
-def door():
-    """Türrahmen-Pfosten (hinter der Figur) mit angedeuteter Wand."""
-    top = 34
+def B(c):
+    return body(c["pose"].get("lean", 0.0))
+
+
+def off(p, u, n, a=0.0, b=0.0):
+    return (p[0] + a * u[0] + b * n[0], p[1] + a * u[1] + b * n[1])
+
+
+def scene_static():
+    wall = "#3b4a63"
     return [
-        Prim("rect", {"x": POST_X, "y": top, "width": POST_W, "height": FLOOR_Y - top,
-                      "fill": PROP_DARK}),
-        Prim("rect", {"x": POST_X + POST_W - 4, "y": top, "width": 4, "height": FLOOR_Y - top,
-                      "fill": PROP, "opacity": 0.8}),
-        Prim("rect", {"x": POST_X - 3, "y": top - 6, "width": POST_W + 6, "height": 8, "rx": 2,
+        # Boden beider Räume, Schwelle in der Öffnung
+        Prim("rect", {"x": OPEN_X0, "y": WALL_Y0, "width": OPEN_X1 - OPEN_X0, "height": WALL_Y1 - WALL_Y0,
+                      "fill": "#26324a"}),
+        Prim("rect", {"x": 8, "y": WALL_Y0, "width": OPEN_X0 - 8, "height": WALL_Y1 - WALL_Y0, "fill": wall}),
+        Prim("rect", {"x": OPEN_X1, "y": WALL_Y0, "width": 392 - OPEN_X1, "height": WALL_Y1 - WALL_Y0, "fill": wall}),
+        # Türzarge (Rahmenkanten)
+        Prim("rect", {"x": OPEN_X0 - 5, "y": WALL_Y0 - 3, "width": 5, "height": WALL_Y1 - WALL_Y0 + 6, "rx": 1.5,
                       "fill": PROP}),
+        Prim("rect", {"x": OPEN_X1, "y": WALL_Y0 - 3, "width": 5, "height": WALL_Y1 - WALL_Y0 + 6, "rx": 1.5,
+                      "fill": "#94a3b8"}),
+        static_text("Wand", 50, WALL_Y0 - 5, 8, MUTED),
+        static_text("Türrahmen", OPEN_X1 + 8, WALL_Y0 - 5, 8, MUTED, anchor="start"),
     ]
 
 
-def figure():
-    prims = []
-    prims += limb(["thigh_f", "shin_f", "foot_f"], 15, FAR)
-    prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
-    prims += limb(["neck"], 13, TORSO)
-    prims += limb(["lumbar", "thorax"], 30, TORSO)
-    prims += limb(["thorax", "chest"], 26, TORSO, outline=False)
-    prims += head_side()
-    prims += limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
-    prims += near_arm()
+def feet():
+    out = []
+    for (x, y) in (FOOT_FRONT, FOOT_BACK):
+        d = f"M{x - 9} {y + 12}L{x - 9} {y - 8}"
+        d2 = f"M{x + 9} {y + 14}L{x + 9} {y - 6}" if (x, y) == FOOT_BACK else f"M{x + 9} {y + 12}L{x + 9} {y - 8}"
+        for dd in ((d,) if (x, y) == FOOT_FRONT else (d2,)):
+            out.append(Prim("path", {"d": dd, "stroke": SKIN_LINE, "stroke-width": 15, "stroke-linecap": "round",
+                                     "fill": "none"}))
+            out.append(Prim("path", {"d": dd, "stroke": FAR, "stroke-width": 12, "stroke-linecap": "round",
+                                     "fill": "none"}))
+    return out
+
+
+def person(frozen_lean=None):
+    def g(c):
+        return body(frozen_lean) if frozen_lean is not None else B(c)
+
+    def trunk(c):
+        S, F, C, u, n = g(c)
+        return [off(F, u, n, 6, -4), off(S, u, n, -6, -4)]
+
+    def shoulders(c):
+        S, F, C, u, n = g(c)
+        return [F, S]
+
+    def far_arm(c):
+        S, F, C, u, n = g(c)
+        x, y = off(F, u, n, -7, 4)
+        return {"cx": x, "cy": y}
+
+    def head(c):
+        S, F, C, u, n = g(c)
+        x, y = off(C, u, n, 0, 6)
+        return {"cx": x, "cy": y}
+
+    def nose(c):
+        S, F, C, u, n = g(c)
+        x, y = off(C, u, n, 0, 23)
+        return {"cx": x, "cy": y}
+
+    def uarm(c):
+        S, F, C, u, n = g(c)
+        return [S, ELBOW]
+
+    prims = [Prim("circle", {"r": 10, "fill": FAR, "stroke": SKIN_LINE, "stroke-width": 1.5}, far_arm)]
+    prims += stroke(trunk, 40, TORSO)
+    prims += stroke(shoulders, 22, TORSO)
+    prims += stroke(uarm, 15, NEAR)
+    prims += [Prim("ellipse", {"rx": 3.5, "ry": 3, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1.5}, nose),
+              Prim("circle", {"r": 17.5, "fill": SKIN_LINE}, head),
+              Prim("circle", {"r": 16, "fill": "#4338ca"}, head),
+              Prim("circle", {"r": 8, "fill": "#3b32b8"}, head)]
     return prims
 
 
-# --- Draufsicht --------------------------------------------------------------
-
-IN_X, IN_Y, IN_W, IN_H = 14, 40, 108, 104
-K = 1.0
-
-
-def top_xy(x_fwd, z):
-    # vorwärts (x) = nach oben, z (seitlich, Rahmen-Seite) = nach rechts
-    return IN_X + 34 + z * K, IN_Y + 74 - (x_fwd - 160) * K
+def forearm_block():
+    ex, ey = ELBOW
+    return [Prim("rect", {"x": ex - 7.5, "y": ey - 7.5, "width": 15, "height": 15, "rx": 4, "fill": NEAR,
+                          "stroke": SKIN_LINE, "stroke-width": 1.5}),
+            Prim("rect", {"x": ex - 4, "y": ey - 4, "width": 8, "height": 8, "rx": 2, "fill": HEAD})]
 
 
-def top_view():
-    wall_y0 = top_xy(POST_X + POST_W, 0)[1]
-    wall_y1 = top_xy(POST_X, 0)[1]
-    edge_x = top_xy(0, EDGE_Z)[0]
-    left_edge = top_xy(0, -EDGE_Z)[0]
+# --- Inset: Armhaltung 90/90 (statisch) ----------------------------------------
+IN_X, IN_Y, IN_W, IN_H = 306, 152, 86, 74
 
-    def body_c(c):
-        sx, _ = shoulder(c)
-        zc = EDGE_Z + 6 - elbow_z(c) - HALF_SH  # Körpermitte (z)
-        return sx, zc
 
-    def sh_line(c):
-        sx, zc = body_c(c)
-        return [top_xy(sx, zc - HALF_SH), top_xy(sx, zc + HALF_SH)]
-
-    def uarm(c):
-        sx, zc = body_c(c)
-        return [top_xy(sx, zc + HALF_SH), top_xy(ELBOW[0], EDGE_Z + 6)]
-
-    def head(c):
-        sx, zc = body_c(c)
-        x, y = top_xy(sx + 3, zc)
-        return {"cx": x, "cy": y}
-
-    def chest_focus(c):
-        sx, zc = body_c(c)
-        x, y = top_xy(sx + 9, zc + HALF_SH * 0.55)
-        return {"cx": x, "cy": y}
-
-    def far_hand(c):
-        sx, zc = body_c(c)
-        x, y = top_xy(sx + 2, zc - HALF_SH - 2)
-        return {"cx": x, "cy": y}
-
-    ex, ey = top_xy(ELBOW[0], EDGE_Z + 6)
-    inner = [
-        Prim("rect", {"x": IN_X, "y": IN_Y, "width": IN_W, "height": IN_H, "rx": 8, "fill": "#0b1220",
-                      "opacity": 0.7}),
-        # Wand mit Türöffnung
-        Prim("rect", {"x": edge_x, "y": wall_y0, "width": IN_X + IN_W - edge_x, "height": wall_y1 - wall_y0,
-                      "fill": PROP_DARK}),
-        Prim("rect", {"x": IN_X, "y": wall_y0, "width": left_edge - IN_X, "height": wall_y1 - wall_y0,
-                      "fill": PROP_DARK}) if left_edge > IN_X else None,
-        Prim("circle", {"r": 4, "fill": FAR}, far_hand),
-        *stroke(sh_line, 11, TORSO),
-        Prim("ellipse", {"rx": 9, "ry": 6, "fill": GOOD, "opacity": 0.35, "_pulse": True,
-                         "_show": [(2.2, 7.6)]}, chest_focus),
-        *stroke(uarm, 8, NEAR),
-        Prim("circle", {"r": 6, "fill": NEAR, "stroke": SKIN_LINE, "stroke-width": 1.5, "cx": ex, "cy": ey}),
-        Prim("circle", {"r": 8, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1.5}, head),
-        static_text("von oben", IN_X + IN_W / 2, IN_Y + IN_H - 6, 10, MUTED),
-    ]
-    g = Prim("g", {"clip-path": "url(#clipTop)"}, children=[p for p in inner if p is not None])
-    return [g]
+def arm_inset():
+    pose = dict(x=0, y=0, upperarm_R=90, forearm_R=90, upperarm_L=4, forearm_L=-4)
+    parts = (limb(["neck"], 13, TORSO) + limb(["lumbar", "thorax", "chest"], 44, TORSO)
+             + [Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 22, "stroke-linecap": "round"},
+                     lambda c: {"d": smooth_path([pt(c["P"], "clav_L"), pt(c["P"], "chest"), pt(c["P"], "clav_R")])})]
+             + limb(["upperarm_L", "forearm_L", "hand_L"], 13, FAR)
+             + limb(["upperarm_R", "forearm_R", "hand_R"], 13, NEAR) + head_front())
+    P = FRONT.fk(pose)
+    ex, ey = pt(P, "upperarm_R")
+    frozen = ghost(parts, FRONT, pose, opacity=1.0)
+    post = Prim("rect", {"x": ex + 7, "y": ey - 90, "width": 12, "height": 160, "fill": "#94a3b8"})
+    ang = Prim("path", {"d": f"M{ex - 14} {ey}L{ex - 14} {ey - 14}L{ex} {ey - 14}", "fill": "none",
+                        "stroke": ACCENT, "stroke-width": 2.5})
+    sh_y = pt(P, "clav_R")[1]
+    level = Prim("line", {"x1": pt(P, "clav_L")[0] - 20, "y1": sh_y, "x2": ex + 30, "y2": sh_y, "stroke": GOOD,
+                          "stroke-width": 2, "stroke-dasharray": "5 5", "opacity": 0.8})
+    cx, cy = pt(P, "chest")
+    g = group([post, frozen, level, ang], scale=0.5, origin=(cx, cy),
+              dx=IN_X + 40 - cx, dy=IN_Y + 50 - cy)
+    clip = Prim("g", {"clip-path": "url(#clipArm)"}, children=[
+        Prim("rect", {"x": IN_X, "y": IN_Y, "width": IN_W, "height": IN_H, "fill": "#0b1220", "opacity": 0.8}), g])
+    return [clip, static_text("Ellbogen auf Schulterhöhe", IN_X + IN_W / 2, IN_Y + IN_H + 12, 9.5, GOOD),
+            static_text("Unterarm senkrecht", IN_X + IN_W / 2, IN_Y + IN_H + 23, 9.5, GOOD)]
 
 
 def build():
-    iks = [
-        IK("thigh_n", "shin_n", ANK_FRONT, bend=1, end_seg="foot_n", end_abs=0),
-        IK("thigh_f", "shin_f", ANK_BACK, bend=1, end_seg="foot_f", end_abs=0),
-    ]
     tl = Timeline([(0, START), (1.4, START), (3.4, LEAN), (5.2, LEAN_IN), (7.0, LEAN),
-                   (7.6, LEAN), (9.2, START), (9.6, START)],
-                  iks=iks, skeleton=SIDE)
+                   (7.6, LEAN), (9.2, START), (9.6, START)], skeleton=SIDE)
 
-    torso_ghost = ghost(limb(["lumbar", "thorax"], 30, TORSO) + limb(["thorax", "chest"], 26, TORSO, False)
-                        + limb(["neck"], 13, TORSO) + head_side(), SIDE, tl.at(0), 0.16)
+    def chest(c):
+        S, F, C, u, n = B(c)
+        x, y = off(S, u, n, -17, 9)
+        return {"cx": x, "cy": y}
 
-    chest = focus("chest", rx=11, ry=14, offset=(13, 6), color=GOOD, show=[(2.6, 7.6)])
-    scene = group([floor(FLOOR_Y, 90, 360), *door(), torso_ghost, *figure(), chest,
-                   arrow("M150 120 L176 120", show=[(1.4, 3.2)]),
-                   ], scale=0.92, origin=(200, FLOOR_Y), dx=28)
-
+    focus_chest = Prim("ellipse", {"rx": 15, "ry": 10, "fill": GOOD, "opacity": 0.35, "_pulse": True,
+                                   "_show": [(2.4, 7.8)]}, chest)
+    start_ghost = ghost(person(0.0), SIDE, START, 0.16)
+    main = group([*scene_static(), start_ghost, *person(), *forearm_block(), focus_chest],
+                 scale=1.35, origin=(185, 140))
     prims = [
-        scene,
-        *top_view(),
+        main,
+        arrow("M180 236 L180 206", show=[(1.4, 3.4)]),
+        *arm_inset(),
         caption_band(),
         caption("Unterarm senkrecht an den Rahmen, Ellbogen 90°", 0, 1.4, size=14),
         caption("Mit dem Körper langsam vorlehnen", 1.4, 3.4),
         caption("Brust zieht – 30 s ruhig atmen", 3.4, 7.6),
         caption("Langsam zurück", 7.6, 9.6),
-        label("Schulter bleibt unten", 262, 72, 3.4, 7.6),
-        static_text("Kribbeln im Arm? Spannung sofort lösen", 258, 24, 12, MUTED),
+        label("Schulter bleibt unten", 16, 62, 3.4, 7.6),
+        static_text("von oben", 16, 46, 11, MUTED, anchor="start"),
+        static_text("Kribbeln im Arm? Spannung sofort lösen", 200, 22, 12, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Brustdehnung im Türrahmen", fps=12,
-                  extra_defs=f'<clipPath id="clipTop"><rect x="{IN_X}" y="{IN_Y}" width="{IN_W}" height="{IN_H}" rx="8"/></clipPath>')
+    clip = (f'<clipPath id="clipArm"><rect x="{IN_X}" y="{IN_Y}" width="{IN_W}" height="{IN_H}" rx="8"/>'
+            '</clipPath>')
+    return render(prims, tl, SIDE, title="Brustdehnung im Türrahmen", fps=12, extra_defs=clip)

@@ -96,8 +96,8 @@ def build():
         *fig,
         focus_seg("upperarm_n", 0.5, 7, rx=13, ry=7, show=[(0.6, 4.0)]),
         elbow_ring,
-        arrow(arc_d(ex, ey, 60, 108, 205), color=MUTED, width=2.2, show=[(0.6, 2.2)]),
-        arrow(arc_d(ex, ey, 60, 200, 102), show=[(2.7, 4.0)]),
+        arrow(arc_d(ex, ey, 54, 112, 205), color=MUTED, width=2.2, show=[(0.6, 2.2)]),
+        arrow(arc_d(ex, ey, 54, 200, 114), show=[(2.7, 4.0)]),
     ], scale=SC, origin=(CX, FLOOR_Y))
 
     gx, gy = CX + (ex - CX) * SC, FLOOR_Y + (ey - FLOOR_Y) * SC
@@ -110,8 +110,8 @@ def build():
         caption_band(),
         caption("Hantel über Kopf, Arm lang", 0, 0.6),
         caption("Einatmen – hinter den Kopf senken", 0.6, 2.2),
-        caption("Kurz halten", 2.2, 2.7),
+        caption("Unten kurz halten", 2.2, 2.7),
         caption("Ausatmen – Unterarm nach oben strecken", 2.7, 4.6),
-        static_text("Oberarm bleibt neben dem Kopf – nur der Unterarm bewegt sich", 200, 24, 13, MUTED),
+        static_text("Ellbogen fix – nur der Unterarm bewegt sich", 200, 24, 13, MUTED),
     ]
     return render(prims, tl, TRI, title="Trizeps-Strecken über Kopf")

@@ -23,7 +23,7 @@ def roll_a(P):
     a = math.radians(P["chest"][4])
     up = (math.cos(a), -math.sin(a))
     fwd = (math.cos(a - math.pi / 2), -math.sin(a - math.pi / 2))
-    return x + fwd[0] * 16 - up[0] * 7, y + fwd[1] * 16 - up[1] * 7
+    return x + fwd[0] * 15 - up[0] * 1, y + fwd[1] * 15 - up[1] * 1
 
 
 def _pivot():
@@ -136,14 +136,17 @@ def build():
     figure = side_fig(extras_behind=machine_back([cable, top_pulley] + stack),
                       extras_mid=near_lever,
                       extras_front=roll_b + roll_a_prims)
-    prims = [
+    scene = group([
         torso_ghost,
         *figure,
-        label("A", lambda c: (roll_pt(c)[0] + 19, roll_pt(c)[1] - 6)),
+        label("A", lambda c: (roll_pt(c)[0] - 2, roll_pt(c)[1] + 23)),
         label("B", lambda c: (ROLL_B[0] + 16, ROLL_B[1] + 4)),
         focus_mid("lumbar", 0.9, 9, 17, perp=12, rotate=True, show=[(T[1], T[4])]),
-        arrow("M248 96 Q262 116 254 140", show=[(T[1], T[2])]),
-        arrow("M254 140 Q262 116 248 96", show=[(T[3], T[4])]),
+        arrow("M280 96 Q294 118 284 142", show=[(T[1], T[2])]),
+        arrow("M284 142 Q294 118 280 96", show=[(T[3], T[4])]),
+    ], scale=1.18, origin=(160, 150), dy=-4)
+    prims = [
+        scene,
         caption_band(),
         caption("Rolle A an die Schultern, Beine hinter B", 0, T[1], size=14),
         caption("Ausatmen – Bauch einrollen", T[1], T[2]),

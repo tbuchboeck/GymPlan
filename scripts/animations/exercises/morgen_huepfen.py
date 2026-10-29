@@ -10,11 +10,11 @@ SLUG = "morgen-huepfen"
 
 FLOOR_Y = 250
 CX = 190
-SC = 0.8
+SC = 0.84
 HOP = 1.2                   # ein Hüpfer
 DUR = 2 * HOP
 TOE_X = CX + 16
-TOE_Y = FLOOR_Y - 9         # Ballen (Strichende) liegt auf dem Boden
+TOE_Y = FLOOR_Y - 7         # Ballen (Strichende) liegt auf dem Boden
 FOOT = 20
 LEG = 98
 HEIGHT = 14                 # Flughöhe (px vor Skalierung)
@@ -28,12 +28,12 @@ def phase(t):
         v = u / FLIGHT
         air = math.sin(math.pi * v)
         comp = 0.0
-        ang = -38 - 8 * air                     # Fuß gestreckt in der Luft
+        ang = -32 - 10 * air                     # Fuß gestreckt in der Luft
     else:
         v = (u - FLIGHT) / (1 - FLIGHT)
         air = 0.0
         comp = math.sin(math.pi * v) ** 1.2     # weich landen ... abdrücken
-        ang = -38 + 14 * comp                   # Ferse sinkt etwas, bleibt aber oben
+        ang = -32 + 12 * comp                   # Ferse sinkt etwas, bleibt aber oben
     return u, air, comp, ang
 
 
@@ -62,6 +62,34 @@ def post(p):
     return p
 
 
+def shoe(side, color):
+    """Schuh: Ferse etwas hinter dem Knöchel bis zum Ballen – macht die
+    gehobene Ferse lesbar."""
+    def f(c):
+        P = c["P"]
+        ax, ay, tx, ty, _ = P["foot_" + side]
+        dx, dy = tx - ax, ty - ay
+        hx, hy = ax - dx * 0.25, ay - dy * 0.25
+        return {"d": f"M{hx:.1f} {hy:.1f}L{tx:.1f} {ty:.1f}"}
+    return [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 13, "stroke-linecap": "round"}, f),
+            Prim("path", {"fill": "none", "stroke": color, "stroke-width": 10, "stroke-linecap": "round"}, f)]
+
+
+def figure():
+    prims = []
+    prims += limb(["thigh_f", "shin_f"], 15, FAR)
+    prims += shoe("f", "#4f46e5")
+    prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
+    prims += limb(["neck"], 13, TORSO)
+    prims += limb(["lumbar", "thorax"], 30, TORSO)
+    prims += limb(["thorax", "chest"], 26, TORSO, outline=False)
+    prims += head_side()
+    prims += limb(["thigh_n", "shin_n"], 16, NEAR)
+    prims += shoe("n", HEAD)
+    prims += limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    return prims
+
+
 def build():
     iks = [
         IK("thigh_n", "shin_n", lambda p: (p["ank_x"], p["ank_y"]), bend=1),
@@ -76,8 +104,7 @@ def build():
     start = post(start)
     fig = group([
         shadow,
-        ghost(limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR), SIDE, start, 0.16),
-        *side_figure(),
+        *figure(),
         focus("shin_n", rx=8, ry=14, offset=(-8, 22), end=False),
     ], scale=SC, origin=(CX, FLOOR_Y))
     # Fenster: ein = Abdrücken + Steigen, aus = Fallen + Landen/Federn
@@ -97,7 +124,7 @@ def build():
         arrow(f"M{ax} 128 L{ax} 150", show=[(a, b) for a, b in win_out]),
         *nose_badge([(a, b, "in") for a, b in win_in] + [(a, b, "out") for a, b in win_out]),
         nose_note(),
-        static_text("Schultern locker unten", 270, 112, 11, GOOD, anchor="start"),
+        static_text("Schultern locker unten", 262, 104, 11, GOOD, anchor="start"),
         caption_band(),
         *[caption("Hoch – durch die Nase einatmen", a, b) for a, b in win_in],
         *[caption("Weich landen – ausatmen", a, b) for a, b in win_out],

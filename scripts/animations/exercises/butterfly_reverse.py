@@ -117,7 +117,7 @@ def side_inset():
               Prim("circle", {"r": 4.5, "fill": PROP, "stroke": "#1e293b", "stroke-width": 1.5}, db),
               Prim("line", {"x1": back[0][0], "y1": back[0][1], "x2": back[1][0], "y2": back[1][1], "stroke": GOOD,
                             "stroke-width": 1.8, "stroke-dasharray": "3 3"}),
-              static_text("Seitansicht", IN_X + IN_W / 2, IN_Y + 14, 10, MUTED)]
+              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 10, MUTED, anchor="start")]
     return prims
 
 
@@ -131,7 +131,7 @@ def build():
     figure = front_fig(
         db_L=dumbbell("hand_L", "forearm_L", fore=0.9, size=1.05),
         db_R=dumbbell("hand_R", "forearm_R", fore=0.9, size=1.05),
-        head_fn=head_down,
+        head_fn=head_down, torso_w=50,
     )
     prims = [
         floor(FLOOR_Y + 2, 20, 290),

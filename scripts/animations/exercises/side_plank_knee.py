@@ -49,7 +49,7 @@ def pre(p):
     lift = p.get("lift", 0.0)
     # gerade Linie: Oberschenkel in Rumpfrichtung; abgelegt: Oberschenkel flach, Taille knickt
     bend = -14 * (1 - lift)
-    th_flat = 186.0
+    th_flat = 179.5
     a_up = solve_alpha(180 + 21, 0)          # Startwert für die Linie
     th = th_flat + (180 + a_up - th_flat) * lift
     a = solve_alpha(th, bend)
@@ -70,11 +70,12 @@ def pre(p):
 
 def hand_on_hip(p):
     P = FRONT.fk(p)
-    x, y = pt(P, "hip_L")
-    return x + 10, y - 6
+    x, y = pt(P, "lumbar")
+    dx, dy = d(P["lumbar"][4] + 90, 20)
+    return x + dx - 4, y + dy
 
 
-IKS = [IK("upperarm_L", "forearm_L", hand_on_hip, bend=-1)]
+IKS = [IK("upperarm_L", "forearm_L", hand_on_hip, bend=1)]
 
 DOWN = dict(lift=0.0)
 UP = dict(lift=1.0)
@@ -91,7 +92,6 @@ def build():
             P = c["P"]
             kx, ky = pt(P, f"thigh_{side}")
             a = P[f"thigh_{side}"][4]
-            ex, ey = d(a + 90 + 180, 0)  # Platzhalter
             dx, dy = d(a + 125, 16)
             return {"d": f"M{kx:.1f} {ky:.1f}L{kx + dx:.1f} {ky + dy:.1f}"}
         return [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": w + 3, "stroke-linecap": "round"}, f),
@@ -109,7 +109,7 @@ def build():
     fore = [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 16, "stroke-linecap": "round"}, forearm),
             Prim("path", {"fill": "none", "stroke": FAR, "stroke-width": 13, "stroke-linecap": "round"}, forearm)]
     fig = [
-        *shin_stub("R", FAR, 14), *limb(["hip_R", "thigh_R"], 16, FAR),
+        *shin_stub("L", FAR, 13), *shin_stub("R", FAR, 13), *limb(["hip_R", "thigh_R"], 16, FAR),
         *fore,
         *limb(["clav_R", "upperarm_R"], 13, FAR),
     ]
@@ -121,8 +121,8 @@ def build():
             Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 22, "stroke-linecap": "round"}, sh),
             trunk[1]]
     fig += head_front()
-    fig += [*shin_stub("L", NEAR, 15), *limb(["hip_L", "thigh_L"], 16, NEAR)]
-    fig += limb(["upperarm_L", "forearm_L"], 12, NEAR)
+    fig += limb(["hip_L", "thigh_L"], 16, NEAR)
+    fig += rlimb(["upperarm_L", "forearm_L", "hand_L"], 12, NEAR, r=6)
 
     p_dn = tl.at(0)
 
@@ -148,10 +148,11 @@ def build():
     ex, ey = T(256, FLOOR_Y)
     prims = [
         scene,
-        label("Schulter weg vom Ohr", sx + 2, sy - 28, T1, T2, 11, ACCENT),
-        arrow(f"M{sx + 34} {sy - 18} L{sx + 34} {sy + 2}", width=2.5, show=[(T1, T2)]),
+        label("Schulter weg", 350, 150, T1, T2, 11, ACCENT),
+        label("vom Ohr", 350, 164, T1, T2, 11, ACCENT),
+        arrow("M300 172 L284 190", width=2.5, show=[(T1, T2)]),
         label("Ellenbogen unter Schulter", ex + 6, FLOOR_Y + 16, 0, T1, 11, GOOD),
-        label("eine Linie", 150, 150, T1, T2, 12, GOOD),
+        label("eine Linie", 205, 232, T1, T2, 12, GOOD),
         label("20–30 s halten", 150, 96, T1, T2, 16, ACCENT, weight="700"),
         label("ruhig weiter atmen", 150, 116, T1 + 1.5, T2, 12, TEXT),
         caption_band(),
@@ -162,4 +163,4 @@ def build():
         caption("Seite wechseln – beide Seiten!", T3, END),
         static_text("Schulter–Hüfte–Knie in einer Linie", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, FRONT, title="Seitstütz (Knie-Variante)", fps=12)
+    return render(prims, tl, FRONT, title="Seitstütz (Knie-Variante)", fps=10)
