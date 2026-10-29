@@ -262,11 +262,11 @@ def inset():
     pose = dict(x=200, y=150, rot=90, thigh_n=88, shin_n=-92, foot_n=-80, thigh_f=92, shin_f=-92,
                 foot_f=-80, upperarm_n=86, upperarm_f=94, neck=-6, head=-4)
     fig = ghost(side_figure(), SIDE, pose, 1.0)
-    box = [Prim("rect", {"x": 292, "y": 40, "width": 100, "height": 76, "rx": 8, "fill": "#0b1220",
+    box = [Prim("rect", {"x": 290, "y": 34, "width": 104, "height": 84, "rx": 8, "fill": "#0b1220",
                          "opacity": 0.7, "stroke": "#334155", "stroke-width": 1}),
-           Prim("rect", {"x": 300, "y": 52, "width": 84, "height": 46, "rx": 4, "fill": "#3f4a7a", "opacity": 0.6})]
-    return box + [group([fig], scale=0.4, origin=(200, 150), dx=150, dy=-70),
-                  static_text("Seitenlage von oben", 342, 110, 9.5, MUTED)]
+           Prim("rect", {"x": 297, "y": 41, "width": 90, "height": 60, "rx": 4, "fill": "#3f4a7a", "opacity": 0.6})]
+    return box + [group([fig], scale=0.37, origin=(200, 150), dx=156, dy=-62),
+                  static_text("Seitenlage von oben", 342, 112, 9.5, MUTED)]
 
 
 def build():
@@ -280,7 +280,7 @@ def build():
         G = geo(dict(th=TH_MAX * smooth(u), phi=-35 + 223 * smooth(u)))
         ax, ay = G["sh1"]
         hx, hy = G["ha1"]
-        arc.append((ax + (hx - ax) * 1.12, ay + (hy - ay) * 1.12))
+        arc.append((ax + (hx - ax) * 1.06, ay + (hy - ay) * 1.06))
 
     pillow = [Prim("rect", {"x": AX - 34, "y": FLOOR - 15, "width": 60, "height": 13, "rx": 6,
                             "fill": PROP, "stroke": PROP_DARK, "stroke-width": 2})]
@@ -312,7 +312,7 @@ def build():
         *rig.limb(["sh1", "el1", "wr1", "ha1"], 13, NEAR),
         *pillow,
         *rig.head(),
-    ], scale=1.15, origin=(AX, FLOOR), dx=10)
+    ], scale=1.15, origin=(AX, FLOOR), dx=0)
     prims = [
         scene,
         *inset(),

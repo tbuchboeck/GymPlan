@@ -124,6 +124,8 @@ def build():
         floor(FLOOR_Y + 1, 120, 360),
         *inset_box,
         main,
+        label("Steißbein unter", 142, 222, 0, 1.3, size=11, anchor="end"),
+        label("Po leicht raus", 142, 222, 1.3, 2.9, size=11, anchor="end"),
         caption_band(),
         caption("Becken nach vorne rollen", 0, 1.3),
         caption("Becken nach hinten rollen", 1.3, 2.9),

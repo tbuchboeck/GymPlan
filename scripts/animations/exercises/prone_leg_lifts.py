@@ -6,7 +6,7 @@ SLUG = "prone-leg-lifts"
 # Bauchlage, Unterarmstütz. Beide Beine gestreckt gemeinsam anheben (Hüftstreckung),
 # Becken bleibt auf der Matte, Blick zur Matte.
 DOWN = PRONE
-UP = dict(PRONE, thigh_n=-15, shin_n=1, foot_n=-74, thigh_f=-17, shin_f=1, foot_f=-74,
+UP = dict(PRONE, thigh_n=-17, shin_n=1, foot_n=-74, thigh_f=-19, shin_f=1, foot_f=-74,
           lumbar=10)
 
 
@@ -20,8 +20,8 @@ def build():
             ghost(legs, SIDE, DOWN, 0.16),
             *figure(),
             focus("root", rx=22, ry=9, offset=(-4, -14), end=False, show=[(0.8, 4.6)]),
-            arrow("M76 206 Q70 190 76 176", show=[(0.8, 2.0)]),
-            arrow("M76 176 Q70 192 76 206", show=[(3.2, 4.6)]),
+            arrow("M62 176 Q56 162 62 148", show=[(0.8, 2.0)]),
+            arrow("M62 148 Q56 162 62 176", show=[(3.2, 4.6)]),
         ]),
         caption_band(),
         caption("Unterarme stützen, Beine lang", 0, 0.8),
