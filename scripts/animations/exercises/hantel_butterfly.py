@@ -124,12 +124,27 @@ def top_view():
     ]
 
 
+def front_body(arms):
+    """Wie rig.front_figure, aber ohne die 2D-Arme (die rechnen wir in 3D)."""
+    prims = limb(["hip_L", "thigh_L", "shin_L", "foot_L"], 16, NEAR)
+    prims += limb(["hip_R", "thigh_R", "shin_R", "foot_R"], 16, NEAR)
+    prims += limb(["neck"], 13, TORSO)
+    trunk = limb(["lumbar", "thorax", "chest"], 44, TORSO)
+    sh = lambda c: {"d": smooth_path([pt(c["P"], "clav_L"), pt(c["P"], "chest"), pt(c["P"], "clav_R")])}
+    prims += [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 25, "stroke-linecap": "round"}, sh),
+              trunk[0],
+              Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 22, "stroke-linecap": "round"}, sh),
+              trunk[1]]
+    prims += head_front()
+    prims += list(arms)
+    return prims
+
+
 def build():
     tl = Timeline([(0, BASE), (0.5, BASE), (1.7, T), (2.0, T), (3.2, TOGETHER), (3.8, TOGETHER),
                    (5.0, T), (5.3, T), (6.4, BASE), (6.8, BASE)], skeleton=FRONT)
 
-    fig = front_figure(extras_front=arm_prims(-1) + arm_prims(1))
-    # front_figure zeichnet eigene Arme – hier ausblenden: Armlängen 0 über Pose
+    fig = front_body(arm_prims(-1) + arm_prims(1))
     pecs = [focus("chest", rx=11, ry=9, offset=(dx, 12), show=[(2.0, 3.8)]) for dx in (-13, 13)]
     ghost_t = ghost(arm_prims(-1) + arm_prims(1), FRONT, T, 0.15)
     main = group([

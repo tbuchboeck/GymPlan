@@ -142,4 +142,4 @@ def build():
         caption("Arme schieben & ziehen gegengleich", T[2], T[3]),
         static_text("5 Min locker aufwärmen – Fersen bleiben unten", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, SIDE, fps=15, title="Ellipsentrainer")
+    return render(prims, tl, SIDE, fps=12, title="Ellipsentrainer")

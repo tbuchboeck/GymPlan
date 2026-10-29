@@ -26,7 +26,7 @@ def arms(ua_abs, fa_rel):
                 forearm_R=fa_rel)
 
 
-UP = arms(80, 30)          # Hanteln über der Brust zusammen
+UP = arms(84, 22)          # Hanteln über der Brust zusammen
 OPEN = arms(190, 26)       # Ellbogen auf der Matte, Unterarme leicht hoch
 
 
@@ -66,8 +66,8 @@ def body():
 
 IN_X, IN_Y, IN_W, IN_H = 300, 38, 92, 84
 IS = 0.42
-LIE = dict(x=0, y=0, rot=90, neck=-6, head=2, thigh_n=-50, shin_n=105, thigh_f=-48, shin_f=103,
-           foot_n=-55, foot_f=-55, upperarm_n=0, upperarm_f=0)
+LIE = dict(x=0, y=0, rot=90, neck=-6, head=2, thigh_n=48, shin_n=-118, thigh_f=46, shin_f=-114,
+           foot_n=-20, foot_f=-22, upperarm_n=0, upperarm_f=0)
 
 
 def side_inset():
@@ -137,7 +137,7 @@ def build():
               show=[(2.6, 3.9)]),
         arrow(f"M{ro[0] - 2:.0f} {ro[1] - 22:.0f} Q{ro[0] - 16:.0f} {ru[1] - 4:.0f} {ru[0] + 22:.0f} {ru[1] - 14:.0f}",
               show=[(2.6, 3.9)]),
-        label("Ellbogen berührt die Matte", CX, 232, 2.1, 2.6, 12, GOOD),
+        label("Ellbogen berührt die Matte", CX, 112, 2.1, 2.6, 12, GOOD),
         *side_inset(),
         caption_band(),
         caption("Rückenlage, Hanteln über der Brust", 0, 0.5),

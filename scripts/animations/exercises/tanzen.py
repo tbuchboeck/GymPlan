@@ -11,7 +11,7 @@ FLOOR_Y = 250
 CX = 200
 FOOT_Y = FLOOR_Y - 12
 HIP_Y = FLOOR_Y - 108
-DIP = 7                         # Knie federn im Takt
+DIP = 5                         # Knie federn im Takt
 
 
 def arms(uaL, faL, uaR, faR):
@@ -56,8 +56,8 @@ DUR = 6.0
 
 def hip_hand(p):
     Pk = FRONT.fk(p)
-    x, y = pt(Pk, "hip_L")
-    return x - 14, y - 10
+    x, y = pt(Pk, "lumbar")
+    return x - 24, y + 4
 
 
 def make_tl():
@@ -72,11 +72,11 @@ def make_tl():
     def post(p):
         t = p["_t"]
         q = dict(p)
-        q = solve_ik(FRONT, q, IK("thigh_L", "shin_L", (p["fl"], FOOT_Y - foot_lift("fl", t)), bend=1,
+        q = solve_ik(FRONT, q, IK("thigh_L", "shin_L", (p["fl"], FOOT_Y - foot_lift("fl", t)), bend=-1,
                                   end_seg="foot_L", end_abs=-90))
-        q = solve_ik(FRONT, q, IK("thigh_R", "shin_R", (p["fr"], FOOT_Y - foot_lift("fr", t)), bend=-1,
+        q = solve_ik(FRONT, q, IK("thigh_R", "shin_R", (p["fr"], FOOT_Y - foot_lift("fr", t)), bend=1,
                                   end_seg="foot_R", end_abs=-90))
-        q = ik_blend(FRONT, q, IK("upperarm_L", "forearm_L", hip_hand, bend=1), p.get("wL", 0))
+        q = ik_blend(FRONT, q, IK("upperarm_L", "forearm_L", hip_hand, bend=-1), p.get("wL", 0))
         return q
 
     tl = FnTimeline(KEYS, skeleton=FRONT, post=post)
@@ -107,22 +107,22 @@ def note(x, y, delay, col, dur=DUR / 2, double=False):
 
 def build():
     tl = make_tl()
-    S = 0.86
+    S = 0.8
     scene = group([floor(FLOOR_Y, 70, 330), *front_figure()], scale=S, origin=(CX, FLOOR_Y))
     # Takt-Punkte: leuchten auf jedem Schlag
     beats = []
     for i in range(4):
         win = [(t, t + 0.25) for t in [k * 0.5 for k in range(12)] if int(round(t / 0.5)) % 4 == i]
-        beats.append(Prim("circle", {"cx": 176 + i * 16, "cy": 46, "r": 3, "fill": FLOOR}))
-        beats.append(Prim("circle", {"cx": 176 + i * 16, "cy": 46, "r": 3.5, "fill": ACCENT, "_show": win}))
+        beats.append(Prim("circle", {"cx": 352 + i * 11, "cy": 271, "r": 2.5, "fill": FLOOR}))
+        beats.append(Prim("circle", {"cx": 352 + i * 11, "cy": 271, "r": 3, "fill": ACCENT, "_show": win}))
     prims = [
         note(70, 110, 0.0, GOOD),
         note(318, 96, 1.0, ACCENT, double=True),
         note(92, 170, 1.9, "#f472b6", double=True),
         note(300, 168, 0.6, "#a5b4fc"),
         scene,
-        *beats,
         caption_band(),
+        *beats,
         caption("Step-Touch – locker zur Seite", 0, 2.0),
         caption("Arme hoch – im Takt mitwippen", 2.0, 4.0),
         caption("Disco-Point – einfach Spaß haben!", 4.0, DUR),

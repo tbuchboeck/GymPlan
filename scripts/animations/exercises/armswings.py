@@ -46,6 +46,7 @@ def hands_top(pose):
 def build():
     tl = FnTimeline(pose_at, DUR, skeleton=FRONT)
     q = SWING / 2
+    O = 0.15                 # Text wechselt kurz nach der Umkehrpunkt-Pose = mit Beginn der Bewegung
     fig = group([
         Prim("ellipse", {"cx": CX, "cy": FLOOR_Y, "rx": 46, "ry": 5, "fill": "#000", "opacity": 0.25}),
         *FIG.prims(cross_rank=True),
@@ -61,15 +62,17 @@ def build():
         arrow(f"M{CX + 40} {sy + 36:.0f} Q{CX + 62} {sy + 28:.0f} {CX + 74} {sy + 12:.0f}",
               show=[(q + 0.1, SWING - 0.15), (SWING + q + 0.1, DUR - 0.15)]),
         *top_inset(345, 140, 36, lambda p: (0.0, 0.0), arms=hands_top, sh_frac=0.28, hip_frac=0.22),
-        *nose_badge([(0, q, "out"), (q, SWING, "in"), (SWING, SWING + q, "out"), (SWING + q, DUR, "in")]),
+        *nose_badge([(0, O, "in"), (O, q + O, "out"), (q + O, SWING + O, "in"), (SWING + O, SWING + q + O, "out"),
+                      (SWING + q + O, DUR, "in")]),
         nose_note(),
         static_text("Zieht/kribbelt der rechte Arm?", 14, 48, 10, WARN, anchor="start"),
         static_text("→ kleiner schwingen", 14, 61, 10, WARN, anchor="start"),
         caption_band(),
-        caption("Vorne locker kreuzen – ausatmen", 0, q),
-        caption("Weit nach hinten öffnen – einatmen", q, SWING),
-        caption("Kreuzen – andere Hand oben", SWING, SWING + q),
-        caption("Brust öffnen – einatmen", SWING + q, DUR),
+        caption("Brust öffnen – einatmen", 0, O),
+        caption("Vorne locker kreuzen – ausatmen", O, q + O),
+        caption("Weit nach hinten öffnen – einatmen", q + O, SWING + O),
+        caption("Kreuzen – andere Hand oben", SWING + O, SWING + q + O),
+        caption("Brust öffnen – einatmen", SWING + q + O, DUR),
         static_text("Schwung aus dem Oberkörper – nicht reißen", 200, 24, 13, MUTED),
     ]
     return render(prims, tl, FRONT, title="Armswings", fps=15)
