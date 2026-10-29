@@ -14,6 +14,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       name: "Ellipsentrainer",
       sets: 1,
       reps: 5, // 5 minutes
+      unit: 'minutes',
       weight: 0,
       rest: 50,
       instructions: "5 Minuten auf Ellipsentrainer",
@@ -122,6 +123,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       name: "Laufband",
       sets: 1,
       reps: 20, // 20 minutes
+      unit: 'minutes',
       weight: 0,
       rest: 50,
       instructions: "20 Minuten auf Laufband",
@@ -396,6 +398,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Hula Hoop",
       sets: 1,
       reps: 10, // 10 minutes
+      unit: 'minutes',
       weight: 0,
       rest: 60,
       instructions: "10 Minuten Hula Hoop - Hüften kreisen, Reifen in Bewegung halten",
@@ -406,6 +409,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Laufband Gehen",
       sets: 1,
       reps: 20, // 20 minutes
+      unit: 'minutes',
       weight: 0,
       rest: 60,
       instructions: "20 Minuten zügiges Gehen auf dem Laufband",
@@ -416,6 +420,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Tanzen",
       sets: 1,
       reps: 20, // 20 minutes
+      unit: 'minutes',
       weight: 0,
       rest: 60,
       instructions: "20 Minuten frei tanzen - Musik genießen und bewegen!",
@@ -438,6 +443,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       name: "Aufwärmen – Locker Gehen",
       sets: 1,
       reps: 2, // 2 Minuten
+      unit: 'minutes',
       weight: 0,
       rest: 30,
       instructions: "2 Minuten locker gehen oder am Stand marschieren. Ziel: Durchblutung, Rücken entspannt in Bewegung bringen. Ruhig atmen.",
@@ -458,6 +464,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       name: "Dead Bug",
       sets: 3,
       reps: 10, // pro Seite
+      perSide: true,
       weight: 0,
       rest: 45,
       instructions: "Rückenlage, Hüfte/Knie 90° (Tischposition), Arme Richtung Decke. Bauchspannung aufbauen, dann gegengleich: rechtes Bein strecken + linker Arm nach hinten. Rücken bleibt flach am Boden! Zurück zur Mitte, Seite wechseln. Tempo: 3s raus / 1s halten / 3s zurück. 10 Wdh. pro Seite.",
@@ -468,6 +475,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       name: "Bird Dog",
       sets: 3,
       reps: 8, // pro Seite
+      perSide: true,
       weight: 0,
       rest: 45,
       instructions: "Vierfüßlerstand: Hände unter Schultern, Knie unter Hüften. Bauchspannung setzen, dann rechtes Bein nach hinten + linker Arm nach vorne strecken. 5 Sek. halten, kontrolliert zurück. Becken bleibt gerade – keine Rotation! Tempo: 2s raus / 5s halten / 2s zurück. 8 Wdh. pro Seite.",
@@ -478,6 +486,8 @@ export const backWorkoutPlan: WorkoutPlan = {
       name: "Seitstütz (Knie-Variante)",
       sets: 3,
       reps: 25, // Sekunden halten
+      unit: 'seconds',
+      perSide: true,
       weight: 0,
       rest: 45,
       instructions: "Seitlage, Ellenbogen unter Schulter, Knie angewinkelt. Becken anheben bis Schulter–Hüfte–Knie eine Linie bilden. 20–30 Sek. halten, dann kontrolliert absetzen. Schulter weg vom Ohr, Becken nicht kippen. Ruhig atmen. Beide Seiten!",
@@ -488,6 +498,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       name: "Cool-Down – Entspanntes Gehen",
       sets: 1,
       reps: 2, // 2 Minuten
+      unit: 'minutes',
       weight: 0,
       rest: 0,
       instructions: "1–2 Minuten entspannt gehen. Kein aggressives Dehnen direkt nach der Einheit nötig. Wenn du dich morgen gleich gut oder besser fühlst, kannst du beim nächsten Mal leicht steigern.",
@@ -510,6 +521,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Bauch- und Rippenatmung",
       sets: 1,
       reps: 5, // 3–5 Minuten
+      unit: 'minutes',
       weight: 0,
       rest: 30,
       instructions: "Startposition: Rückenlage mit aufgestellten Beinen oder aufrecht sitzen. Eine Hand auf dem Bauch, eine seitlich an den Rippen. Einatmen 4 s: Durch die Nase erst in den Bauch, dann seitlich in die Rippen atmen. Die Hände werden nach außen geschoben, die Schultern bleiben unten. Ausatmen 6 s: Langsam durch den Mund ausatmen, Rippen sinken zurück, Nacken und Schultern lösen. Täglich 3–5 Min., kombinierbar mit Rolle und Open Book: in die gedehnte Seite atmen. Wichtig: Hebt sich beim Einatmen die Schulter, arbeiten die Treppenmuskeln am Hals mit. Dann flacher und tiefer in Bauch und Rippen atmen. Entspannt die Treppenmuskeln am Hals, zwischen denen die Armnerven verlaufen. Bei akutem Ziehen im Arm: erst 5 tiefe Atemzüge, dann Chin Tucks."
@@ -519,6 +531,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Extension über die Rolle (Faszienrolle)",
       sets: 1,
       reps: 2, // 1–2 Minuten, 3–4 Segmente
+      unit: 'minutes',
       weight: 0,
       rest: 30,
       instructions: "Startposition: Rolle quer unter die mittlere BWS, Knie gebeugt, Füße und Gesäß am Boden. Hände am Hinterkopf, Ellbogen nach vorn, Kinn leicht zur Brust. Absinken: Oberkörper langsam über die Rolle nach hinten sinken lassen, ausatmen. Kein Hohlkreuz in der LWS. Endposition: 2–3 Atemzüge halten, zurück, Rolle eine Handbreit nach oben schieben. Segmentweise nach oben wandern, die LWS bleibt am Boden. Wichtig: Nur BWS, nie Lenden- oder Halswirbelsäule über die Rolle legen – nie unter den Nacken."
@@ -528,6 +541,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Open Book",
       sets: 1,
       reps: 10, // 8–10 pro Seite
+      perSide: true,
       weight: 0,
       rest: 30,
       instructions: "Startposition: Seitenlage, Kopf auf einem Kissen, Knie 90° gebeugt und aufeinander, Arme gestreckt nach vorn, Handflächen zusammen. Aufdrehen: Oberen Arm im Bogen zur anderen Seite öffnen, Blick folgt der Hand. Knie bleiben zusammen. Endposition: Brust zeigt zur Decke, 2 Atemzüge halten, langsam zurück. Die Drehung kommt aus der BWS, nicht aus der Hüfte. 8–10 pro Seite. Wichtig: Knie dürfen nicht auseinanderrutschen, sonst dreht die LWS mit."
@@ -546,6 +560,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Thread the Needle",
       sets: 1,
       reps: 8, // pro Seite
+      perSide: true,
       weight: 0,
       rest: 30,
       instructions: "Startposition: Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte, Gewicht gleichmäßig verteilt. Durchfädeln: Rechten Arm unter dem Körper nach links schieben, Schulter und Schläfe sinken Richtung Boden. Aufdrehen: Arm zurückholen und im Bogen zur Decke öffnen, Blick folgt der Hand, Brust öffnet sich. Hüfte bleibt über den Knien, nur der Oberkörper dreht. 8 pro Seite. Wichtig: Im Durchfädeln nicht auf den Nacken legen. Die Schulter trägt, nicht der Kopf."
@@ -555,6 +570,8 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Brustdehnung im Türrahmen",
       sets: 2,
       reps: 30, // Sekunden halten, pro Seite
+      unit: 'seconds',
+      perSide: true,
       weight: 0,
       rest: 30,
       instructions: "Startposition: Unterarm senkrecht am Türrahmen, Ellbogen 90° auf Schulterhöhe, ein Fuß vorn. Schulterblatt zurück und nach unten. Vorlehnen: Mit dem Körper langsam nach vorn lehnen (nicht mit der Schulter), bis die Brust zieht. Schulter bleibt unten. Halten: 30 Sekunden ruhig atmen, beide Seiten. Ellbogen etwas höher = mehr unterer Brustmuskel. Wichtig: Ziehen in der Brust ist ok – Kribbeln oder Einschießen in Hand oder Arm heißt: Nerv gereizt, Spannung sofort reduzieren."
@@ -609,6 +626,8 @@ export const neckWorkoutPlan: WorkoutPlan = {
       name: "Seitliche Nackendehnung",
       sets: 2,
       reps: 30, // Sekunden halten, pro Seite
+      unit: 'seconds',
+      perSide: true,
       weight: 0,
       rest: 30,
       instructions: "Startposition: Auf einem Stuhl sitzen, rechte Hand unter das Gesäß klemmen – das fixiert die Schulter. Neigen: Kopf zur linken Seite neigen, Ohr Richtung Schulter, Schulter bleibt unten. Halten: Nase leicht Richtung linke Achsel drehen (für den Levator), 30 s halten, ruhig atmen. Kein Ziehen am Kopf mit der Hand. Dann Seite wechseln. Wichtig: Zieht es bis in den Arm, Neigung verringern – die Dehnung bleibt im Nacken."
@@ -648,6 +667,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Lymphatisches Hüpfen",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Locker auf den Fußballen hüpfen, Knie weich, Arme hängen entspannt. Beim Hochspringen einatmen, beim Landen ausatmen – durch die Nase. Schultern bleiben unten und locker. Die ganze Routine 100 % durch die Nase atmen."
@@ -657,6 +677,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Bodywaves",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Sanfte Wellenbewegung von Becken über Bauch und Brust bis zum Kopf für eine geschmeidige Wirbelsäule. Die Welle vor allem durch den mittleren Rücken (BWS) laufen lassen, der Nacken folgt nur locker, kein Kopfnicken. Die ganze Routine 100 % durch die Nase atmen."
@@ -666,6 +687,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Armswings",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Arme locker vor dem Körper kreuzen und weit nach hinten öffnen. Öffnet den Brustkorb und befreit die Schultern. Schwung aus dem Oberkörper, nicht reißen. Wichtig: Zieht oder kribbelt es im rechten Arm, Bewegung kleiner machen. Die ganze Routine 100 % durch die Nase atmen."
@@ -675,6 +697,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Trunk Twists",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Hüftbreit stehen, Oberkörper locker nach links und rechts drehen, die Arme schwingen mit. Rumpfrotation zur Aktivierung des Rückens. Die Drehung kommt aus der BWS, Knie weich, Becken bleibt ruhig. Die ganze Routine 100 % durch die Nase atmen."
@@ -684,6 +707,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Hip Twist Hops",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Kleine Hopser, bei denen sich Hüfte und Beine zur einen Seite drehen und der Oberkörper zur anderen. Dynamisch, aber leichtfüßig landen. Die ganze Routine 100 % durch die Nase atmen."
@@ -693,6 +717,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Dead Arms",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Arme komplett locker hängen lassen und aus Schultern und Oberkörper ausschütteln. Schüttelt festgefahrene Spannung aus den Armen. Schultern dabei bewusst weg von den Ohren sinken lassen. Die ganze Routine 100 % durch die Nase atmen."
@@ -702,6 +727,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Golferswings",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Wie beim Golfschwung diagonal von unten-seitlich nach oben über die andere Schulter schwingen, Gewicht verlagert sich mit. Befreit die Diagonalketten des Körpers. Beide Seiten gleich oft. Die ganze Routine 100 % durch die Nase atmen."
@@ -711,6 +737,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Standard March",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Am Stand marschieren, Knie heben und mit der gegengleichen Hand antippen. Kreuzbewegungen zur Gehirn-Synchronisation. Aufrecht bleiben, Kinn leicht zurück. Die ganze Routine 100 % durch die Nase atmen."
@@ -720,6 +747,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Ballet Squat",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Breiter Stand, Füße und Knie nach außen gedreht, langsam tief in die Hocke und wieder hoch. Kräftigt Beine und Beckenboden in tiefer Öffnung. Knie zeigen in Richtung der Zehen, Rücken lang. Die ganze Routine 100 % durch die Nase atmen."
@@ -729,6 +757,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       name: "Horse Stance / Horse Dance",
       sets: 1,
       reps: 1, // 1 Minute
+      unit: 'minutes',
       weight: 0,
       rest: 10,
       instructions: "Tief und breit stehen wie im Reitersitz, Hüfte bewusst nach vorne und hinten rollen, locker in Bewegung bleiben. Oberkörper aufrecht, Schultern entspannt. Die ganze Routine 100 % durch die Nase atmen."

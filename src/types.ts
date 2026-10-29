@@ -3,6 +3,8 @@ export interface Exercise {
   name: string;
   sets: number;
   reps: number;
+  unit?: 'reps' | 'seconds' | 'minutes'; // was `reps` zählt, Standard: Wiederholungen
+  perSide?: boolean;
   weight: number;
   rest: number; // in seconds
   instructions?: string;

@@ -1,5 +1,6 @@
 import type { WorkoutPlan, WorkoutSession } from '../types';
 import type { Person } from '../lib/auth-service';
+import { formatAmount } from '../utils/format';
 import { Play, BarChart3, Calendar, Bell, Dumbbell, ArrowLeftRight } from 'lucide-react';
 
 interface HomeProps {
@@ -150,7 +151,7 @@ export function Home({
                 <span className="text-white text-sm">{exercise.name}</span>
               </div>
               <span className="text-xs text-slate-500">
-                {exercise.sets} &times; {exercise.reps}
+                {exercise.sets} &times; {formatAmount(exercise)}
               </span>
             </button>
           ))}

@@ -16,12 +16,45 @@ const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m =
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
 type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | null;
 
+// Legacy: sessions used to live under one key shared by everyone on the
+// device. Hand them to the first person who logs in here, once.
+const LEGACY_SESSIONS_KEY = 'workoutSessions';
+const sessionsKey = (person: Person) => `workoutSessions.${person}`;
+
+function migrateLegacySessions(person: Person) {
+  try {
+    const legacy = localStorage.getItem(LEGACY_SESSIONS_KEY);
+    if (legacy === null) return;
+    if (localStorage.getItem(sessionsKey(person)) === null) {
+      localStorage.setItem(sessionsKey(person), legacy);
+    }
+    localStorage.removeItem(LEGACY_SESSIONS_KEY);
+  } catch {
+    // localStorage unavailable — nothing to migrate.
+  }
+}
+
 function App() {
   const [person, setPerson] = useState<Person | null>(null);
-  const isUnlocked = person !== null;
+
+  if (!person) {
+    return (
+      <AuthScreen
+        onUnlock={(p) => {
+          migrateLegacySessions(p);
+          setPerson(p);
+        }}
+      />
+    );
+  }
+
+  return <PersonApp key={person} person={person} />;
+}
+
+function PersonApp({ person }: { person: Person }) {
   const [location, setLocation] = useState<Location>(null);
   const [currentView, setCurrentView] = useState<AppView>('home');
-  const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
+  const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>(sessionsKey(person), []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
   const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
   const hasSynced = useRef(false);
@@ -33,7 +66,7 @@ function App() {
 
   // Sync with Supabase once after unlock
   useEffect(() => {
-    if (!isUnlocked || hasSynced.current) return;
+    if (hasSynced.current) return;
     hasSynced.current = true;
 
     syncAllSessions(sessions).then((merged) => {
@@ -41,7 +74,7 @@ function App() {
         setSessions(merged);
       }
     });
-  }, [isUnlocked]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const workoutPlan = useMemo(() => {
     if (location === 'home') return homeWorkoutPlan;
@@ -85,10 +118,6 @@ function App() {
       pushSession(s);
     }
   };
-
-  if (!isUnlocked) {
-    return <AuthScreen onUnlock={setPerson} />;
-  }
 
   if (!location) {
     return <LocationSelector person={person} onSelectLocation={(loc) => setLocation(loc)} />;

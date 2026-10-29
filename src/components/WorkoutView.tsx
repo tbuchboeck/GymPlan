@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Exercise, WorkoutSession } from '../types';
 import { ExerciseCard } from './ExerciseCard';
 import { RestTimer } from './RestTimer';
+import { holdSeconds } from '../utils/format';
 import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
 
 interface WorkoutViewProps {
@@ -16,6 +17,7 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialExerciseIndex);
   const [currentSet, setCurrentSet] = useState(1);
   const [isResting, setIsResting] = useState(false);
+  const [isTiming, setIsTiming] = useState(false);
   const [completedExercises, setCompletedExercises] = useState(0);
   const [startTime] = useState(Date.now());
 
@@ -24,6 +26,7 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
   const isLastSet = currentSet === currentExercise.sets;
 
   const handleSetComplete = () => {
+    setIsTiming(false);
     if (isLastSet) {
       setCompletedExercises((prev) => prev + 1);
 
@@ -59,6 +62,7 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
       setCurrentSet((prev) => prev + 1);
     }
     setIsResting(false);
+    setIsTiming(false);
   };
 
   const handleSkipRest = () => {
@@ -74,6 +78,7 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
       setCompletedExercises((prev) => Math.max(0, prev - 1));
     }
     setIsResting(false);
+    setIsTiming(false);
   };
 
   const handleNext = () => {
@@ -85,6 +90,7 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
       setCompletedExercises((prev) => prev + 1);
     }
     setIsResting(false);
+    setIsTiming(false);
   };
 
   const progress = ((completedExercises + (currentSet - 1) / currentExercise.sets) / exercises.length) * 100;
@@ -124,9 +130,23 @@ export function WorkoutView({ exercises, planName, onComplete, onExit, initialEx
             exercise={currentExercise}
             currentSet={currentSet}
             onSetComplete={handleSetComplete}
+            onStartTimer={() => setIsTiming(true)}
             exerciseNumber={currentExerciseIndex + 1}
           />
         </div>
+
+        {/* Exercise countdown overlay — "Fertig" when the time is up */}
+        {isTiming && (
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-20 animate-fade-in">
+            <RestTimer
+              seconds={holdSeconds(currentExercise) ?? 0}
+              label={currentExercise.name}
+              skipLabel="Abbrechen"
+              onComplete={handleSetComplete}
+              onSkip={() => setIsTiming(false)}
+            />
+          </div>
+        )}
 
         {/* Rest Timer Overlay */}
         {isResting && (
