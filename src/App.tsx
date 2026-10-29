@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan } from './data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import type { Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -14,7 +14,7 @@ import LocationSelector from './components/LocationSelector';
 const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
-type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | null;
+type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | null;
 
 function App() {
   const [person, setPerson] = useState<Person | null>(null);
@@ -48,6 +48,7 @@ function App() {
     if (location === 'home2') return homeWorkoutPlan2;
     if (location === 'back') return backWorkoutPlan;
     if (location === 'neck') return neckWorkoutPlan;
+    if (location === 'morning') return morningWorkoutPlan;
     return gymWorkoutPlan;
   }, [location]);
 

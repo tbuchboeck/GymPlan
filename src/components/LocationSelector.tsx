@@ -2,7 +2,7 @@ import type { Person } from '../lib/auth-service';
 
 interface LocationSelectorProps {
   person: Person;
-  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back' | 'neck') => void;
+  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning') => void;
 }
 
 const locations = [
@@ -35,6 +35,13 @@ const locations = [
     label: 'nacken',
     description: 'Nacken, Schulter & BWS',
     gradient: 'from-sky-500 to-blue-600',
+    onlyFor: 'thomas' as Person,
+  },
+  {
+    key: 'morning' as const,
+    label: 'morgen',
+    description: 'Morgen-Reset (10 Teile)',
+    gradient: 'from-amber-400 to-orange-500',
     onlyFor: 'thomas' as Person,
   },
 ] as const;

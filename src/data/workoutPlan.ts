@@ -634,5 +634,107 @@ export const neckWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Morgen-Reset – 10-teilige Routine zum Wachwerden, 100 % Nasenatmung
+export const morningWorkoutPlan: WorkoutPlan = {
+  name: "Morgen-Reset (@morgen)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 7,
+  goal: "Wach werden, Wirbelsäule & Schultern lockern",
+  trainer: "Eigene Routine",
+  createdAt: "29.10.2026",
+  exercises: [
+    {
+      id: 1,
+      name: "Lymphatisches Hüpfen",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Locker auf den Fußballen hüpfen, Knie weich, Arme hängen entspannt. Beim Hochspringen einatmen, beim Landen ausatmen – durch die Nase. Schultern bleiben unten und locker. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 2,
+      name: "Bodywaves",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Sanfte Wellenbewegung von Becken über Bauch und Brust bis zum Kopf für eine geschmeidige Wirbelsäule. Die Welle vor allem durch den mittleren Rücken (BWS) laufen lassen, der Nacken folgt nur locker, kein Kopfnicken. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 3,
+      name: "Armswings",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Arme locker vor dem Körper kreuzen und weit nach hinten öffnen. Öffnet den Brustkorb und befreit die Schultern. Schwung aus dem Oberkörper, nicht reißen. Wichtig: Zieht oder kribbelt es im rechten Arm, Bewegung kleiner machen. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 4,
+      name: "Trunk Twists",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Hüftbreit stehen, Oberkörper locker nach links und rechts drehen, die Arme schwingen mit. Rumpfrotation zur Aktivierung des Rückens. Die Drehung kommt aus der BWS, Knie weich, Becken bleibt ruhig. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 5,
+      name: "Hip Twist Hops",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Kleine Hopser, bei denen sich Hüfte und Beine zur einen Seite drehen und der Oberkörper zur anderen. Dynamisch, aber leichtfüßig landen. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 6,
+      name: "Dead Arms",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Arme komplett locker hängen lassen und aus Schultern und Oberkörper ausschütteln. Schüttelt festgefahrene Spannung aus den Armen. Schultern dabei bewusst weg von den Ohren sinken lassen. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 7,
+      name: "Golferswings",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Wie beim Golfschwung diagonal von unten-seitlich nach oben über die andere Schulter schwingen, Gewicht verlagert sich mit. Befreit die Diagonalketten des Körpers. Beide Seiten gleich oft. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 8,
+      name: "Standard March",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Am Stand marschieren, Knie heben und mit der gegengleichen Hand antippen. Kreuzbewegungen zur Gehirn-Synchronisation. Aufrecht bleiben, Kinn leicht zurück. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 9,
+      name: "Ballet Squat",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Breiter Stand, Füße und Knie nach außen gedreht, langsam tief in die Hocke und wieder hoch. Kräftigt Beine und Beckenboden in tiefer Öffnung. Knie zeigen in Richtung der Zehen, Rücken lang. Die ganze Routine 100 % durch die Nase atmen."
+    },
+    {
+      id: 10,
+      name: "Horse Stance / Horse Dance",
+      sets: 1,
+      reps: 1, // 1 Minute
+      weight: 0,
+      rest: 10,
+      instructions: "Tief und breit stehen wie im Reitersitz, Hüfte bewusst nach vorne und hinten rollen, locker in Bewegung bleiben. Oberkörper aufrecht, Schultern entspannt. Die ganze Routine 100 % durch die Nase atmen."
+    }
+  ]
+};
+
 // Default export für Kompatibilität
 export const workoutPlan = gymWorkoutPlan;
