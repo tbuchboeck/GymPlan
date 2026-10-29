@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Dumbbell, Fingerprint, Key } from 'lucide-react';
 import { authService, type Person } from '../lib/auth-service';
+import { VersionBadge } from './VersionBadge';
 
 interface AuthScreenProps {
   onUnlock: (person: Person) => void;
@@ -240,6 +241,8 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
             aria-hidden="true"
           />
         )}
+
+        <VersionBadge />
       </div>
     </div>
   );
