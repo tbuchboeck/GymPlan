@@ -132,7 +132,7 @@ function PersonApp({ person, onLogout }: { person: Person; onLogout: () => void 
   }
 
   return (
-    <div className="min-h-dvh bg-slate-900">
+    <div className="min-h-dvh bg-slate-950">
       {currentView === 'home' && (
         <Home
           person={person}
@@ -172,7 +172,7 @@ function PersonApp({ person, onLogout }: { person: Person; onLogout: () => void 
 
       {currentView === 'history' && (
         <Suspense fallback={
-          <div className="h-dvh bg-slate-900 flex items-center justify-center">
+          <div className="h-dvh bg-slate-950 flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
           </div>
         }>

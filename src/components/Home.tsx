@@ -3,7 +3,9 @@ import type { Person } from '../lib/auth-service';
 import { clearWorkoutProgress, getResumableWorkout } from '../lib/workout-progress';
 import { formatAmount, planTitle } from '../utils/format';
 import { isInWeekOf, weekdayIndex } from '../utils/statistics';
-import { Play, BarChart3, Calendar, ArrowLeftRight, LogOut, TriangleAlert, ChevronDown, RotateCcw, Check } from 'lucide-react';
+import { Play, BarChart3, ChevronLeft, ChevronRight, LogOut, TriangleAlert, ChevronDown, RotateCcw, Check } from 'lucide-react';
+import { planTheme } from '../utils/plan-theme';
+import { Button } from './ui/Button';
 
 interface HomeProps {
   person: Person;
@@ -42,171 +44,201 @@ export function Home({
 
   const resumable = getResumableWorkout(person, workoutPlan.name);
 
+  const theme = planTheme(workoutPlan.name);
+  const PlanIcon = theme.icon;
+  const name = person === 'thomas' ? 'Thomas' : 'Neli';
+  const restart = () => {
+    // „Neu starten“ verwirft den gespeicherten Stand, sonst würde fortgesetzt
+    if (resumable) clearWorkoutProgress(person);
+    onStartWorkout();
+  };
+
   return (
-    <div className="min-h-dvh bg-slate-900">
-      {/* Header */}
-      <div className="bg-slate-800 border-b border-slate-700/50 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-white">{person === 'thomas' ? 'Thomas' : 'Neli'}</h1>
-            <p className="text-sm text-slate-400">Dein persönlicher Trainingsplan</p>
-          </div>
-          <button
-            onClick={onLogout}
-            className="min-h-11 flex items-center gap-1.5 px-3 rounded-lg text-xs text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Abmelden
-          </button>
-        </div>
+    <div className="relative min-h-dvh bg-slate-950 pb-safe-32">
+      {/* Leuchten in Plan-Farbe */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[26rem] overflow-hidden">
+        <div className={`absolute -top-40 left-1/2 h-96 w-[40rem] -translate-x-1/2 rounded-full blur-3xl ${theme.glow}`} />
       </div>
+      {/* Kopf */}
+      <header className="relative px-safe-4 pt-safe-2 pb-2">
+        <div className="relative mx-auto max-w-[500px]">
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={onSwitchPlan}
+              className="-ml-2 flex min-h-11 items-center gap-1 rounded-xl pl-1 pr-3 text-base font-medium text-slate-200 transition hover:bg-white/5"
+            >
+              <ChevronLeft className="h-5 w-5" />
+              Wechseln
+            </button>
+            <button
+              type="button"
+              onClick={onLogout}
+              className="-mr-2 flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm text-slate-400 transition hover:bg-white/5 hover:text-slate-200"
+            >
+              <LogOut className="h-4 w-4" />
+              Abmelden
+            </button>
+          </div>
 
-      {/* Plan Card */}
-      <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl mx-4 mt-4 p-5">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold text-white">{planTitle(workoutPlan.name)}</h2>
-          <button
-            onClick={onSwitchPlan}
-            className="min-h-11 -mr-2 px-3 flex items-center gap-1.5 rounded-lg text-sm text-indigo-400 hover:text-indigo-300 hover:bg-slate-700/40 transition-colors shrink-0"
-          >
-            <ArrowLeftRight className="w-4 h-4" />
-            Wechseln
-          </button>
+          <div className="mt-4 flex items-center gap-4 animate-slide-up">
+            <span className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${theme.gradient} text-white shadow-lg shadow-black/40 ring-1 ring-white/20`}>
+              <PlanIcon className="h-8 w-8" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-slate-400">{name} · dein Plan</p>
+              <h1 className="text-3xl font-bold leading-tight tracking-tight text-white">{planTitle(workoutPlan.name)}</h1>
+              <p className="text-sm text-slate-400">
+                {workoutPlan.exercises.length} Übungen · {workoutPlan.sessionsPerWeek}× pro Woche
+              </p>
+            </div>
+          </div>
         </div>
-        <p className="text-sm text-slate-400 mt-1">
-          {workoutPlan.exercises.length} Übungen &bull; {workoutPlan.sessionsPerWeek} Einheiten/Woche
-        </p>
+      </header>
 
+      <main className="relative mx-auto max-w-[500px] space-y-4 px-safe-4 pt-4">
+        {/* Weitermachen */}
         {resumable && (
-          <button
-            onClick={() => onStartExercise(resumable.exerciseIndex)}
-            className="w-full mt-4 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 py-3 px-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors"
-          >
-            <RotateCcw className="w-5 h-5" />
-            Weitermachen bei Übung {resumable.exerciseIndex + 1}/{resumable.totalExercises}
-          </button>
+          <section className="rounded-3xl bg-emerald-500/10 p-4 ring-1 ring-emerald-500/30 animate-slide-up">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500/20 text-emerald-300">
+                <RotateCcw className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-emerald-200">Training läuft noch</p>
+                <p className="text-sm text-emerald-100/70">
+                  Übung {resumable.exerciseIndex + 1} von {resumable.totalExercises}
+                </p>
+              </div>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-emerald-950/60">
+                <div
+                  className="h-full rounded-full bg-emerald-400"
+                  style={{ width: `${Math.max(4, (resumable.exerciseIndex / Math.max(1, resumable.totalExercises)) * 100)}%` }}
+                />
+              </div>
+              <Button variant="ghost" size="md" onClick={restart} className="-mr-2 text-sm! text-slate-300">
+                <Play className="h-4 w-4 fill-current" />
+                Neu starten
+              </Button>
+            </div>
+          </section>
         )}
 
-        <button
-          onClick={() => {
-            // „Neu starten“ verwirft den gespeicherten Stand, sonst würde fortgesetzt
-            if (resumable) clearWorkoutProgress(person);
-            onStartWorkout();
-          }}
-          className={`w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors ${
-            resumable
-              ? 'mt-3 bg-slate-700 hover:bg-slate-600 text-white'
-              : 'mt-4 bg-indigo-500 hover:bg-indigo-400 text-white'
-          }`}
-        >
-          <Play className="w-5 h-5 fill-current" />
-          {resumable ? 'Neu starten' : 'Training starten'}
-        </button>
-      </div>
-
-      {/* Diese Woche (Mo–So) */}
-      <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl mx-4 mt-3 p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-1.5">
-            <Calendar className="text-indigo-400 w-4 h-4" />
-            <span className="text-xs text-slate-400 uppercase tracking-wider">Diese Woche</span>
+        {/* Diese Woche (Mo–So) */}
+        <section className="rounded-3xl bg-slate-900 p-4 ring-1 ring-white/5 animate-slide-up [animation-delay:60ms]">
+          <div className="mb-3 flex items-baseline justify-between">
+            <h2 className="text-base font-semibold text-white">Diese Woche</h2>
+            <span className="text-sm text-slate-400">
+              <span className="text-lg font-bold tabular-nums text-white">{weekSessions.length}</span> / {workoutPlan.sessionsPerWeek} Einheiten
+            </span>
           </div>
-          <span className="text-lg font-bold text-white">
-            {weekSessions.length} / {workoutPlan.sessionsPerWeek}
-          </span>
-        </div>
-        <div className="grid grid-cols-7 gap-1">
-          {WEEKDAYS.map((label, i) => {
-            const done = doneDays.has(i);
-            const isToday = i === todayIndex;
-            return (
-              <div key={label} className="flex flex-col items-center gap-1">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    done
-                      ? 'bg-emerald-500 text-white'
-                      : isToday
-                        ? 'border-2 border-indigo-400'
-                        : 'border border-slate-600'
-                  }`}
-                  aria-label={`${label}${done ? ': erledigt' : ''}`}
-                >
-                  {done && <Check className="w-4 h-4" strokeWidth={3} />}
+          <div className="grid grid-cols-7 gap-1">
+            {WEEKDAYS.map((label, i) => {
+              const done = doneDays.has(i);
+              const isToday = i === todayIndex;
+              return (
+                <div key={label} className="flex flex-col items-center gap-1.5">
+                  <div
+                    className={`flex h-9 w-9 items-center justify-center rounded-full transition ${
+                      done
+                        ? 'bg-emerald-500 text-white shadow-md shadow-emerald-950'
+                        : isToday
+                          ? 'ring-2 ring-indigo-400 bg-indigo-500/10'
+                          : 'bg-slate-800'
+                    }`}
+                    aria-label={`${label}${done ? ': erledigt' : ''}`}
+                  >
+                    {done && <Check className="h-4 w-4" strokeWidth={3} />}
+                  </div>
+                  <span className={`text-xs ${isToday ? 'font-semibold text-indigo-300' : 'text-slate-500'}`}>{label}</span>
                 </div>
-                <span className={`text-xs ${isToday ? 'text-indigo-300 font-semibold' : 'text-slate-500'}`}>
-                  {label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Last Workout */}
-      {lastWorkout && (
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl mx-4 mt-3 p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span className="text-xs text-slate-400 uppercase tracking-wider">Letztes Training</span>
-          </div>
-          <p className="text-sm text-slate-300">
-            {new Date(lastWorkout.date).toLocaleDateString('de-AT', {
-              weekday: 'long',
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric'
+              );
             })}
-            {' '}&bull;{' '}
-            {lastWorkout.duration} Minuten
-          </p>
-        </div>
-      )}
+          </div>
+        </section>
 
-      {/* Action Buttons */}
-      <div className="mx-4 mt-3">
+        {/* Statistik */}
         <button
+          type="button"
           onClick={onViewHistory}
-          className="bg-slate-800 border border-slate-700/50 hover:bg-slate-700 text-white py-3 px-4 rounded-xl font-medium flex items-center gap-3 w-full transition-colors"
+          className="flex w-full items-center gap-3 rounded-3xl bg-slate-900 p-4 text-left ring-1 ring-white/5 transition hover:bg-slate-800/80 active:scale-[0.99] animate-slide-up [animation-delay:100ms]"
         >
-          <BarChart3 className="w-5 h-5 text-indigo-400" />
-          Trainings-Statistiken
-          <span className="ml-auto text-sm text-slate-400">{sessions.length} gesamt</span>
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-indigo-500/15 text-indigo-300">
+            <BarChart3 className="h-5 w-5" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-semibold text-white">Trainings-Statistiken</span>
+            <span className="block truncate text-sm text-slate-400">
+              {lastWorkout
+                ? `Zuletzt ${new Date(lastWorkout.date).toLocaleDateString('de-AT', { weekday: 'short', day: '2-digit', month: '2-digit' })} · ${sessions.length} gesamt`
+                : 'Noch keine Trainings'}
+            </span>
+          </span>
+          <ChevronRight className="h-5 w-5 shrink-0 text-slate-600" />
         </button>
-      </div>
 
-      {/* Plan-Hinweis */}
-      {workoutPlan.notice && (
-        <details open className="group mx-4 mt-4 rounded-xl border border-amber-500/40 bg-amber-500/10">
-          <summary className="min-h-11 flex items-center gap-2 px-4 py-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <TriangleAlert className="w-5 h-5 text-amber-400 shrink-0" />
-            <span className="font-semibold text-amber-200">Wichtiger Hinweis</span>
-            <ChevronDown className="w-4 h-4 text-amber-300 ml-auto transition-transform group-open:rotate-180" />
-          </summary>
-          <p className="px-4 pb-4 text-sm text-amber-100/90 whitespace-pre-line">{workoutPlan.notice}</p>
-        </details>
-      )}
+        {/* Plan-Hinweis */}
+        {workoutPlan.notice && (
+          <details open className="group rounded-3xl bg-amber-500/10 ring-1 ring-amber-500/35">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-4 py-3 [&::-webkit-details-marker]:hidden">
+              <TriangleAlert className="h-5 w-5 shrink-0 text-amber-400" />
+              <span className="font-semibold text-amber-200">Wichtiger Hinweis</span>
+              <ChevronDown className="ml-auto h-5 w-5 text-amber-300 transition-transform group-open:rotate-180" />
+            </summary>
+            <p className="whitespace-pre-line px-4 pb-4 text-base leading-relaxed text-amber-50/90">{workoutPlan.notice}</p>
+          </details>
+        )}
 
-      {/* Exercise List */}
-      <div className="mx-4 mt-4 mb-6">
-        <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-2">Übungen</h3>
-        <div className="space-y-1.5">
-          {workoutPlan.exercises.map((exercise, index) => (
-            <button
-              key={exercise.id}
-              onClick={() => onStartExercise(index)}
-              className="bg-slate-800/30 hover:bg-slate-800 border border-slate-700/30 rounded-lg p-3 flex items-center justify-between w-full transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-7 h-7 bg-indigo-500/20 text-indigo-400 rounded-lg text-sm font-medium flex items-center justify-center">
-                  {index + 1}
-                </div>
-                <span className="text-white text-sm text-left">{exercise.name}</span>
-              </div>
-              <span className="text-xs text-slate-500 shrink-0 ml-2">
-                {exercise.sets} &times; {formatAmount(exercise)}
-              </span>
-            </button>
-          ))}
+        {/* Übungen */}
+        <section>
+          <h2 className="mb-2 mt-2 px-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Übungen</h2>
+          <ol className="overflow-hidden rounded-3xl bg-slate-900 ring-1 ring-white/5">
+            {workoutPlan.exercises.map((exercise, index) => (
+              <li key={exercise.id} className="border-t border-white/5 first:border-t-0">
+                <button
+                  type="button"
+                  onClick={() => onStartExercise(index)}
+                  className="flex min-h-16 w-full items-center gap-3 px-3 py-2.5 text-left transition hover:bg-white/5 active:bg-white/10"
+                >
+                  <span className="relative h-12 w-16 shrink-0 overflow-hidden rounded-xl bg-slate-800">
+                    {exercise.imageUrl && (
+                      <img src={exercise.imageUrl} alt="" loading="lazy" decoding="async" className="h-full w-full scale-[1.3] object-cover" />
+                    )}
+                    <span className={`absolute left-1 top-1 grid h-5 min-w-5 place-items-center rounded-md px-1 text-[11px] font-bold backdrop-blur-sm ${theme.soft}`}>
+                      {index + 1}
+                    </span>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-base font-medium leading-snug text-white">{exercise.name}</span>
+                    <span className="block text-sm text-slate-400">
+                      {exercise.sets} × {formatAmount(exercise)}
+                      {exercise.weight > 0 && ` · ${exercise.weight} kg`}
+                    </span>
+                  </span>
+                  <ChevronRight className="h-5 w-5 shrink-0 text-slate-600" />
+                </button>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </main>
+
+      {/* Primärknopf im Daumenbereich */}
+      <div className="fixed inset-x-0 bottom-0 z-20 bg-gradient-to-t from-slate-950 via-slate-950/95 to-slate-950/0 px-safe-4 pt-8 pb-safe-4">
+        <div className="mx-auto max-w-[500px]">
+          {resumable ? (
+            <Button variant="success" size="xl" block onClick={() => onStartExercise(resumable.exerciseIndex)} className="px-4! text-lg!">
+              <RotateCcw className="h-6 w-6" />
+              Weitermachen bei Übung {resumable.exerciseIndex + 1}/{resumable.totalExercises}
+            </Button>
+          ) : (
+            <Button size="xl" block onClick={restart}>
+              <Play className="h-6 w-6 fill-current" />
+              Training starten
+            </Button>
+          )}
         </div>
       </div>
     </div>
