@@ -44,7 +44,7 @@ export function ExerciseCard({
             alt={exercise.name}
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageLoaded(false)}
-            className="w-full max-h-48 object-contain rounded-lg mx-auto"
+            className="w-full max-h-72 object-contain rounded-lg mx-auto"
           />
         </div>
       )}
