@@ -9,13 +9,13 @@ SLUG = "trizeps-boden"
 # Hände per IK fix am Boden.
 
 FLOOR_Y = 238
-TOE = (78.0, FLOOR_Y - 4.0)
-HAND_N = (262.0, FLOOR_Y - 5.0)
-HAND_F = (258.0, FLOOR_Y - 5.0)
+TOE = (95.0, FLOOR_Y - 4.0)
+HAND_N = (258.0, FLOOR_Y - 5.0)   # unter der Schulter in der Startpose
+HAND_F = (254.0, FLOOR_Y - 5.0)
 
 BODY = dict(neck=-4, head=-12, foot_n=6, foot_f=6, thigh_f=-1, shin_f=1)
-TOP = dict(BODY, tilt=19.5)
-LOW = dict(BODY, tilt=7.0, neck=-2, head=-10)
+TOP = dict(BODY, tilt=16.0)
+LOW = dict(BODY, tilt=3.8, neck=-2, head=-10)
 
 
 def place(pose):
@@ -39,8 +39,8 @@ class PlankTimeline(Timeline):
 
 def build():
     iks = [
-        IK("upperarm_n", "forearm_n", HAND_N, bend=1, end_seg="hand_n", end_abs=0),
-        IK("upperarm_f", "forearm_f", HAND_F, bend=1, end_seg="hand_f", end_abs=0),
+        IK("upperarm_n", "forearm_n", HAND_N, bend=-1, end_seg="hand_n", end_abs=0),
+        IK("upperarm_f", "forearm_f", HAND_F, bend=-1, end_seg="hand_f", end_abs=0),
     ]
     tl = PlankTimeline([(0, TOP), (0.6, TOP), (2.0, LOW), (2.5, LOW), (3.7, TOP), (4.3, TOP)],
                        iks=iks, skeleton=SIDE)
@@ -59,15 +59,15 @@ def build():
         *side_figure(),
         body_line,
         focus_seg("upperarm_n", 0.5, -7, rx=12, ry=7, show=[(0.6, 3.7)]),
-        arrow("M300 96 L300 128", show=[(0.6, 2.0)]),
-        arrow("M300 150 L300 118", show=[(2.5, 3.7)]),
+        arrow("M352 112 L352 142", show=[(0.6, 2.0)]),
+        arrow("M352 150 L352 120", show=[(2.5, 3.7)]),
         Prim("g", {"_show": [(1.6, 3.0)]}, children=[
-            Prim("path", {"d": f"M{ex - 44:.1f} {ey - 38:.1f}Q{ex - 30:.1f} {ey - 30:.1f} {ex - 8:.1f} {ey - 10:.1f}",
+            Prim("path", {"d": f"M{ex + 12:.1f} {ey - 66:.1f}Q{ex - 8:.1f} {ey - 44:.1f} {ex - 2:.1f} {ey - 12:.1f}",
                           "fill": "none", "stroke": ACCENT, "stroke-width": 1.8, "marker-end": "url(#arrowhead)"}),
-            Prim("text", {"x": ex - 48, "y": ey - 42, "font-size": 12, "fill": ACCENT, "font-weight": "600",
-                          "text-anchor": "middle"}, text="Ellbogen nach hinten"),
+            Prim("text", {"x": ex + 34, "y": ey - 72, "font-size": 12, "fill": ACCENT, "font-weight": "600",
+                          "text-anchor": "middle"}, text="Ellbogen eng nach hinten"),
         ]),
-        static_text("Körper bleibt gerade", 112, 168, 11, GOOD),
+        static_text("Körper bleibt gerade", 62, 150, 11, GOOD, anchor="start"),
         caption_band(),
         caption("Liegestütz – Hände unter den Schultern", 0, 0.6),
         caption("Einatmen – langsam absenken", 0.6, 2.0),

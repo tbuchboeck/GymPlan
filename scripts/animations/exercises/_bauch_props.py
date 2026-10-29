@@ -79,6 +79,9 @@ class PinTimeline(Timeline):
         pose = apply_abs(self.skeleton, pose)
         for ik in self.iks:
             pose = solve_anchor(self.skeleton, pose, ik) if isinstance(ik, Anchor) else solve_ik(self.skeleton, pose, ik)
+        if self.iks:
+            # Weltwinkel unterhalb einer IK-Kette (z. B. Fuß) nach der IK erneut setzen
+            pose = apply_abs(self.skeleton, pose)
         return pose
 
 

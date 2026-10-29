@@ -74,8 +74,6 @@ def scene_static():
                       "fill": PROP}),
         Prim("rect", {"x": OPEN_X1, "y": WALL_Y0 - 3, "width": 5, "height": WALL_Y1 - WALL_Y0 + 6, "rx": 1.5,
                       "fill": "#94a3b8"}),
-        static_text("Wand", 50, WALL_Y0 - 5, 8, MUTED),
-        static_text("Türrahmen", OPEN_X1 + 8, WALL_Y0 - 5, 8, MUTED, anchor="start"),
     ]
 
 
@@ -116,7 +114,7 @@ def person(frozen_lean=None):
 
     def nose(c):
         S, F, C, u, n = g(c)
-        x, y = off(C, u, n, 0, 23)
+        x, y = off(C, u, n, 0, 22)
         return {"cx": x, "cy": y}
 
     def uarm(c):
@@ -127,10 +125,10 @@ def person(frozen_lean=None):
     prims += stroke(trunk, 40, TORSO)
     prims += stroke(shoulders, 22, TORSO)
     prims += stroke(uarm, 15, NEAR)
-    prims += [Prim("ellipse", {"rx": 3.5, "ry": 3, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1.5}, nose),
-              Prim("circle", {"r": 17.5, "fill": SKIN_LINE}, head),
+    prims += [Prim("circle", {"r": 17.5, "fill": SKIN_LINE}, head),
               Prim("circle", {"r": 16, "fill": "#4338ca"}, head),
-              Prim("circle", {"r": 8, "fill": "#3b32b8"}, head)]
+              Prim("circle", {"r": 8, "fill": "#3b32b8"}, head),
+              Prim("ellipse", {"rx": 4, "ry": 3.5, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1.5}, nose)]
     return prims
 
 
@@ -142,7 +140,7 @@ def forearm_block():
 
 
 # --- Inset: Armhaltung 90/90 (statisch) ----------------------------------------
-IN_X, IN_Y, IN_W, IN_H = 306, 152, 86, 74
+IN_X, IN_Y, IN_W, IN_H = 280, 164, 112, 88
 
 
 def arm_inset():
@@ -155,19 +153,19 @@ def arm_inset():
     P = FRONT.fk(pose)
     ex, ey = pt(P, "upperarm_R")
     frozen = ghost(parts, FRONT, pose, opacity=1.0)
-    post = Prim("rect", {"x": ex + 7, "y": ey - 90, "width": 12, "height": 160, "fill": "#94a3b8"})
+    post = Prim("rect", {"x": ex + 7, "y": ey - 52, "width": 12, "height": 120, "fill": "#94a3b8"})
     ang = Prim("path", {"d": f"M{ex - 14} {ey}L{ex - 14} {ey - 14}L{ex} {ey - 14}", "fill": "none",
                         "stroke": ACCENT, "stroke-width": 2.5})
     sh_y = pt(P, "clav_R")[1]
     level = Prim("line", {"x1": pt(P, "clav_L")[0] - 20, "y1": sh_y, "x2": ex + 30, "y2": sh_y, "stroke": GOOD,
                           "stroke-width": 2, "stroke-dasharray": "5 5", "opacity": 0.8})
     cx, cy = pt(P, "chest")
-    g = group([post, frozen, level, ang], scale=0.5, origin=(cx, cy),
-              dx=IN_X + 40 - cx, dy=IN_Y + 50 - cy)
+    g = group([post, frozen, level, ang], scale=0.66, origin=(cx, cy),
+              dx=IN_X + 40 - cx, dy=IN_Y + 66 - cy)
     clip = Prim("g", {"clip-path": "url(#clipArm)"}, children=[
         Prim("rect", {"x": IN_X, "y": IN_Y, "width": IN_W, "height": IN_H, "fill": "#0b1220", "opacity": 0.8}), g])
-    return [clip, static_text("Ellbogen auf Schulterhöhe", IN_X + IN_W / 2, IN_Y + IN_H + 12, 9.5, GOOD),
-            static_text("Unterarm senkrecht", IN_X + IN_W / 2, IN_Y + IN_H + 23, 9.5, GOOD)]
+    return [clip, static_text("Ellbogen auf Schulterhöhe", IN_X + IN_W / 2, IN_Y + 12, 9, GOOD),
+            static_text("Unterarm senkrecht", IN_X + IN_W / 2, IN_Y + 23, 9, GOOD)]
 
 
 def build():
@@ -183,17 +181,19 @@ def build():
                                    "_show": [(2.4, 7.8)]}, chest)
     start_ghost = ghost(person(0.0), SIDE, START, 0.16)
     main = group([*scene_static(), start_ghost, *person(), *forearm_block(), focus_chest],
-                 scale=1.35, origin=(185, 140))
+                 scale=1.3, origin=(182, 140), dx=-12)
     prims = [
         main,
-        arrow("M180 236 L180 206", show=[(1.4, 3.4)]),
+        arrow("M160 238 L160 208", show=[(1.4, 3.4)]),
         *arm_inset(),
         caption_band(),
         caption("Unterarm senkrecht an den Rahmen, Ellbogen 90°", 0, 1.4, size=14),
         caption("Mit dem Körper langsam vorlehnen", 1.4, 3.4),
         caption("Brust zieht – 30 s ruhig atmen", 3.4, 7.6),
         caption("Langsam zurück", 7.6, 9.6),
-        label("Schulter bleibt unten", 16, 62, 3.4, 7.6),
+        label("Schulter bleibt unten", 16, 238, 3.4, 7.6),
+        static_text("Wand", 24, 111, 10, MUTED, anchor="start"),
+        static_text("Türrahmen", 302, 111, 10, MUTED, anchor="start"),
         static_text("von oben", 16, 46, 11, MUTED, anchor="start"),
         static_text("Kribbeln im Arm? Spannung sofort lösen", 200, 22, 12, MUTED),
     ]

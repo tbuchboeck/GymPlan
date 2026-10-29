@@ -71,10 +71,13 @@ def build():
         return Prim("path", {"fill": "none", "stroke": ACCENT, "stroke-width": 2.5, "stroke-linecap": "round",
                              "marker-end": "url(#arrowhead)", "opacity": 0.8}, f)
 
-    knee_arrow = lambda show: arrow(f"M{CX + 52} 214 Q{CX + 62} 196 {CX + 56} 176", width=2.5, show=show)
+    knee_arrow = lambda show: arrow(f"M{CX + 74} 206 Q{CX + 82} 186 {CX + 76} 162", width=2.5, show=show)
     main = group([
-        lot,
-        *side_figure(),
+        *side_figure(extras_front=[
+            # Tippt die ferne Hand aufs nahe Knie, liegt der Arm vor dem Körper
+            *[Prim(q.tag, dict(q.attrs), (lambda c, d=q.dyn: {**d(c), "opacity": 1 if c["pose"]["tap_f"] > 0.35 else 0}))
+              for q in limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)],
+        ]),
         tap_flash("f", "n", [(0.55, 0.8)]),
         tap_flash("n", "f", [(1.75, 2.0)]),
         knee_arrow([(0.05, 0.55), (1.25, 1.75)]),
