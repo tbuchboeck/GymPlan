@@ -170,7 +170,7 @@ function LocationSelector({ person, sessions, onSelectLocation }: LocationSelect
                   {doneToday && (
                     <span className="flex items-center gap-1 text-xs font-medium text-emerald-400">
                       <CircleCheck className="w-4 h-4" aria-hidden="true" />
-                      heute erledigt ✓
+                      heute erledigt
                     </span>
                   )}
                   <span className="text-xs text-slate-500">

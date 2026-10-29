@@ -3,7 +3,7 @@ import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, nec
 import type { WorkoutSession } from './types';
 import { authService, type Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { pushSession, syncAllSessions } from './lib/session-sync';
+import { pushSession, pushAllAndPull, mergeSessions } from './lib/session-sync';
 import { Home } from './components/Home';
 import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
@@ -79,10 +79,8 @@ function PersonApp({ person, onLogout }: { person: Person; onLogout: () => void 
     if (hasSynced.current) return;
     hasSynced.current = true;
 
-    syncAllSessions(sessions).then((merged) => {
-      if (merged.length !== sessions.length) {
-        setSessions(merged);
-      }
+    pushAllAndPull(sessions).then((remote) => {
+      if (remote) setSessions((cur) => mergeSessions(cur, remote));
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -2,12 +2,10 @@ from rig import *
 
 SLUG = "open-book"
 
-# Perspektive: vom Kopfende aus, Kamera knapp über dem Boden, Blick entlang der
-# Wirbelsäule zu den Füßen (2D vereinfacht). Die Drehachse zeigt zum Betrachter:
-# Schulterlinie dreht von senkrecht (Seitenlage) nach fast waagrecht (Brust zur
-# Decke), der obere Arm beschreibt einen Halbkreis von rechts nach links.
-# Becken und Knie bleiben dahinter sichtbar übereinander. Ein kleines Inset
-# zeigt die Seitenlage mit 90°-Knien von oben.
+# Perspektive: schräg von oben (fast Draufsicht von der Decke). Person liegt
+# auf der rechten Seite, Kopf links, Knie 90° übereinander nach vorn (unten im
+# Bild). Der obere Arm schwingt im Halbkreis über den Körper nach hinten auf
+# die Matte, der Brustkorb dreht dabei zur Decke (Schultern werden breit).
 #
 # Die 3D-Helfer unten (Cam, Rig3, spath, floor_rect) nutzt thread_the_needle.py.
 
@@ -146,182 +144,105 @@ def floor_rect(cam, x0, x1, z0, z1, y=0.0, color="#3f4a7a", edge=5):
 
 
 # --------------------------------------------------------------------------
-# Open Book: 2D-Ansicht vom Kopfende
+# Open Book: 3D-Mini-Rig, x = Richtung Füße, y = oben, z = Bauchseite
 
-FLOOR = 236          # Vorderkante der Matte (Kontakt nahe Objekte)
-BACKF = FLOOR - 20   # Kontaktlinie hinten (Becken/Knie, etwas weiter weg)
-AX = 188             # Drehachse x in Seitenlage
-SW = 30              # halbe Schulterbreite
-ARM = 92
+CAM = Cam(yaw=0, pitch=68, scale=1.0, cx=200, cy=152)
+SH_X, HIP_X = -52, 40
+SW = 19            # halbe Schulterbreite
+ARM_UP, ARM_LO, ARM_HA = 36, 32, 13
 TH_MAX = 80
 
 
-def geo(p):
+def joints(p):
     th = math.radians(p.get("th", 0.0))
-    s, c = math.sin(th), math.cos(th)
-    G = {}
-    ax, ay = AX - 14 * s, FLOOR - 44 + 26 * s
-    G["axis"] = (ax, ay)
-    G["sh1"] = (ax - SW * s, ay - SW * c)      # obere Schulter
-    G["sh0"] = (ax + SW * s, ay + SW * c)      # untere Schulter
-    # unterer Arm liegt nach vorn am Boden
-    b = G["sh0"]
-    G["el0"], G["wr0"], G["ha0"] = (b[0] + 42, FLOOR - 8), (b[0] + 78, FLOOR - 8), (b[0] + 92, FLOOR - 8)
-    # oberer Arm gestreckt
-    t = G["sh1"]
-    phi = math.radians(p.get("phi", -35.0))
-    if t[1] - ARM * math.sin(phi) > FLOOR - 8:           # Hand nicht unter die Matte
-        k = max(-1.0, min(1.0, (t[1] - (FLOOR - 8)) / ARM))
-        phi = math.pi - math.asin(k) if math.cos(phi) < 0 else math.asin(k)
-    d = (math.cos(phi), -math.sin(phi))
-    G["el1"], G["wr1"], G["ha1"] = [(t[0] + d[0] * L, t[1] + d[1] * L) for L in (42, 78, ARM)]
-    # Brust-Normale (zeigt nach vorn bzw. zur Decke)
-    G["chest_a"] = (ax + 20 * c, ay - 20 * s)
-    G["chest_b"] = (ax + 46 * c, ay - 46 * s)
-    # Kopf auf dem Kissen
-    G["head"] = (AX - 6 - 8 * s, FLOOR - 30)
-    G["gaze"] = p.get("gaze", 0.0)
-    # hinten: Becken senkrecht, Oberschenkel nach vorn, Knie übereinander
-    G["hip1"], G["hip0"] = (AX + 4, BACKF - 44), (AX + 4, BACKF - 12)
-    G["knee1"], G["knee0"] = (AX + 70, BACKF - 24), (AX + 66, BACKF - 8)
-    return G
+    J = {}
+    cy = 20 - 7 * math.sin(th)
+    c = (SH_X, cy, 0)
+    v = (0, SW * math.cos(th), -SW * math.sin(th))        # zur oberen Schulter
+    J["sh_c"] = c
+    J["sh1"], J["sh0"] = add(c, v), add(c, v, -1)
+    J["chest"] = add(c, (0, 14 * math.sin(th), 14 * math.cos(th)))
+    # Becken und Beine bleiben liegen: Knie 90°, übereinander
+    J["hip1"], J["hip0"] = (HIP_X, 27, 0), (HIP_X, 3, 0)
+    J["knee1"], J["knee0"] = (HIP_X + 4, 25, 50), (HIP_X + 2, 4, 50)
+    J["foot1"], J["foot0"] = (HIP_X + 52, 23, 52), (HIP_X + 50, 4, 52)
+    J["waist"] = (-6, 15 - 2 * math.sin(th), 0)
+    J["hip_c"] = (HIP_X, 15, 0)
+    # unterer Arm liegt gestreckt nach vorn
+    b = J["sh0"]
+    J["el0"] = (b[0] + 2, 6, b[2] + ARM_UP)
+    J["wr0"] = (b[0] + 3, 5, b[2] + ARM_UP + ARM_LO)
+    J["ha0"] = (b[0] + 3, 5, b[2] + ARM_UP + ARM_LO + ARM_HA)
+    # oberer Arm gestreckt, Winkel psi in der Querebene (0 = nach vorn, 90 = Decke)
+    t = J["sh1"]
+    L = ARM_UP + ARM_LO + ARM_HA
+    psi = math.radians(p.get("psi", -12.0))
+    lo = 10.0
+    if t[1] + L * math.sin(psi) < lo:                      # Hand nicht in die Matte
+        k = max(-1.0, min(1.0, (lo - t[1]) / L))
+        psi = math.asin(k) if math.cos(psi) > 0 else math.pi - math.asin(k)
+    d = (0.03, math.sin(psi), math.cos(psi))
+    J["el1"], J["wr1"], J["ha1"] = add(t, d, ARM_UP), add(t, d, ARM_UP + ARM_LO), add(t, d, L)
+    # Kopf auf dem Kissen, Blick folgt der Hand
+    J["neck"] = add(c, (-16, -2 * math.cos(th), 2))
+    J["head"] = (SH_X - 36, 17 - 3 * math.sin(th), 2 - 4 * math.sin(th))
+    g = math.radians(p.get("gaze", 0.0))
+    J["gaze"] = (0, math.sin(g), math.cos(g))
+    return J
 
 
-class Rig2:
-    def __init__(self):
-        self._c = {}
-
-    def G(self, c):
-        k = id(c["pose"])
-        if k not in self._c:
-            self._c[k] = (c["pose"], geo(c["pose"]))
-        return self._c[k][1]
-
-    def limb(self, names, width, color, outline=True):
-        f = lambda c, n=names: {"d": spath([self.G(c)[k] for k in n])}
-        out = []
-        if outline:
-            out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
-                                     "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
-        out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
-                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
-        return out
-
-    def head(self, r=17):
-        def base(c):
-            x, y = self.G(c)["head"]
-            return x, y, self.G(c)["gaze"]
-
-        def at(c, fwd, side):
-            x, y, g = base(c)
-            f, s_ = math.radians(g), math.radians(g + 90)
-            return (x + r * (fwd * math.cos(f) + side * math.cos(s_)),
-                    y - r * (fwd * math.sin(f) + side * math.sin(s_)))
-
-        def skull(c):
-            x, y, _ = base(c)
-            return {"cx": round(x, 1), "cy": round(y, 1)}
-
-        def hair(c):
-            x, y, g = base(c)
-            def q(deg, k=1.0):
-                a = math.radians(g + deg)
-                return x + (r + 1) * k * math.cos(a), y - (r + 1) * k * math.sin(a)
-            p0, p1, m = q(100), q(-100), q(180, 0.15)
-            return {"d": f"M{p0[0]:.1f} {p0[1]:.1f}A{r + 1} {r + 1} 0 0 1 {p1[0]:.1f} {p1[1]:.1f}"
-                         f"Q{m[0]:.1f} {m[1]:.1f} {p0[0]:.1f} {p0[1]:.1f}Z"}
-
-        def nose(c):
-            a, b, d = at(c, 0.92, 0.14), at(c, 1.3, -0.04), at(c, 0.92, -0.2)
-            return {"d": f"M{a[0]:.1f} {a[1]:.1f}L{b[0]:.1f} {b[1]:.1f}L{d[0]:.1f} {d[1]:.1f}Z"}
-
-        def eye(side):
-            return lambda c: dict(zip(("cx", "cy"), (round(v, 1) for v in at(c, 0.5, side * 0.36))))
-
-        def mouth(c):
-            a, b = at(c, 0.62, 0.28), at(c, 0.62, -0.28)
-            m = at(c, 0.74, 0.0)
-            return {"d": f"M{a[0]:.1f} {a[1]:.1f}Q{m[0]:.1f} {m[1]:.1f} {b[0]:.1f} {b[1]:.1f}"}
-
-        return [
-            Prim("circle", {"r": r + 1.5, "fill": SKIN_LINE}, skull),
-            Prim("circle", {"r": r, "fill": HEAD}, skull),
-            Prim("path", {"fill": "#4338ca"}, hair),
-            Prim("path", {"fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1.5, "stroke-linejoin": "round"}, nose),
-            Prim("circle", {"r": 2.3, "fill": SKIN_LINE}, eye(1)),
-            Prim("circle", {"r": 2.3, "fill": SKIN_LINE}, eye(-1)),
-        ]
-
-
-START = dict(th=0, phi=-35, gaze=-8)
-OPEN = dict(th=TH_MAX, phi=188, gaze=128)
-
-
-def inset():
-    """Kleine Draufsicht: Seitenlage, Knie 90°, Arme vorn (statisch)."""
-    pose = dict(x=200, y=150, rot=90, thigh_n=88, shin_n=-92, foot_n=-80, thigh_f=92, shin_f=-92,
-                foot_f=-80, upperarm_n=86, upperarm_f=94, neck=-6, head=-4)
-    fig = ghost(side_figure(), SIDE, pose, 1.0)
-    box = [Prim("rect", {"x": 290, "y": 34, "width": 104, "height": 84, "rx": 8, "fill": "#0b1220",
-                         "opacity": 0.7, "stroke": "#334155", "stroke-width": 1}),
-           Prim("rect", {"x": 297, "y": 41, "width": 90, "height": 60, "rx": 4, "fill": "#3f4a7a", "opacity": 0.6})]
-    return box + [group([fig], scale=0.37, origin=(200, 150), dx=156, dy=-62),
-                  static_text("Seitenlage von oben", 342, 112, 12, MUTED)]
+START = dict(th=0, psi=-12, gaze=0)
+OPEN = dict(th=TH_MAX, psi=192, gaze=135)
 
 
 def build():
-    rig = Rig2()
+    rig = Rig3(joints, CAM)
     tl = Timeline([(0, START), (0.8, START), (3.2, OPEN), (5.4, OPEN), (7.4, START), (8.0, START)])
 
-    # Bogen der Hand (gestrichelt, leicht außerhalb der Hand)
+    # Weg der Hand: neben dem Arm, leicht gewölbt (der Arm geht über den Körper)
     arc = []
-    for i in range(1, 24):
+    for i in range(2, 23):
         u = i / 24
-        G = geo(dict(th=TH_MAX * smooth(u), phi=-35 + 223 * smooth(u)))
-        ax, ay = G["sh1"]
-        hx, hy = G["ha1"]
-        arc.append((ax + (hx - ax) * 1.06, ay + (hy - ay) * 1.06))
+        J = joints(dict(th=TH_MAX * smooth(u), psi=-12 + 204 * smooth(u)))
+        hx, hy = CAM(J["ha1"])
+        arc.append((hx + 16 + 22 * math.sin(math.pi * u), hy))
 
-    pillow = [Prim("rect", {"x": AX - 34, "y": FLOOR - 15, "width": 60, "height": 13, "rx": 6,
-                            "fill": PROP, "stroke": PROP_DARK, "stroke-width": 2})]
-    defs = ('<marker id="arrowG" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" '
-            f'orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="{GOOD}"/></marker>')
-    k1, k0 = geo(START)["knee1"], geo(START)["knee0"]
-    scene = group([
-        Prim("rect", {"x": 30, "y": BACKF - 4, "width": 328, "height": FLOOR - BACKF + 6, "rx": 3, "fill": "#3f4a7a"}),
-        Prim("rect", {"x": 30, "y": FLOOR + 2, "width": 328, "height": 5, "rx": 2, "fill": "#2b3460"}),
-        # hinten: Beine und Becken (dunkler = weiter weg)
-        *rig.limb(["hip0", "knee0"], 16, FAR),
-        *rig.limb(["hip1", "knee1"], 16, "#7479e8"),
-        Prim("ellipse", {"cx": k1[0] + 2, "cy": (k1[1] + k0[1]) / 2, "rx": 14, "ry": 20, "fill": GOOD,
-                         "opacity": 0.35, "_pulse": True, "_show": [(0.8, 7.4)]}),
-        *rig.limb(["hip1", "hip0"], 30, FAR),
-        # Rumpf: Flanke zwischen Becken und Schultern, dann Brustkorb
-        Prim("path", {"fill": "#6d72e8", "stroke": SKIN_LINE, "stroke-width": 2, "stroke-linejoin": "round"},
-             lambda c: {"d": "M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in
-                                            [rig.G(c)[k] for k in ("hip1", "sh1", "sh0", "hip0")]) + "Z"}),
-        *rig.limb(["sh1", "sh0"], 36, TORSO),
-        *rig.limb(["sh0", "el0", "wr0", "ha0"], 12, FAR),
-        Prim("path", {"fill": "none", "stroke": GOOD, "stroke-width": 2.5, "stroke-linecap": "round",
-                      "marker-end": "url(#arrowG)"},
-             lambda c: {"d": spath([rig.G(c)["chest_a"], rig.G(c)["chest_b"]])}),
-        ghost(rig.limb(["sh1", "el1", "wr1", "ha1"], 13, NEAR), SIDE, START, 0.16),
-        Prim("path", {"d": smooth_path(arc), "fill": "none", "stroke": ACCENT, "stroke-width": 2,
-                      "stroke-dasharray": "4 5", "opacity": 0.8, "marker-end": "url(#arrowhead)",
-                      "_show": [(0.8, 3.2)]}),
-        *rig.limb(["sh1", "el1", "wr1", "ha1"], 13, NEAR),
-        *pillow,
-        *rig.head(),
-    ], scale=1.15, origin=(AX, FLOOR), dx=0)
+    pillow = CAM((SH_X - 38, 6, 2))
+    sx = CAM.s
+    k1 = CAM((HIP_X + 4, 25, 50))
     prims = [
-        scene,
-        *inset(),
+        *floor_rect(CAM, -136, 118, -110, 104),
+        Prim("ellipse", {"cx": round(pillow[0]), "cy": round(pillow[1]), "rx": round(30 * sx), "ry": round(16 * sx),
+                         "fill": PROP, "stroke": PROP_DARK, "stroke-width": 2}),
+        # unten liegende Seite (dunkler)
+        *rig.limb(["hip0", "knee0", "foot0"], 15, FAR),
+        *rig.limb(["sh0", "el0", "wr0", "ha0"], 11, FAR),
+        # Rumpf: von oben schmal (Seitenlage), Schulterlinie wird beim Aufdrehen breit
+        *rig.limb(["hip_c", "waist", "sh_c"], 30, TORSO),
+        *rig.limb(["hip1", "hip0"], 26, TORSO, outline=False),
+        *rig.limb(["sh1", "sh0"], 24, "#8f98fb"),
+        Prim("ellipse", {"rx": round(13 * sx), "ry": round(9 * sx), "fill": GOOD, "opacity": 0.35, "_pulse": True,
+                         "_show": [(1.6, 6.6)]},
+             lambda c: dict(zip(("cx", "cy"), (round(v) for v in rig.P(c, "chest"))))),
+        *rig.limb(["sh_c", "neck", "head"], 12, TORSO),
+        *rig.head("head", "gaze"),
+        # oben liegendes Bein, Knie bleiben aufeinander
+        *rig.limb(["hip1", "knee1", "foot1"], 16, NEAR),
+        Prim("ellipse", {"cx": round(k1[0]), "cy": round(k1[1]), "rx": 15, "ry": 12, "fill": GOOD,
+                         "opacity": 0.3, "_pulse": True, "_show": [(0.8, 7.4)]}),
+        ghost(rig.limb(["sh1", "el1", "wr1", "ha1"], 12, NEAR), SIDE, START, 0.16),
+        # Schatten der Hand auf der Matte: zeigt, wie hoch der Arm gerade ist
+        Prim("ellipse", {"rx": round(9 * sx), "ry": round(5 * sx), "fill": "#000", "opacity": 0.3},
+             lambda c: (lambda h: dict(zip(("cx", "cy"), (round(v) for v in CAM((h[0], 0, h[2]))))))(rig.J(c)["ha1"])),
+        Prim("path", {"d": smooth_path(arc), "fill": "none", "stroke": ACCENT, "stroke-width": 2.5,
+                      "stroke-dasharray": "5 5", "opacity": 0.9, "marker-end": "url(#arrowhead)",
+                      "_show": [(0.8, 3.2)]}),
+        *rig.limb(["sh1", "el1", "wr1", "ha1"], 12, NEAR),
         caption_band(),
         caption("Seitenlage, Knie 90° aufeinander", 0, 0.8),
         caption("Oberen Arm im Bogen öffnen – Blick folgt", 0.8, 3.2),
         caption("Brust zur Decke – 2 Atemzüge halten", 3.2, 5.4),
         caption("Langsam zurück – Knie bleiben zusammen", 5.4, 8.0),
-        static_text("Ansicht vom Kopfende", 16, 24, LEAD_SIZE, MUTED, anchor="start"),
-        static_text("Drehung aus der BWS", 16, 40, 12, MUTED, anchor="start"),
+        static_text("Von oben gesehen – Drehung aus der BWS", 200, 24, LEAD_SIZE, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Open Book", extra_defs=defs)
+    return render(prims, tl, SIDE, title="Open Book")

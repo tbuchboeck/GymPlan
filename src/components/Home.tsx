@@ -1,6 +1,6 @@
 import type { WorkoutPlan, WorkoutSession } from '../types';
 import type { Person } from '../lib/auth-service';
-import { getResumableWorkout } from '../lib/workout-progress';
+import { clearWorkoutProgress, getResumableWorkout } from '../lib/workout-progress';
 import { formatAmount } from '../utils/format';
 import { isInWeekOf, weekdayIndex } from '../utils/statistics';
 import { Play, BarChart3, Calendar, ArrowLeftRight, LogOut, TriangleAlert, ChevronDown, RotateCcw, Check } from 'lucide-react';
@@ -88,7 +88,11 @@ export function Home({
         )}
 
         <button
-          onClick={onStartWorkout}
+          onClick={() => {
+            // „Neu starten“ verwirft den gespeicherten Stand, sonst würde fortgesetzt
+            if (resumable) clearWorkoutProgress(person);
+            onStartWorkout();
+          }}
           className={`w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors ${
             resumable
               ? 'mt-3 bg-slate-700 hover:bg-slate-600 text-white'

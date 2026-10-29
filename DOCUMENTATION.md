@@ -1,227 +1,161 @@
-# GymPlan — Documentation
+# GymPlan – Technische Dokumentation
 
-## Overview
+## Überblick
 
-GymPlan is a Progressive Web App (PWA) for guided workout tracking. It provides exercise-by-exercise navigation with rest timers, set tracking, 54 animated exercise illustrations, session history with charts, and push notification reminders. Built for personal use by user "Neli" with trainer Martin Schiendorfer's workout plans.
+GymPlan ist eine PWA für geführtes Training mit zwei Personen:
 
-**Status:** Active, 163 commits across 65+ PRs. All development via Claude Code on feature branches with PRs to main.
+- **Neli** – Pläne `@gym`, `@hantel`, `@cardio`. Grundsatz: Sie trägt nichts ein, alles bleibt einfach.
+- **Thomas** – zusätzlich die Physio-Routinen `@rücken`, `@nacken`, `@morgen` (mit Befindens-Abfrage bei `@rücken`/`@nacken` und „Kribbelt – abbrechen“ bei Nerven-Übungen).
 
-**Key facts:**
-- 4 workout plans: Gym (12 exercises), Dumbbell/Hantel (12), Cardio (15), Back Rehab (6)
-- 54 animated SVG exercise illustrations (all exercises covered)
-- PIN-locked with Supabase server-side verification + offline fallback
-- Workout sessions sync to Supabase `gym_sessions` table (offline-first)
-- All session data also in localStorage (primary, offline-capable)
-- Installable PWA with full icon set + `manifest.json` (flat indigo `#4f46e5` canvas, dumbbell motif)
-- Deployed on Vercel (static Vite build)
+Die Daten liegen lokal (localStorage, primär) und werden im Hintergrund mit der Supabase-Tabelle `gym_sessions` abgeglichen. Gehostet auf Vercel als statischer Vite-Build.
 
-## Architecture
+## Ablauf und Architektur
 
 ```
-┌──────────────────────────────────────────────────┐
-│  PinLogin (Supabase PIN verify → sessionStorage) │
-├──────────────────────────────────────────────────┤
-│  LocationSelector (choose workout plan)          │
-├──────────────────────────────────────────────────┤
-│  App (view router: home/workout/summary/history) │
-│  ├── Home (plan info, stats, exercise list)      │
-│  │   └── "Wechseln" → back to LocationSelector  │
-│  ├── WorkoutView → ExerciseCard + RestTimer      │
-│  ├── WorkoutSummary (post-workout stats)         │
-│  ├── WorkoutHistory (charts, export) [lazy]      │
-│  └── ReminderSettings (push notifications)       │
-├──────────────────────────────────────────────────┤
-│  localStorage (sessions, primary)                │
-│  Supabase (gym_sessions table, sync layer)       │
-│  Supabase (app_config table, PIN hash)           │
-│  sessionStorage (PIN session)                    │
-└──────────────────────────────────────────────────┘
+main.tsx
+└── ErrorBoundary            Chunk-Ladefehler → 1× neu laden, sonst Fehlerseite
+    └── App
+        ├── AuthScreen       Passkey / Recovery-Code (wenn keine gültige Sitzung)
+        └── PersonApp        (pro Person, key = person)
+            ├── LocationSelector   Plan-Auswahl, „heute erledigt“, „diese Woche x/y“, Version
+            ├── Home               Wochenpunkte Mo–So, Weitermachen, Plan-Hinweis, Übungsliste, Abmelden
+            ├── WorkoutView        Übung für Übung (ExerciseCard, RestTimer)
+            ├── WorkoutSummary     Abschluss, ggf. Befinden
+            └── WorkoutHistory     Statistiken/Diagramme/Export (lazy geladen)
 ```
 
-**Tech stack:**
-- React 19 + TypeScript 5.9
-- Vite 7 + vite-plugin-pwa (Workbox)
-- Tailwind CSS 4
-- Recharts 3 (lazy-loaded)
-- Lucide React (icons)
-- @supabase/supabase-js (PIN auth + session sync)
+Kein Router: `App.tsx` schaltet per `useState` zwischen Ansichten.
 
-**Data flow:**
-1. PIN entered → hashed SHA-256 → compared against Supabase `app_config.pin_hash` (offline fallback to local hash)
-2. On unlock → `syncAllSessions()` merges localStorage + Supabase sessions
-3. User selects plan → exercises render with animated SVG illustrations
-4. Workout sessions saved to localStorage + pushed to Supabase (fire-and-forget)
-5. Export: JSON (raw) or CSV (formatted with German locale)
-6. Import: JSON with type validation + deduplication by session ID + push to Supabase
+### Login (Passkey, 7 Tage gültig)
 
-## File Inventory
+- `src/lib/auth-service.ts` spricht mit `https://auth.apps.buchboeck.at/api/auth` (app_id `gym`, `label` = Person). Ergebnis ist ein JWT, dessen `sub` die Nutzer-UUID ist.
+- Nach erfolgreichem Login wird `{ token, person, expiresAt }` unter `gym.auth.session` in localStorage gespeichert. `expiresAt = min(JWT-exp, Login-Zeit + 7 Tage)`.
+- Beim Start liest `App` die Sitzung (`authService.getSession()`); ist sie gültig, ist die App sofort entsperrt – auch offline. Abgelaufene Sitzungen werden gelöscht.
+- `getCurrentUserId()` liefert das `sub` nur bei gültiger Sitzung; ohne Sitzung wird nicht synchronisiert (lokal geht trotzdem alles).
+- „Abmelden“ auf der Startseite löscht die Sitzung und führt zurück zum Login (Personenwechsel).
+- Der früher verwendete Schlüssel `gym.auth.session.v1` in sessionStorage wird nicht mehr gelesen und beim Login/Abmelden entfernt.
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `src/App.tsx` | Root component, view router, session state, Supabase sync | Active |
-| `src/main.tsx` | React entry point (StrictMode) | Active |
-| `src/types.ts` | TypeScript interfaces: Exercise, WorkoutPlan, WorkoutSession | Active |
-| `src/index.css` | Tailwind import + custom animations (pulse, bounce, fade, shake, slide-up, timer-ring) | Active |
-| `src/lib/supabase.ts` | Shared Supabase client (used by pin-service + session-sync) | Active |
-| `src/lib/pin-service.ts` | Supabase PIN verification with offline SHA-256 fallback, sessionStorage | Active |
-| `src/lib/session-sync.ts` | Offline-first session sync: pushSession, pullRemoteSessions, syncAllSessions | Active |
-| `src/components/PinLogin.tsx` | PIN entry screen with numpad, Supabase verification, keyboard support | Active |
-| `src/components/LocationSelector.tsx` | Workout plan selector (4 options), Tailwind-styled | Active |
-| `src/components/Home.tsx` | Dashboard: plan info, plan switcher, weekly stats, last workout, exercise list | Active |
-| `src/components/WorkoutView.tsx` | Fixed-viewport exercise navigation, progress bar, rest timer overlay, bottom nav | Active |
-| `src/components/ExerciseCard.tsx` | Compact exercise display: image, instructions, horizontal set dots, action button | Active |
-| `src/components/RestTimer.tsx` | SVG circular progress ring, overlay on ExerciseCard | Active |
-| `src/components/WorkoutSummary.tsx` | Post-workout celebration with clean stats | Active |
-| `src/components/WorkoutHistory.tsx` | Statistics dashboard with Recharts (lazy-loaded) | Active |
-| `src/components/ReminderSettings.tsx` | Push notification scheduling (day/time picker), dark theme | Active |
-| `src/hooks/useLocalStorage.ts` | Generic localStorage hook with JSON serialization | Active |
-| `src/data/workoutPlan.ts` | 4 workout plan definitions with exercise data (45 exercises, all with imageUrl) | Active |
-| `src/utils/statistics.ts` | Extended stats: streaks, weekday analysis, weekly charts | Active |
-| `src/utils/export.ts` | JSON/CSV export + JSON import with type validation | Active |
-| `public/exercise-images/*.svg` | 54 animated SVG exercise illustrations (articulated line-segment style) | Active |
-| `public/icon.svg` | App icon — flat-fill dumbbell on indigo `#4f46e5` (no gradients; ImageMagick raster-safe) | Active |
-| `public/icon-{192,512,maskable-512}.png` | Android home-screen + Android adaptive (maskable) icons | Active |
-| `public/apple-touch-icon.png` | 180×180 iOS home-screen icon | Active |
-| `public/favicon.ico` | Multi-size favicon (16/32/48) | Active |
-| `public/manifest.json` | PWA manifest — `background_color: #4f46e5` so install paints no white frame | Active |
-| `index.html` | HTML shell with PWA meta tags + icon/manifest links | Active |
-| `vite.config.ts` | Vite config + PWA plugin (Workbox precaching) | Active |
-| `vercel.json` | Vercel deployment: SPA rewrite + security headers | Active |
-| `tsconfig.app.json` | TypeScript config (ES2023, strict, React JSX) | Active |
-| `eslint.config.js` | ESLint flat config with React hooks + refresh plugins | Active |
-| `tailwind.config.js` | Tailwind content paths | Active |
-| `postcss.config.js` | PostCSS with Tailwind + autoprefixer | Active |
-| `.env.example` | Template for Supabase credentials | Active |
-| `.vercelignore` | Excludes node_modules, .git, dist from deploy | Active |
+### Synchronisation
 
-## Usage
+`src/lib/session-sync.ts`: Nach dem Entsperren werden alle lokalen Sessions hochgeladen (`upsert` nach `id`) und die entfernten Sessions des Nutzers geholt (`pushAllAndPull`), dann funktional zusammengeführt (`mergeSessions`). Neue Sessions werden einzeln „fire-and-forget“ gepusht. Befinden, Kribbeln und abgebrochene Übungen werden – ohne DB-Änderung – als JSON mit Präfix `gp:` in der Spalte `notes` abgelegt.
 
-### Prerequisites
+### Lokale Speicher-Schlüssel
 
-- Node.js 20+ (24 LTS recommended)
-- npm 10+
-- Supabase project with `app_config` and `gym_sessions` tables (shared with CoffeeTracker/EcoFlowMon)
+| Schlüssel | Inhalt |
+|-----------|--------|
+| `gym.auth.session` | Login-Sitzung (Token, Person, Ablauf) |
+| `gym.auth.person` | zuletzt gewählte Person im Login |
+| `workoutSessions.<person>` | Trainings der Person (Altbestand `workoutSessions` wird einmalig übernommen) |
+| `workoutInProgress.<person>` | angefangenes Training (Fortsetzen, max. 12 h) |
+| `lastPlan.<person>` | zuletzt gewählter Plan (Vorreihung in der Plan-Auswahl) |
+| `gym.chunkReloaded` (sessionStorage) | Schutz gegen Neulade-Schleifen der ErrorBoundary |
 
-### Environment Setup
+### Zeit und Wochen
+
+Alle Tages- und Wochenberechnungen (`src/utils/statistics.ts`) laufen in **Ortszeit**: Tagesschlüssel `YYYY-MM-DD` aus `getFullYear/getMonth/getDate` (nie `toISOString`), Woche = Montag 00:00 bis Sonntag. Serien beginnen heute oder gestern. Hilfsfunktionen: `localDayKey`, `startOfWeek`, `isInWeekOf`, `isSameLocalDay`, `weekdayIndex`, `formatDayCount` („1 Tag“/„n Tage“).
+
+## Pläne
+
+| Variable (`src/data/workoutPlan.ts`) | Plan | Übungen | Einheiten/Woche |
+|---|---|---|---|
+| `gymWorkoutPlan` | Ganzkörper-Trainingsplan (@gym) | 12 | 2 |
+| `homeWorkoutPlan` | Hanteltraining (@hantel) | 12 | 2 |
+| `homeWorkoutPlan2` | Cardio (@cardio) | 15 | 2 |
+| `backWorkoutPlan` | Rücken-Aufbau (@rücken) | 6 | 4 |
+| `neckWorkoutPlan` | Nacken, Schulter & BWS (@nacken) | 14 | 4 |
+| `morningWorkoutPlan` | Morgen-Reset (@morgen) | 10 | 7 |
+
+Sessions werden über `planName` dem Plan zugeordnet – Plan-Namen daher nicht leichtfertig umbenennen (sonst passen Wochen-/Tagesanzeigen alter Trainings nicht mehr). Ein Plan kann einen `notice` (Warnhinweis) haben, der auf der Startseite in einer gelben, aufklappbaren Box vor den Übungen steht; Übungen mit `caution` bekommen im Training den Abbrechen-Knopf.
+
+## Übungsanimationen
+
+`scripts/animations/` erzeugt die SVGs in `public/exercise-images/` (SMIL, kein JavaScript): `rig.py` (Skelette, Posen-Timeline, IK, Renderer), `exercises/<name>.py` je Übung, `build.py` baut alle oder einzelne, `preview.cjs` erstellt Kontaktabzüge. Konventionen siehe `scripts/animations/README.md`.
+
+## Versionierung
+
+- `package.json` → `version` ist die fachliche Version; bei Änderungen erhöhen.
+- `vite.config.ts` bäckt `{ version, sha, builtAt }` als `__BUILD_INFO__` ein (Commit aus `VERCEL_GIT_COMMIT_SHA` bzw. lokal `git`) und schreibt `/version.json`.
+- `VersionBadge` zeigt die Version im Login und unten in der Plan-Auswahl und vergleicht mit `/version.json`; bei Abweichung gibt es „neu laden“ (inkl. Service-Worker-Update).
+
+## PWA und Hosting
+
+- **Manifest**: nur noch das von vite-plugin-pwa erzeugte `manifest.webmanifest` (konfiguriert in `vite.config.ts`: PNG-Icons inkl. maskable, `lang: de`, Theme/Hintergrund `#0f172a`). `public/manifest.json` gibt es nicht mehr.
+- **Service Worker**: `registerType: 'autoUpdate'`, Precache aller Build-Dateien inkl. Übungsbilder. Registrierung über die externe Datei `/registerSW.js` – kein Inline-Script, daher mit `script-src 'self'` verträglich.
+- **Chunk-Fehler nach Deploys**: Die `ErrorBoundary` erkennt „Failed to fetch dynamically imported module“ / „Importing a module script failed“ / `ChunkLoadError` und lädt einmal neu.
+- **vercel.json**: SPA-Rewrite nur für Pfade ohne Dateiendung und außerhalb `assets/` bzw. `exercise-images/` (fehlende Dateien liefern so 404 statt `index.html`). Header: `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`, `Permissions-Policy` (Kamera/Mikrofon/Standort aus), CSP:
+  `default-src 'self'; connect-src 'self' https://auth.apps.buchboeck.at https://*.supabase.co; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; frame-ancestors 'none'; manifest-src 'self'; worker-src 'self'`.
+  `style-src 'unsafe-inline'` ist für Inline-Styles von React/Recharts nötig.
+- Vercel-Umgebungsvariablen: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+
+## Entwicklung
 
 ```bash
-# Copy env template and fill in Supabase credentials
-cp .env.example .env.local
-# Edit .env.local with:
-#   VITE_SUPABASE_URL=https://your-project.supabase.co
-#   VITE_SUPABASE_ANON_KEY=your-anon-key
-```
-
-### Running Scripts
-
-```bash
-# Install dependencies
 npm install
-
-# Development server (http://localhost:5173)
-npm run dev
-
-# Type-check + production build
-npm run build
-
-# Preview production build locally
-npm run preview
-
-# Lint
+cp .env.example .env.local
+npm run dev       # Entwicklungsserver
+npm run build     # tsc -b + vite build
+npm run preview   # Build ansehen (Service Worker aktiv)
 npm run lint
 ```
 
-### Supabase Table Setup
+## Sicherheit Supabase
 
-The app uses the shared Supabase project (`wyiafjbpxbhaflhqvwcu`). Two tables are needed:
+### Ist-Zustand
+
+`gym_sessions` (Spalten u. a. `id text`, `user_id uuid not null`, `date`, `plan_name`, …, `notes`) hat RLS aktiviert, die Policies erlauben aber laut bisheriger Einrichtung **alles für `anon`**:
 
 ```sql
--- PIN authentication (shared with CoffeeTracker/EcoFlowMon)
-CREATE TABLE app_config (
-  key TEXT PRIMARY KEY,
-  value TEXT NOT NULL
-);
-INSERT INTO app_config (key, value) VALUES ('pin_hash', '<sha256-hash>');
-
--- Workout session sync (GymPlan-specific)
-CREATE TABLE gym_sessions (
-  id TEXT PRIMARY KEY,
-  date TIMESTAMPTZ NOT NULL,
-  plan_name TEXT NOT NULL,
-  completed_exercises INT NOT NULL,
-  total_exercises INT NOT NULL,
-  duration INT NOT NULL,
-  notes TEXT,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
-
--- RLS policies for both tables
-ALTER TABLE app_config ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow anon read" ON app_config FOR SELECT USING (true);
-
-ALTER TABLE gym_sessions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow anon read" ON gym_sessions FOR SELECT USING (true);
+CREATE POLICY "Allow anon read"   ON gym_sessions FOR SELECT USING (true);
 CREATE POLICY "Allow anon insert" ON gym_sessions FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow anon update" ON gym_sessions FOR UPDATE USING (true);
 ```
 
-### Vercel Deployment
+Die App filtert zwar per `.eq('user_id', …)`, das ist aber nur Client-Logik: Wer den (öffentlich im Bundle stehenden) anon-Key kennt, kann alle Trainings beider Personen lesen und beliebige Zeilen schreiben oder überschreiben. Der Passkey-JWT wird an Supabase derzeit **nicht** mitgeschickt.
 
-```bash
-# Required env vars on Vercel:
-#   VITE_SUPABASE_URL
-#   VITE_SUPABASE_ANON_KEY
-vercel --prod
+### ToDo (bewusst noch nicht im App-Code umgesetzt)
+
+Ziel: Supabase soll den JWT des Auth-Service prüfen und Zeilen nur für `user_id = sub` freigeben. Zwei Wege:
+
+1. **JWT direkt an Supabase (bevorzugt, wenig Code):**
+   - Der Auth-Service muss einen Token ausstellen, den Supabase akzeptiert: entweder als *Third-Party Auth*-Anbieter (Supabase prüft per JWKS/OIDC-Discovery des Auth-Service) oder signiert mit dem JWT-Schlüssel des Supabase-Projekts. Der Token braucht `sub` (UUID), `role: "authenticated"` und passende `aud`/`iss`/`exp`.
+   - In der App: `createClient(url, anonKey, { accessToken: async () => authService.getSession()?.token ?? null })`.
+   - Achtung: Offline-Sitzungen gelten bis zu 7 Tage, der JWT ggf. kürzer – abgelaufene Tokens führen dann zu 401 beim Sync (die App arbeitet lokal weiter, Sync erst nach erneutem Login). Ggf. Token-Refresh im Auth-Service vorsehen.
+2. **Supabase Edge Function als Gateway:** Funktion prüft den Auth-Service-JWT (JWKS), schreibt/liest mit Service-Role-Key ausschließlich Zeilen mit `user_id = sub`. Danach den anon-Zugriff auf `gym_sessions` komplett sperren.
+
+### SQL-Entwurf (für Weg 1)
+
+```sql
+-- Alte, offene Policies entfernen
+DROP POLICY IF EXISTS "Allow anon read"   ON gym_sessions;
+DROP POLICY IF EXISTS "Allow anon insert" ON gym_sessions;
+DROP POLICY IF EXISTS "Allow anon update" ON gym_sessions;
+
+ALTER TABLE gym_sessions ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON gym_sessions FROM anon;
+
+-- Nur eigene Zeilen (sub aus dem geprüften JWT)
+CREATE POLICY "own rows select" ON gym_sessions
+  FOR SELECT TO authenticated
+  USING (user_id::text = auth.jwt() ->> 'sub');
+
+CREATE POLICY "own rows insert" ON gym_sessions
+  FOR INSERT TO authenticated
+  WITH CHECK (user_id::text = auth.jwt() ->> 'sub');
+
+CREATE POLICY "own rows update" ON gym_sessions
+  FOR UPDATE TO authenticated
+  USING (user_id::text = auth.jwt() ->> 'sub')
+  WITH CHECK (user_id::text = auth.jwt() ->> 'sub');
+
+-- Löschen bei Bedarf analog (die App löscht derzeit nichts)
 ```
 
-## Technical Patterns
+Hinweis: `upsert` auf eine fremde `id` scheitert danach an der UPDATE-Policy – gewollt. Reihenfolge beim Umstellen: erst Auth-Service/Token und App-Client (`accessToken`) ausrollen und prüfen, dann die Policies tauschen.
 
-- **Offline-first Supabase sync**: `session-sync.ts` pushes sessions via fire-and-forget `upsert` (idempotent by ID). On app load, `syncAllSessions()` pushes all local, pulls all remote, merges by ID with Map. Network failures fall back silently to localStorage.
+## Erkenntnisse
 
-- **Supabase PIN with offline fallback**: `pin-service.ts` tries Supabase `app_config` table first, catches errors, falls back to hardcoded SHA-256 hash. Session persists in `sessionStorage`.
-
-- **Shared Supabase client**: `supabase.ts` exports a single client instance used by both `pin-service.ts` and `session-sync.ts`. Returns `null` when env vars missing (offline mode).
-
-- **Lazy-loaded Recharts**: `React.lazy(() => import('./components/WorkoutHistory'))` in `App.tsx` — reduced initial bundle from 600KB to 240KB.
-
-- **useRef for timer callbacks**: `RestTimer.tsx` stores `onComplete` in `useRef` to avoid re-running the timer interval when parent re-renders.
-
-- **Non-mutating array operations**: All sorting uses `.toSorted()` (ES2023) instead of `.sort()` to avoid mutating React props/state.
-
-- **Fixed-viewport workout layout**: `WorkoutView` uses `h-dvh flex flex-col` with a scrollable content area and fixed header/footer — prevents page scrolling during exercises.
-
-- **Rest timer as overlay**: `RestTimer` renders as an `absolute inset-0` overlay with `backdrop-blur-sm` on top of `ExerciseCard` instead of replacing it — eliminates layout jumps.
-
-- **Typed JSON import validation**: `export.ts` validates imported JSON field-by-field with `typeof` checks, `Date.parse()` for dates, `Number.isFinite()` for numbers. Constructs clean objects instead of `as` casts.
-
-- **SHA-256 via Web Crypto API**: PIN hashing uses `crypto.subtle.digest('SHA-256', ...)` — native browser API, no dependencies.
-
-- **PWA with Workbox precaching**: `vite-plugin-pwa` generates a service worker that precaches all static assets with content hashes. 63 precached entries including all 54 SVGs.
-
-- **View-based routing without a router**: App uses `useState<AppView>` to switch views + `useEffect` scroll-to-top. No React Router — keeps bundle small.
-
-- **Plan switcher**: Home screen has "Wechseln" button that resets `location` state to `null`, showing the `LocationSelector` without app restart.
-
-- **Security headers via vercel.json**: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `X-XSS-Protection: 1; mode=block`.
-
-## Lessons Learned
-
-- **Never push to merged branches**: PRs #63 and #64 were merged before late commits were pushed — commits were silently lost. Always check `gh pr view --json state` before pushing.
-- **Hardcoded PIN in source code is easily discovered**: SHA-256 hashing was the immediate fix; Supabase server-side verification is the proper solution.
-- **`sessions.sort()` silently mutates props**: `.toSorted()` is the clean ES2023 fix.
-- **Duplicate service workers cause confusing caching**: Use only vite-plugin-pwa's generated SW, not manual `public/sw.js`.
-- **Code splitting Recharts has massive impact**: Single `React.lazy()` reduced initial bundle by 60%.
-- **Supabase MCP auth via WSL2**: OAuth callback to `localhost` can be flaky on WSL2 — long URLs get mangled during copy-paste. Direct SQL in the Supabase dashboard is the reliable fallback.
-
-## Timeline
-
-| Date | Milestone |
-|------|-----------|
-| 2025-10-24 | Initial PWA created with gym workout plan |
-| 2025-10 | Vercel deployment, Tailwind v4 migration, animated SVG exercises |
-| 2025-11 | Location selector, home/cardio workout plans, exercise instructions |
-| 2025-12 | Cardio plan, step-up exercise, theraband exercises |
-| 2026-01 | Statistics dashboard with Recharts, export/import, PIN login |
-| 2026-02 | Back rehab workout plan (post-injury), SVG redesigns |
-| 2026-03 | Exercise renaming, plan adjustments, core exercises added |
-| 2026-04-04 | Major refactoring session: security hardening (Supabase PIN auth), full design overhaul (flat dark theme, fixed viewport, glass nav), code quality fixes (RestTimer closure, array mutation, code splitting), 48 SVG animations rebuilt to articulated style, 6 new SVGs created for Hantel plan, plan switcher added, Supabase session sync (`gym_sessions` table), comprehensive documentation |
+- Tagesgrenzen nie über `toISOString()` bilden – in Österreich verschiebt das Trainings nach 22/23 Uhr bzw. vor 1/2 Uhr auf den falschen Tag.
+- Nach Deploys fehlen alte Chunks im Cache → ErrorBoundary mit einmaligem Neuladen.
+- Nur ein Manifest verwenden (vite-plugin-pwa), sonst widersprüchliche Icons/Farben.
+- Nicht auf bereits gemergte Branches pushen; Commits gehen sonst verloren.
+- `.toSorted()` statt `.sort()` auf Props/State.

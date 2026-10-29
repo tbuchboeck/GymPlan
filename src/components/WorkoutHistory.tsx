@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { WorkoutSession } from '../types';
 import type { Person } from '../lib/auth-service';
 import { Calendar, TrendingUp, Dumbbell, Clock, ArrowLeft, Award, Flame, Target, BarChart3, Download, Upload, FileText, Share2 } from 'lucide-react';
-import { calculateExtendedStatistics } from '../utils/statistics';
+import { calculateExtendedStatistics, formatDayCount } from '../utils/statistics';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { exportToJSON, exportToCSV, importFromJSON, downloadTextFile, getDateString } from '../utils/export';
 import { buildPhysioReport, physioReportTitle } from '../utils/physio-report';
@@ -186,7 +186,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
               <Flame className="text-indigo-400 w-5 h-5" />
               <div className="text-xs text-slate-400 uppercase tracking-wider">Serie</div>
             </div>
-            <div className="text-2xl font-bold text-white">{stats.currentStreak} Tage</div>
+            <div className="text-2xl font-bold text-white">{formatDayCount(stats.currentStreak)}</div>
           </div>
         </div>
 
@@ -210,7 +210,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
               <Award className="text-indigo-400 w-5 h-5" />
               <h3 className="text-lg font-bold text-white">Beste Streak</h3>
             </div>
-            <div className="text-2xl font-bold text-white mb-1">{stats.longestStreak} Tage</div>
+            <div className="text-2xl font-bold text-white mb-1">{formatDayCount(stats.longestStreak)}</div>
             <div className="text-sm text-slate-400">Längste Serie</div>
           </div>
 
