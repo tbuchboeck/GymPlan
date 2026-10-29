@@ -26,6 +26,7 @@ Siehe poses.py für anatomische Helfer und exercises/ für Beispiele.
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -250,6 +251,12 @@ class Prim:
     dyn: Callable[[Ctx], dict] | None = None
     text: str | None = None
     children: list["Prim"] = field(default_factory=list)
+
+
+def _amp(text: str) -> str:
+    """Rohes "&" maskieren (macht die SVG sonst ungültig). Bestehende
+    Entities und bewusst eingebettetes Markup wie <tspan> bleiben erhalten."""
+    return re.sub(r"&(?!#?\w+;)", "&amp;", text)
 
 
 def fmt(v) -> str:
@@ -559,7 +566,7 @@ def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
             anims.append('<animate attributeName="opacity" values="0.15;0.5;0.15" dur="1.6s" '
                          'repeatCount="indefinite"/>')
         a = " ".join(f'{k}="{fmt(v)}"' for k, v in attrs.items())
-        inner = "".join(anims) + (p.text or "") + "".join(emit(c) for c in p.children)
+        inner = "".join(anims) + _amp(p.text or "") + "".join(emit(c) for c in p.children)
         el = f"<{p.tag} {a}>{inner}</{p.tag}>" if inner else f"<{p.tag} {a}/>"
         if "_show" in p.attrs:
             el = f'<g opacity="0">{_show_anim(p.attrs["_show"], dur)}{el}</g>'
@@ -569,7 +576,7 @@ def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
     head = (
         f'<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" '
         f'font-family="system-ui,-apple-system,sans-serif">\n'
-        f'<title>{title}</title>\n'
+        f'<title>{_amp(title)}</title>\n'
         '<defs>'
         f'<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{BG_TOP}"/>'
         f'<stop offset="1" stop-color="{BG_BOTTOM}"/></linearGradient>'

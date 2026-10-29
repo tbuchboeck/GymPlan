@@ -413,7 +413,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       weight: 0,
       rest: 60,
       instructions: "20 Minuten zügiges Gehen auf dem Laufband",
-      imageUrl: "/exercise-images/walking.svg"
+      imageUrl: "/exercise-images/laufband.svg"
     },
     {
       id: 15,

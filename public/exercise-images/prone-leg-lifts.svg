@@ -7,7 +7,7 @@
 <rect x="0" y="258" width="400" height="42" fill="#0b1220" opacity="0.8"/>
 <g opacity="0"><animate attributeName="opacity" values="1;0;0" keyTimes="0.0000;0.1538;1.0000" calcMode="discrete" dur="5.2s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Unterarme stützen, Beine lang</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.1538;0.3846;1.0000" calcMode="discrete" dur="5.2s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Ausatmen – beide Beine gestreckt heben</text></g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.3846;0.6154;1.0000" calcMode="discrete" dur="5.2s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Kurz halten – Po & Bauch fest</text></g>
+<g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.3846;0.6154;1.0000" calcMode="discrete" dur="5.2s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Kurz halten – Po &amp; Bauch fest</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0" keyTimes="0.0000;0.6154;1.0000" calcMode="discrete" dur="5.2s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Langsam absenken</text></g>
 <text x="200" y="24" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Becken bleibt auf der Matte – nur leicht heben</text>
 </svg>
