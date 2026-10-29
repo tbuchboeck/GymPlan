@@ -1,127 +1,99 @@
 import { useState } from 'react';
+import { TriangleAlert } from 'lucide-react';
 import type { Exercise } from '../types';
-import { formatAmount, holdSeconds } from '../utils/format';
+import { formatAmount } from '../utils/format';
+import type { PlanTheme } from '../utils/plan-theme';
+import { Button } from './ui/Button';
 
 interface ExerciseCardProps {
   exercise: Exercise;
   currentSet: number;
-  onSetComplete: () => void;
-  onStartTimer: () => void;
-  onAbort?: () => void;
   exerciseNumber: number;
+  totalExercises: number;
+  theme: PlanTheme;
+  onAbort?: () => void;
 }
 
-export function ExerciseCard({
-  exercise,
-  currentSet,
-  onSetComplete,
-  onStartTimer,
-  onAbort,
-  exerciseNumber,
-}: ExerciseCardProps) {
+/** Inhalt einer Übung: Animation groß oben, darunter Name, Satz-Fortschritt und Anleitung. */
+export function ExerciseCard({ exercise, currentSet, exerciseNumber, totalExercises, theme, onAbort }: ExerciseCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
-  const timerSeconds = holdSeconds(exercise);
   const showImage = !!exercise.imageUrl && !imageFailed;
+  const Icon = theme.icon;
 
   return (
-    <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 overflow-hidden animate-fade-in">
-      {/* Header */}
-      <div className="bg-indigo-600 p-4 rounded-t-2xl">
-        <div className="flex items-center gap-3 mb-1">
-          <span className="bg-indigo-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">
-            {exerciseNumber}
-          </span>
-          <h2 className="text-xl font-bold text-white leading-tight">{exercise.name}</h2>
-        </div>
-        <div className="text-sm text-indigo-200 ml-9">
-          {exercise.sets} × {formatAmount(exercise)}
-          {exercise.weight > 0 && ` × ${exercise.weight} kg`}
-        </div>
+    <article className="animate-slide-up">
+      {/* Animation – Platz reserviert, damit beim Laden nichts springt */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl shadow-black/40 ring-1 ring-white/5">
+        {showImage ? (
+          <img
+            src={exercise.imageUrl}
+            alt={exercise.name}
+            onError={() => setImageFailed(true)}
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          <div className="grid h-full w-full place-items-center">
+            <span className={`grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br ${theme.gradient} text-white`}>
+              <Icon className="h-10 w-10" />
+            </span>
+          </div>
+        )}
       </div>
 
-      {/* Exercise Image – Platz reserviert, damit beim Laden nichts springt */}
-      {showImage && (
-        <div className="bg-slate-800 p-3">
-          <div className="w-full aspect-[4/3] max-h-72 mx-auto flex items-center justify-center">
-            <img
-              src={exercise.imageUrl}
-              alt={exercise.name}
-              onError={() => setImageFailed(true)}
-              className="max-w-full max-h-full object-contain rounded-lg"
-            />
+      {/* Name & Menge */}
+      <div className="mt-5 px-1">
+        <p className={`text-sm font-semibold ${theme.text}`}>
+          Übung {exerciseNumber} von {totalExercises}
+        </p>
+        <h2 className="mt-0.5 text-[1.75rem] font-bold leading-tight tracking-tight text-white">{exercise.name}</h2>
+      </div>
+
+      {/* Nerven-/Dehnübung: sofort abbrechen können */}
+      {exercise.caution && onAbort && (
+        <Button variant="danger" size="lg" block onClick={onAbort} className="mt-4 text-base!">
+          <TriangleAlert className="h-5 w-5" />
+          Kribbelt / zieht – abbrechen
+        </Button>
+      )}
+      {/* Satz-Fortschritt */}
+      <section className="mt-4 rounded-3xl bg-slate-900 p-4 ring-1 ring-white/5" aria-label="Satz-Fortschritt">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <div className="text-xs font-medium uppercase tracking-wider text-slate-500">Satz</div>
+            <div className="text-2xl font-bold tabular-nums text-white">
+              {currentSet} <span className="text-lg font-medium text-slate-500">von {exercise.sets}</span>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-2xl font-bold text-white">{formatAmount(exercise)}</div>
+            <div className="text-sm text-slate-400">{exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}</div>
           </div>
         </div>
-      )}
-
-      {/* Instructions */}
-      {exercise.instructions && (
-        <div className="mx-4 mt-3 bg-slate-800 border-l-2 border-indigo-400 px-4 py-2 rounded-r-lg">
-          <p className="text-base text-slate-300">{exercise.instructions}</p>
-        </div>
-      )}
-
-      {/* Set indicators */}
-      <div className="p-4">
-        <div className="flex items-center justify-center gap-2 mb-3">
+        <div className="mt-3 flex gap-1.5">
           {Array.from({ length: exercise.sets }, (_, i) => i + 1).map((setNumber) => {
             const isCompleted = setNumber < currentSet;
             const isCurrent = setNumber === currentSet;
             return (
               <div
                 key={setNumber}
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                  isCompleted
-                    ? 'bg-emerald-500 text-white'
-                    : isCurrent
-                    ? 'bg-indigo-500 text-white ring-2 ring-indigo-300'
-                    : 'bg-slate-700 text-slate-500'
+                className={`h-2.5 flex-1 rounded-full transition-colors duration-300 ${
+                  isCompleted ? 'bg-emerald-500' : isCurrent ? `bg-gradient-to-r ${theme.gradient}` : 'bg-slate-800'
                 }`}
-              >
-                {setNumber}
-              </div>
+                aria-label={`Satz ${setNumber}${isCompleted ? ': erledigt' : isCurrent ? ': jetzt' : ''}`}
+              />
             );
           })}
         </div>
+      </section>
 
-        {/* Current set info */}
-        <div className="text-center mb-4">
-          <div className="text-sm font-medium text-slate-400">Satz {currentSet}</div>
-          <div className="text-slate-300">
-            {formatAmount(exercise)} × {exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}
-          </div>
-        </div>
+      {/* Anleitung */}
+      {exercise.instructions && (
+        <section className="mt-3 rounded-3xl bg-slate-900 p-4 ring-1 ring-white/5">
+          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">So geht’s</h3>
+          <p className="text-base leading-relaxed text-slate-200">{exercise.instructions}</p>
+        </section>
+      )}
 
-        {/* Countdown for timed exercises (optional) */}
-        {timerSeconds !== null && (
-          <button
-            type="button"
-            onClick={onStartTimer}
-            className="w-full mb-2 min-h-12 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
-          >
-            ▶ Timer starten ({formatAmount(exercise)})
-          </button>
-        )}
-
-        {/* Action button */}
-        <button
-          type="button"
-          onClick={onSetComplete}
-          className="w-full min-h-14 bg-indigo-500 hover:bg-indigo-400 text-white text-lg py-4 rounded-xl font-semibold transition-colors"
-        >
-          Fertig ✓
-        </button>
-
-        {/* Nerven-/Dehnübung: sofort abbrechen können */}
-        {exercise.caution && onAbort && (
-          <button
-            type="button"
-            onClick={onAbort}
-            className="w-full mt-3 min-h-11 px-4 py-2 rounded-xl border border-red-500/50 bg-red-500/10 hover:bg-red-500/20 text-red-300 font-medium transition-colors"
-          >
-            Kribbelt / zieht – abbrechen
-          </button>
-        )}
-      </div>
-    </div>
+    </article>
   );
 }

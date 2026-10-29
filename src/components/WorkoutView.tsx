@@ -3,7 +3,9 @@ import type { Exercise, WorkoutSession } from '../types';
 import type { Person } from '../lib/auth-service';
 import { ExerciseCard } from './ExerciseCard';
 import { RestTimer } from './RestTimer';
-import { holdSeconds } from '../utils/format';
+import { formatAmount, holdSeconds, planTitle } from '../utils/format';
+import { planTheme } from '../utils/plan-theme';
+import { Button } from './ui/Button';
 import { useWakeLock } from '../hooks/useWakeLock';
 import {
   clearWorkoutProgress,
@@ -11,7 +13,7 @@ import {
   saveWorkoutProgress,
   unlockAudio,
 } from '../lib/workout-progress';
-import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Play, X } from 'lucide-react';
 
 interface WorkoutViewProps {
   exercises: Exercise[];
@@ -230,58 +232,119 @@ export function WorkoutView({ exercises, planName, person, onComplete, onExit, i
   const holdTotal = holdSeconds(currentExercise) ?? 0;
   const nextExercise = isLastSet ? exercises[currentExerciseIndex + 1] : undefined;
 
+  const theme = planTheme(planName);
+  const timerSeconds = holdSeconds(currentExercise);
+  const overlayClass =
+    'absolute inset-0 z-20 flex flex-col items-center bg-slate-950/90 backdrop-blur-md animate-fade-in';
+
   return (
-    <div className="h-dvh flex flex-col bg-slate-900">
-      {/* Header */}
-      <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-2">
-          <div className="flex items-center justify-between mb-1">
+    <div className="flex h-dvh flex-col bg-slate-950">
+      {/* Kopf: Beenden, Plan, Fortschritt */}
+      <header className="z-10 border-b border-white/5 bg-slate-950/95 px-safe-4 pt-safe-1 pb-3 backdrop-blur">
+        <div className="mx-auto max-w-xl">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setConfirmExit(true)}
-              className="-ml-2 min-w-11 min-h-11 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-colors"
+              className="-ml-2 flex min-h-11 min-w-11 items-center justify-center rounded-xl text-slate-300 transition hover:bg-white/5 hover:text-white"
               aria-label="Training beenden"
             >
-              <Home className="w-6 h-6" />
+              <X className="h-6 w-6" />
             </button>
-            <span className="text-sm font-medium text-slate-300">
+            <span className="min-w-0 flex-1 truncate text-center text-sm font-medium text-slate-400">
+              {planTitle(planName)}
+            </span>
+            <span className="min-w-11 rounded-full bg-slate-800 px-2.5 py-1 text-center text-sm font-semibold tabular-nums text-slate-200">
               {currentExerciseIndex + 1} / {exercises.length}
             </span>
           </div>
 
-          {/* Progress Bar */}
-          <div className="w-full bg-slate-800 rounded-full h-1.5">
+          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-800">
             <div
-              className="bg-indigo-500 h-1.5 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
+              className={`h-full rounded-full bg-gradient-to-r ${theme.gradient} transition-all duration-500 ease-out`}
+              style={{ width: `${Math.max(progress, 2)}%` }}
             />
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Content area */}
-      <div className="flex-1 overflow-y-auto relative">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <ExerciseCard
-            key={currentExercise.id}
-            exercise={currentExercise}
-            currentSet={currentSet}
-            onSetComplete={handleSetComplete}
-            onStartTimer={handleStartTimer}
-            onAbort={handleAbortExercise}
-            exerciseNumber={currentExerciseIndex + 1}
-          />
+      {/* Inhalt + Daumenleiste; Timer-Overlays decken beides ab */}
+      <div className="relative flex min-h-0 flex-1 flex-col">
+        <div className="flex-1 overflow-y-auto">
+          <div className="mx-auto max-w-xl px-safe-4 pt-4 pb-6">
+            <ExerciseCard
+              key={currentExercise.id}
+              exercise={currentExercise}
+              currentSet={currentSet}
+              exerciseNumber={currentExerciseIndex + 1}
+              totalExercises={exercises.length}
+              theme={theme}
+              onAbort={handleAbortExercise}
+            />
+          </div>
+        </div>
+
+        {/* Daumenleiste – während Timer/Pause verdeckt */}
+        <div className="z-10 border-t border-white/5 bg-slate-950/95 px-safe-4 pt-3 pb-safe-3 backdrop-blur">
+          <div className="mx-auto max-w-xl space-y-2">
+            {timerSeconds !== null && (
+              <button
+                type="button"
+                onClick={handleStartTimer}
+                disabled={overlayOpen}
+                className={`flex min-h-16 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-br ${theme.gradient} px-4 text-lg font-semibold text-white shadow-lg shadow-black/40 transition active:scale-[0.98] disabled:opacity-40`}
+              >
+                <Play className="h-6 w-6 fill-current" />
+                Timer starten ({formatAmount(currentExercise)})
+              </button>
+            )}
+            <div className="flex gap-2">
+              <Button
+                variant="secondary"
+                size={timerSeconds !== null ? 'lg' : 'xl'}
+                onClick={handlePrevious}
+                disabled={overlayOpen || (currentExerciseIndex === 0 && currentSet === 1)}
+                aria-label="Zurück"
+                className="w-16 shrink-0 px-0!"
+              >
+                <ArrowLeft className="h-6 w-6" />
+              </Button>
+              <Button
+                variant={timerSeconds !== null ? 'secondary' : 'primary'}
+                size={timerSeconds !== null ? 'lg' : 'xl'}
+                onClick={handleSetComplete}
+                disabled={overlayOpen}
+                className="flex-1"
+              >
+                <Check className="h-6 w-6" strokeWidth={3} />
+                Fertig
+              </Button>
+              <Button
+                variant="secondary"
+                size={timerSeconds !== null ? 'lg' : 'xl'}
+                onClick={handleNext}
+                disabled={overlayOpen || (isLastExercise && isLastSet)}
+                aria-label="Weiter"
+                className="w-16 shrink-0 px-0!"
+              >
+                <ArrowRight className="h-6 w-6" />
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Halte-Countdown; bei „pro Seite“ zweimal */}
         {phase.kind === 'hold' && (
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-20 animate-fade-in px-4">
+          <div className={overlayClass}>
             <RestTimer
               key={`hold-${currentExerciseIndex}-${currentSet}-${phase.side}`}
               seconds={holdTotal}
               label={currentExercise.name}
-              hint={currentExercise.perSide ? `Seite ${phase.side} von 2` : undefined}
+              hint={currentExercise.perSide ? `Seite ${phase.side} von 2` : `Satz ${currentSet} von ${currentExercise.sets}`}
               skipLabel="Abbrechen"
+              accentFrom={theme.from}
+              accentTo={theme.to}
+              previewImage={currentExercise.imageUrl}
               onComplete={handleHoldComplete}
               onSkip={() => setPhase({ kind: 'idle' })}
             />
@@ -289,13 +352,15 @@ export function WorkoutView({ exercises, planName, person, onComplete, onExit, i
         )}
 
         {phase.kind === 'switch' && (
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-20 animate-fade-in px-4">
+          <div className={overlayClass}>
             <RestTimer
               key={`switch-${currentExerciseIndex}-${currentSet}`}
               seconds={SIDE_SWITCH_SECONDS}
               label="Seite wechseln"
               hint="Gleich geht es mit Seite 2 weiter"
               skipLabel="Abbrechen"
+              accentFrom="#fde047"
+              accentTo="#f59e0b"
               onComplete={() => setPhase({ kind: 'hold', side: 2 })}
               onSkip={() => setPhase({ kind: 'idle' })}
             />
@@ -304,11 +369,14 @@ export function WorkoutView({ exercises, planName, person, onComplete, onExit, i
 
         {/* Pause */}
         {phase.kind === 'rest' && (
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-20 animate-fade-in px-4">
+          <div className={overlayClass}>
             <RestTimer
               key={`rest-${currentExerciseIndex}-${currentSet}`}
               seconds={currentExercise.rest}
-              hint={nextExercise ? `Als Nächstes: ${nextExercise.name}` : undefined}
+              hint={nextExercise ? `Als Nächstes: ${nextExercise.name}` : `Gleich: Satz ${currentSet + 1} von ${currentExercise.sets}`}
+              accentFrom={theme.from}
+              accentTo={theme.to}
+              previewImage={nextExercise?.imageUrl}
               onComplete={handleRestComplete}
               onSkip={handleRestComplete}
             />
@@ -316,85 +384,48 @@ export function WorkoutView({ exercises, planName, person, onComplete, onExit, i
         )}
 
         {toast && (
-          <div className="fixed left-1/2 -translate-x-1/2 bottom-24 z-30 max-w-sm w-[calc(100%-2rem)] bg-slate-800 border border-red-500/40 text-red-200 text-sm text-center rounded-xl px-4 py-3 shadow-xl animate-fade-in" role="status">
+          <div
+            className="absolute left-1/2 top-3 z-30 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 rounded-2xl bg-slate-800 px-4 py-3 text-center text-sm text-red-200 shadow-xl ring-1 ring-red-500/40 animate-slide-up"
+            role="status"
+          >
             {toast}
           </div>
         )}
       </div>
 
-      {/* Bottom nav – während Timer/Pause gesperrt */}
-      <div className="bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex gap-3">
-          <button
-            type="button"
-            onClick={handlePrevious}
-            disabled={overlayOpen || (currentExerciseIndex === 0 && currentSet === 1)}
-            className="flex-1 min-h-12 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Zurück
-          </button>
-
-          <button
-            type="button"
-            onClick={handleNext}
-            disabled={overlayOpen || (isLastExercise && isLastSet)}
-            className="flex-1 min-h-12 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition-colors"
-          >
-            Weiter
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-
       {/* Rückfrage beim Beenden */}
       {confirmExit && (
         <div
-          className="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-40 flex items-end justify-center bg-slate-950/80 px-safe-3 pb-safe-3 backdrop-blur-sm animate-fade-in sm:items-center"
           role="dialog"
           aria-modal="true"
           aria-labelledby="exit-title"
           onClick={() => setConfirmExit(false)}
         >
           <div
-            className="w-full max-w-sm bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-2xl"
+            className="w-full max-w-md rounded-3xl bg-slate-900 p-5 shadow-2xl ring-1 ring-white/10 animate-sheet-up"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 id="exit-title" className="text-lg font-bold text-white mb-1">Training beenden?</h2>
-            <p className="text-sm text-slate-400 mb-4">
+            <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-slate-700" aria-hidden="true" />
+            <h2 id="exit-title" className="text-xl font-bold text-white">Training beenden?</h2>
+            <p className="mb-5 mt-1 text-base text-slate-400">
               Dein Fortschritt bleibt gespeichert – du kannst später weitermachen.
             </p>
             <div className="flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={onExit}
-                className="w-full min-h-12 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-semibold transition-colors"
-              >
+              <Button block onClick={onExit}>
                 Beenden, später weitermachen
-              </button>
+              </Button>
               {completedCount > 0 && (
-                <button
-                  type="button"
-                  onClick={() => finish(completedSets, abortedExercises)}
-                  className="w-full min-h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold transition-colors"
-                >
+                <Button variant="success" block onClick={() => finish(completedSets, abortedExercises)}>
                   Jetzt abschließen ({completedCount} {completedCount === 1 ? 'Übung' : 'Übungen'})
-                </button>
+                </Button>
               )}
-              <button
-                type="button"
-                onClick={handleDiscard}
-                className="w-full min-h-12 border border-red-500/50 bg-red-500/10 hover:bg-red-500/20 text-red-300 rounded-xl font-medium transition-colors"
-              >
+              <Button variant="danger" size="md" block onClick={handleDiscard} className="min-h-12">
                 Verwerfen
-              </button>
-              <button
-                type="button"
-                onClick={() => setConfirmExit(false)}
-                className="w-full min-h-11 text-slate-400 hover:text-white rounded-xl font-medium transition-colors"
-              >
+              </Button>
+              <Button variant="ghost" size="md" block onClick={() => setConfirmExit(false)} className="min-h-12">
                 Weiter trainieren
-              </button>
+              </Button>
             </div>
           </div>
         </div>

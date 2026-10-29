@@ -1,21 +1,41 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { signalTimerEnd } from '../lib/workout-progress';
+import { Button } from './ui/Button';
 
 interface RestTimerProps {
   seconds: number;
   label?: string;
   hint?: string;
   skipLabel?: string;
+  /** Akzentverlauf des Rings (Plan-Farbe) */
+  accentFrom?: string;
+  accentTo?: string;
+  /** Kleines Vorschaubild (aktuelle bzw. nächste Übung) */
+  previewImage?: string;
   onComplete: () => void;
   onSkip: () => void;
 }
 
+const R = 88;
+const CIRCUMFERENCE = 2 * Math.PI * R;
+
 // Rechnet gegen die Uhrzeit (endAt), damit der Timer auch im Hintergrund
 // bzw. bei gedrosseltem setInterval nicht nachgeht.
-export function RestTimer({ seconds, label = 'Pause', hint, skipLabel = 'Überspringen →', onComplete, onSkip }: RestTimerProps) {
+export function RestTimer({
+  seconds,
+  label = 'Pause',
+  hint,
+  skipLabel = 'Überspringen →',
+  accentFrom = '#6366f1',
+  accentTo = '#8b5cf6',
+  previewImage,
+  onComplete,
+  onSkip,
+}: RestTimerProps) {
   const [remainingMs, setRemainingMs] = useState(seconds * 1000);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
+  const gradientId = useId();
 
   useEffect(() => {
     const endAt = Date.now() + seconds * 1000;
@@ -48,58 +68,69 @@ export function RestTimer({ seconds, label = 'Pause', hint, skipLabel = 'Übersp
   const timeLeft = Math.ceil(remainingMs / 1000);
   const minutes = Math.floor(timeLeft / 60);
   const secs = timeLeft % 60;
-  const circumference = 2 * Math.PI * 54;
   // Ring leert sich: voll am Anfang, leer am Ende
   const fraction = seconds > 0 ? remainingMs / (seconds * 1000) : 0;
-  const dashOffset = circumference * (1 - fraction);
+  const dashOffset = CIRCUMFERENCE * (1 - fraction);
+  const ringSize = previewImage ? 'h-56 w-56' : 'h-64 w-64';
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl animate-fade-in max-w-xs w-full">
-      {/* Label */}
-      <div className="text-center mb-4">
-        <span className="text-sm text-slate-400 uppercase tracking-wider">{label}</span>
-        {hint && <div className="mt-1 text-base font-semibold text-white">{hint}</div>}
-      </div>
+    <div className="flex w-full max-w-sm flex-1 flex-col items-center px-safe-6 pt-6 pb-safe-4">
+      <div className="flex w-full flex-1 flex-col items-center justify-center gap-6 animate-scale-in">
+        {/* Beschriftung */}
+        <div className="text-center">
+          <div className="text-sm font-semibold uppercase tracking-widest text-slate-400">{label}</div>
+          {hint && <div className="mt-1.5 text-xl font-semibold leading-snug text-white">{hint}</div>}
+        </div>
 
-      {/* Circular progress */}
-      <div className="flex justify-center mb-4">
-        <div className="relative w-40 h-40">
-          <svg viewBox="0 0 120 120" className="w-40 h-40">
+        {/* Ring */}
+        <div className={`relative ${ringSize}`}>
+          <div
+            aria-hidden="true"
+            className="absolute inset-8 rounded-full opacity-25 blur-2xl"
+            style={{ background: `linear-gradient(135deg, ${accentFrom}, ${accentTo})` }}
+          />
+          <svg viewBox="0 0 200 200" className="relative h-full w-full">
+            <defs>
+              <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor={accentFrom} />
+                <stop offset="1" stopColor={accentTo} />
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r={R} fill="none" stroke="#1e293b" strokeWidth="12" />
             <circle
-              cx="60" cy="60" r="54"
+              cx="100"
+              cy="100"
+              r={R}
               fill="none"
-              stroke="#1e293b"
-              strokeWidth="8"
-            />
-            <circle
-              cx="60" cy="60" r="54"
-              fill="none"
-              stroke="#6366f1"
-              strokeWidth="8"
+              stroke={`url(#${gradientId})`}
+              strokeWidth="12"
               strokeLinecap="round"
-              strokeDasharray={circumference}
+              strokeDasharray={CIRCUMFERENCE}
               strokeDashoffset={dashOffset}
               className="timer-ring"
-              transform="rotate(-90 60 60)"
+              transform="rotate(-90 100 100)"
             />
           </svg>
-          {/* Time display centered over ring */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-4xl font-mono font-bold text-white" aria-live="off">
+            <span className="text-6xl font-bold tabular-nums tracking-tight text-white" aria-live="off">
               {String(minutes).padStart(2, '0')}:{String(secs).padStart(2, '0')}
             </span>
           </div>
         </div>
+
+        {previewImage && (
+          <img
+            src={previewImage}
+            alt=""
+            className="aspect-[4/3] w-48 rounded-2xl object-contain ring-1 ring-white/10 shadow-lg shadow-black/40"
+          />
+        )}
       </div>
 
-      {/* Skip button */}
-      <button
-        type="button"
-        onClick={onSkip}
-        className="w-full min-h-11 px-4 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-white font-medium transition-colors"
-      >
+      {/* Überspringen / Abbrechen im Daumenbereich */}
+      <Button variant="secondary" size="lg" block onClick={onSkip} className="mt-6">
         {skipLabel}
-      </button>
+      </Button>
     </div>
   );
 }

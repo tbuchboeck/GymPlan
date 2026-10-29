@@ -65,8 +65,8 @@ export class ErrorBoundary extends Component<Props, State> {
     if (!this.state.error) return this.props.children;
 
     return (
-      <div className="min-h-dvh bg-slate-900 flex items-center justify-center p-6">
-        <div className="w-full max-w-sm bg-slate-800 border border-slate-700/50 rounded-2xl p-6 text-center">
+      <div className="min-h-dvh bg-slate-950 flex items-center justify-center p-6">
+        <div className="w-full max-w-sm bg-slate-900 ring-1 ring-white/5 rounded-3xl p-6 text-center">
           <div className="mx-auto mb-4 w-14 h-14 rounded-full bg-amber-500/15 flex items-center justify-center">
             <TriangleAlert className="w-7 h-7 text-amber-400" />
           </div>
@@ -77,7 +77,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <button
             type="button"
             onClick={this.reload}
-            className="w-full bg-indigo-500 hover:bg-indigo-400 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors"
+            className="w-full min-h-14 bg-gradient-to-br from-indigo-500 to-violet-600 text-white text-lg py-3 rounded-2xl font-semibold flex items-center justify-center gap-2 transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             Neu laden
