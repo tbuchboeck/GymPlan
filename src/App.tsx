@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
 import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
+import type { Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { pushSession, syncAllSessions } from './lib/session-sync';
 import { Home } from './components/Home';
@@ -16,7 +17,8 @@ type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
 type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | null;
 
 function App() {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [person, setPerson] = useState<Person | null>(null);
+  const isUnlocked = person !== null;
   const [location, setLocation] = useState<Location>(null);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
@@ -84,17 +86,18 @@ function App() {
   };
 
   if (!isUnlocked) {
-    return <AuthScreen onUnlock={() => setIsUnlocked(true)} />;
+    return <AuthScreen onUnlock={setPerson} />;
   }
 
   if (!location) {
-    return <LocationSelector onSelectLocation={(loc) => setLocation(loc)} />;
+    return <LocationSelector person={person} onSelectLocation={(loc) => setLocation(loc)} />;
   }
 
   return (
     <div className="min-h-dvh bg-slate-900">
       {currentView === 'home' && (
         <Home
+          person={person}
           workoutPlan={workoutPlan}
           sessions={sessions}
           onStartWorkout={handleStartWorkout}

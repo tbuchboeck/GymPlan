@@ -1,4 +1,7 @@
+import type { Person } from '../lib/auth-service';
+
 interface LocationSelectorProps {
+  person: Person;
   onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back' | 'neck') => void;
 }
 
@@ -32,10 +35,15 @@ const locations = [
     label: 'nacken',
     description: 'Nacken, Schulter & BWS',
     gradient: 'from-sky-500 to-blue-600',
+    onlyFor: 'thomas' as Person,
   },
 ] as const;
 
-function LocationSelector({ onSelectLocation }: LocationSelectorProps) {
+function LocationSelector({ person, onSelectLocation }: LocationSelectorProps) {
+  const visibleLocations = locations.filter(
+    (loc) => !('onlyFor' in loc) || loc.onlyFor === person
+  );
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-5">
       <div className="text-center max-w-[500px] w-full">
@@ -47,7 +55,7 @@ function LocationSelector({ onSelectLocation }: LocationSelectorProps) {
         </p>
 
         <div className="flex flex-col gap-5">
-          {locations.map(({ key, label, description, gradient }) => (
+          {visibleLocations.map(({ key, label, description, gradient }) => (
             <button
               key={key}
               onClick={() => onSelectLocation(key)}
