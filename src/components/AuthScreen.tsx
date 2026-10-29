@@ -158,7 +158,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
                   onClick={() => selectPerson(p)}
                   disabled={loading}
                   className={
-                    'relative flex min-h-16 items-center gap-3 rounded-2xl p-3 text-left transition duration-200 active:scale-[0.98] disabled:cursor-progress ' +
+                    'relative flex min-h-16 flex-col items-center justify-center gap-2 rounded-2xl px-2 py-3 text-center transition duration-200 active:scale-[0.98] disabled:cursor-progress ' +
                     (active
                       ? 'bg-slate-800 ring-2 ring-indigo-400 shadow-lg shadow-indigo-950/50'
                       : 'bg-slate-900 ring-1 ring-white/5 hover:bg-slate-800/70')
@@ -166,16 +166,17 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
                 >
                   <span
                     aria-hidden="true"
-                    className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg font-bold transition ${active ? `bg-gradient-to-br text-white ${PERSON_AVATAR[p]}` : 'bg-slate-800 text-slate-400'}`}
+                    className={`relative grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg font-bold transition ${active ? `bg-gradient-to-br text-white ${PERSON_AVATAR[p]}` : 'bg-slate-800 text-slate-400'}`}
                   >
                     {PERSON_LABEL[p][0]}
+                    {active && (
+                      // Häkchen als Abzeichen am Avatar – kollidiert so nie mit dem Namen
+                      <span className="absolute -bottom-0.5 -right-0.5 grid h-5 w-5 place-items-center rounded-full bg-indigo-500 text-white ring-2 ring-slate-800">
+                        <Check size={12} strokeWidth={3.5} />
+                      </span>
+                    )}
                   </span>
-                  <span className={`text-lg font-semibold ${active ? 'text-white' : 'text-slate-400'}`}>{PERSON_LABEL[p]}</span>
-                  {active && (
-                    <span className="absolute right-3 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full bg-indigo-500 text-white">
-                      <Check size={14} strokeWidth={3} />
-                    </span>
-                  )}
+                  <span className={`max-w-full break-words text-lg font-semibold leading-tight ${active ? 'text-white' : 'text-slate-400'}`}>{PERSON_LABEL[p]}</span>
                 </button>
               );
             })}
