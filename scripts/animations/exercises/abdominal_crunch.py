@@ -66,18 +66,23 @@ def lever_end(c, ext=22):
 def grip_xy(P):
     """Griff an Rolle A (etwas über der Rolle) – dort liegen die Hände."""
     x, y, _ = roll_on_lever(P)
-    return x + 3, y - 9
+    return x - 1, y + 3
 
 
 def grip_pt(p):
     return grip_xy(SIDE.fk(p))
 
 
+COL_X = 116
+
+
 def machine_back(stack) -> list[Prim]:
     return stack + [
         rect(40, FLOOR_Y - 8, 250, 9, PROP_DARK, 4),
-        # Hauptsäule mit Achse
-        line(PIVOT[0], PIVOT[1], 150, FLOOR_Y - 6, PROP_DARK, 9),
+        # Säule hinter der Lehne, Ausleger zur Hebelachse (hinter dem Körper)
+        line(COL_X, 64, COL_X, FLOOR_Y - 6, PROP_DARK, 10),
+        line(COL_X, PIVOT[1], PIVOT[0], PIVOT[1], PROP_DARK, 8),
+        circle(PIVOT[0], PIVOT[1], 11, PROP_DARK),
         # Sitzstütze
         line(176, 204, 176, FLOOR_Y - 6, PROP_DARK, 9),
         # Rolle-B-Stütze
@@ -103,22 +108,16 @@ def build():
     lift = lambda c: 26 * c["pose"].get("crunch", 0.0)
     stack, pulley = weight_stack(70, 60, FLOOR_Y, lift, n=10, sel=4, w=30)
     cam = (PIVOT[0], PIVOT[1])
-    cable = dpath(lambda c: [(pulley[0], pulley[1] - 5), (pulley[0] + 5, pulley[1] - 5),
-                             (cam[0] - 6, cam[1] - 7)], "#cbd5e1", 1.4, opacity=0.8)
+    cable = dpath(lambda c: [(pulley[0], pulley[1] - 5), (COL_X, pulley[1] - 5), (COL_X, PIVOT[1] - 10),
+                             (cam[0], cam[1] - 10)], "#cbd5e1", 1.4, opacity=0.8)
+    top_pulley = circle(COL_X, pulley[1], 5, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.5})
 
     roll_b = [circle(ROLL_B[0], ROLL_B[1], 9, PROP_DARK), circle(ROLL_B[0], ROLL_B[1], 7, PROP)]
-    near_lever = [
-        dline(lambda c: (PIVOT, lever_end(c)), PROP_DARK, 8),
-        dline(lambda c: (PIVOT, lever_end(c)), PROP, 4),
-        circle(PIVOT[0], PIVOT[1], 7, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.5}),
-    ]
     roll_a_prims = [
-        dcircle(roll_pt, 10, PROP_DARK),
-        dcircle(roll_pt, 8, PROP),
-        dline(lambda c: ((roll_pt(c)[0], roll_pt(c)[1]), (grip_xy(c["P"])[0], grip_xy(c["P"])[1])),
-              PROP_DARK, 4),
+        dcircle(roll_pt, 11, PROP_DARK),
+        dcircle(roll_pt, 9, PROP),
+        dcircle(roll_pt, 3, PROP_DARK),
     ]
-    grips = [dcircle(lambda c: grip_xy(c["P"]), 4, "#1f2937")]
 
     def label(txt, fn):
         def f(c):
@@ -129,13 +128,13 @@ def build():
 
     torso_ghost = ghost(limb(["lumbar", "thorax"], 30, TORSO) + limb(["neck"], 13, TORSO) + head_side(),
                         SIDE, BASE, 0.14)
-    figure = side_fig(extras_behind=machine_back([cable] + stack),
-                      extras_mid=roll_a_prims + near_lever + grips,
+    figure = side_fig(extras_behind=machine_back([cable, top_pulley] + stack),
+                      extras_mid=roll_a_prims,
                       extras_front=roll_b)
     prims = [
         torso_ghost,
         *figure,
-        label("A", lambda c: (roll_pt(c)[0] + 18, roll_pt(c)[1] + 4)),
+        label("A", lambda c: (roll_pt(c)[0] + 19, roll_pt(c)[1] - 6)),
         label("B", lambda c: (ROLL_B[0] + 16, ROLL_B[1] + 4)),
         focus_mid("lumbar", 0.9, 9, 17, perp=12, rotate=True, show=[(T[1], T[4])]),
         arrow("M248 96 Q262 116 254 140", show=[(T[1], T[2])]),
@@ -147,4 +146,4 @@ def build():
         caption("Langsam zurück, Spannung halten", T[3], T[5]),
         static_text("Aus dem Bauch rollen – nicht mit den Armen ziehen", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Bauchpresse")
+    return render(prims, tl, SIDE, fps=12, title="Bauchpresse")

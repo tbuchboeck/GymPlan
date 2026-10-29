@@ -1,13 +1,13 @@
 from rig import *
-from exercises._hantel_props import arc_d, dumbbell_inplane, focus_seg
+from exercises._hantel_props import arc_d, dumbbell_inplane, fist_prim, focus_seg, grip_point, limb_sharp
 from rig import Seg, Skeleton
 
 SLUG = "hantel-trizeps"
 
-# Seitansicht, sitzend auf einer Bank. Eine Kurzhantel, beide Handflächen
-# unter der oberen Scheibe – die Hantel hängt längs zum Unterarm. Oberarme
-# zeigen nach oben (Ellbogen fix), nur die Unterarme senken sich hinter den
-# Kopf und strecken wieder. Füße/Gesäß fix.
+# Seitansicht, sitzend auf einer Bank, einarmig (naher Arm). Neutraler Griff:
+# Griffachse in der Bildebene, senkrecht zum Unterarm. Der Oberarm zeigt nach
+# oben (Ellbogen fix), nur der Unterarm senkt sich hinter den Kopf und streckt
+# wieder. Die andere Hand liegt auf dem Oberschenkel. Füße/Gesäß fix.
 
 FLOOR_Y = 251
 SC = 0.9
@@ -18,10 +18,10 @@ ANKLE_N = (CX + 52, FLOOR_Y - 8)
 ANKLE_F = (CX + 47, FLOOR_Y - 8)
 
 TOP = dict(x=ROOT[0], y=ROOT[1], neck=-8, head=4, lumbar=1,
-           upperarm_n=-176, forearm_n=-2, hand_n=0, upperarm_f=-174, forearm_f=-2, hand_f=0,
+           upperarm_n=-176, forearm_n=-2, hand_n=0, 
            thigh_n=90, shin_n=-90, thigh_f=90, shin_f=-90)
-LOW = dict(TOP, upperarm_n=-175, forearm_n=140, hand_n=6, upperarm_f=-173, forearm_f=138, hand_f=6)
-MID = dict(TOP, forearm_n=72, forearm_f=71)
+LOW = dict(TOP, upperarm_n=-175, forearm_n=140, hand_n=6)
+MID = dict(TOP, forearm_n=72)
 
 HALF = 13.0
 
@@ -34,28 +34,31 @@ TRI = Skeleton([Seg(s.name, s.parent, 46 if s.name.startswith("upperarm") else s
 
 def figure(dbell, behind):
     prims = list(behind)
-    prims += limb(["thigh_f", "shin_f", "foot_f"], 15, FAR)
+    prims += limb_sharp(["thigh_f", "shin_f", "foot_f"], 15, FAR)
     prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
     prims += limb(["neck"], 13, TORSO)
     prims += limb(["lumbar", "thorax"], 30, TORSO)
     prims += limb(["thorax", "chest"], 26, TORSO, outline=False)
     prims += head_side()
-    prims += limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
-    prims += list(dbell)
+    prims += limb_sharp(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
     prims += limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    prims += list(dbell)
     return prims
 
 
-def db_center(c):
-    P = c["P"]
-    _, _, ex, ey, a = P["hand_n"]
-    r = math.radians(P["forearm_n"][4])
-    k = 1.5 - HALF
-    return ex + k * math.cos(r), ey - k * math.sin(r)
+def grip(c):
+    return grip_point(c["P"], "hand_n")[:2]
 
 
 def db_axis(c):
-    return c["P"]["forearm_n"][4]
+    return c["P"]["forearm_n"][4] + 90
+
+
+def thigh_rest(pose):
+    """Ziel für die ferne Hand: auf dem Oberschenkel, kurz vor dem Knie."""
+    P = TRI.fk(pose)
+    sx, sy, ex, ey, _ = P["thigh_f"]
+    return sx + (ex - sx) * 0.62, sy + (ey - sy) * 0.62 - 9
 
 
 def bench():
@@ -73,11 +76,12 @@ def build():
     iks = [
         IK("thigh_n", "shin_n", ANKLE_N, bend=1, end_seg="foot_n", end_abs=0),
         IK("thigh_f", "shin_f", ANKLE_F, bend=1, end_seg="foot_f", end_abs=0),
+        IK("upperarm_f", "forearm_f", thigh_rest, bend=1, end_seg="hand_f", end_abs=-10),
     ]
     tl = Timeline([(0, TOP), (0.6, TOP), (2.2, LOW), (2.7, LOW), (3.4, MID), (4.0, TOP), (4.6, TOP)],
                   iks=iks, skeleton=TRI)
 
-    dbell = dumbbell_inplane(db_center, db_axis, half=HALF, plate=17)
+    dbell = dumbbell_inplane(grip, db_axis, half=HALF, plate=16) + [fist_prim(grip, NEAR, 6.5)]
     fig = figure(dbell, bench())
 
     P0 = TRI.fk(tl.at(0))

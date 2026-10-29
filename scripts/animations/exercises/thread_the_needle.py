@@ -9,7 +9,7 @@ SLUG = "thread-the-needle"
 # Bildebene, gleichzeitig sieht man, dass Hüfte und Knie stehen bleiben.
 # x = linke Körperseite, y = oben, z = Richtung Kopf. Rechter Arm fädelt.
 
-CAM = Cam(yaw=-62, pitch=20, scale=1.1, cx=156, cy=230)
+CAM = Cam(yaw=-62, pitch=20, scale=1.15, cx=152, cy=232)
 UP, LO, HAND = 36, 32, 13
 
 
@@ -79,7 +79,7 @@ def joints(p):
 
 
 START = dict(th=0, sink=0, psi=-90, zt=0, gaze=0, thr=0)
-THREAD = dict(th=40, sink=34, psi=-30, zt=-0.1, gaze=-55, thr=1)
+THREAD = dict(th=40, sink=34, psi=-30, zt=-0.18, gaze=-55, thr=1)
 OPEN = dict(th=-55, sink=-17, psi=-240, zt=0, gaze=150, thr=0)
 
 
@@ -87,12 +87,16 @@ def build():
     rig = Rig3(joints, CAM)
     tl = Timeline([(0, START), (0.8, START), (2.8, THREAD), (4.4, THREAD), (5.8, START), (6.2, START),
                    (8.2, OPEN), (9.8, OPEN), (11.4, START), (12.0, START)])
-    def hand_path(t0, t1, n=16):
-        pts = [CAM(joints(tl.at(t0 + (t1 - t0) * i / n))["haR"]) for i in range(n + 1)]
-        return smooth_path(pts[1:-1])
+    def hand_path(t0, t1, n=16, grow=1.0):
+        out = []
+        for i in range(n + 1):
+            J = joints(tl.at(t0 + (t1 - t0) * i / n))
+            (hx, hy), (sx, sy) = CAM(J["haR"]), CAM(J["shR"])
+            out.append((sx + (hx - sx) * grow, sy + (hy - sy) * grow))
+        return smooth_path(out[1:-1])
 
     prims = [
-        *floor_rect(CAM, -62, 42, -150, 60),
+        *floor_rect(CAM, -62, 36, -150, 58),
         *rig.limb(["hipR", "kneeR", "footR"], 15, FAR),
         *rig.limb(["shR", "elR", "wrR", "haR"], 11, FAR),
         *rig.slab(["hipL", "shL", "shR", "hipR"], TORSO, 18),
@@ -105,7 +109,7 @@ def build():
         *rig.limb(["hipL", "kneeL", "footL"], 16, NEAR),
         *rig.limb(["shL", "elL", "wrL", "haL1"], 12, NEAR),
         arrow(hand_path(0.8, 2.8), width=2.2, show=[(0.8, 2.8)]),
-        arrow(hand_path(6.2, 8.2), width=2.2, show=[(6.2, 8.2)]),
+        arrow(hand_path(6.2, 8.2, grow=1.08), width=2.2, show=[(6.2, 8.2)]),
         caption_band(),
         caption("Vierfüßlerstand, Gewicht gleichmäßig", 0, 0.8),
         caption("Rechten Arm unter dem Körper durchfädeln", 0.8, 2.8),
@@ -114,6 +118,6 @@ def build():
         caption("Im Bogen zur Decke – Blick folgt", 6.2, 8.2),
         caption("Brust öffnet sich – kurz halten", 8.2, 9.8),
         caption("Zurück in den Vierfüßlerstand", 9.8, 12.0),
-        static_text("Hüfte bleibt über den Knien", 200, 24, 13, MUTED),
+        static_text("Hüfte bleibt über den Knien", 386, 24, 13, MUTED, anchor="end"),
     ]
     return render(prims, tl, SIDE, fps=12, title="Thread the Needle")

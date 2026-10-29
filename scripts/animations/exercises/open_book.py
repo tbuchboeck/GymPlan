@@ -38,6 +38,19 @@ def lerp3(a, b, u):
     return tuple(a[i] + (b[i] - a[i]) * u for i in range(3))
 
 
+def spath(points):
+    """Wie smooth_path, aber mit ganzzahligen Koordinaten (kleinere Datei)."""
+    r = [(round(x), round(y)) for x, y in points]
+    if len(r) == 2:
+        return f"M{r[0][0]} {r[0][1]}L{r[1][0]} {r[1][1]}"
+    d = f"M{r[0][0]} {r[0][1]}"
+    for i in range(1, len(r) - 1):
+        (cx, cy), (nx, ny) = r[i], r[i + 1]
+        mx, my = ((cx + nx) / 2, (cy + ny) / 2) if i < len(r) - 2 else (nx, ny)
+        d += f"Q{cx} {cy} {mx:g} {my:g}"
+    return d
+
+
 class Rig3:
     """Cached Gelenk-Funktion pose -> {name: (x, y, z)}."""
     def __init__(self, fn, cam):
@@ -54,7 +67,7 @@ class Rig3:
 
     def limb(self, names, width, color, outline=True):
         w = width * self.cam.s
-        f = lambda c, n=names: {"d": smooth_path([self.P(c, k) for k in n])}
+        f = lambda c, n=names: {"d": spath([self.P(c, k) for k in n])}
         out = []
         if outline:
             out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": round(w + 3, 1),
@@ -68,7 +81,7 @@ class Rig3:
         w = round_w * self.cam.s
         def f(c, n=names):
             pts = [self.P(c, k) for k in n]
-            return {"d": "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + "Z"}
+            return {"d": "M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in pts) + "Z"}
         return [Prim("path", {"fill": SKIN_LINE, "stroke": SKIN_LINE, "stroke-width": round(w + 3, 1),
                               "stroke-linejoin": "round"}, f),
                 Prim("path", {"fill": color, "stroke": color, "stroke-width": round(w, 1),

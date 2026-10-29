@@ -112,6 +112,9 @@ class SwingTimeline(Timeline):
         for ik in (IK("thigh_L", "shin_L", (ANK_L, ANK_Y - p.get("lift_L", 0)), bend=bl),
                    IK("thigh_R", "shin_R", (ANK_R, ANK_Y - p.get("lift_R", 0)), bend=br)):
             p = solve_ik(FRONT, p, ik)
+        # Schwungbogen: in der Mitte laufen die Hände tiefer vor dem Bauch durch
+        sag = math.exp(-((p["hx"] - CX) / 34.0) ** 2) * max(0.0, min(1.0, (FLOOR_Y - 112 - p["hy"]) / 40.0))
+        p["hy"] += 34 * sag
         p["turn"] = 0.75 * math.sin(math.radians(p.get("sy", 0.0)))
         return p
 
@@ -196,22 +199,16 @@ def build():
     a0, a1 = grip_at(0.0), grip_at(1.45)
     m = lambda q: (2 * CX - q[0], q[1])
 
-    def bahn(p0, p1, bow, show, dashed):
+    def bahn(p0, p1, bow, show):
         mx, my = (p0[0] + p1[0]) / 2 + bow, (p0[1] + p1[1]) / 2 + abs(bow) * 0.35
-        d = f"M{p0[0]:.0f} {p0[1]:.0f}Q{mx:.0f} {my:.0f} {p1[0]:.0f} {p1[1]:.0f}"
-        if dashed:
-            return Prim("path", {"d": d, "fill": "none", "stroke": ACCENT, "stroke-width": 1.6,
-                                 "stroke-dasharray": "3 5", "opacity": 0.5, "_show": show})
-        return arrow(d, width=3, show=show)
+        return arrow(f"M{p0[0]:.0f} {p0[1]:.0f}Q{mx:.0f} {my:.0f} {p1[0]:.0f} {p1[1]:.0f}", width=3, show=show)
 
-    o0, o1 = (a0[0] - 14, a0[1] + 8), (a1[0] + 16, a1[1] + 2)
+    o0, o1 = (a0[0] - 16, a0[1] + 10), (a1[0] + 18, a1[1] + 4)
     main = group([
         foot_weight("L"), foot_weight("R"),
-        bahn(a0, a1, 44, [(0, 2.6)], True),
-        bahn(m(a0), m(a1), -44, [(3.25, 5.85)], True),
         *figure(),
-        bahn(o0, o1, 62, [(0.35, 1.4)], False),
-        bahn(m(o0), m(o1), -62, [(3.6, 4.65)], False),
+        bahn(o0, o1, 66, [(0.35, 1.4)]),
+        bahn(m(o0), m(o1), -66, [(3.6, 4.65)]),
     ], scale=SC, origin=(CX, FLOOR_Y))
 
     prims = [

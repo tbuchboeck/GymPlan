@@ -39,8 +39,8 @@ def solve(p):
                 q[k] = ext[k] + (q[k] - ext[k]) * wa
         if wl < 1:
             ext = dict(q)
-            set_abs(SIDE, ext, f"thigh_{s}", 183)
-            set_abs(SIDE, ext, f"shin_{s}", 181)
+            set_abs(SIDE, ext, f"thigh_{s}", 179)
+            set_abs(SIDE, ext, f"shin_{s}", 178)
             set_abs(SIDE, ext, f"foot_{s}", 268)
             for k in (f"thigh_{s}", f"shin_{s}", f"foot_{s}"):
                 q[k] = ext[k] + (q[k] - ext[k]) * wl

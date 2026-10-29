@@ -159,3 +159,18 @@ def arc_d(cx, cy, r, a0, a1):
     large = 1 if abs(a1 - a0) > 180 else 0
     sweep = 0 if a1 > a0 else 1
     return f"M{p0[0]:.1f} {p0[1]:.1f}A{r} {r} 0 {large} {sweep} {p1[0]:.1f} {p1[1]:.1f}"
+
+
+def limb_sharp(names, width, color, outline=True):
+    """Wie rig.limb, aber als Polylinie (Knie/Ellbogen nicht verrundet) –
+    sinnvoll bei stark gebeugten Gelenken (Sitzen)."""
+    def d(c, n=names):
+        pts = chain_points(c["P"], n)
+        return {"d": "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts)}
+    out = []
+    if outline:
+        out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, d))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"}, d))
+    return out
