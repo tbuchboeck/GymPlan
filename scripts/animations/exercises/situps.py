@@ -12,7 +12,7 @@ PX = 214
 PY = FLOOR_Y - 16
 ANK = (PX + 82, FLOOR_Y - 8)
 
-ARMS = dict(upperarm_n=34, forearm_n=128, hand_n=14, upperarm_f=40, forearm_f=124, hand_f=14)
+ARMS = dict(upperarm_n=20, forearm_n=148, hand_n=12, upperarm_f=26, forearm_f=144, hand_f=12)
 LIE = dict(ARMS, x=PX, y=PY, rot=90, neck=-3, head=0)
 CURL = dict(ARMS, x=PX, y=PY, rot=66, lumbar=-4, thorax=-14, chest=-16, neck=-20, head=-4)
 TOP = dict(ARMS, x=PX + 1, y=PY - 1, rot=16, lumbar=-8, thorax=-10, chest=-10, neck=-12, head=-2)

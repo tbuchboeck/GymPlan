@@ -10,15 +10,15 @@ SLUG = "butterfly-reverse"
 # als Projektion mitbewegt.
 
 FLOOR_Y = 250
-LEAN = 50.0                                  # Rumpfneigung aus der Senkrechten
+LEAN = 60.0                                  # Rumpfneigung aus der Senkrechten
 K = math.cos(math.radians(LEAN))
 _LEN = {"lumbar": 26 * K, "thorax": 26 * K, "chest": 26 * K, "neck": 17 * K, "head": 15 * K,
-        "thigh_L": 47, "thigh_R": 47}
+        "thigh_L": 44, "thigh_R": 44}
 BENT = Skeleton([Seg(s.name, s.parent, _LEN.get(s.name, s.length), s.rest) for s in FRONT.segs])
 
 CX = 172
 LEGS = dict(hip_L=0, hip_R=0, thigh_L=-5, thigh_R=5, shin_L=4, shin_R=-4)
-BASE = dict(x=CX, y=FLOOR_Y - 104, **LEGS)
+BASE = dict(x=CX, y=FLOOR_Y - 101, **LEGS)
 
 
 def arms(ua, fa=14.0, clav=0.0):
@@ -64,16 +64,16 @@ def head_down(r=17.0):
 
 
 # --- Seitansicht-Inset --------------------------------------------------------
-IN_X, IN_Y, IN_W, IN_H = 300, 40, 92, 110
-IS = 0.42
-SIDE_POSE = dict(x=0, y=0, rot=-LEAN, neck=12, head=4, thigh_n=34, shin_n=-30, foot_n=-4,
-                 thigh_f=32, shin_f=-28, foot_f=-4, upperarm_n=LEAN, upperarm_f=LEAN)
+IN_X, IN_Y, IN_W, IN_H = 296, 40, 96, 112
+IS = 0.5
+SIDE_POSE = dict(x=0, y=0, rot=-LEAN, neck=12, head=4, thigh_n=LEAN + 12, shin_n=-18, foot_n=6,
+                 thigh_f=LEAN + 10, shin_f=-16, foot_f=6, upperarm_n=LEAN, upperarm_f=LEAN)
 
 
 def side_inset():
     P = SIDE.fk(SIDE_POSE)
     foot_y = max(P["foot_n"][3], P["shin_n"][3])
-    ox, oy = IN_X + 34, IN_Y + IN_H - 12 - (foot_y - 0) * IS
+    ox, oy = IN_X + 30, IN_Y + IN_H - 12 - (foot_y - 0) * IS
 
     def tr(p):
         return ox + p[0] * IS, oy + p[1] * IS
@@ -117,7 +117,7 @@ def side_inset():
               Prim("circle", {"r": 4.5, "fill": PROP, "stroke": "#1e293b", "stroke-width": 1.5}, db),
               Prim("line", {"x1": back[0][0], "y1": back[0][1], "x2": back[1][0], "y2": back[1][1], "stroke": GOOD,
                             "stroke-width": 1.8, "stroke-dasharray": "3 3"}),
-              static_text("~45° vorgebeugt", IN_X + IN_W / 2, IN_Y + 14, 10, MUTED)]
+              static_text("Seitansicht", IN_X + IN_W / 2, IN_Y + 14, 10, MUTED)]
     return prims
 
 

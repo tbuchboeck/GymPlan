@@ -65,8 +65,8 @@ def lever_end(c, ext=22):
 
 def grip_xy(P):
     """Griff an Rolle A (etwas über der Rolle) – dort liegen die Hände."""
-    x, y, _ = roll_on_lever(P)
-    return x - 1, y + 3
+    x, y, ang = roll_on_lever(P)
+    return x + 6 * math.cos(ang + 1.9), y + 6 * math.sin(ang + 1.9)
 
 
 def grip_pt(p):
@@ -98,8 +98,8 @@ def machine_back(stack) -> list[Prim]:
 
 def build():
     iks = [
-        IK("upperarm_n", "forearm_n", grip_pt, bend=1),
-        IK("upperarm_f", "forearm_f", lambda p: (grip_pt(p)[0] - 4, grip_pt(p)[1] + 1), bend=1),
+        IK("upperarm_n", "forearm_n", grip_pt, bend=-1),
+        IK("upperarm_f", "forearm_f", lambda p: (grip_pt(p)[0] - 4, grip_pt(p)[1] + 1), bend=-1),
     ]
     T = [0, 0.8, 2.2, 2.8, 4.8, 5.4]
     tl = Timeline([(T[0], BASE), (T[1], BASE), (T[2], CRUNCH), (T[3], CRUNCH), (T[4], BASE),
@@ -113,6 +113,11 @@ def build():
     top_pulley = circle(COL_X, pulley[1], 5, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.5})
 
     roll_b = [circle(ROLL_B[0], ROLL_B[1], 9, PROP_DARK), circle(ROLL_B[0], ROLL_B[1], 7, PROP)]
+    near_lever = [
+        dline(lambda c: (PIVOT, lever_end(c, 8)), PROP_DARK, 9),
+        dline(lambda c: (PIVOT, lever_end(c, 8)), PROP, 5),
+        circle(PIVOT[0], PIVOT[1], 6, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.5}),
+    ]
     roll_a_prims = [
         dcircle(roll_pt, 11, PROP_DARK),
         dcircle(roll_pt, 9, PROP),
@@ -129,8 +134,8 @@ def build():
     torso_ghost = ghost(limb(["lumbar", "thorax"], 30, TORSO) + limb(["neck"], 13, TORSO) + head_side(),
                         SIDE, BASE, 0.14)
     figure = side_fig(extras_behind=machine_back([cable, top_pulley] + stack),
-                      extras_mid=roll_a_prims,
-                      extras_front=roll_b)
+                      extras_mid=near_lever,
+                      extras_front=roll_b + roll_a_prims)
     prims = [
         torso_ghost,
         *figure,

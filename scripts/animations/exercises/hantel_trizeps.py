@@ -27,8 +27,8 @@ HALF = 13.0
 
 # Eigenes Skelett: In rig.SIDE reicht der Oberarm (36) nur bis zur Kopfmitte;
 # real liegt der Ellbogen über Kopf etwa auf Scheitelhöhe. Daher hier längere
-# Oberarme (46) – sonst identisch zu SIDE.
-TRI = Skeleton([Seg(s.name, s.parent, 46 if s.name.startswith("upperarm") else s.length, s.rest)
+# Oberarme (51) – sonst identisch zu SIDE.
+TRI = Skeleton([Seg(s.name, s.parent, 51 if s.name.startswith("upperarm") else s.length, s.rest)
                 for s in SIDE.segs])
 
 
@@ -108,10 +108,10 @@ def build():
         static_text("Ellbogen zeigt", 298, gy - 3, 11, GOOD, anchor="start"),
         static_text("nach oben", 298, gy + 10, 11, GOOD, anchor="start"),
         caption_band(),
-        caption("Hantel über Kopf, Arme lang", 0, 0.6),
+        caption("Hantel über Kopf, Arm lang", 0, 0.6),
         caption("Einatmen – hinter den Kopf senken", 0.6, 2.2),
         caption("Kurz halten", 2.2, 2.7),
-        caption("Ausatmen – Unterarme nach oben strecken", 2.7, 4.6),
-        static_text("Oberarme bleiben neben dem Kopf", 200, 24, 13, MUTED),
+        caption("Ausatmen – Unterarm nach oben strecken", 2.7, 4.6),
+        static_text("Oberarm bleibt neben dem Kopf – nur der Unterarm bewegt sich", 200, 24, 13, MUTED),
     ]
     return render(prims, tl, TRI, title="Trizeps-Strecken über Kopf")
