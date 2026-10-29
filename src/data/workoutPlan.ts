@@ -496,5 +496,143 @@ export const backWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Nacken, Schulter & BWS – Mobilisation, Haltung, Nerve Glides
+export const neckWorkoutPlan: WorkoutPlan = {
+  name: "Nacken, Schulter & BWS (@nacken)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 4,
+  goal: "BWS-Mobilität, Schulterhaltung & Nackenentlastung",
+  trainer: "Physiotherapie-basiert",
+  createdAt: "29.10.2026",
+  exercises: [
+    {
+      id: 1,
+      name: "Bauch- und Rippenatmung",
+      sets: 1,
+      reps: 5, // 3–5 Minuten
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Rückenlage mit aufgestellten Beinen oder aufrecht sitzen. Eine Hand auf dem Bauch, eine seitlich an den Rippen. Einatmen 4 s: Durch die Nase erst in den Bauch, dann seitlich in die Rippen atmen. Die Hände werden nach außen geschoben, die Schultern bleiben unten. Ausatmen 6 s: Langsam durch den Mund ausatmen, Rippen sinken zurück, Nacken und Schultern lösen. Täglich 3–5 Min., kombinierbar mit Rolle und Open Book: in die gedehnte Seite atmen. Wichtig: Hebt sich beim Einatmen die Schulter, arbeiten die Treppenmuskeln am Hals mit. Dann flacher und tiefer in Bauch und Rippen atmen. Entspannt die Treppenmuskeln am Hals, zwischen denen die Armnerven verlaufen. Bei akutem Ziehen im Arm: erst 5 tiefe Atemzüge, dann Chin Tucks."
+    },
+    {
+      id: 2,
+      name: "Extension über die Rolle (Faszienrolle)",
+      sets: 1,
+      reps: 2, // 1–2 Minuten, 3–4 Segmente
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Rolle quer unter die mittlere BWS, Knie gebeugt, Füße und Gesäß am Boden. Hände am Hinterkopf, Ellbogen nach vorn, Kinn leicht zur Brust. Absinken: Oberkörper langsam über die Rolle nach hinten sinken lassen, ausatmen. Kein Hohlkreuz in der LWS. Endposition: 2–3 Atemzüge halten, zurück, Rolle eine Handbreit nach oben schieben. Segmentweise nach oben wandern, die LWS bleibt am Boden. Wichtig: Nur BWS, nie Lenden- oder Halswirbelsäule über die Rolle legen – nie unter den Nacken."
+    },
+    {
+      id: 3,
+      name: "Open Book",
+      sets: 1,
+      reps: 10, // 8–10 pro Seite
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Seitenlage, Kopf auf einem Kissen, Knie 90° gebeugt und aufeinander, Arme gestreckt nach vorn, Handflächen zusammen. Aufdrehen: Oberen Arm im Bogen zur anderen Seite öffnen, Blick folgt der Hand. Knie bleiben zusammen. Endposition: Brust zeigt zur Decke, 2 Atemzüge halten, langsam zurück. Die Drehung kommt aus der BWS, nicht aus der Hüfte. 8–10 pro Seite. Wichtig: Knie dürfen nicht auseinanderrutschen, sonst dreht die LWS mit."
+    },
+    {
+      id: 4,
+      name: "Katze-Kuh (BWS-Fokus)",
+      sets: 1,
+      reps: 10,
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Runden: Zwischen den Schulterblättern nach oben schieben, Kopf locker hängen lassen. Strecken: Brustbein nach vorn-unten sinken lassen, Blick schräg nach vorn. Bewegung bewusst in den mittleren Rücken legen, langsam und mit der Atmung gekoppelt. Lendenbereich so ruhig wie möglich halten. Tipp: Wenn die BWS nicht mitgeht, Hände auf einen Stuhl – dann ist es leichter isoliert."
+    },
+    {
+      id: 5,
+      name: "Thread the Needle",
+      sets: 1,
+      reps: 8, // pro Seite
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte, Gewicht gleichmäßig verteilt. Durchfädeln: Rechten Arm unter dem Körper nach links schieben, Schulter und Schläfe sinken Richtung Boden. Aufdrehen: Arm zurückholen und im Bogen zur Decke öffnen, Blick folgt der Hand, Brust öffnet sich. Hüfte bleibt über den Knien, nur der Oberkörper dreht. 8 pro Seite. Wichtig: Im Durchfädeln nicht auf den Nacken legen. Die Schulter trägt, nicht der Kopf."
+    },
+    {
+      id: 6,
+      name: "Brustdehnung im Türrahmen",
+      sets: 2,
+      reps: 30, // Sekunden halten, pro Seite
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Unterarm senkrecht am Türrahmen, Ellbogen 90° auf Schulterhöhe, ein Fuß vorn. Schulterblatt zurück und nach unten. Vorlehnen: Mit dem Körper langsam nach vorn lehnen (nicht mit der Schulter), bis die Brust zieht. Schulter bleibt unten. Halten: 30 Sekunden ruhig atmen, beide Seiten. Ellbogen etwas höher = mehr unterer Brustmuskel. Wichtig: Ziehen in der Brust ist ok – Kribbeln oder Einschießen in Hand oder Arm heißt: Nerv gereizt, Spannung sofort reduzieren."
+    },
+    {
+      id: 7,
+      name: "Y-T-W in Bauchlage",
+      sets: 2,
+      reps: 10, // 8–10 pro Buchstabe
+      weight: 0,
+      rest: 45,
+      instructions: "Bauchlage, Stirn auf einem kleinen Handtuch, Beine lang. Y: Arme schräg nach vorn in Y-Form, Daumen nach oben. Schulterblätter zurück und runter, Arme 2–3 cm heben, 2 s halten. T: Arme seitlich ausstrecken, Daumen nach oben. Gleiche Bewegung: erst Schulterblätter, dann Arme heben. W: Ellbogen an die Rippen ziehen, Hände neben den Schultern. Ellbogen und Hände anheben, Schulterblätter zusammen. Langsam ablegen. Ohne Gewicht starten. Variante (mehr Bewegungsweg): auf der Hyperextension-Bank mit frei hängenden Armen. Wichtig: Kopf bleibt in Verlängerung der Wirbelsäule. Nicht nach vorn schauen, sonst arbeitet der Nacken mit."
+    },
+    {
+      id: 8,
+      name: "Wall Angels",
+      sets: 2,
+      reps: 10,
+      weight: 0,
+      rest: 45,
+      instructions: "Startposition: Rücken, Hinterkopf und Gesäß an der Wand, Füße eine Fußlänge vor der Wand. Arme in U-Form an der Wand. Rippen unten halten, kein Hohlkreuz. Hochgleiten: Arme an der Wand langsam nach oben schieben, so weit Handrücken und Ellbogen Kontakt halten. Runterziehen: Ellbogen Richtung Rippen ziehen, Schulterblätter nach unten – das ist der eigentliche Arbeitsteil. Tipp: Bei steifer BWS ist der Bewegungsweg anfangs klein. Das ist normal und wird mit der Mobilisation besser."
+    },
+    {
+      id: 9,
+      name: "Face Pulls (Sling)",
+      sets: 3,
+      reps: 12, // 10–12
+      weight: 0,
+      rest: 45,
+      instructions: "Sling auf Kopfhöhe befestigen, Griffe mit gestreckten Armen fassen. Erst Schulterblätter zurück und nach unten Richtung Gesäßtasche, dann Griffe Richtung Gesicht ziehen, Ellbogen hoch und nach außen. Kurz halten, kontrolliert zurück. Wichtig: Schulterblätter zusätzlich nach unten ziehen, nicht nur zusammen – so arbeitet der mittlere und untere Trapez und der obere wird entlastet."
+    },
+    {
+      id: 10,
+      name: "Reverse Flys (Sling)",
+      sets: 3,
+      reps: 12, // 10–12
+      weight: 0,
+      rest: 45,
+      instructions: "Griffe mit leicht gebeugten Armen vor der Brust fassen. Erst Schulterblätter zurück und nach unten Richtung Gesäßtasche, dann Arme im Bogen seitlich öffnen. Kurz halten, kontrolliert zurück. Wichtig: Schulterblätter zusätzlich nach unten ziehen, nicht nur zusammen. Schultern bleiben weg von den Ohren."
+    },
+    {
+      id: 11,
+      name: "Chin Tucks",
+      sets: 1,
+      reps: 10, // je 5 Sekunden halten
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Aufrecht sitzen oder stehen, Schultern locker, Blick geradeaus. Zurückschieben: Kinn waagrecht nach hinten schieben (Doppelkinn), nicht nach unten nicken. Blick bleibt auf Augenhöhe. Halten: 5 Sekunden halten, Nacken wird hinten lang. Locker lösen. Mehrmals täglich, auch am Schreibtisch: einmal pro Stunde ein paar Chin Tucks und Schulterkreise nach hinten bringen oft mehr als eine lange Einheit am Abend. Wichtig: Sanfter Zug im oberen Nacken ist gut. Kein Druck in den Kiefer."
+    },
+    {
+      id: 12,
+      name: "Seitliche Nackendehnung",
+      sets: 2,
+      reps: 30, // Sekunden halten, pro Seite
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Auf einem Stuhl sitzen, rechte Hand unter das Gesäß klemmen – das fixiert die Schulter. Neigen: Kopf zur linken Seite neigen, Ohr Richtung Schulter, Schulter bleibt unten. Halten: Nase leicht Richtung linke Achsel drehen (für den Levator), 30 s halten, ruhig atmen. Kein Ziehen am Kopf mit der Hand. Dann Seite wechseln. Wichtig: Zieht es bis in den Arm, Neigung verringern – die Dehnung bleibt im Nacken."
+    },
+    {
+      id: 13,
+      name: "Nerve Glide (Ulnaris, rechts)",
+      sets: 1,
+      reps: 10, // 5–10 sanft, nur rechts
+      weight: 0,
+      rest: 30,
+      instructions: "Nur rechts, wo Ring- und kleiner Finger betroffen sind. Erst die tiefe Atmung, dann der Glide. Startposition: Rechter Arm seitlich ausgestreckt auf Schulterhöhe, Handfläche nach vorn, Kopf neutral. Gleiten: Ellbogen beugen, Hand Richtung Ohr führen, Finger zeigen nach hinten (Maske ums Auge). Gleichzeitig Kopf nach rechts neigen. Zurück: Arm wieder strecken und Kopf nach links neigen. Rhythmisch hin und her, langsam, nie halten. Wichtig: Der Ulnaris reagiert empfindlich. Kein Einschießen, kein zunehmendes Kribbeln. Am nächsten Tag darf es nicht schlimmer sein. Ärztlich abklären, wenn Taubheit, Kribbeln oder Kraftverlust in Hand oder Arm dazukommen oder die Schmerzen häufiger werden. Hält es an, klärt eine NLG-Messung, ob der Nerv am Ellbogen oder an der HWS gereizt ist."
+    },
+    {
+      id: 14,
+      name: "Nerve Glide (Medianus)",
+      sets: 1,
+      reps: 10, // 5–10 sanft
+      weight: 0,
+      rest: 30,
+      instructions: "Startposition: Arm seitlich auf Schulterhöhe, Ellbogen gebeugt, Handfläche zum Ohr. Kopf neutral. Gleiten: Ellbogen strecken und Handgelenk nach hinten kippen, gleichzeitig Kopf zur selben Seite neigen. Zurück: Ellbogen beugen und Kopf zur Gegenseite neigen. Rhythmisch hin und her, nie halten. Die Bewegung ist ein Gleiten, keine Dehnung – nur leichter Zug, nie Schmerz. Ulnaris- und Radialis-Varianten von der Physio zeigen lassen. Wichtig: Kein Einschießen, kein zunehmendes Kribbeln. Wenn doch: sofort aufhören, nicht mehr in dieser Woche."
+    }
+  ]
+};
+
 // Default export für Kompatibilität
 export const workoutPlan = gymWorkoutPlan;

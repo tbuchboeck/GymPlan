@@ -1,5 +1,5 @@
 interface LocationSelectorProps {
-  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back') => void;
+  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back' | 'neck') => void;
 }
 
 const locations = [
@@ -26,6 +26,12 @@ const locations = [
     label: 'rücken',
     description: 'Rücken-Aufbau & Stabilität',
     gradient: 'from-teal-500 to-cyan-600',
+  },
+  {
+    key: 'neck' as const,
+    label: 'nacken',
+    description: 'Nacken, Schulter & BWS',
+    gradient: 'from-sky-500 to-blue-600',
   },
 ] as const;
 

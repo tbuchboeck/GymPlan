@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan } from './data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { pushSession, syncAllSessions } from './lib/session-sync';
@@ -13,7 +13,7 @@ import LocationSelector from './components/LocationSelector';
 const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
-type Location = 'gym' | 'home' | 'home2' | 'back' | null;
+type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | null;
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -45,6 +45,7 @@ function App() {
     if (location === 'home') return homeWorkoutPlan;
     if (location === 'home2') return homeWorkoutPlan2;
     if (location === 'back') return backWorkoutPlan;
+    if (location === 'neck') return neckWorkoutPlan;
     return gymWorkoutPlan;
   }, [location]);
 
