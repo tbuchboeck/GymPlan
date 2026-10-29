@@ -82,8 +82,9 @@ def treadmill_back() -> list[Prim]:
         line(334, DECK_Y - 10, 318, 112, PROP_DARK, 10),
         poly([(300, 96), (340, 92), (346, 112), (300, 118)], PROP_DARK, 3, fill=PROP),
         rect(306, 100, 26, 10, "#0b1220", 2),
-        Prim("text", {"x": 319, "y": 108.5, "font-size": 8, "fill": GOOD, "text-anchor": "middle",
-                      "font-weight": "700"}, text="5.5"),
+        # Anzeige (nur angedeutet – Ziffern wären am Handy unlesbar)
+        Prim("rect", {"x": 310, "y": 103, "width": 12, "height": 4, "rx": 1, "fill": GOOD, "opacity": 0.8}),
+        Prim("rect", {"x": 324, "y": 103, "width": 4, "height": 4, "rx": 1, "fill": GOOD, "opacity": 0.5}),
         # ferner Handlauf
         poly([(318, 124), (262, 140), (248, 146)], "#3a4659", 6),
     ]
@@ -118,6 +119,6 @@ def build():
         caption("Aufrecht gehen, Blick nach vorn", T[0], T[1]),
         caption("Ferse aufsetzen – über den Fuß abrollen", T[1], T[2]),
         caption("Arme schwingen gegengleich mit", T[2], T[3]),
-        static_text("20 Min zügig gehen – nicht am Geländer hängen", 200, 24, 13, MUTED),
+        static_text("20 Min zügig gehen – nicht am Geländer hängen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=15, title="Laufband")

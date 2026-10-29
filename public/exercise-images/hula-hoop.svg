@@ -7,10 +7,10 @@
 <ellipse cx="346" cy="96" rx="22" ry="16.5" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.7"/>
 <ellipse cx="346" cy="96" rx="10" ry="6" fill="#818cf8" stroke="#312e81" stroke-width="1.5"/>
 <circle r="4.5" fill="#fbbf24"><animate attributeName="cx" values="346;353.5;360.1;365.1;367.7;367.7;365.1;360.1;353.5;346;338.5;331.9;326.9;324.3;324.3;326.9;331.9;338.5;346;353.5;360.1;365.1;367.7;367.7;365.1;360.1;353.5;346;338.5;331.9;326.9;324.3;324.3;326.9;331.9;338.5;346;353.5;360.1;365.1;367.7;367.7;365.1;360.1;353.5;346;338.5;331.9;326.9;324.3;324.3;326.9;331.9;338.5;346;353.5;360.1;365.1;367.7;367.7;365.1;360.1;353.5;346;338.5;331.9;326.9;324.3;324.3;326.9;331.9;338.5;346" dur="4.8s" repeatCount="indefinite"/><animate attributeName="cy" values="112.5;111.5;108.6;104.2;98.9;93.1;87.8;83.4;80.5;79.5;80.5;83.4;87.8;93.1;98.9;104.2;108.6;111.5;112.5;111.5;108.6;104.2;98.9;93.1;87.7;83.4;80.5;79.5;80.5;83.4;87.8;93.1;98.9;104.3;108.6;111.5;112.5;111.5;108.6;104.3;98.9;93.1;87.7;83.4;80.5;79.5;80.5;83.4;87.8;93.1;98.9;104.2;108.6;111.5;112.5;111.5;108.6;104.3;98.9;93.1;87.8;83.4;80.5;79.5;80.5;83.4;87.8;93.1;98.9;104.2;108.6;111.5;112.5" dur="4.8s" repeatCount="indefinite"/></circle>
-<text x="346" y="66" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="400">Hüfte kreist</text>
-<text x="346" y="134" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="400">vorn</text>
+<text x="346" y="66" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400">Hüfte kreist</text>
+<text x="346" y="134" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400">vorn</text>
 <rect x="0" y="258" width="400" height="42" fill="#0b1220" opacity="0.8"/>
 <g opacity="0"><animate attributeName="opacity" values="1;0;0" keyTimes="0.0000;0.5000;1.0000" calcMode="discrete" dur="4.8s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Hüfte kreist – vor, seitlich, zurück</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0" keyTimes="0.0000;0.5000;1.0000" calcMode="discrete" dur="4.8s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Reifen in Bewegung halten</text></g>
-<text x="200" y="24" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Kreisen aus der Hüfte – Oberkörper bleibt ruhig</text>
+<text x="200" y="24" font-size="14" fill="#94a3b8" text-anchor="middle" font-weight="400">Kreisen aus der Hüfte – Oberkörper bleibt ruhig</text>
 </svg>

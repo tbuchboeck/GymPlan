@@ -49,14 +49,14 @@ def build():
     prims = [
         floor(FLOOR_Y, 40, 360),
         scene,
-        label("Knie bleibt hinter", 262, 214, 1.3, 5.0, 11, GOOD, "start"),
-        label("der Zehenlinie", 262, 228, 1.3, 5.0, 11, GOOD, "start"),
+        label("Knie bleibt hinter", 262, 214, 1.3, 5.0, 12, GOOD, "start"),
+        label("der Zehenlinie", 262, 228, 1.3, 5.0, 12, GOOD, "start"),
         caption_band(),
         caption("Hüftbreit stehen, Arme nach vorn", 0, 1.3),
         caption("Einatmen – Po nach hinten absenken", 1.3, 2.9),
         caption("Kurz halten – Rücken gerade", 2.9, 3.5),
         caption("Ausatmen – über die Fersen hoch", 3.5, 5.0),
         caption("Aufrecht – nächste Wiederholung", 5.0, 6.0),
-        static_text("Hüfte nach hinten – Fersen bleiben am Boden", 200, 24, 13, MUTED),
+        static_text("Hüfte nach hinten – Fersen bleiben am Boden", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Kniebeugen")

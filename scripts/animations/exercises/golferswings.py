@@ -220,7 +220,7 @@ def build():
         caption("Seite wechseln", 2.6, 3.6),
         caption("Über die andere Schulter – Gewicht mit", 3.6, 4.9),
         caption("Beide Seiten gleich oft", 4.9, dur),
-        static_text("Gewicht wandert mit dem Schwung", 200, 24, 13, MUTED),
+        static_text("Gewicht wandert mit dem Schwung", 200, 24, LEAD_SIZE, MUTED),
         nose_hint(dur=dur / 2),
     ]
     return render(prims, tl, HFRONT, title="Golferswings", fps=15)

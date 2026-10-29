@@ -233,8 +233,8 @@ def build():
     prims = [
         scene,
         caption_band(),
-        static_text("Körper gespannt wie ein Brett", 200, 24, 13, MUTED),
-        static_text("Anker auf Kopfhöhe", 360, 52, 11, MUTED, anchor="end"),
+        static_text("Körper gespannt wie ein Brett", 200, 24, LEAD_SIZE, MUTED),
+        static_text("Anker auf Kopfhöhe", 360, 52, 12, MUTED, anchor="end"),
         caption("Arme lang, Körper gespannt", 0, 0.8),
         caption("Schulterblätter zurück & runter", 0.8, 2.2),
         caption("Griffe zum Gesicht – Ellbogen hoch & außen", 2.2, 3.6),

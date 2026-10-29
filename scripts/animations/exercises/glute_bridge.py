@@ -72,7 +72,7 @@ def build():
     ], scale=S, origin=(OX, FLOOR_Y))
     prims = [
         scene,
-        label("Druck über die Fersen", hx + 4, FLOOR_Y + 17, T_UP0, T_UP1, 11, GOOD),
+        label("Druck über die Fersen", hx + 4, FLOOR_Y + 17, T_UP0, T_UP1, 12, GOOD),
         label("eine Linie", lx - 30, ly - 4, T_UP1, T_H1, 12, GOOD),
         *counter(T_UP1, 4, lx + 2, ly - 34, size=18),
         caption_band(),
@@ -81,6 +81,6 @@ def build():
         caption("Oben halten – Knie, Hüfte, Schulter", T_UP1, T_H1),
         caption("Kontrolliert absenken", T_H1, T_END),
         *tempo_chip([("2 s hoch", T_UP0, T_UP1), ("4 s halten", T_UP1, T_H1), ("2 s runter", T_H1, T_DN1)]),
-        static_text("Gesäß anspannen – nicht ins Hohlkreuz", 200, 24, 13, MUTED),
+        static_text("Gesäß anspannen – nicht ins Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Glute Bridge")

@@ -77,6 +77,6 @@ def build():
         caption("Ausatmen – über Kopf drücken", 2.2, 3.8),
         caption("Langsam zurück zur Schulter", 3.8, 5.3),
         caption("Kontrolliert ablassen", 5.3, 6.9),
-        static_text("Curl mit fixem Ellbogen, dann gerade nach oben", 200, 24, 13, MUTED),
+        static_text("Curl mit fixem Ellbogen, dann gerade nach oben", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bizeps-Curl plus Überkopfdrücken")

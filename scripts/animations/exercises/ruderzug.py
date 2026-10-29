@@ -9,7 +9,7 @@ SLUG = "ruderzug"
 # drücken hinten zusammen („Nussknacker“). Füße fix, Knie locker.
 
 FLOOR_Y = 250
-HIP = (182.0, 149.0)
+HIP = (184.0, 147.0)
 ANK_N, ANK_F = (192.0, FLOOR_Y - 8.0), (180.0, FLOOR_Y - 8.0)
 PULLEY = (338.0, 114.0)
 FAR_OFF = (-4.0, -1.0)
@@ -109,7 +109,7 @@ def build():
     prims = [
         scene,
         caption_band(),
-        static_text("Ellbogen eng am Körper zur Hüfte", 200, 22, 13, MUTED),
+        static_text("Ellbogen eng am Körper zur Hüfte", 200, 22, LEAD_SIZE, MUTED),
         caption("Knie locker, Rücken gerade, Arme lang", 0, T0),
         caption("Ausatmen – Ellbogen zur Hüfte ziehen", T0, T1),
         caption("„Nussknacker“ – Schulterblätter zusammen", T1, T2),

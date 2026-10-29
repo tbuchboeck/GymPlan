@@ -8,7 +8,7 @@ SLUG = "nackendehnung"
 #          Nase Richtung linke Achsel (Bild rechts unten). Dehnung Bild links.
 # Seite 2: gespiegelt.
 
-SCALE, ORIGIN, DY = 1.37, (200.0, 150.0), 6.0
+SCALE, ORIGIN, DY = 1.12, (200.0, 150.0), -10.0
 ROOT = (200.0, 203.0)            # Becken (Gruppenkoordinaten)
 SEAT_Y = ROOT[1] + 3             # Vorderkante der Sitzfläche
 
@@ -224,12 +224,12 @@ def build():
         return {"stroke-dashoffset": circ * (1 - f)}
 
     timer = Prim("g", {"_show": holds}, children=[
-        Prim("circle", {"cx": 352, "cy": 150, "r": R, "fill": "none", "stroke": FLOOR, "stroke-width": 4}),
-        Prim("circle", {"cx": 352, "cy": 150, "r": R, "fill": "none", "stroke": GOOD, "stroke-width": 4,
+        Prim("circle", {"cx": 352, "cy": 96, "r": R, "fill": "none", "stroke": FLOOR, "stroke-width": 4}),
+        Prim("circle", {"cx": 352, "cy": 96, "r": R, "fill": "none", "stroke": GOOD, "stroke-width": 4,
                         "stroke-dasharray": f"{circ:.1f}", "stroke-linecap": "round",
-                        "transform": "rotate(-90 352 150)"}, ring),
-        static_text("30 s", 352, 154, 11, TEXT, weight="600"),
-        static_text("halten", 352, 180, 11, MUTED),
+                        "transform": "rotate(-90 352 96)"}, ring),
+        static_text("30 s", 352, 100, 12, TEXT, weight="600"),
+        static_text("halten", 352, 126, 12, MUTED),
     ])
 
     def caps(off, hand, seite, achsel):
@@ -241,11 +241,32 @@ def build():
             caption("Lösen – Seite wechseln", off + 6.6, off + T, size=14),
         ]
 
+    # Fixierende Hand: greift seitlich unter dem Gesäß die Sitzkante
+    def to_screen(x, y):
+        return ORIGIN[0] + (x - ORIGIN[0]) * SCALE, ORIGIN[1] + (y - ORIGIN[1]) * SCALE + DY
+
+    grips = []
+    for off, side, seg in ((0.0, -1, "hand_L"), (T, 1, "hand_R")):
+        hx, hy = to_screen(*pt(P_at(off + 1.8), seg))
+        win = [(off + 1.0, off + 7.4)]
+        lx = hx + side * 30
+        grips.append(Prim("g", {"_show": win}, children=[
+            Prim("circle", {"cx": round(hx, 1), "cy": round(hy - 2, 1), "r": 13, "fill": "none", "stroke": GOOD,
+                            "stroke-width": 2.5, "stroke-dasharray": "4 3"}),
+            Prim("line", {"x1": round(hx + side * 14, 1), "y1": round(hy - 6, 1), "x2": round(lx, 1),
+                          "y2": round(hy - 26, 1), "stroke": GOOD, "stroke-width": 1.5}),
+            static_text("Hand hält", lx + side * 4, hy - 42, 12, GOOD, anchor="end" if side < 0 else "start",
+                        weight="600"),
+            static_text("die Sitzkante", lx + side * 4, hy - 28, 12, GOOD, anchor="end" if side < 0 else "start",
+                        weight="600"),
+        ]))
+
     prims = [
         scene,
+        *grips,
         caption_band(),
         timer,
-        static_text("Nicht am Kopf ziehen – Schulter bleibt unten", 200, 24, 13, MUTED),
+        static_text("Nicht am Kopf ziehen – Schulter bleibt unten", 200, 24, LEAD_SIZE, MUTED),
         *caps(0.0, "Rechte", "linken", "linke"),
         *caps(T, "Linke", "rechten", "rechte"),
     ]

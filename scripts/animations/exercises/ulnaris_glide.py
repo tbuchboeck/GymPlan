@@ -202,7 +202,7 @@ def captions2(items):
     for main, sub, t0, t1 in items:
         out.append(caption(main, t0, t1, y=279, size=14))
         if sub:
-            out.append(caption(sub, t0, t1, y=295, size=11, color=MUTED, weight="400"))
+            out.append(caption(sub, t0, t1, y=295, size=12, color=MUTED, weight="400"))
     return out
 
 
@@ -289,9 +289,9 @@ def build():
         static_text("nur rechter Arm", 78, 192, 12.5, ACCENT, weight="700"),
         Prim("line", {"x1": 128, "y1": 160, "x2": 142, "y2": 160, "stroke": NERVE, "stroke-width": 2,
                       "stroke-dasharray": "3 3"}),
-        static_text("Nerv gleitet", 124, 164, 10.5, NERVE, anchor="end"),
-        static_text("Arm und Kopf", 78, 218, 11, MUTED),
-        static_text("bewegen sich gegengleich", 78, 232, 11, MUTED),
+        static_text("Nerv gleitet", 124, 164, 12, NERVE, anchor="end"),
+        static_text("Arm und Kopf", 78, 218, 12, MUTED),
+        static_text("gegengleich", 78, 232, 12, MUTED),
     ]
     prims = [fig, *label, caption_band(),
              *captions2([
@@ -300,6 +300,6 @@ def build():
                  ("Wieder beugen – Maske ums Auge", "Kopf nach rechts · rhythmisch, nie halten", T[2], T[3]),
                  ("Arm strecken, Kopf zurück", "langsam hin und her · 5–10×", T[3], T[4]),
              ]),
-             static_text(TOP_HINT, 200, 24, 13, MUTED)]
+             static_text(TOP_HINT, 200, 24, LEAD_SIZE, MUTED)]
     clip = '<clipPath id="clipU"><rect x="0" y="0" width="400" height="258"/></clipPath>'
     return compact(render(prims, tl, SK, fps=15, title="Nerve Glide Ulnaris (rechts)", extra_defs=clip))

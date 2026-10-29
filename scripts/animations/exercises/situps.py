@@ -51,6 +51,6 @@ def build():
         caption("Oben kurz halten", 2.1, 2.6),
         caption("Einatmen – langsam abrollen", 2.6, 4.3),
         caption("Kopf ablegen – Nacken locker", 4.3, 4.9),
-        static_text("Nacken locker – Kinn faustbreit von der Brust", 200, 24, 13, MUTED),
+        static_text("Nacken locker – Kinn faustbreit von der Brust", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Sit-Ups")

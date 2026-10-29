@@ -33,7 +33,7 @@ def build():
         caption("Kinn waagrecht zurückschieben", 1.0, 2.2),
         caption("5 s halten – Nacken wird lang", 2.2, 4.6),
         caption("Locker lösen", 4.6, 6.4),
-        static_text("Nicht nicken – gleiten", 200, 24, 13, MUTED),
+        static_text("Nicht nicken – gleiten", 200, 24, LEAD_SIZE, MUTED),
     ]
     clip = '<clipPath id="clipFig"><rect x="0" y="0" width="400" height="300"/></clipPath>'
     return render(prims, tl, SIDE, title="Chin Tucks", extra_defs=clip)

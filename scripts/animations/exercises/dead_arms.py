@@ -84,7 +84,7 @@ def build():
         caption_band(),
         caption("Arme hängen – locker ausschütteln", 0, dur / 2),
         caption("Schultern sinken – weg von den Ohren", dur / 2, dur),
-        static_text("Impuls aus Schultern & Oberkörper", 200, 24, 13, MUTED),
+        static_text("Impuls aus Schultern & Oberkörper", 200, 24, LEAD_SIZE, MUTED),
         nose_hint(dur=dur),
     ]
     return render(prims, tl, FRONT, title="Dead Arms", fps=25)

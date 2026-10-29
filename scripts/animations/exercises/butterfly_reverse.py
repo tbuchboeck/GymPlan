@@ -10,7 +10,7 @@ SLUG = "butterfly-reverse"
 # als Projektion mitbewegt.
 
 FLOOR_Y = 250
-LEAN = 60.0                                  # Rumpfneigung aus der Senkrechten
+LEAN = 66.0                                  # Rumpfneigung aus der Senkrechten
 K = math.cos(math.radians(LEAN))
 _LEN = {"lumbar": 26 * K, "thorax": 26 * K, "chest": 26 * K, "neck": 17 * K, "head": 15 * K,
         "thigh_L": 44, "thigh_R": 44}
@@ -64,8 +64,8 @@ def head_down(r=17.0):
 
 
 # --- Seitansicht-Inset --------------------------------------------------------
-IN_X, IN_Y, IN_W, IN_H = 296, 40, 96, 112
-IS = 0.5
+IN_X, IN_Y, IN_W, IN_H = 280, 38, 114, 128
+IS = 0.6
 SIDE_POSE = dict(x=0, y=0, rot=-LEAN, neck=12, head=4, thigh_n=LEAN + 12, shin_n=-18, foot_n=6,
                  thigh_f=LEAN + 10, shin_f=-16, foot_f=6, upperarm_n=LEAN, upperarm_f=LEAN)
 
@@ -117,7 +117,7 @@ def side_inset():
               Prim("circle", {"r": 4.5, "fill": PROP, "stroke": "#1e293b", "stroke-width": 1.5}, db),
               Prim("line", {"x1": back[0][0], "y1": back[0][1], "x2": back[1][0], "y2": back[1][1], "stroke": GOOD,
                             "stroke-width": 1.8, "stroke-dasharray": "3 3"}),
-              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 10, MUTED, anchor="start")]
+              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 12, MUTED, anchor="start")]
     return prims
 
 
@@ -151,6 +151,6 @@ def build():
         caption("Ausatmen – Arme seitlich anheben", 0.6, 1.9),
         caption("Oben kurz halten", 1.9, 2.6),
         caption("Einatmen – langsam senken", 2.6, 4.6),
-        static_text("Nur bis Schulterhöhe – Ellbogen leicht gebeugt", 200, 24, 13, MUTED),
+        static_text("Nur bis Schulterhöhe – Ellbogen leicht gebeugt", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, BENT, title="Butterfly reverse (vorgebeugt)")

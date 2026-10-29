@@ -136,6 +136,11 @@ MUTED = "#94a3b8"
 
 W, H = 400, 300
 
+# Lesbarkeit am Handy: Die App zeigt die SVG mit 304 px Breite (Faktor 0,76).
+MIN_TEXT = 12      # ≈ 9 px – kleinste Beschriftung (auch in Insets)
+LEAD_SIZE = 14     # Leitsatz oben
+CAPTION_SIZE = 15  # Phasentexte im Band unten
+
 # --------------------------------------------------------------------------
 # Timeline
 # --------------------------------------------------------------------------
@@ -494,13 +499,13 @@ def ghost(prims: list[Prim], skeleton: "Skeleton", pose: dict, opacity=0.18) -> 
     return Prim("g", {"opacity": opacity}, children=[freeze(p) for p in prims])
 
 
-def caption(text: str, t0: float, t1: float, y=284, size=15, color=TEXT, weight="600") -> Prim:
-    return Prim("text", {"x": W / 2, "y": y, "font-size": size, "fill": color, "font-weight": weight,
+def caption(text: str, t0: float, t1: float, y=284, size=CAPTION_SIZE, color=TEXT, weight="600") -> Prim:
+    return Prim("text", {"x": W / 2, "y": y, "font-size": max(size, MIN_TEXT), "fill": color, "font-weight": weight,
                          "text-anchor": "middle", "_show": [(t0, t1)]}, text=text)
 
 
-def static_text(text, x, y, size=12, color=MUTED, anchor="middle", weight="400") -> Prim:
-    return Prim("text", {"x": x, "y": y, "font-size": size, "fill": color,
+def static_text(text, x, y, size=MIN_TEXT, color=MUTED, anchor="middle", weight="400") -> Prim:
+    return Prim("text", {"x": x, "y": y, "font-size": max(size, MIN_TEXT), "fill": color,
                          "text-anchor": anchor, "font-weight": weight}, text=text)
 
 
@@ -551,6 +556,9 @@ def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
 
     def emit(p: Prim) -> str:
         attrs = {k: v for k, v in p.attrs.items() if not k.startswith("_")}
+        if p.tag == "text" and isinstance(attrs.get("font-size"), (int, float)):
+            # Untergrenze auch für selbst gebaute Text-Prims
+            attrs["font-size"] = max(attrs["font-size"], MIN_TEXT)
         anims = []
         if p.dyn is not None:
             series = [p.dyn(f) for f in frames]

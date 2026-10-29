@@ -104,6 +104,6 @@ def build():
         caption("Kontrolliert zurück", B2, END),
         *tempo_chip([("2 s raus", [(A0, A1), (B0, B1)], None), ("5 s halten", hold, None),
                      ("2 s zurück", [(A2, A3), (B2, B3)], None)]),
-        static_text("Becken bleibt gerade – keine Rotation", 200, 24, 13, MUTED),
+        static_text("Becken bleibt gerade – keine Rotation", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bird Dog", fps=8)

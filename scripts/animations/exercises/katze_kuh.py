@@ -37,6 +37,6 @@ def build():
         caption("Runden: zwischen den Schulterblättern hoch", 0.8, 3.4),
         caption("Strecken: Brustbein sinkt nach vorn-unten", 3.4, 6.2),
         caption("Zurück zur Mitte – mit dem Atem", 6.2, 7.4),
-        static_text("Bewegung im mittleren Rücken – LWS bleibt ruhig", 200, 24, 13, MUTED),
+        static_text("Bewegung im mittleren Rücken – LWS bleibt ruhig", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Katze-Kuh (BWS-Fokus)")

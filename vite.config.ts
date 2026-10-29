@@ -43,39 +43,27 @@ export default defineConfig({
     versionJson(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon.svg'],
+      // Einziges Manifest der App (public/manifest.json gibt es nicht mehr)
       manifest: {
-        name: 'GymPlan - Ganzkörper Training',
+        name: 'GymPlan',
         short_name: 'GymPlan',
         description: 'Dein persönlicher Trainingsplan für allgemeine Fitness',
-        theme_color: '#4f46e5',
-        background_color: '#ffffff',
+        start_url: '/',
+        scope: '/',
         display: 'standalone',
+        orientation: 'portrait',
+        lang: 'de',
+        theme_color: '#0f172a',
+        background_color: '#0f172a',
         icons: [
-          {
-            src: '/icon.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
-          }
-        ]
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/.*\.(gif|jpg|jpeg|png|webp)$/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'exercise-images',
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
-              }
-            }
-          }
-        ]
-      }
-    })
+      },
+    }),
   ],
 })

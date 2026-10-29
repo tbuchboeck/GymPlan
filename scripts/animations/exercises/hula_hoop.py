@@ -100,8 +100,8 @@ def build():
                          "stroke-width": 1.5, "stroke-dasharray": "3 4", "opacity": 0.7}),
         Prim("ellipse", {"cx": ix, "cy": iy, "rx": 10, "ry": 6, "fill": TORSO, "stroke": SKIN_LINE, "stroke-width": 1.5}),
         Prim("circle", {"r": 4.5, "fill": ACCENT}, dot),
-        static_text("Hüfte kreist", ix, iy - 30, 10, MUTED),
-        static_text("vorn", ix, iy + 38, 9, MUTED),
+        static_text("Hüfte kreist", ix, iy - 30, 12, MUTED),
+        static_text("vorn", ix, iy + 38, 12, MUTED),
     ]
     half = DUR / 2
     prims = [
@@ -110,6 +110,6 @@ def build():
         caption_band(),
         caption("Hüfte kreist – vor, seitlich, zurück", 0, half),
         caption("Reifen in Bewegung halten", half, DUR),
-        static_text("Kreisen aus der Hüfte – Oberkörper bleibt ruhig", 200, 24, 13, MUTED),
+        static_text("Kreisen aus der Hüfte – Oberkörper bleibt ruhig", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Hula Hoop", fps=15)

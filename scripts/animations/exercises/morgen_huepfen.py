@@ -124,10 +124,10 @@ def build():
         arrow(f"M{ax} 128 L{ax} 150", show=[(a, b) for a, b in win_out]),
         *nose_badge([(a, b, "in") for a, b in win_in] + [(a, b, "out") for a, b in win_out]),
         nose_note(),
-        static_text("Schultern locker unten", 262, 104, 11, GOOD, anchor="start"),
+        static_text("Schultern locker unten", 262, 104, 12, GOOD, anchor="start"),
         caption_band(),
         *[caption("Hoch – durch die Nase einatmen", a, b) for a, b in win_in],
         *[caption("Weich landen – ausatmen", a, b) for a, b in win_out],
-        static_text("Locker auf den Fußballen – Knie bleiben weich", 200, 24, 13, MUTED),
+        static_text("Locker auf den Fußballen – Knie bleiben weich", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Lymphatisches Hüpfen", fps=15)

@@ -28,6 +28,6 @@ def build():
         caption("Ausatmen – beide Beine gestreckt heben", 0.8, 2.0),
         caption("Kurz halten – Po & Bauch fest", 2.0, 3.2),
         caption("Langsam absenken", 3.2, 5.2),
-        static_text("Becken bleibt auf der Matte – nur leicht heben", 200, 24, 13, MUTED),
+        static_text("Becken bleibt auf der Matte – nur leicht heben", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bauchlage-Beinheben")

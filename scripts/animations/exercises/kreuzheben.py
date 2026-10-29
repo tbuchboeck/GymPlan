@@ -108,6 +108,6 @@ def build():
         caption("Dehnung hinten – Rücken bleibt gerade", 2.8, 3.5),
         caption("Ausatmen – Hüfte nach vorn, aufrichten", 3.5, 5.0),
         caption("Oben Gesäß anspannen", 5.0, 5.8),
-        static_text("Hüfte nach hinten – Rücken neutral", 200, 24, 13, MUTED),
+        static_text("Hüfte nach hinten – Rücken neutral", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SK, title="Kreuzheben mit Kurzhanteln")

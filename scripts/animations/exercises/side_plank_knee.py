@@ -1,166 +1,183 @@
 from rig import *
-from exercises._ruecken_cardio_props import *
+from exercises._ruecken_cardio_props import label, dyn_line
 
 SLUG = "side-plank-knee"
 
 # Frontansicht einer seitlich liegenden Figur (Kopf rechts, Gesicht zum
-# Betrachter). R (Bildschirm) = untere Körperseite. Unteres Knie bleibt fix
-# am Boden, der Ellenbogen bleibt unter der Schulter. Skalar "lift" 0..1:
-# 0 = Becken hängt auf der Matte, 1 = Schulter–Hüfte–Knie eine Linie.
+# Betrachter), als einfache 2D-Geometrie aus dem Skalar "lift" 0..1:
+# 0 = Seitlage, auf den Unterarm gestützt, Becken liegt auf der Matte,
+# 1 = Knie–Hüfte–Schulter eine Linie. Knie und Ellbogen bleiben fix, der
+# Oberarm steht senkrecht unter der Schulter, der Unterarm liegt flach.
+
 FLOOR_Y = 236
-KNEE = (112, FLOOR_Y - 9)        # unteres Knie (fix)
-SH_Y = FLOOR_Y - 8 - 36          # Schulterhöhe: Oberarm senkrecht auf Ellenbogen
+KNEE = (116.0, FLOOR_Y - 9)          # unteres Knie
+ELBOW = (266.0, FLOOR_Y - 7)
+UPPER = 50                           # Oberarm (senkrecht)
+SB = (ELBOW[0], ELBOW[1] - UPPER)    # untere Schulter
+SC = (SB[0] - 5, SB[1] - 17)         # Schulter-Mitte (Körperlinie)
+ST = (SB[0] - 10, SB[1] - 34)        # obere Schulter
+THIGH = 50
+HALF_W = 10                          # halbe Rumpfbreite (schlank)
 
 
-def d(a, l):
-    r = math.radians(a)
-    return l * math.cos(r), -l * math.sin(r)
+def unit(a, b):
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    n = math.hypot(dx, dy) or 1.0
+    return dx / n, dy / n
 
 
-def place(alpha, th):
-    """Wurzel so, dass das untere Knie auf KNEE liegt."""
-    tx, ty = d(th, 50)
-    hx, hy = d(alpha - 90, 15)
-    return KNEE[0] - tx - hx, KNEE[1] - ty - hy
-
-
-def shoulder_y(alpha, th, bend):
-    x, y = place(alpha, th)
-    p = dict(x=x, y=y, rot=alpha - 90, lumbar=bend, thorax=bend * 0.5)
-    P = FRONT.fk(p)
-    return pt(P, "clav_R")[1]
-
-
-def solve_alpha(th, bend):
-    lo, hi = 0.0, 80.0
-    for _ in range(40):
-        mid = (lo + hi) / 2
-        if shoulder_y(mid, th, bend) > SH_Y:
-            lo = mid
-        else:
-            hi = mid
-    return (lo + hi) / 2
-
-
-TH_UP = None
-
-
-def pre(p):
+def geo(p):
     lift = p.get("lift", 0.0)
-    # gerade Linie: Oberschenkel in Rumpfrichtung; abgelegt: Oberschenkel flach, Taille knickt
-    bend = -14 * (1 - lift)
-    th_flat = 179.5
-    a_up = solve_alpha(180 + 21, 0)          # Startwert für die Linie
-    th = th_flat + (180 + a_up - th_flat) * lift
-    a = solve_alpha(th, bend)
-    x, y = place(a, th)
-    p.update(x=x, y=y, rot=a - 90, lumbar=bend, thorax=bend * 0.5, chest=0)
-    # Oberschenkel absolut setzen (Eltern: hip_*)
-    set_abs(FRONT, p, "thigh_R", th)
-    set_abs(FRONT, p, "thigh_L", th + 2)
-    set_abs(FRONT, p, "shin_R", th + 90)   # nach hinten gebeugt (wird kurz gezeichnet)
-    set_abs(FRONT, p, "shin_L", th + 90)
-    # unterer Arm: Oberarm senkrecht nach unten auf den Ellenbogen
-    set_abs(FRONT, p, "upperarm_R", -90)
-    set_abs(FRONT, p, "neck", a - 4)
-    set_abs(FRONT, p, "head", a - 6)
-    p["turn"] = 0.0
-    return p
+    ux, uy = unit(KNEE, SC)
+    up_line = (KNEE[0] + THIGH * ux, KNEE[1] + THIGH * uy)
+    down = (KNEE[0] + 47, FLOOR_Y - 13)          # Becken liegt auf
+    pc = (down[0] + (up_line[0] - down[0]) * lift, down[1] + (up_line[1] - down[1]) * lift)
+    # Taille: abgelegt hängt sie zur Matte durch, oben gerade
+    mid = ((pc[0] + SC[0]) / 2, (pc[1] + SC[1]) / 2)
+    waist = (mid[0], mid[1] + 13 * (1 - lift))
+    vx, vy = unit(pc, SC)
+    nx, ny = vy, -vx                              # "oben" (zur Decke)
+    G = dict(pc=pc, waist=waist, u=(vx, vy), n=(nx, ny))
+    G["hip_t"] = (pc[0] + 9 * nx, pc[1] + 9 * ny)
+    G["hip_b"] = (pc[0] - 7 * nx, pc[1] - 7 * ny)
+    G["knee_t"] = (KNEE[0] + 4, KNEE[1] - 14)
+    # oberer Arm: Hand auf der Hüfte
+    hand = (G["hip_t"][0] + 10 * vx, G["hip_t"][1] + 10 * vy)
+    m = ((ST[0] + hand[0]) / 2, (ST[1] + hand[1]) / 2)
+    G["el_t"] = (m[0] + 30 * nx, m[1] + 30 * ny)       # Ellbogen zeigt zur Decke
+    G["hand_t"] = hand
+    a = math.degrees(math.atan2(-(SC[1] - pc[1]), SC[0] - pc[0]))
+    G["ang"] = a
+    G["head"] = (SC[0] + 34 * vx, SC[1] + 34 * vy)
+    G["neck"] = (SC[0] + 14 * vx, SC[1] + 14 * vy)
+    return G
 
 
-def hand_on_hip(p):
-    P = FRONT.fk(p)
-    x, y = pt(P, "lumbar")
-    dx, dy = d(P["lumbar"][4] + 90, 20)
-    return x + dx - 4, y + dy
+_cache = {}
 
 
-IKS = [IK("upperarm_L", "forearm_L", hand_on_hip, bend=1)]
+def G(c):
+    k = id(c["pose"])
+    if k not in _cache:
+        _cache[k] = (c["pose"], geo(c["pose"]))
+    return _cache[k][1]
+
+
+def path(keys_or_fn, width, color, outline=True, sharp=False):
+    def f(c):
+        pts = keys_or_fn(c)
+        if sharp:
+            return {"d": "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts)}
+        return {"d": smooth_path(pts)}
+    out = []
+    if outline:
+        out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    return out
+
+
+def static_path(pts, width, color):
+    d = smooth_path(pts)
+    return [Prim("path", {"d": d, "fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                          "stroke-linecap": "round", "stroke-linejoin": "round"}),
+            Prim("path", {"d": d, "fill": "none", "stroke": color, "stroke-width": width,
+                          "stroke-linecap": "round", "stroke-linejoin": "round"})]
+
+
+def head():
+    r = 16
+
+    def at(c, fwd, side):
+        g = G(c)
+        x, y = g["head"]
+        ux, uy = g["u"]
+        nx, ny = g["n"]
+        return x + r * (fwd * ux + side * nx), y + r * (fwd * uy + side * ny)
+
+    def skull(c):
+        x, y = G(c)["head"]
+        return {"cx": x, "cy": y}
+
+    def eye(s):
+        return lambda c: dict(zip(("cx", "cy"), at(c, 0.12, s * 0.36)))
+
+    def mouth(c):
+        a, b = at(c, -0.4, 0.22), at(c, -0.4, -0.22)
+        return {"d": f"M{a[0]:.1f} {a[1]:.1f}L{b[0]:.1f} {b[1]:.1f}"}
+
+    return [Prim("circle", {"r": r + 1.5, "fill": SKIN_LINE}, skull),
+            Prim("circle", {"r": r, "fill": HEAD}, skull),
+            Prim("circle", {"r": 2.4, "fill": SKIN_LINE}, eye(1)),
+            Prim("circle", {"r": 2.4, "fill": SKIN_LINE}, eye(-1)),
+            Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 1.5, "stroke-linecap": "round"}, mouth)]
+
 
 DOWN = dict(lift=0.0)
 UP = dict(lift=1.0)
-T0, T1, T2, T3, END = 0.8, 2.8, 8.8, 10.8, 12.4
+T0, T1, T2, T3, END = 1.0, 3.0, 9.0, 11.0, 12.4
 
 
 def build():
-    tl = FnTimeline([(0, DOWN), (T0, DOWN), (T1, UP), (T2, UP), (T3, DOWN), (END, DOWN)],
-                    iks=IKS, skeleton=FRONT, pre=pre)
-
-    def shin_stub(side, col, w):
-        # Unterschenkel zeigt nach hinten (vom Betrachter weg): verkürzt
-        def f(c):
-            P = c["P"]
-            kx, ky = pt(P, f"thigh_{side}")
-            a = P[f"thigh_{side}"][4]
-            dx, dy = d(a + 125, 16)
-            return {"d": f"M{kx:.1f} {ky:.1f}L{kx + dx:.1f} {ky + dy:.1f}"}
-        return [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": w + 3, "stroke-linecap": "round"}, f),
-                Prim("path", {"fill": "none", "stroke": col, "stroke-width": w, "stroke-linecap": "round"}, f)]
-
-    def forearm(c):
-        # unterer Unterarm liegt auf der Matte, zeigt schräg nach vorn
-        ex, ey = pt(c["P"], "upperarm_R")
-        return {"d": f"M{ex:.1f} {ey + 1:.1f}L{ex + 30:.1f} {ey + 3:.1f}"}
-
-    def fist(c):
-        ex, ey = pt(c["P"], "upperarm_R")
-        return {"cx": ex + 33, "cy": ey + 3}
-
-    fore = [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 16, "stroke-linecap": "round"}, forearm),
-            Prim("path", {"fill": "none", "stroke": FAR, "stroke-width": 13, "stroke-linecap": "round"}, forearm)]
+    tl = Timeline([(0, DOWN), (T0, DOWN), (T1, UP), (T2, UP), (T3, DOWN), (END, DOWN)])
+    ex, ey = ELBOW
     fig = [
-        *shin_stub("L", FAR, 13), *shin_stub("R", FAR, 13), *limb(["hip_R", "thigh_R"], 16, FAR),
-        *fore,
-        *limb(["clav_R", "upperarm_R"], 13, FAR),
+        # Unterschenkel zeigen nach hinten (verkürzt)
+        *static_path([KNEE, (KNEE[0] - 12, KNEE[1] + 3)], 13, FAR),
+        *static_path([(KNEE[0] + 4, KNEE[1] - 14), (KNEE[0] - 9, KNEE[1] - 13)], 13, FAR),
+        # untere Seite: Oberschenkel, Unterarm flach, Oberarm senkrecht
+        *path(lambda c: [KNEE, G(c)["hip_b"]], 17, FAR),
+        *static_path([(ex, ey), (ex + 34, ey + 1)], 12, FAR),
+        Prim("circle", {"cx": ex + 38, "cy": ey + 1, "r": 7, "fill": FAR, "stroke": SKIN_LINE, "stroke-width": 1.5}),
+        *static_path([SB, (ex, ey)], 13, FAR),
+        # Rumpf schlank, Schulterlinie senkrecht gestapelt
+        *path(lambda c: [G(c)["pc"], G(c)["waist"], SC], 2 * HALF_W + 6, TORSO),
+        *static_path([SB, ST], 18, TORSO),
+        *path(lambda c: [SC, G(c)["neck"]], 12, TORSO),
+        *head(),
+        # obere Seite
+        *path(lambda c: [G(c)["knee_t"], G(c)["hip_t"]], 17, NEAR),
+        *path(lambda c: [ST, G(c)["el_t"], G(c)["hand_t"]], 12, NEAR, sharp=True),
     ]
-    # Rumpf (Front-Figur ohne Beine, eigene Arm-Reihenfolge)
-    trunk = limb(["lumbar", "thorax", "chest"], 40, TORSO)
-    sh = lambda c: {"d": smooth_path([pt(c["P"], "clav_L"), pt(c["P"], "chest"), pt(c["P"], "clav_R")])}
-    fig += [Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 25, "stroke-linecap": "round"}, sh),
-            trunk[0], *limb(["neck"], 13, TORSO),
-            Prim("path", {"fill": "none", "stroke": TORSO, "stroke-width": 22, "stroke-linecap": "round"}, sh),
-            trunk[1]]
-    fig += head_front()
-    fig += limb(["hip_L", "thigh_L"], 16, NEAR)
-    fig += rlimb(["upperarm_L", "forearm_L", "hand_L"], 12, NEAR, r=6)
-
     p_dn = tl.at(0)
+    ghost_body = ghost(path(lambda c: [G(c)["pc"], G(c)["waist"], SC], 2 * HALF_W + 6, TORSO)
+                       + path(lambda c: [KNEE, G(c)["hip_b"]], 17, FAR), SIDE, p_dn, 0.16)
 
-    def line_pts(c):
-        P = c["P"]
-        return pt(P, "thigh_R"), pt(P, "chest")
-
-    S, OX = 1.25, 190
+    S, OX = 1.2, 200
+    gpc_up = geo(UP)["pc"]
     scene = group([
-        mat(FLOOR_Y, 50, 340),
-        ghost(limb(["lumbar", "thorax", "chest"], 40, TORSO), FRONT, p_dn, 0.14),
+        mat(FLOOR_Y, 50, 350),
+        ghost_body,
         *fig,
-        dyn_line(line_pts, show=[(T1, T2)]),
-        focus("lumbar", rx=20, ry=11, offset=(0, 4), show=[(T0, T2)]),
-        arrow("M176 222 L176 198", show=[(T0, T1)]),
-        arrow("M176 196 L176 220", show=[(T2, T3)]),
+        dyn_line(lambda c: (KNEE, SC), show=[(T1, T2)]),
+        Prim("ellipse", {"rx": 18, "ry": 10, "fill": ACCENT, "opacity": 0.35, "_pulse": True, "_show": [(T0, T2)]},
+             lambda c: dict(zip(("cx", "cy"), G(c)["waist"]))),
+        arrow(f"M{gpc_up[0] + 22:.0f} {FLOOR_Y - 6} L{gpc_up[0] + 22:.0f} {gpc_up[1] - 18:.0f}", show=[(T0, T1)]),
+        arrow(f"M{gpc_up[0] + 22:.0f} {gpc_up[1] - 18:.0f} L{gpc_up[0] + 22:.0f} {FLOOR_Y - 6}", show=[(T2, T3)]),
     ], scale=S, origin=(OX, FLOOR_Y))
 
     def T(x, y):
         return OX + (x - OX) * S, FLOOR_Y + (y - FLOOR_Y) * S
 
-    sx, sy = T(258, SH_Y - 26)
-    ex, ey = T(256, FLOOR_Y)
+    lx, ly = T(ex + 22, ey)
     prims = [
         scene,
-        label("Schulter weg", 350, 150, T1, T2, 11, ACCENT),
-        label("vom Ohr", 350, 164, T1, T2, 11, ACCENT),
-        arrow("M300 172 L284 190", width=2.5, show=[(T1, T2)]),
-        label("Ellenbogen unter Schulter", ex + 6, FLOOR_Y + 16, 0, T1, 11, GOOD),
-        label("eine Linie", 205, 232, T1, T2, 12, GOOD),
-        label("20–30 s halten", 150, 96, T1, T2, 16, ACCENT, weight="700"),
-        label("ruhig weiter atmen", 150, 116, T1 + 1.5, T2, 12, TEXT),
+        label("Ellbogen unter", lx + 2, 186, 0, T1, 12, GOOD, anchor="start"),
+        label("der Schulter", lx + 2, 200, 0, T1, 12, GOOD, anchor="start"),
+        Prim("path", {"d": f"M{lx + 8:.0f} 206 L{T(ex, ey)[0] + 8:.0f} {T(ex, ey)[1] - 10:.0f}", "stroke": GOOD,
+                      "stroke-width": 1.5, "fill": "none", "opacity": 0.8, "_show": [(0, T1)]}),
+        label("Schulter weg", 352, 70, T1, T2, 12, ACCENT),
+        label("vom Ohr", 352, 84, T1, T2, 12, ACCENT),
+        label("eine Linie", 84, 196, T1, T2, 12, GOOD),
+        label("20–30 s halten", 110, 84, T1, T2, 16, ACCENT, weight="700"),
+        label("ruhig weiter atmen", 110, 104, T1 + 1.5, T2, 12, TEXT),
         caption_band(),
-        caption("Seitlage, Knie angewinkelt", 0, T0),
-        caption("Becken anheben – Schulter, Hüfte, Knie", T0, T1),
+        caption("Seitlage, auf den Unterarm gestützt", 0, T0),
+        caption("Becken anheben – Knie, Hüfte, Schulter", T0, T1),
         caption("Halten – Becken nicht kippen", T1, T2),
         caption("Kontrolliert absetzen", T2, T3),
         caption("Seite wechseln – beide Seiten!", T3, END),
-        static_text("Schulter–Hüfte–Knie in einer Linie", 200, 24, 13, MUTED),
+        static_text("Schulter–Hüfte–Knie in einer Linie", 200, 24, LEAD_SIZE, MUTED),
     ]
-    return render(prims, tl, FRONT, title="Seitstütz (Knie-Variante)", fps=10)
+    return render(prims, tl, SIDE, title="Seitstütz (Knie-Variante)", fps=10)

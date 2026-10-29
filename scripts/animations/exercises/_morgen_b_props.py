@@ -31,7 +31,7 @@ def nose_hint(x=330, y=36, dur=4.0):
             anim("cx", f"{x0};{x1};{x1};{x0};{x0}", dur, "0;0.4;0.5;0.9;1", begin=b),
             anim("opacity", "0;0.9;0;0.6;0", dur, "0;0.38;0.5;0.8;1", begin=b),
         ]))
-    out.append(Prim("text", {"x": x + 42, "y": y + 14, "font-size": 11, "fill": GOOD, "font-weight": "600",
+    out.append(Prim("text", {"x": x + 42, "y": y + 14, "font-size": 12, "fill": GOOD, "font-weight": "600",
                              "text-anchor": "middle"}, text="Nase"))
     return Prim("g", {"opacity": 0.95}, children=out)
 

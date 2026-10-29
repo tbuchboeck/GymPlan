@@ -114,7 +114,7 @@ def build():
     pec = Prim("ellipse", {"rx": 9, "ry": 12, "fill": ACCENT, "opacity": 0.35, "_pulse": True,
                            "_show": [(T0, T3)]},
                lambda c: dict(zip(("cx", "cy"), body_pt(c["P"], "thorax", 16, 9))))
-    lock = Prim("text", {"x": c1["wx"] + 14, "y": c1["wy"] - 14, "font-size": 11, "fill": WARN,
+    lock = Prim("text", {"x": c1["wx"] + 14, "y": c1["wy"] - 14, "font-size": 12, "fill": WARN,
                          "text-anchor": "start", "_show": [(T1, T2)]}, text="nicht durchstrecken")
 
     prims = [
@@ -126,7 +126,7 @@ def build():
         pec,
         push_arrow, lock,
         caption_band(),
-        static_text("Schultern bleiben hinten am Polster", 200, 22, 13, MUTED),
+        static_text("Schultern bleiben hinten am Polster", 200, 22, LEAD_SIZE, MUTED),
         caption("Rücken ans Polster, Griffe auf Brusthöhe", 0, T0),
         caption("Ausatmen – nach vorne drücken", T0, T1),
         caption("Arme fast gestreckt – kurz halten", T1, T2),

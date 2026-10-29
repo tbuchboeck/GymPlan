@@ -117,6 +117,6 @@ def build():
         caption("Frontheben: Ausatmen – nach vorn hoch", B0 - 0.2, B2),
         caption("Schulterhöhe – Arme gestreckt", B2, B3),
         caption("Einatmen – langsam senken", B3, END),
-        static_text("Nur bis Schulterhöhe – ohne Schwung", 200, 24, 13, MUTED),
+        static_text("Nur bis Schulterhöhe – ohne Schwung", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, fps=12, title="Seitheben und Frontheben")

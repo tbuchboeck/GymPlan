@@ -31,6 +31,6 @@ def build():
         caption("Beine gestreckt leicht abheben", 0.6, 1.3),
         caption("Abwechselnd auf und ab – wie eine Schere", 1.3, 5.1),
         caption("Ablegen, kurz lösen", 5.1, 6.2),
-        static_text("Kleine, ruhige Schläge – Becken bleibt liegen", 200, 24, 13, MUTED),
+        static_text("Kleine, ruhige Schläge – Becken bleibt liegen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Scissor Kicks (Bauchlage)")

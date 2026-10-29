@@ -62,12 +62,12 @@ def build():
     lx = CX + (hx + 46 - CX) * SC
     prims = [
         main,
-        static_text("Schulterhöhe", lx + 4, ly + 4, 11, GOOD, anchor="start"),
+        static_text("Schulterhöhe", lx + 4, ly + 4, 12, GOOD, anchor="start"),
         caption_band(),
         caption("Hanteln vor den Oberschenkeln", 0, 0.6),
         caption("Ausatmen – Arme nach vorn heben", 0.6, 2.0),
         caption("Auf Schulterhöhe kurz halten", 2.0, 2.6),
         caption("Einatmen – langsam senken", 2.6, 4.9),
-        static_text("Arme fast gestreckt – Oberkörper bleibt ruhig", 200, 24, 13, MUTED),
+        static_text("Arme fast gestreckt – Oberkörper bleibt ruhig", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Front Raises")

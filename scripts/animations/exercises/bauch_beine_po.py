@@ -34,8 +34,8 @@ def post(p):
         knee0 = sh0 - th0
         th0 = (th0 - 190 + 180) % 360 - 180 + 190      # nahe 190 normalisieren
         th = lerp(th0, 192, k)
-        k2 = max(0.0, (k - 0.5) / 0.5)
-        bendmore = -22 * math.sin(math.pi * min(1.0, k / 0.75))   # Ferse erst Richtung Decke
+        k2 = k
+        bendmore = -12 * math.sin(math.pi * k)          # Ferse leicht Richtung Decke, ohne Knoten
         knee = lerp(knee0, -6, k2 * k2 * (3 - 2 * k2)) + bendmore
         p["thigh_n"] = th - root_abs - 180
         p["shin_n"] = knee
@@ -62,13 +62,13 @@ def build():
         focus("root", rx=14, ry=12, offset=(-6, -8), show=[(0.6, 3.4)]),
         arrow("M100 230 Q52 232 42 188", show=[(0.6, 1.6)]),
         arrow("M42 188 Q52 232 100 230", show=[(2.3, 3.4)]),
-        label("Rücken gerade", 186, 132, 0.6, 3.4, 11, GOOD),
+        label("Rücken gerade", 186, 132, 0.6, 3.4, 12, GOOD),
         caption_band(),
         caption("Vierfüßler – Hände unter den Schultern", 0, 0.6),
         caption("Ausatmen – Bein nach hinten oben", 0.6, 1.6),
         caption("Kurz halten – Po anspannen", 1.6, 2.3),
         caption("Langsam zurück in den Vierfüßler", 2.3, 3.4),
         caption("15× – dann Seite wechseln", 3.4, 4.4),
-        static_text("Becken bleibt waagrecht – kein Hohlkreuz", 200, 24, 13, MUTED),
+        static_text("Becken bleibt waagrecht – kein Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bauch Beine Po (Donkey Kicks)")

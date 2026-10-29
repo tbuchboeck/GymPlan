@@ -1,5 +1,6 @@
 from rig import *
 from exercises._gymgeraete_props import *
+from exercises._morgen_props import top_inset
 
 SLUG = "rotary-torso"
 
@@ -115,12 +116,21 @@ def build():
         Prim("g", {"_show": [(0, T[5])]}, children=[static_text("Satz links", 66, 64, 14, ACCENT, weight="700")]),
         Prim("g", {"_show": [(T[5], T[9])]}, children=[static_text("Satz rechts", 66, 64, 14, ACCENT,
                                                                    weight="700")]),
+        # Draufsicht: Schulterachse dreht, Becken bleibt
+        *top_inset(64, 140, 34, lambda p: (0.0, p.get("yaw", 0.0)), hip_color=GOOD, sh_color=ACCENT,
+                   nose_color=TEXT, bar_w=1.4),
+        Prim("line", {"x1": 22, "y1": 196, "x2": 36, "y2": 196, "stroke": ACCENT, "stroke-width": 7,
+                      "stroke-linecap": "round"}),
+        static_text("Schultern", 42, 200, 12, ACCENT, anchor="start", weight="600"),
+        Prim("line", {"x1": 22, "y1": 214, "x2": 36, "y2": 214, "stroke": GOOD, "stroke-width": 7,
+                      "stroke-linecap": "round"}),
+        static_text("Becken fest", 42, 218, 12, GOOD, anchor="start", weight="600"),
         caption_band(),
         caption("Aufrecht sitzen, Arme an die Schulterpolster", 0, T[1], size=14),
         caption("Ausatmen – kontrolliert nach links drehen", T[1], T[3], size=14),
         caption("Langsam zurück zur Mitte", T[3], T[5]),
         caption("Nächster Satz: nach rechts drehen", T[5], T[7]),
         caption("Langsam zurück – Seite je Satz wechseln", T[7], T[9], size=14),
-        static_text("Nur der Oberkörper dreht – Becken bleibt fest", 200, 24, 13, MUTED),
+        static_text("Nur der Oberkörper dreht – Becken bleibt fest", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SK, fps=12, title="Rotary Torso")

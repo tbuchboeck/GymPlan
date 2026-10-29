@@ -140,6 +140,6 @@ def build():
         caption("Aufrecht, ganze Sohle auf den Pedalen", T[0], T[1]),
         caption("Gleichmäßig rund treten", T[1], T[2]),
         caption("Arme schieben & ziehen gegengleich", T[2], T[3]),
-        static_text("5 Min locker aufwärmen – Fersen bleiben unten", 200, 24, 13, MUTED),
+        static_text("5 Min locker aufwärmen – Fersen bleiben unten", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=12, title="Ellipsentrainer")

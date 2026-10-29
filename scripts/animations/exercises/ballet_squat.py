@@ -85,7 +85,7 @@ def build():
         caption("Langsam tief – Knie nach außen", 0, 2.6),
         caption("Unten kurz halten – Rücken lang", 2.6, 3.3),
         caption("Langsam wieder hoch", 3.3, dur),
-        static_text("Knie zeigen Richtung Zehen", 200, 24, 13, MUTED),
+        static_text("Knie zeigen Richtung Zehen", 200, 24, LEAD_SIZE, MUTED),
         nose_hint(dur=dur),
     ]
     return render(prims, tl, FRONT, title="Ballet Squat", fps=12)

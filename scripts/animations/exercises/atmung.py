@@ -140,14 +140,14 @@ def build():
         p.attrs["x"] = 62
 
     labels = [
-        static_text("Schultern", 338, 80, 11.5, GOOD, weight="600"),
-        static_text("bleiben unten", 338, 94, 11.5, GOOD, weight="600"),
+        static_text("Schultern", 338, 80, 12, GOOD, weight="600"),
+        static_text("bleiben unten", 338, 94, 12, GOOD, weight="600"),
         Prim("line", {"x1": 300, "y1": 88, "x2": 284, "y2": 98, "stroke": GOOD, "stroke-width": 1.2, "opacity": 0.7}),
-        static_text("Hebt sich die", 338, 196, 10.5, MUTED),
-        static_text("Schulter? Flacher", 338, 209, 10.5, MUTED),
-        static_text("in Bauch und Rippen", 338, 222, 10.5, MUTED),
-        static_text("aufrecht sitzen", 62, 214, 10.5, MUTED),
-        static_text("oder Rückenlage", 62, 227, 10.5, MUTED),
+        static_text("Hebt sich die", 338, 196, 12, MUTED),
+        static_text("Schulter? Flacher", 338, 209, 12, MUTED),
+        static_text("in Bauch und Rippen", 338, 222, 12, MUTED),
+        static_text("aufrecht sitzen", 62, 214, 12, MUTED),
+        static_text("oder Rückenlage", 62, 227, 12, MUTED),
     ]
     prims = [fig, *bar, *counter, *labels, caption_band(),
              *captions2([

@@ -1,20 +1,19 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
 import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
-import type { Person } from './lib/auth-service';
+import { authService, type Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { pushSession, syncAllSessions } from './lib/session-sync';
+import { pushSession, pushAllAndPull, mergeSessions } from './lib/session-sync';
 import { Home } from './components/Home';
 import { WorkoutView } from './components/WorkoutView';
 import { WorkoutSummary } from './components/WorkoutSummary';
-import { ReminderSettings } from './components/ReminderSettings';
 import { AuthScreen } from './components/AuthScreen';
-import LocationSelector from './components/LocationSelector';
+import LocationSelector, { type LocationKey } from './components/LocationSelector';
 
 const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
 
-type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
-type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | null;
+type AppView = 'home' | 'workout' | 'summary' | 'history';
+type Location = LocationKey | null;
 
 // Legacy: sessions used to live under one key shared by everyone on the
 // device. Hand them to the first person who logs in here, once.
@@ -35,7 +34,12 @@ function migrateLegacySessions(person: Person) {
 }
 
 function App() {
-  const [person, setPerson] = useState<Person | null>(null);
+  // Gespeicherte Sitzung (max. 7 Tage) → direkt entsperrt, auch offline
+  const [person, setPerson] = useState<Person | null>(() => {
+    const saved = authService.getSession()?.person ?? null;
+    if (saved) migrateLegacySessions(saved);
+    return saved;
+  });
 
   if (!person) {
     return (
@@ -48,15 +52,21 @@ function App() {
     );
   }
 
-  return <PersonApp key={person} person={person} />;
+  const handleLogout = () => {
+    authService.clearSession();
+    setPerson(null);
+  };
+
+  return <PersonApp key={person} person={person} onLogout={handleLogout} />;
 }
 
-function PersonApp({ person }: { person: Person }) {
+function PersonApp({ person, onLogout }: { person: Person; onLogout: () => void }) {
   const [location, setLocation] = useState<Location>(null);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>(sessionsKey(person), []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
-  const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
+  // undefined = gespeicherten Stand fortsetzen (falls vorhanden), Zahl = gezielt bei dieser Übung einsteigen
+  const [startExerciseIndex, setStartExerciseIndex] = useState<number | undefined>(undefined);
   const hasSynced = useRef(false);
 
   // Scroll to top on every view change
@@ -69,10 +79,8 @@ function PersonApp({ person }: { person: Person }) {
     if (hasSynced.current) return;
     hasSynced.current = true;
 
-    syncAllSessions(sessions).then((merged) => {
-      if (merged.length !== sessions.length) {
-        setSessions(merged);
-      }
+    pushAllAndPull(sessions).then((remote) => {
+      if (remote) setSessions((cur) => mergeSessions(cur, remote));
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -86,7 +94,7 @@ function PersonApp({ person }: { person: Person }) {
   }, [location]);
 
   const handleStartWorkout = () => {
-    setStartExerciseIndex(0);
+    setStartExerciseIndex(undefined);
     setCurrentView('workout');
   };
 
@@ -120,7 +128,7 @@ function PersonApp({ person }: { person: Person }) {
   };
 
   if (!location) {
-    return <LocationSelector person={person} onSelectLocation={(loc) => setLocation(loc)} />;
+    return <LocationSelector person={person} sessions={sessions} onSelectLocation={(loc) => setLocation(loc)} />;
   }
 
   return (
@@ -133,8 +141,8 @@ function PersonApp({ person }: { person: Person }) {
           onStartWorkout={handleStartWorkout}
           onStartExercise={handleStartExercise}
           onViewHistory={() => setCurrentView('history')}
-          onManageReminders={() => setCurrentView('reminders')}
           onSwitchPlan={() => setLocation(null)}
+          onLogout={onLogout}
         />
       )}
 
@@ -142,6 +150,7 @@ function PersonApp({ person }: { person: Person }) {
         <WorkoutView
           exercises={workoutPlan.exercises}
           planName={workoutPlan.name}
+          person={person}
           onComplete={handleWorkoutComplete}
           onExit={() => setCurrentView('home')}
           initialExerciseIndex={startExerciseIndex}
@@ -151,7 +160,13 @@ function PersonApp({ person }: { person: Person }) {
       {currentView === 'summary' && currentSession && (
         <WorkoutSummary
           session={currentSession}
+          person={person}
           onClose={handleSummaryClose}
+          onUpdateSession={(updated) => {
+            setSessions((cur) => cur.map((s) => (s.id === updated.id ? updated : s)));
+            setCurrentSession(updated);
+            pushSession(updated);
+          }}
         />
       )}
 
@@ -163,15 +178,13 @@ function PersonApp({ person }: { person: Person }) {
         }>
           <WorkoutHistory
             sessions={sessions}
+            person={person}
             onClose={() => setCurrentView('home')}
             onImport={handleImportSessions}
           />
         </Suspense>
       )}
 
-      {currentView === 'reminders' && (
-        <ReminderSettings onClose={() => setCurrentView('home')} />
-      )}
     </div>
   );
 }

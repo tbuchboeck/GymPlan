@@ -72,7 +72,7 @@ class RollTimeline(Timeline):
 
 
 BASE = dict(x=HIP[0], y=HIP[1], chest=-6, neck=-10, head=-8)
-EXT = dict(BASE, thorax=6, chest=30, neck=-4, head=-8)     # BWS sinkt über die Rolle
+EXT = dict(BASE, thorax=6, chest=30, neck=-30, head=-10)   # BWS sinkt über die Rolle, Kopf bleibt gestützt in Verlängerung
 
 
 def roll_prims():
@@ -144,6 +144,6 @@ def build():
         caption("Halten und ruhig atmen", 9.8, 12.0),
         caption("Zurück – Segment für Segment höher", 12.0, 13.6),
         caption("Neuer Durchgang: mittlere BWS", 13.6, 14.6),
-        static_text("Nur BWS über die Rolle – nie unter den Nacken", 200, 24, 13, MUTED),
+        static_text("Nur BWS über die Rolle – nie unter den Nacken", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=12, title="Extension über die Rolle")

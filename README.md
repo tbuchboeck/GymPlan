@@ -1,138 +1,72 @@
-# GymPlan - Ganzkörper Trainingsplan App
+# GymPlan
 
-Eine Progressive Web App (PWA) für deinen persönlichen Ganzkörper-Trainingsplan, erstellt von Trainer Martin Schiendorfer.
+Progressive Web App (PWA) für geführtes Training – für **Neli** und **Thomas**, mit den Trainingsplänen von Trainer Martin Schiendorfer und eigenen Physio-Routinen. Deutschsprachig, dunkles Design, für das Handy gebaut und auch offline nutzbar.
 
-## Features
+## Funktionen
 
-- **Übung-für-Übung Navigation**: Geführtes Training durch alle Übungen
-- **Rest Timer**: Automatischer Countdown für Pausen zwischen Sets
-- **Set-Tracking**: Abhaken von Sets mit visuellem Fortschritt
-- **Detaillierte Anweisungen**: Genaue Ausführungshinweise für jede Übung
-- **Übungsbilder**: Animierte GIFs zeigen die richtige Ausführung
-- **Trainings-Statistiken**: Verlauf und Analyse deiner Workouts
-- **Erinnerungen**: Push-Benachrichtigungen für deine Trainingstage
-- **Offline-Modus**: Funktioniert auch ohne Internet
-- **Mobile-First**: Optimiert für Smartphone-Nutzung
+- **Login mit Passkey** (Fingerabdruck/Face ID) über `auth.apps.buchboeck.at`, Person wählbar (Neli/Thomas). Der Login bleibt **7 Tage gültig** – auch offline und nach Neustart der App. „Abmelden“ auf der Startseite beendet die Sitzung (z. B. um die Person zu wechseln).
+- **Plan-Auswahl** bei jedem Start: zeigt pro Plan „heute erledigt“ und „diese Woche x/y“. Der zuletzt gewählte Plan steht oben und ist hervorgehoben; bei Thomas steht vor 11 Uhr `@morgen` ganz oben, solange er heute noch nicht erledigt ist.
+- **Startseite**: Wochenübersicht Mo–So (Punkte für erledigte Tage, „x / Einheiten pro Woche“ für den aktuellen Plan), „Weitermachen bei Übung X/Y“ für ein angefangenes Training, Plan-Hinweis (z. B. wann ärztlich abklären), Übungsliste zum direkten Einstieg.
+- **Geführtes Training** Übung für Übung mit Satz-Abhaken, Pausen-Timer und animierten Übungsbildern (SVG).
+- **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
+- **Statistiken**: Verlauf, Serien (Streak), Wochentage, Diagramme; Export/Import als JSON/CSV.
+- **Synchronisation** der Trainings mit Supabase (lokal zuerst, Server im Hintergrund).
+- **Offline**: Service Worker speichert die App inkl. aller Übungsbilder.
 
-## Installation
+Erinnerungen per Push gibt es bewusst **nicht** (die frühere Einstellung war eine Attrappe ohne echte Benachrichtigungen). Stattdessen zeigt die Plan-Auswahl, was heute bzw. diese Woche noch offen ist.
 
-### Entwicklungsumgebung
+## Pläne und Personen
+
+| Plan | Kennung | Übungen | Einheiten/Woche | Für |
+|------|---------|---------|-----------------|-----|
+| Ganzkörper-Trainingsplan | `@gym` | 12 | 2 | Neli, Thomas |
+| Hanteltraining | `@hantel` | 12 | 2 | Neli, Thomas |
+| Cardio | `@cardio` | 15 | 2 | Neli, Thomas |
+| Rücken-Aufbau | `@rücken` | 6 | 4 | Thomas |
+| Nacken, Schulter & BWS | `@nacken` | 14 | 4 | Thomas |
+| Morgen-Reset | `@morgen` | 10 | 7 | Thomas |
+
+Die Pläne stehen in `src/data/workoutPlan.ts`, die Sichtbarkeit pro Person (`onlyFor`) in `src/components/LocationSelector.tsx`. Neli soll nichts eintragen müssen – für sie bleibt alles so einfach wie möglich.
+
+## Entwicklung
 
 ```bash
-# Abhängigkeiten installieren
 npm install
-
-# Development Server starten
-npm run dev
-
-# Build für Production
-npm run build
-
-# Preview Production Build
-npm run preview
+cp .env.example .env.local   # VITE_SUPABASE_URL und VITE_SUPABASE_ANON_KEY eintragen
+npm run dev                  # http://localhost:5173
+npm run build                # Typprüfung + Produktions-Build nach dist/
+npm run preview              # Build lokal ansehen
+npm run lint
 ```
 
-## Als PWA auf dem Handy installieren
+Ohne Supabase-Variablen läuft die App rein lokal (keine Synchronisation).
 
-### iPhone (Safari)
+### Übungsanimationen
 
-1. Öffne die App im Safari Browser
-2. Tippe auf das "Teilen" Symbol (Quadrat mit Pfeil nach oben)
-3. Scrolle runter und wähle "Zum Home-Bildschirm"
-4. Tippe auf "Hinzufügen"
+Die animierten SVGs in `public/exercise-images/` werden mit einem Python-Generator unter `scripts/animations/` erzeugt (Skelett-Rig, Schlüsselposen, SMIL-Animation ohne JavaScript):
 
-### Android (Chrome)
+```bash
+python3 scripts/animations/build.py              # alle bauen
+python3 scripts/animations/build.py chin_tuck    # nur eine Übung
+```
 
-1. Öffne die App im Chrome Browser
-2. Tippe auf die drei Punkte (Menü)
-3. Wähle "Zum Startbildschirm hinzufügen"
-4. Tippe auf "Hinzufügen"
+Details und Konventionen: `scripts/animations/README.md`.
 
-## Verwendung
+### Version
 
-### Training starten
+Die Version kommt aus `package.json` (`version`), dazu Commit-Kürzel und Build-Zeitpunkt. Sie werden beim Build eingebacken und zusätzlich als `/version.json` ausgeliefert. Login-Seite und Plan-Auswahl zeigen die Version an und bieten „neu laden“, wenn online schon eine neuere Version liegt. Bei inhaltlichen Änderungen `version` in `package.json` erhöhen.
 
-1. Öffne die App auf dem Startbildschirm
-2. Tippe auf "Training starten"
-3. Folge den Übungen Schritt für Schritt
-4. Markiere jeden Satz als abgeschlossen
-5. Der Timer startet automatisch für die Pause
+## Als App installieren
 
-### Erinnerungen einrichten
+- **iPhone (Safari):** Teilen → „Zum Home-Bildschirm“.
+- **Android (Chrome):** Menü → „Zum Startbildschirm hinzufügen“ bzw. „App installieren“.
 
-1. Gehe zur Startseite
-2. Tippe auf "Erinnerungen verwalten"
-3. Aktiviere die Erinnerungen
-4. Wähle deine Trainingstage (empfohlen: 2x pro Woche)
-5. Stelle die gewünschte Uhrzeit ein
+## Technik
 
-### Statistiken ansehen
+React 19, TypeScript, Vite 7, Tailwind CSS 4, vite-plugin-pwa (Workbox), Recharts (nachgeladen), Lucide-Icons, Supabase. Gehostet auf Vercel (`vercel.json`: SPA-Rewrite und Sicherheits-Header inkl. CSP).
 
-1. Gehe zur Startseite
-2. Tippe auf "Trainings-Statistiken"
-3. Siehe deinen Fortschritt und Verlauf
-
-## Trainingsplan Details
-
-- **Name**: Ganzkörper-Trainingsplan
-- **Ziel**: Allgemeine Fitness
-- **Trainer**: Martin Schiendorfer
-- **Einheiten pro Woche**: 2
-- **Anzahl Übungen**: 10
-
-### Übungen
-
-1. Adduktionsmaschine (3×15 @ 15 kg)
-2. Abduktionsmaschine (3×15 @ 15 kg)
-3. Beinpresse horizontal (3×15 @ 50 kg)
-4. Schulterpresse (3×15 @ 15 kg)
-5. Seitheben Kurzhantel (3×15 @ 2 kg)
-6. Ruderzug Maschine (3×15 @ 19 kg)
-7. Butterfly Maschine (3×15 @ 5 kg)
-8. Crunch (2×15)
-9. Heel Touches (2×15)
-10. Hollow Hold (2×15 Sekunden)
-
-## Technologie-Stack
-
-- **Framework**: React 18 + TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Build Tool**: Vite
-- **PWA**: vite-plugin-pwa
-- **Service Worker**: Workbox
-
-## Datenspeicherung
-
-Alle Daten werden lokal auf deinem Gerät gespeichert:
-- Trainings-Sessions im localStorage
-- Erinnerungs-Einstellungen im localStorage
-- Keine Cloud-Synchronisation
-- Deine Daten bleiben privat auf deinem Gerät
-
-## Browser-Kompatibilität
-
-- Chrome/Edge (Desktop & Mobile) ✅
-- Safari (iOS & macOS) ✅
-- Firefox (Desktop & Mobile) ✅
-- Samsung Internet ✅
-
-## Deployment
-
-Die App kann auf verschiedenen Plattformen gehostet werden:
-
-- **Vercel**: Einfaches Deployment direkt aus Git
-- **Netlify**: Automatisches Deployment mit PWA-Support
-- **GitHub Pages**: Kostenloses Hosting für statische Apps
+Mehr Details (Architektur, Speicher-Schlüssel, Sicherheit): [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Lizenz
 
 Privates Projekt für persönliche Nutzung.
-
-## Support
-
-Bei Fragen oder Problemen wende dich an deinen Trainer Martin Schiendorfer.
-
----
-
-**Viel Erfolg beim Training!** 💪

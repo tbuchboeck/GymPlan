@@ -123,18 +123,18 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center p-6 bg-gradient-to-br from-pink-300 via-rose-300 to-amber-200">
-      <div className="w-full max-w-sm rounded-2xl bg-white/96 dark:bg-slate-800 shadow-2xl p-8 text-center text-slate-900 dark:text-slate-100">
-        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-pink-500 to-rose-400 text-white">
+    <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto p-4 bg-slate-900">
+      <div className="w-full max-w-sm rounded-2xl border border-slate-700/50 bg-slate-800 shadow-2xl p-8 text-center text-slate-100">
+        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
           <Dumbbell size={32} strokeWidth={2.2} />
         </div>
         <h2 className="mb-1 text-xl font-semibold">GymPlan</h2>
-        <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">Entsperren</p>
+        <p className="mb-4 text-sm text-slate-400">Entsperren</p>
 
         <div
           role="tablist"
           aria-label="Person auswählen"
-          className="mb-5 grid grid-cols-2 gap-1 rounded-xl bg-slate-100 dark:bg-slate-700/60 p-1"
+          className="mb-5 grid grid-cols-2 gap-1 rounded-xl bg-slate-900/60 border border-slate-700/50 p-1"
         >
           {PEOPLE.map((p) => {
             const active = p === person;
@@ -147,10 +147,10 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
                 onClick={() => selectPerson(p)}
                 disabled={loading}
                 className={
-                  'rounded-lg px-3 py-2 text-sm font-semibold transition disabled:cursor-progress ' +
+                  'min-h-11 rounded-lg px-3 py-2 text-sm font-semibold transition disabled:cursor-progress ' +
                   (active
-                    ? 'bg-pink-500 text-white shadow'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100')
+                    ? 'bg-indigo-500 text-white shadow'
+                    : 'text-slate-400 hover:text-slate-100')
                 }
               >
                 {PERSON_LABEL[p]}
@@ -160,7 +160,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
         </div>
 
         {error && (
-          <div className="mb-3 rounded-lg bg-rose-100 dark:bg-rose-900/40 px-3 py-2 text-sm text-rose-700 dark:text-rose-200">
+          <div className="mb-3 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-200">
             {error}
           </div>
         )}
@@ -169,7 +169,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
           type="button"
           onClick={handleLogin}
           disabled={loading}
-          className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl bg-pink-500 px-4 py-3 text-base font-semibold text-white transition hover:bg-pink-600 active:scale-[0.98] disabled:opacity-60 disabled:cursor-progress"
+          className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-3 text-base font-semibold text-white transition hover:bg-indigo-400 active:scale-[0.98] disabled:opacity-60 disabled:cursor-progress"
         >
           <Fingerprint size={18} />
           <span>Mit Fingerabdruck entsperren</span>
@@ -183,14 +183,14 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
               setShowRecovery(true);
             }}
             disabled={loading}
-            className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm text-slate-500 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-60 disabled:cursor-progress"
+            className="mt-2 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:text-slate-100 disabled:opacity-60 disabled:cursor-progress"
           >
             <Key size={14} />
             <span>Recovery-Code verwenden</span>
           </button>
         ) : (
           <div className="mt-4 text-left">
-            <label htmlFor="recovery-code" className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-300">
+            <label htmlFor="recovery-code" className="mb-1 block text-xs font-medium text-slate-300">
               Recovery-Code für {PERSON_LABEL[person]} (5 Gruppen à 5 Zeichen)
             </label>
             <input
@@ -205,9 +205,9 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
               onChange={(e) => setRecoveryInput(e.target.value)}
               placeholder="ABCDE-FGHIJ-KLMNO-PQRST-UVWXY"
               disabled={loading}
-              className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 font-mono text-sm tracking-wider text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/30 disabled:opacity-60"
+              className="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 font-mono text-sm tracking-wider text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 disabled:opacity-60"
             />
-            <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <div className="mt-1 text-xs text-slate-400">
               {normalized.length} / 25 Zeichen
             </div>
             <div className="mt-3 flex gap-2">
@@ -219,7 +219,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
                   setError('');
                 }}
                 disabled={loading}
-                className="flex-1 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 transition hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-60"
+                className="min-h-11 flex-1 rounded-lg border border-slate-600 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-700 disabled:opacity-60"
               >
                 Abbrechen
               </button>
@@ -227,7 +227,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
                 type="button"
                 onClick={handleRecoverySubmit}
                 disabled={loading || normalized.length !== 25}
-                className="flex-1 rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white transition hover:bg-pink-600 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="min-h-11 flex-1 rounded-lg bg-indigo-500 px-3 py-2 text-sm font-semibold text-white transition hover:bg-indigo-400 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Einlösen
               </button>
@@ -237,7 +237,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
 
         {loading && (
           <div
-            className="mx-auto mt-4 h-5 w-5 animate-spin rounded-full border-2 border-pink-500 border-t-transparent"
+            className="mx-auto mt-4 h-5 w-5 animate-spin rounded-full border-2 border-indigo-400 border-t-transparent"
             aria-hidden="true"
           />
         )}

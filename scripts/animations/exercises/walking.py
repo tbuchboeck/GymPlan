@@ -119,7 +119,7 @@ def build():
         dashes,
         scene,
         caption_band(),
-        static_text("Locker gehen – Schultern entspannt, ruhig atmen", 200, 22, 13, MUTED),
+        static_text("Locker gehen – Schultern entspannt, ruhig atmen", 200, 22, LEAD_SIZE, MUTED),
         caption("Ferse setzt auf, Fuß rollt ab", 0, T),
         caption("Arme schwingen locker gegengleich", T, 2 * T),
         caption("Aufrecht, Blick nach vorn", 2 * T, 3 * T),

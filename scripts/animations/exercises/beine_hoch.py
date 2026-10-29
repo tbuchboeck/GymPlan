@@ -40,13 +40,13 @@ def build():
             arrow("M342 150 Q352 128 336 108", show=[(0.5, 1.2), (2.4, 3.2)]),
             arrow("M336 108 Q352 128 342 150", show=[(1.4, 2.2), (3.4, 4.2)]),
         ], 1.12, FLOOR_Y),
-        label("Rücken bleibt am Boden", 150, 186, 0.5, 4.4, 11, GOOD),
+        label("Rücken bleibt am Boden", 150, 186, 0.5, 4.4, 12, GOOD),
         caption_band(),
         caption("Rückenlage – Beine gestreckt anheben", 0, 0.5),
         caption("Rechtes Bein hoch, linkes tief", 0.5, 1.4),
         caption("Wechseln – wie eine Schere", 1.4, 2.4),
         caption("Gleichmäßig weiteratmen", 2.4, 3.4),
         caption("Bauch fest – Füße nicht ablegen", 3.4, 5.0),
-        static_text("Unterer Rücken bleibt fest auf der Matte", 200, 24, 13, MUTED),
+        static_text("Unterer Rücken bleibt fest auf der Matte", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Beine Hoch (Schere)")
