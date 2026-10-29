@@ -5,17 +5,19 @@ nicht als Übung (Unterstrich)."""
 from rig import *
 from exercises._gymgeraete_props import *
 
-ORIGIN = (200.0, 170.0)
+ORIGIN = (200.0, 162.0)
 FLOOR_Y = 250
-GRIP_Y = -4.0
+GRIP_Y = 8.0
+GRIP_X = 38.0
+GRIP_Z = -4.0
 
 
 def _arms(J, pose):
     for s, side in ((-1, "L"), (1, "R")):
-        arm_to(J, side, (s * 50.0, GRIP_Y, 16.0), (s * 1.0, 0.1, -0.6))
+        arm_to(J, side, (s * GRIP_X, GRIP_Y, GRIP_Z), (s * 1.0, 0.0, -0.3))
 
 
-SK = Proj3D(lambda p: seated_joints(p, _arms), SEATED_SEGS, ORIGIN)
+SK = Proj3D(lambda p: seated_joints(p, _arms), SEATED_SEGS, ORIGIN, elev=math.radians(34))
 proj = SK.proj
 
 
@@ -90,8 +92,10 @@ def machine(lift, inner):
         # Sitz
         *box(-46, 46, -24, -11, -26, 34),
         # Griffe seitlich
-        line(*proj((-50, -14, 16)), *proj((-50, GRIP_Y, 16)), PROP_DARK, 5),
-        line(*proj((50, -14, 16)), *proj((50, GRIP_Y, 16)), PROP_DARK, 5),
+        line(*proj((-GRIP_X - 4, -12, GRIP_Z)), *proj((-GRIP_X, GRIP_Y, GRIP_Z)), PROP_DARK, 5),
+        line(*proj((GRIP_X + 4, -12, GRIP_Z)), *proj((GRIP_X, GRIP_Y, GRIP_Z)), PROP_DARK, 5),
+        line(*proj((-GRIP_X - 6, GRIP_Y, GRIP_Z)), *proj((-GRIP_X + 6, GRIP_Y, GRIP_Z)), "#1f2937", 7),
+        line(*proj((GRIP_X - 6, GRIP_Y, GRIP_Z)), *proj((GRIP_X + 6, GRIP_Y, GRIP_Z)), "#1f2937", 7),
     ]
     lb, lf = leg_lever(-1, inner)
     rb, rf = leg_lever(1, inner)

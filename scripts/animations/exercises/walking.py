@@ -19,6 +19,7 @@ HALF = 27.0                    # halbe Schrittlänge (Fußgelenk relativ zum Bec
 STANCE = 0.6                   # Anteil Standphase
 FOOT = 20.0
 LEGLEN = 50 + 48 - 2.5         # Stand-Bein fast gestreckt
+SCALE = 0.84
 SPEED = 2 * HALF / (STANCE * CYCLE)   # px/s des Bodens
 
 
@@ -75,7 +76,7 @@ class WalkTimeline(Timeline):
         for k, other in (("n", "f"), ("f", "n")):
             leg = feet[k][0] / HALF                     # +1 = Bein vorn
             swing = -leg
-            pose["upperarm_" + k] = 20 * swing + 2
+            pose["upperarm_" + k] = 24 * swing + 2
             pose["forearm_" + k] = 18 + 10 * max(0.0, swing)
             pose["hand_" + k] = 4
         pose["t"] = t
@@ -87,11 +88,11 @@ def build():
     dur = tl.duration
 
     def ground(c):
-        return {"stroke-dashoffset": c["t"] * SPEED}   # SPEED*dur = 360 = 9 Muster
+        return {"stroke-dashoffset": c["t"] * SPEED * SCALE}   # gesamt 302.4 = 8 Muster à 37.8
 
     # Bodenmarkierungen ziehen mit der Geschwindigkeit des Standfußes nach hinten
     dashes = Prim("line", {"x1": 20, "y1": FLOOR_Y + 5, "x2": 380, "y2": FLOOR_Y + 5, "stroke": "#475569",
-                           "stroke-width": 2.5, "stroke-dasharray": "14 26", "stroke-linecap": "round"}, ground)
+                           "stroke-width": 2.5, "stroke-dasharray": "12 25.8", "stroke-linecap": "round"}, ground)
     # Dashoffset positiv verschiebt das Muster nach links -> Boden läuft nach hinten
     shadow = Prim("ellipse", {"cx": CX + 4, "cy": FLOOR_Y + 1, "rx": 42, "ry": 4, "fill": "#0b1220",
                               "opacity": 0.5})
@@ -110,9 +111,9 @@ def build():
     prims_fig += limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
     prims_fig += arms(False)
 
-    relax = focus("lumbar", rx=10, ry=14, offset=(-8, 0), color=GOOD, end=False)
+    relax = focus("lumbar", rx=8, ry=12, offset=(-10, 0), color=GOOD, end=False, show=[(3 * CYCLE, 4 * CYCLE)])
     T = CYCLE
-    scene = group([shadow, *prims_fig, relax], scale=0.84, origin=(CX, FLOOR_Y))
+    scene = group([shadow, *prims_fig, relax], scale=SCALE, origin=(CX, FLOOR_Y))
     prims = [
         floor(FLOOR_Y, 20, 380),
         dashes,

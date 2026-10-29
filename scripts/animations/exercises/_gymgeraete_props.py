@@ -245,15 +245,16 @@ class Proj3D(Skeleton):
     fk liefert das gewohnte {seg: (sx, sy, ex, ey, winkel)} in Bildkoordinaten,
     damit limb(), head_front(), focus(), ghost() unverändert funktionieren."""
 
-    def __init__(self, joints, segs, origin=(200.0, 190.0)):
+    def __init__(self, joints, segs, origin=(200.0, 190.0), elev=ELEV):
         super().__init__([])
+        self.elev = elev
         self.joints = joints
         self.seglist = segs
         self.origin = origin
 
     def proj(self, p):
         return (self.origin[0] + p[0],
-                self.origin[1] - p[1] * math.cos(ELEV) + p[2] * math.sin(ELEV))
+                self.origin[1] - p[1] * math.cos(self.elev) + p[2] * math.sin(self.elev))
 
     def fk(self, pose):
         J = self.joints(pose)
@@ -340,6 +341,8 @@ def seated_front_figure(torso_w=44, extras_after_trunk=(), extras_after_arms=(),
     prims += list(extras_after_arms)
     for s in ("L", "R"):
         prims += limb_j(["shin_" + s, "foot_" + s], 15, NEAR)
-        prims += limb(["thigh_" + s], 18, NEAR)
+        prims += limb(["thigh_" + s], 19, NEAR)
+        prims.append(Prim("ellipse", {"rx": 6, "ry": 4.5, "fill": HEAD, "opacity": 0.7},
+                          lambda c, s=s: dict(zip(("cx", "cy"), pt(c["P"], "thigh_" + s)))))
     prims += list(legs_front)
     return prims
