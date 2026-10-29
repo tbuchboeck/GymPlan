@@ -14,10 +14,10 @@ FLOOR_Y = 252
 CX = 210
 SC = 0.92
 ANK_Y = FLOOR_Y - 9
-ANK_N = (CX + 30, ANK_Y)
-ANK_F = (CX + 34, ANK_Y)
+ANK_N = (CX + 26, ANK_Y)
+ANK_F = (CX + 31, ANK_Y)
 
-BASE = dict(x=CX - 6, y=ANK_Y - 74, neck=-2, head=0)
+BASE = dict(x=CX - 22, y=ANK_Y - 62, neck=-2, head=0)
 
 
 def tilt_pose(tilt, shift):
@@ -58,7 +58,7 @@ def build():
             x, y = pt(c["P"], "root", end=False)
             a = -c["pose"].get("rot", 0.0)        # SVG-Rotation (im Uhrzeigersinn positiv)
             return {"cx": x + 2, "cy": y - 2, "transform": f"rotate({a:.1f} {x:.1f} {y:.1f})"}
-        return Prim("ellipse", {"rx": 20 + pad, "ry": 15 + pad, "fill": SKIN_LINE if pad else TORSO}, f)
+        return Prim("ellipse", {"rx": 15 + pad, "ry": 12 + pad, "fill": SKIN_LINE if pad else TORSO}, f)
 
     def tilt_line(c):
         x, y = pt(c["P"], "root", end=False)
@@ -95,7 +95,7 @@ def build():
     main = group([
         lot_line,
         *figure,
-        focus("root", rx=18, ry=12, offset=(0, 4), end=False, show=[(0, dur)]),
+        focus("lumbar", rx=9, ry=16, offset=(-14, 8), end=False, color=GOOD, show=[(0, dur)]),
         roll_fwd, roll_back,
     ], scale=SC, origin=(CX, FLOOR_Y))
 
@@ -111,11 +111,11 @@ def build():
     fpose = solve_ik(FR, fpose, IK("upperarm_R", "forearm_R", (30, 24), bend=-1))
     inset_fig = front_figure(legs=True)
     inset = group([ghost(inset_fig, FR, fpose, 1.0)], scale=0.42, origin=(0, 0),
-                  dx=ix + iw / 2, dy=iy + 66)
+                  dx=ix + iw / 2, dy=iy + 52)
     inset_box = [
         Prim("rect", {"x": ix, "y": iy, "width": iw, "height": ih, "rx": 8, "fill": "#0b1220", "opacity": 0.6,
                       "stroke": "#334155", "stroke-width": 1}),
-        Prim("line", {"x1": ix + 8, "y1": iy + 66 + 0.42 * 82, "x2": ix + iw - 8, "y2": iy + 66 + 0.42 * 82,
+        Prim("line", {"x1": ix + 8, "y1": iy + 52 + 0.42 * 82, "x2": ix + iw - 8, "y2": iy + 52 + 0.42 * 82,
                       "stroke": FLOOR, "stroke-width": 2}),
         inset,
         static_text("von vorn: breit", ix + iw / 2, iy + ih - 6, 10, MUTED),

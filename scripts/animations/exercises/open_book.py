@@ -151,8 +151,8 @@ def floor_rect(cam, x0, x1, z0, z1, y=0.0, color="#3f4a7a", edge=5):
 FLOOR = 236          # Vorderkante der Matte (Kontakt nahe Objekte)
 BACKF = FLOOR - 20   # Kontaktlinie hinten (Becken/Knie, etwas weiter weg)
 AX = 188             # Drehachse x in Seitenlage
-SW = 40              # halbe Schulterbreite
-ARM = 84
+SW = 30              # halbe Schulterbreite
+ARM = 92
 TH_MAX = 80
 
 
@@ -160,13 +160,13 @@ def geo(p):
     th = math.radians(p.get("th", 0.0))
     s, c = math.sin(th), math.cos(th)
     G = {}
-    ax, ay = AX - 18 * s, FLOOR - 48 + 26 * s
+    ax, ay = AX - 14 * s, FLOOR - 44 + 26 * s
     G["axis"] = (ax, ay)
     G["sh1"] = (ax - SW * s, ay - SW * c)      # obere Schulter
     G["sh0"] = (ax + SW * s, ay + SW * c)      # untere Schulter
     # unterer Arm liegt nach vorn am Boden
     b = G["sh0"]
-    G["el0"], G["wr0"], G["ha0"] = (b[0] + 38, FLOOR - 8), (b[0] + 70, FLOOR - 8), (b[0] + 84, FLOOR - 8)
+    G["el0"], G["wr0"], G["ha0"] = (b[0] + 42, FLOOR - 8), (b[0] + 78, FLOOR - 8), (b[0] + 92, FLOOR - 8)
     # oberer Arm gestreckt
     t = G["sh1"]
     phi = math.radians(p.get("phi", -35.0))
@@ -174,7 +174,7 @@ def geo(p):
         k = max(-1.0, min(1.0, (t[1] - (FLOOR - 8)) / ARM))
         phi = math.pi - math.asin(k) if math.cos(phi) < 0 else math.asin(k)
     d = (math.cos(phi), -math.sin(phi))
-    G["el1"], G["wr1"], G["ha1"] = [(t[0] + d[0] * L, t[1] + d[1] * L) for L in (38, 70, ARM)]
+    G["el1"], G["wr1"], G["ha1"] = [(t[0] + d[0] * L, t[1] + d[1] * L) for L in (42, 78, ARM)]
     # Brust-Normale (zeigt nach vorn bzw. zur Decke)
     G["chest_a"] = (ax + 20 * c, ay - 20 * s)
     G["chest_b"] = (ax + 46 * c, ay - 46 * s)
@@ -183,7 +183,7 @@ def geo(p):
     G["gaze"] = p.get("gaze", 0.0)
     # hinten: Becken senkrecht, Oberschenkel nach vorn, Knie übereinander
     G["hip1"], G["hip0"] = (AX + 4, BACKF - 44), (AX + 4, BACKF - 12)
-    G["knee1"], G["knee0"] = (AX + 66, BACKF - 24), (AX + 66, BACKF - 8)
+    G["knee1"], G["knee0"] = (AX + 70, BACKF - 24), (AX + 66, BACKF - 8)
     return G
 
 
@@ -253,7 +253,7 @@ class Rig2:
         ]
 
 
-START = dict(th=0, phi=-38, gaze=-8)
+START = dict(th=0, phi=-35, gaze=-8)
 OPEN = dict(th=TH_MAX, phi=188, gaze=128)
 
 
@@ -277,7 +277,7 @@ def build():
     arc = []
     for i in range(1, 24):
         u = i / 24
-        G = geo(dict(th=TH_MAX * smooth(u), phi=-38 + 226 * smooth(u)))
+        G = geo(dict(th=TH_MAX * smooth(u), phi=-35 + 223 * smooth(u)))
         ax, ay = G["sh1"]
         hx, hy = G["ha1"]
         arc.append((ax + (hx - ax) * 1.12, ay + (hy - ay) * 1.12))
@@ -312,7 +312,7 @@ def build():
         *rig.limb(["sh1", "el1", "wr1", "ha1"], 13, NEAR),
         *pillow,
         *rig.head(),
-    ], scale=1.22, origin=(AX, FLOOR), dx=8)
+    ], scale=1.15, origin=(AX, FLOOR), dx=10)
     prims = [
         scene,
         *inset(),

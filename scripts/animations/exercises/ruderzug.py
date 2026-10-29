@@ -21,9 +21,9 @@ def post(pose, P):
     scap = min(1.0, max(0.0, (p - 0.35) / 0.55))
     s = shoulder_side(P, scap)
     # Handgelenk: vorne (Arme lang, Richtung Seilrolle) -> am Bauch
-    belly = body_pt(P, "lumbar", 2, 25)
+    belly = body_pt(P, "lumbar", 6, 10)
     w0 = (s[0] + 61, s[1] + 22)
-    w1 = (belly[0] + 6, belly[1] - 2)
+    w1 = belly
     u = p
     w = (w0[0] + (w1[0] - w0[0]) * u, w0[1] + (w1[1] - w0[1]) * u - 5 * math.sin(math.pi * u))
     out = {"scap": scap}
