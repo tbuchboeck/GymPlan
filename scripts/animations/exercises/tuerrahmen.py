@@ -19,8 +19,8 @@ HALF_SH = 20.0                 # halbe Schulterbreite (Draufsicht)
 EDGE_Z = 50.0                  # Türöffnung: halbe Breite (Draufsicht)
 
 START = dict(x=165, y=152, upperarm_f=4, forearm_f=6, neck=2, head=-2)
-LEAN = dict(x=180, y=157, rot=-8, upperarm_f=12, forearm_f=8, neck=6, head=4)
-LEAN_IN = dict(LEAN, x=182)  # in der Haltephase minimal tiefer
+LEAN = dict(x=173, y=155, rot=-6, upperarm_f=12, forearm_f=8, neck=6, head=4)
+LEAN_IN = dict(LEAN, x=175)  # in der Haltephase minimal tiefer
 
 
 def label(text, x, y, t0, t1, size=12, color=ACCENT, anchor="start"):

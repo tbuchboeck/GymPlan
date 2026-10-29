@@ -203,7 +203,7 @@ def build():
         caption("Griffe vor der Brust, Arme leicht gebeugt", 0, 0.8),
         caption("Schulterblätter zurück & runter", 0.8, 2.0),
         caption("Arme im Bogen seitlich öffnen", 2.0, 3.6),
-        caption("Kurz halten", 3.6, 4.8),
+        caption("Kurz halten – Schulterblätter bleiben unten", 3.6, 4.8),
         caption("Kontrolliert zurück", 4.8, 7.2),
     ]
     return render(prims, tl, FRONT, fps=12, title="Reverse Flys (Sling)")

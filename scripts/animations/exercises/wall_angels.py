@@ -123,7 +123,7 @@ def side_inset():
     for yy in (hy, sh[1] + 12, to_inset(*pt(P, "root", False))[1]):
         prims.append(Prim("circle", {"cx": WALL_X, "cy": yy, "r": 3, "fill": GOOD}))
     prims.append(Prim("ellipse", {"cx": WALL_X + 7, "cy": sh[1] + 16, "rx": 6, "ry": 11, "fill": ACCENT,
-                                  "opacity": 0.35, "_pulse": True, "_show": [(3.8, 7.4)]}))
+                                  "opacity": 0.5, "_pulse": True, "_show": [(3.8, 7.4)]}))
     prims.append(static_text("Kopf · Rücken · Po", IN_X + IN_W / 2, IN_Y + IN_H + 13, 10, GOOD))
     prims.append(static_text("an der Wand", IN_X + IN_W / 2, IN_Y + IN_H + 25, 10, GOOD))
     return prims
@@ -137,7 +137,7 @@ def build():
     ghost_u = ghost(limb(["upperarm_L", "forearm_L", "hand_L"], 13, NEAR)
                     + limb(["upperarm_R", "forearm_R", "hand_R"], 13, NEAR), FRONT, U, 0.16)
     # Schulterblätter runter: kleine Pfeile neben dem Hals
-    sh_arrows = [arrow(f"M{x} 66 L{x} 80", width=2.5, show=[(5.8, 7.4)]) for x in (CX - 30, CX + 30)]
+    sh_arrows = [arrow(f"M{x} 40 L{x} 54", width=2.5, show=[(5.8, 7.4)]) for x in (CX - 30, CX + 30)]
     main = group([ghost_u, *fig,
                   arrow(f"M{CX - 96} 92 Q{CX - 104} 60 {CX - 92} 30", show=[(1.0, 3.0)]),
                   arrow(f"M{CX + 96} 92 Q{CX + 104} 60 {CX + 92} 30", show=[(1.0, 3.0)]),
@@ -155,7 +155,8 @@ def build():
         caption("Langsam hochgleiten – Kontakt halten", 1.0, 3.8),
         caption("Ellbogen zu den Rippen ziehen", 3.8, 7.4),
         caption("Zurück in die U-Form", 7.4, 9.2),
-        label("Schulterblätter nach unten", CX, 48, 3.8, 7.4),
+        label("Schulterblätter", 20, 184, 3.8, 7.4, anchor="start"),
+        label("nach unten", 20, 199, 3.8, 7.4, anchor="start"),
         static_text("Rippen unten – kein Hohlkreuz", 200, 24, 13, MUTED),
     ]
     return render(prims, tl, FRONT, title="Wall Angels", fps=12)

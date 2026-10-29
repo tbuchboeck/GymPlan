@@ -1,0 +1,33 @@
+from rig import *
+from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage
+
+SLUG = "prone-leg-lifts"
+
+# Bauchlage, Unterarmstütz. Beide Beine gestreckt gemeinsam anheben (Hüftstreckung),
+# Becken bleibt auf der Matte, Blick zur Matte.
+DOWN = PRONE
+UP = dict(PRONE, thigh_n=-15, shin_n=1, foot_n=-74, thigh_f=-17, shin_f=1, foot_f=-74,
+          lumbar=10)
+
+
+def build():
+    tl = Timeline([(0, DOWN), (0.8, DOWN), (2.0, UP), (3.2, UP), (4.6, DOWN), (5.2, DOWN)],
+                  iks=forearm_iks(), skeleton=SIDE)
+    legs = limb(["thigh_f", "shin_f", "foot_f"], 15, FAR) + limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    prims = [
+        *stage([
+            *mat_layer(),
+            ghost(legs, SIDE, DOWN, 0.16),
+            *side_figure(),
+            focus("root", rx=22, ry=9, offset=(-4, -14), end=False, show=[(0.8, 4.6)]),
+            arrow("M76 206 Q70 190 76 176", show=[(0.8, 2.0)]),
+            arrow("M76 176 Q70 192 76 206", show=[(3.2, 4.6)]),
+        ]),
+        caption_band(),
+        caption("Unterarme stützen, Beine lang", 0, 0.8),
+        caption("Ausatmen – beide Beine gestreckt heben", 0.8, 2.0),
+        caption("Kurz halten – Po & Bauch fest", 2.0, 3.2),
+        caption("Langsam absenken", 3.2, 5.2),
+        static_text("Becken bleibt auf der Matte – nur leicht heben", 200, 24, 13, MUTED),
+    ]
+    return render(prims, tl, SIDE, title="Bauchlage-Beinheben")

@@ -44,6 +44,14 @@ def twin(dyn, outer_w, inner_w, inner_color, outer_color=SKIN_LINE):
             Prim("path", dict(st, stroke=inner_color, **{"stroke-width": inner_w}), dyn)]
 
 
+def arm2(names, width, color):
+    """Arm als Polylinie mit runden Gelenken – Ellbogen bleibt als Knick sichtbar."""
+    def d(c, n=names):
+        pts = chain_points(c["P"], n)
+        return {"d": "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts)}
+    return twin(d, width + 3, width, color)
+
+
 def limb2(names, width, color):
     return twin(lambda c, n=names: {"d": smooth_path(chain_points(c["P"], n))}, width + 3, width, color)
 
@@ -141,7 +149,7 @@ def upper_body(active="L", hand_extra_front=()):
     prims += limb2([f"upperarm_{rest}", f"forearm_{rest}", f"hand_{rest}"], 13, NEAR)
     prims += limb2(["neck"], 13, TORSO)
     prims += head_front()
-    prims += limb2([f"upperarm_{active}", f"forearm_{active}"], 13, NEAR)
+    prims += arm2([f"upperarm_{active}", f"forearm_{active}"], 13, NEAR)
     prims += [nerve_path(active)]
     prims += hand_prims(f"hand_{active}", "h_")
     prims += list(hand_extra_front)
@@ -163,25 +171,53 @@ TOP_HINT = (f'Gleiten, keine Dehnung – <tspan fill="{WARN}">kein Kribbeln</tsp
 # Posen
 # --------------------------------------------------------------------------
 
-BASE = dict(x=200, y=200, upperarm_R=4, forearm_R=6, hand_R=0, glide=0,
-            h_pw=10, h_fang=0, h_flen=1, h_th=-70, h_tlen=1, ring=0, len_upperarm_L=1, len_forearm_L=1)
+class MapTimeline(Timeline):
+    """Timeline, deren Posen nach dem Interpolieren durch mapper(pose) laufen –
+    so folgt der Arm einer frei gestaltbaren Bahn (Pose-Skalar m = 0..1)."""
+    def __init__(self, keys, mapper, skeleton):
+        super().__init__(keys, skeleton=skeleton)
+        self.mapper = mapper
 
-# Start: rechter Arm seitlich gestreckt auf Schulterhöhe, Handfläche vorn
-# (Daumen oben), Kopf neutral.
-STRAIGHT = dict(BASE, upperarm_L=-90, forearm_L=0, hand_L=4)
-STRAIGHT_OPP = dict(STRAIGHT, neck=-11, head=-7, turn=0.0, glide=-1)    # Kopf nach links
-# Maske: Ellbogen gebeugt, Hand am Auge, Finger zeigen nach hinten,
-# Kopf nach rechts (zur Bildschirm-Linken).
-MASK = dict(BASE, upperarm_L=-88, len_upperarm_L=0.92, len_forearm_L=1.1, forearm_L=-146, hand_L=-8,
-            neck=13, head=8, glide=1,
-            h_pw=9, h_fang=78, h_flen=0.85, h_th=-150, h_tlen=0.2, ring=1)
+    def at(self, t):
+        return self.mapper(super().at(t))
+
+
+def lerp(a, b, u):
+    return a + (b - a) * u
+
+
+BASE = dict(x=200, y=200, upperarm_R=4, forearm_R=6, hand_R=0)
+
+
+def ulnar_map(p):
+    """m=0: Arm gestreckt, Handfläche vorn, Daumen oben.
+    m=1: Ellbogen gebeugt, Hand als Maske am Auge, Finger nach hinten.
+    tilt: Kopfneigung (+1 = nach rechts = Bildschirm-links)."""
+    m, tilt = p.get("m", 0.0), p.get("tilt", 0.0)
+    q = dict(p)
+    bump = math.sin(math.pi * m)            # Mitte der Bahn: Unterarm kommt nach vorn
+    q.update(
+        upperarm_L=-90 + 3 * m, len_upperarm_L=1 - 0.08 * m,
+        forearm_L=-146 * m, len_forearm_L=(1 + 0.1 * m) * (1 - 0.3 * bump),
+        hand_L=lerp(4, -8, m),
+        neck=13 * tilt, head=8 * tilt,
+        h_pw=lerp(10, 9, m), h_fang=118 * m ** 1.5, h_flen=lerp(1, 0.95, m) - 0.25 * bump,
+        h_th=lerp(-70, -150, m), h_tlen=lerp(1, 0.2, m), ring=m,
+        glide=0.5 * (2 * m - 1) + 0.5 * tilt,
+    )
+    return q
+
+
+# Start: rechter Arm seitlich gestreckt, Kopf neutral
+STRAIGHT = dict(BASE, m=0, tilt=0)
+STRAIGHT_OPP = dict(BASE, m=0, tilt=-1)     # Arm gestreckt, Kopf nach links
+MASK = dict(BASE, m=1, tilt=1)              # Maske, Kopf nach rechts
 
 
 def build():
     T = [0, 1.9, 3.8, 5.7, 7.6]
-    tl = Timeline([(T[0], STRAIGHT), (T[1], MASK), (T[2], STRAIGHT_OPP), (T[3], MASK), (T[4], STRAIGHT)],
-                  skeleton=SK)
-
+    tl = MapTimeline([(T[0], STRAIGHT), (T[1], MASK), (T[2], STRAIGHT_OPP), (T[3], MASK), (T[4], STRAIGHT)],
+                     ulnar_map, SK)
     # Daumen-Zeigefinger-Ring ums Auge ("Maske")
     def ring(c):
         wx, wy, _, _, a = c["P"]["hand_L"]
@@ -201,7 +237,7 @@ def build():
         arrow("M214 64Q202 56 188 61", width=2, show=to_mask),
         arrow("M186 64Q198 56 212 61", width=2, show=to_straight),
     ]
-    fig = group([ghost(limb(["upperarm_L", "forearm_L"], 13, NEAR), SK, STRAIGHT, 0.14)]
+    fig = group([ghost(limb(["upperarm_L", "forearm_L"], 13, NEAR), SK, ulnar_map(STRAIGHT), 0.14)]
                 + upper_body("L", ring_p) + arrows,
                 scale=1.5, origin=(200, 120), dx=45, dy=8)
     fig.attrs["clip-path"] = "url(#clipU)"
@@ -210,6 +246,9 @@ def build():
         Prim("rect", {"x": 22, "y": 176, "width": 112, "height": 24, "rx": 12, "fill": "#0b1220",
                       "stroke": ACCENT, "stroke-width": 1.2, "opacity": 0.9}),
         static_text("nur rechter Arm", 78, 192, 12.5, ACCENT, weight="700"),
+        Prim("line", {"x1": 128, "y1": 160, "x2": 142, "y2": 160, "stroke": NERVE, "stroke-width": 2,
+                      "stroke-dasharray": "3 3"}),
+        static_text("Nerv gleitet", 124, 164, 10.5, NERVE, anchor="end"),
         static_text("Arm und Kopf", 78, 218, 11, MUTED),
         static_text("bewegen sich gegengleich", 78, 232, 11, MUTED),
     ]

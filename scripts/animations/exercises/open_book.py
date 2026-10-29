@@ -100,7 +100,7 @@ class Rig3:
                 a = math.radians(fa + deg)
                 return x + (rr + 1) * k * math.cos(a), y - (rr + 1) * k * math.sin(a)
             p0, p1, q = p(80), p(-80), p(180, 0.25)
-            return {"d": f"M{p0[0]:.1f} {p0[1]:.1f}A{rr + 1:.1f} {rr + 1:.1f} 0 1 1 {p1[0]:.1f} {p1[1]:.1f}"
+            return {"d": f"M{p0[0]:.1f} {p0[1]:.1f}A{rr + 1:.1f} {rr + 1:.1f} 0 1 0 {p1[0]:.1f} {p1[1]:.1f}"
                          f"Q{q[0]:.1f} {q[1]:.1f} {p0[0]:.1f} {p0[1]:.1f}Z"}
 
         def nose(c):
@@ -133,7 +133,7 @@ def floor_rect(cam, x0, x1, z0, z1, y=0.0, color="#3f4a7a", edge=5):
 
 # --------------------------------------------------------------------------
 
-CAM = Cam(yaw=-28, pitch=30, scale=1.25, cx=212, cy=190)
+CAM = Cam(yaw=-12, pitch=46, scale=1.3, cx=214, cy=190)
 ARM = 81
 TH_MAX = 78
 
@@ -154,6 +154,9 @@ def joints(p):
     v = (-math.sin(th) * 19, math.cos(th) * 19, 0)
     J["sc"] = sc
     J["sh1"], J["sh0"] = add(sc, v), add(sc, v, -1)
+    # Brustbein-Richtung (Normale der Schulterlinie)
+    J["chest_c"] = add(sc, (0, 0, -22))
+    J["chest_n"] = add(J["chest_c"], (math.cos(th) * 34, math.sin(th) * 34, 0))
     # unterer Arm liegt nach vorn am Boden
     b = J["sh0"]
     J["el0"] = (b[0] + 36, max(7, b[1] - 1), 2)
@@ -185,10 +188,6 @@ def build():
     rig = Rig3(joints, CAM)
     tl = Timeline([(0, START), (0.8, START), (3.2, OPEN), (5.4, OPEN), (7.4, START), (8.0, START)])
 
-    pillow = [Prim("ellipse", {}, lambda c: (lambda x, y: {"cx": x, "cy": y + 3, "rx": 30, "ry": 13})(*CAM((-4, 5, 34)))),
-              ]
-    pillow = []
-    px = lambda x, z: CAM((x, 0, z))
     pil_top = [CAM((-24, 9, 14)), CAM((22, 9, 14)), CAM((22, 9, 52)), CAM((-24, 9, 52))]
     pil_d = "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pil_top) + "Z"
     pil_front = [CAM((-24, 0, 52)), CAM((22, 0, 52))]
@@ -209,21 +208,27 @@ def build():
     arc_pts = hand_arc()
     arc_d = smooth_path(arc_pts[1:-1])
 
-    ghost_arm = ghost(rig.limb(["sh1", "el1", "wr1", "ha1"], 12, NEAR), SIDE, START, 0.2)
+    ghost_arm = ghost(rig.limb(["sh1", "el1", "wr1", "ha1"], 12, NEAR), SIDE, START, 0.14)
 
     prims = [
-        *floor_rect(CAM, -120, 92, -150, 62),
-        *rig.limb(["hip0", "knee0", "foot0", "toe0"], 16, FAR),
-        *rig.limb(["hip1", "knee1", "foot1", "toe1"], 16, NEAR),
-        focus("root", rx=14, ry=20, offset=(0, 0), color=GOOD, show=[(0.8, 7.4)]),
-        *rig.slab(["hip1", "sh1", "sh0", "hip0"], TORSO, 14),
-        *rig.limb(["pelvis", "waist", "sc"], 26, TORSO, outline=False),
+        *floor_rect(CAM, -108, 78, -136, 54),
+        *rig.limb(["hip0", "knee0", "foot0"], 16, FAR),
+        *rig.limb(["hip1", "knee1", "foot1"], 16, NEAR),
+        Prim("ellipse", {"cx": round(CAM((46, 16, -80))[0], 1), "cy": round(CAM((46, 16, -80))[1], 1),
+                         "rx": 16, "ry": 22, "fill": GOOD, "opacity": 0.35, "_pulse": True, "_show": [(0.8, 7.4)]}),
+        *rig.slab(["hip1", "sh1", "sh0", "hip0"], TORSO, 18),
+        *rig.limb(["hip1", "hip0"], 22, TORSO, outline=False),
+        *rig.limb(["pelvis", "waist", "chest_c"], 24, TORSO, outline=False),
+        *rig.limb(["sh1", "sh0"], 22, "#8f98fb"),
         *rig.limb(["sh0", "el0", "wr0", "ha0"], 11, FAR),
         *pillow,
         *rig.limb(["sc", "neck", "head"], 12, TORSO),
         ghost_arm,
         Prim("path", {"d": arc_d, "fill": "none", "stroke": ACCENT, "stroke-width": 2, "stroke-dasharray": "4 5",
                       "opacity": 0.75, "_show": [(0.8, 3.2)]}),
+        Prim("path", {"fill": "none", "stroke": GOOD, "stroke-width": 2.5, "stroke-linecap": "round",
+                      "marker-end": "url(#arrowG)"},
+             lambda c: {"d": smooth_path([rig.P(c, "chest_c"), rig.P(c, "chest_n")])}),
         *rig.limb(["sh1", "el1", "wr1", "ha1"], 12, NEAR),
         *rig.head("head", "gaze"),
         caption_band(),
@@ -233,4 +238,6 @@ def build():
         caption("Langsam zurück – Knie bleiben zusammen", 5.4, 8.0),
         static_text("Drehung aus der BWS, nicht aus der Hüfte", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Open Book")
+    defs = ('<marker id="arrowG" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" '
+            f'orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="{GOOD}"/></marker>')
+    return render(prims, tl, SIDE, title="Open Book", extra_defs=defs)
