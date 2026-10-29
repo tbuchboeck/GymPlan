@@ -29,6 +29,7 @@ const locations = [
     label: 'rücken',
     description: 'Rücken-Aufbau & Stabilität',
     gradient: 'from-teal-500 to-cyan-600',
+    onlyFor: 'thomas' as Person,
   },
   {
     key: 'neck' as const,
