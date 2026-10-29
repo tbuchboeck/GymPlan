@@ -118,3 +118,47 @@ def apply_abs(skel, pose):
                 pa = P[s.parent][4]
             out[s.name] = out[k] - pa - s.rest
     return out
+
+
+def poly_path(points):
+    d = f"M{points[0][0]:.1f} {points[0][1]:.1f}"
+    for x, y in points[1:]:
+        d += f"L{x:.1f} {y:.1f}"
+    return d
+
+
+def limb_sharp(names, width, color, outline=True):
+    """Wie rig.limb, aber als Polylinie mit runden Gelenken: Knie/Ellbogen
+    bleiben sichtbar dort, wo sie sind (rig.limb rundet über das Gelenk)."""
+    out = []
+    f = lambda c, n=names: {"d": poly_path(chain_points(c["P"], n))}
+    if outline:
+        out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    return out
+
+
+def legs_sharp(far=True, near=True):
+    out = []
+    if far:
+        out += limb_sharp(["thigh_f", "shin_f", "foot_f"], 15, FAR)
+    if near:
+        out += limb_sharp(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    return out
+
+
+def figure(torso_w=30, extras_behind=(), extras_front=()):
+    """rig.side_figure mit kantigeren Beinen/Armen (Knie und Ellbogen klar)."""
+    prims = list(extras_behind)
+    prims += limb_sharp(["thigh_f", "shin_f", "foot_f"], 15, FAR)
+    prims += limb_sharp(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
+    prims += limb(["neck"], 13, TORSO)
+    prims += limb(["lumbar", "thorax"], torso_w, TORSO)
+    prims += limb(["thorax", "chest"], torso_w - 4, TORSO, outline=False)
+    prims += head_side()
+    prims += limb_sharp(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    prims += limb_sharp(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    prims += list(extras_front)
+    return prims

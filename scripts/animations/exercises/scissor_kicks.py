@@ -1,5 +1,5 @@
 from rig import *
-from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage
+from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage, figure, legs_sharp
 
 SLUG = "scissor-kicks"
 
@@ -14,7 +14,7 @@ def build():
     keys = [(0, PRONE), (0.6, PRONE), (1.3, HOVER),
             (2.0, A), (2.8, B), (3.6, A), (4.4, B), (5.1, HOVER), (5.8, PRONE), (6.2, PRONE)]
     tl = Timeline(keys, iks=forearm_iks(), skeleton=SIDE)
-    legs = limb(["thigh_f", "shin_f", "foot_f"], 15, FAR) + limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    legs = legs_sharp()
     strokes = [(1.3, 5.1)]
     updown = arrow("M62 150 L62 172", show=strokes)
     updown.attrs["marker-start"] = "url(#arrowhead)"
@@ -22,7 +22,7 @@ def build():
         *stage([
             *mat_layer(),
             ghost(legs, SIDE, PRONE, 0.14),
-            *side_figure(),
+            *figure(),
             focus("root", rx=20, ry=7, offset=(-16, 8), end=False, show=strokes),
             updown,
         ]),

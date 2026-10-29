@@ -104,9 +104,9 @@ def build():
                        f"{e1[0] - 4:.0f} {e1[1] + 12:.0f}", show=[(T_PULL0, T_PULL1)])
     back_arrow = arrow(f"M{e1[0] + 14:.0f} {c1['wy'] - 22:.0f} L{c0['wx'] - 6:.0f} {c0['wy'] - 24:.0f}",
                        color=MUTED, width=2.2, show=[(T_HOLD1, T_BACK1)])
-    rhomb = Prim("ellipse", {"rx": 7, "ry": 14, "fill": ACCENT, "opacity": 0.35, "_pulse": True,
+    rhomb = Prim("ellipse", {"rx": 6, "ry": 12, "fill": ACCENT, "opacity": 0.35, "_pulse": True,
                              "_show": [(1.3, 3.6)]},
-                 lambda c: dict(zip(("cx", "cy"), body_pt(c["P"], "thorax", 10, -12))))
+                 lambda c: dict(zip(("cx", "cy"), body_pt(c["P"], "thorax", 17, -10))))
 
     prims = [
         floor(FLOOR_Y, 40, 380),

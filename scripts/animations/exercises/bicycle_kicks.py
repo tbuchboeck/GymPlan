@@ -1,5 +1,5 @@
 from rig import *
-from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage
+from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage, figure, legs_sharp
 
 SLUG = "bicycle-kicks-prone"
 
@@ -58,7 +58,7 @@ def build():
         *stage([
             *mat_layer(),
             loop,
-            *side_figure(),
+            *figure(),
             focus("root", rx=20, ry=7, offset=(-16, 8), end=False, show=[(T0, T1)]),
         ]),
         caption_band(),

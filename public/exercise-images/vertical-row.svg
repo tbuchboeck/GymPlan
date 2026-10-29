@@ -68,7 +68,7 @@
 <circle cx="205" cy="36" r="11" fill="#475569"/>
 <circle cx="205" cy="36" r="7.5" fill="#64748b"/>
 <circle cx="205" cy="36" r="2.5" fill="#475569"/>
-<g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.2321;0.6429;1.0000" calcMode="discrete" dur="5.6s" repeatCount="indefinite"/><ellipse rx="7" ry="14" fill="#fbbf24" opacity="0.3" cx="142.4" cy="131.3"><animate attributeName="opacity" values="0.15;0.5;0.15" dur="1.6s" repeatCount="indefinite"/></ellipse></g>
+<g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.2321;0.6429;1.0000" calcMode="discrete" dur="5.6s" repeatCount="indefinite"/><ellipse rx="6" ry="12" fill="#fbbf24" opacity="0.3" cx="144.8" cy="124.5"><animate attributeName="opacity" values="0.15;0.5;0.15" dur="1.6s" repeatCount="indefinite"/></ellipse></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.1429;0.3929;1.0000" calcMode="discrete" dur="5.6s" repeatCount="indefinite"/><path d="M181 157 Q161 159 133 147" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowhead)"/></g>
 <rect x="0" y="258" width="400" height="42" fill="#0b1220" opacity="0.8"/>
 <text x="200" y="22" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Brust bleibt am Polster – Ellbogen nach hinten</text>

@@ -1,5 +1,5 @@
 from rig import *
-from exercises._bauch_props import FLOOR_Y, PinTimeline, mat_layer, stage
+from exercises._bauch_props import FLOOR_Y, PinTimeline, mat_layer, stage, figure, legs_sharp
 
 SLUG = "reverse-crunch"
 
@@ -25,12 +25,12 @@ def build():
     keys = [(0, START), (0.8, START), (2.0, CURL), (2.7, CURL), (4.7, START), (5.3, START)]
     tl = PinTimeline(keys, SHOULDER, iks=iks)
     s0 = tl.at(0)
-    legs = limb(["thigh_f", "shin_f", "foot_f"], 15, FAR) + limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    legs = legs_sharp()
     prims = [
         *stage([
             *mat_layer(),
             ghost(legs, SIDE, s0, 0.16),
-            *side_figure(),
+            *figure(),
             focus("root", rx=18, ry=9, offset=(-14, -16), end=False, show=[(0.8, 4.7)]),
             arrow("M300 150 Q300 112 262 102", show=[(0.8, 2.0)]),
             arrow("M262 102 Q300 112 300 150", show=[(2.7, 4.7)]),

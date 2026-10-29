@@ -11,15 +11,15 @@ SLUG = "sessel-step-up"
 # Füße per IK fix am Boden bzw. auf der Sitzfläche, Arme waagrecht vorn.
 
 FLOOR_Y = 250
-SC = 0.76
+SC = 0.72
 AY = FLOOR_Y - ANKLE_UP
 SEAT_H = 56
 CH_X = 170                     # linke Sitzkante
-CH_D = 62
+CH_D = 68
 SEAT_Y = FLOOR_Y - SEAT_H      # Oberkante Sitz
 SAY = SEAT_Y - 3 - ANKLE_UP    # Knöchelhöhe auf dem Sitz (Sitz ist 9 dick, -3 oben)
 X0 = 132                       # Knöchel am Boden (nahes Bein)
-SX = CH_X + 14                 # Knöchel auf dem Sitz (Fuß komplett auf der Fläche)
+SX = CH_X + 16                 # Knöchel auf dem Sitz (Fuß komplett auf der Fläche)
 DZ = 4                         # fernes Bein minimal versetzt
 SY = AY - 97.4
 
@@ -64,8 +64,8 @@ def build():
         focus("root", rx=13, ry=13, offset=(-8, 2), show=[(1.0, 2.8), (5.6, 7.4)]),
         focus_mid("thigh_n", 0.5, 18, 9, show=[(1.0, 2.4)]),
         focus_mid("thigh_f", 0.5, 18, 9, show=[(5.6, 7.0)]),
-        arrow("M118 118 Q114 84 132 62", show=[(1.0, 1.9), (5.6, 6.5)]),
-        arrow("M128 100 Q112 130 118 160", show=[(2.8, 4.4), (7.4, 9.0)]),
+        arrow("M100 124 Q94 90 110 66", show=[(1.0, 1.9), (5.6, 6.5)]),
+        arrow("M104 96 Q90 128 98 160", show=[(2.8, 4.4), (7.4, 9.0)]),
     ], SC, FLOOR_Y)
     prims = [
         floor(FLOOR_Y, 30, 370),

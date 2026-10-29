@@ -1,5 +1,6 @@
 from rig import *
-from exercises._hantel_props import arc_d, dumbbell_inplane, focus_seg, side_standing
+from exercises._hantel_props import arc_d, dumbbell_inplane, focus_seg
+from rig import Seg, Skeleton
 
 SLUG = "hantel-trizeps"
 
@@ -16,14 +17,33 @@ ROOT = (CX, SEAT_Y - 8)
 ANKLE_N = (CX + 52, FLOOR_Y - 8)
 ANKLE_F = (CX + 47, FLOOR_Y - 8)
 
-TOP = dict(x=ROOT[0], y=ROOT[1], neck=-2, head=0, lumbar=1,
-           upperarm_n=-183, forearm_n=4, hand_n=0, upperarm_f=-181, forearm_f=4, hand_f=0,
+TOP = dict(x=ROOT[0], y=ROOT[1], neck=-8, head=4, lumbar=1,
+           upperarm_n=-176, forearm_n=-2, hand_n=0, upperarm_f=-174, forearm_f=-2, hand_f=0,
            thigh_n=90, shin_n=-90, thigh_f=90, shin_f=-90)
-LOW = dict(TOP, upperarm_n=-182, forearm_n=138, hand_n=6, upperarm_f=-180, forearm_f=136, hand_f=6,
-           neck=-6, head=2)
+LOW = dict(TOP, upperarm_n=-175, forearm_n=140, hand_n=6, upperarm_f=-173, forearm_f=138, hand_f=6)
 MID = dict(TOP, forearm_n=72, forearm_f=71)
 
 HALF = 13.0
+
+# Eigenes Skelett: In rig.SIDE reicht der Oberarm (36) nur bis zur Kopfmitte;
+# real liegt der Ellbogen über Kopf etwa auf Scheitelhöhe. Daher hier längere
+# Oberarme (46) – sonst identisch zu SIDE.
+TRI = Skeleton([Seg(s.name, s.parent, 46 if s.name.startswith("upperarm") else s.length, s.rest)
+                for s in SIDE.segs])
+
+
+def figure(dbell, behind):
+    prims = list(behind)
+    prims += limb(["thigh_f", "shin_f", "foot_f"], 15, FAR)
+    prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
+    prims += limb(["neck"], 13, TORSO)
+    prims += limb(["lumbar", "thorax"], 30, TORSO)
+    prims += limb(["thorax", "chest"], 26, TORSO, outline=False)
+    prims += head_side()
+    prims += limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    prims += list(dbell)
+    prims += limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    return prims
 
 
 def db_center(c):
@@ -55,17 +75,17 @@ def build():
         IK("thigh_f", "shin_f", ANKLE_F, bend=1, end_seg="foot_f", end_abs=0),
     ]
     tl = Timeline([(0, TOP), (0.6, TOP), (2.2, LOW), (2.7, LOW), (3.4, MID), (4.0, TOP), (4.6, TOP)],
-                  iks=iks, skeleton=SIDE)
+                  iks=iks, skeleton=TRI)
 
     dbell = dumbbell_inplane(db_center, db_axis, half=HALF, plate=17)
-    fig = side_standing(far_arm_extra=dbell, behind=bench())
+    fig = figure(dbell, bench())
 
-    P0 = SIDE.fk(tl.at(0))
+    P0 = TRI.fk(tl.at(0))
     ex, ey = pt(P0, "upperarm_n")
     elbow_ring = Prim("circle", {"r": 9, "fill": "none", "stroke": GOOD, "stroke-width": 2,
                                  "stroke-dasharray": "3 3"},
                       lambda c: dict(zip(("cx", "cy"), pt(c["P"], "upperarm_n"))))
-    ghost_arm = ghost(limb(["forearm_n", "hand_n"], 12, NEAR) + dbell, SIDE, tl.at(0), 0.15)
+    ghost_arm = ghost(limb(["forearm_n", "hand_n"], 12, NEAR) + dbell, TRI, tl.at(0), 0.15)
     main = group([
         floor(FLOOR_Y + 1, 60, 330),
         ghost_arm,
@@ -90,4 +110,4 @@ def build():
         caption("Ausatmen – Unterarme nach oben strecken", 2.7, 4.6),
         static_text("Oberarme bleiben neben dem Kopf", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Trizeps-Strecken über Kopf")
+    return render(prims, tl, TRI, title="Trizeps-Strecken über Kopf")

@@ -80,7 +80,7 @@ def joints(p):
 
 START = dict(th=0, sink=0, psi=-90, zt=0, gaze=0, thr=0)
 THREAD = dict(th=40, sink=34, psi=-30, zt=-0.1, gaze=-55, thr=1)
-OPEN = dict(th=-55, sink=-12, psi=-240, zt=0, gaze=150, thr=0)
+OPEN = dict(th=-55, sink=-17, psi=-240, zt=0, gaze=150, thr=0)
 
 
 def build():

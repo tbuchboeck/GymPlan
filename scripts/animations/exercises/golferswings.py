@@ -66,7 +66,7 @@ def arm_chain(S, G, side):
     gebeugt; zeigt der Arm zum Betrachter (kurze Projektion), wird er
     verkürzt statt stark gebeugt."""
     d = max(1e-6, math.hypot(G[0] - S[0], G[1] - S[1]))
-    k = min(1.0, max(d / REACH, 0.86))
+    k = min(1.0, max(d / (REACH * 0.96), 0.4))      # zum Betrachter: verkürzt statt geknickt
     l1, l2 = UA * k, FA * k
     dd = min(d, l1 + l2 - 1e-3)
     a = math.acos(max(-1, min(1, (l1 * l1 + dd * dd - l2 * l2) / (2 * l1 * dd))))

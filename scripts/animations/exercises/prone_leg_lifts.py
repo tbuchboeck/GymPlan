@@ -1,5 +1,5 @@
 from rig import *
-from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage
+from exercises._bauch_props import FLOOR_Y, PRONE, forearm_iks, mat_layer, stage, figure, legs_sharp
 
 SLUG = "prone-leg-lifts"
 
@@ -13,12 +13,12 @@ UP = dict(PRONE, thigh_n=-15, shin_n=1, foot_n=-74, thigh_f=-17, shin_f=1, foot_
 def build():
     tl = Timeline([(0, DOWN), (0.8, DOWN), (2.0, UP), (3.2, UP), (4.6, DOWN), (5.2, DOWN)],
                   iks=forearm_iks(), skeleton=SIDE)
-    legs = limb(["thigh_f", "shin_f", "foot_f"], 15, FAR) + limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    legs = legs_sharp()
     prims = [
         *stage([
             *mat_layer(),
             ghost(legs, SIDE, DOWN, 0.16),
-            *side_figure(),
+            *figure(),
             focus("root", rx=22, ry=9, offset=(-4, -14), end=False, show=[(0.8, 4.6)]),
             arrow("M76 206 Q70 190 76 176", show=[(0.8, 2.0)]),
             arrow("M76 176 Q70 192 76 206", show=[(3.2, 4.6)]),

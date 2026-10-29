@@ -49,7 +49,7 @@ def build():
     fig = group([
         Prim("ellipse", {"cx": CX, "cy": FLOOR_Y, "rx": 46, "ry": 5, "fill": "#000", "opacity": 0.25}),
         *FIG.prims(cross_rank=True),
-        focus("chest", rx=22, ry=9, offset=(0, 14), color=GOOD, show=[(q * 0.6, q * 1.4), (SWING + q * 0.6, SWING + q * 1.4)]),
+        focus("chest", rx=24, ry=10, offset=(0, 12), color=GOOD, show=[(0, 0.3), (SWING - 0.3, SWING + 0.3), (DUR - 0.3, DUR)]),
     ], scale=SC, origin=(CX, FLOOR_Y))
     sy = FLOOR_Y - (FLOOR_Y - (PEL_Y - 76)) * SC     # Schulterhöhe im Bild
     prims = [
@@ -61,7 +61,6 @@ def build():
         arrow(f"M{CX + 40} {sy + 36:.0f} Q{CX + 62} {sy + 28:.0f} {CX + 74} {sy + 12:.0f}",
               show=[(q + 0.1, SWING - 0.15), (SWING + q + 0.1, DUR - 0.15)]),
         *top_inset(345, 140, 36, lambda p: (0.0, 0.0), arms=hands_top, sh_frac=0.28, hip_frac=0.22),
-        static_text("hinten", 345, 99, 9, MUTED),
         *nose_badge([(0, q, "out"), (q, SWING, "in"), (SWING, SWING + q, "out"), (SWING + q, DUR, "in")]),
         nose_note(),
         static_text("Zieht/kribbelt der rechte Arm?", 14, 48, 10, WARN, anchor="start"),
