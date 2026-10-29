@@ -116,7 +116,7 @@ def build():
         Prim("g", {"_show": [(T[5], T[9])]}, children=[static_text("Satz rechts", 66, 64, 14, ACCENT,
                                                                    weight="700")]),
         caption_band(),
-        caption("Brust ans Polster, Arme an die Schulterpolster", 0, T[1], size=14),
+        caption("Aufrecht sitzen, Arme an die Schulterpolster", 0, T[1], size=14),
         caption("Ausatmen – kontrolliert nach links drehen", T[1], T[3], size=14),
         caption("Langsam zurück zur Mitte", T[3], T[5]),
         caption("Nächster Satz: nach rechts drehen", T[5], T[7]),
