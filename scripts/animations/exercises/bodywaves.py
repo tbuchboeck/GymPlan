@@ -119,11 +119,11 @@ def build():
     prims = [
         floor(FLOOR_Y, 60, 320),
         fig,
-        static_text("Blick bleibt ruhig", 300, 92, 11, GOOD, anchor="middle"),
+        static_text("Blick bleibt ruhig", 300, 92, 12, GOOD, anchor="middle"),
         *nose_badge([(a, b, "in") for a, b in br_in] + [(a, b, "out") for a, b in br_out]),
         nose_note(),
         caption_band(),
         *caps,
-        static_text("Welle vor allem durch die BWS – kein Kopfnicken", 200, 24, 13, MUTED),
+        static_text("Welle vor allem durch die BWS – kein Kopfnicken", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bodywaves", fps=15)

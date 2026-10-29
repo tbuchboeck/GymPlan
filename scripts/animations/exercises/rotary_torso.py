@@ -121,6 +121,6 @@ def build():
         caption("Langsam zurück zur Mitte", T[3], T[5]),
         caption("Nächster Satz: nach rechts drehen", T[5], T[7]),
         caption("Langsam zurück – Seite je Satz wechseln", T[7], T[9], size=14),
-        static_text("Nur der Oberkörper dreht – Becken bleibt fest", 200, 24, 13, MUTED),
+        static_text("Nur der Oberkörper dreht – Becken bleibt fest", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SK, fps=12, title="Rotary Torso")

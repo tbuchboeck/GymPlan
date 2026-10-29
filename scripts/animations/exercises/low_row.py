@@ -126,7 +126,7 @@ def build():
         *figure,
         back_line, rhomb, pull_arrow,
         caption_band(),
-        static_text("Rücken bleibt gerade – zur Hüfte rudern", 200, 22, 13, MUTED),
+        static_text("Rücken bleibt gerade – zur Hüfte rudern", 200, 22, LEAD_SIZE, MUTED),
         caption("Knie leicht gebeugt, Rücken gerade, Arme lang", 0, T0),
         caption("Ausatmen – Griff zur Hüfte rudern", T0, T1),
         caption("Schulterblätter zusammenziehen", T1, T2),

@@ -24,11 +24,11 @@
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.5200;0.6200;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Andere Seite strecken</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.6200;0.8700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">5 s halten – lang machen</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0" keyTimes="0.0000;0.8700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Kontrolliert zurück</text></g>
-<text x="119.9" y="44" font-size="11" fill="#94a3b8" text-anchor="middle">2 s raus</text>
-<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.0400;0.1400;0.5200;0.6200;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="119.9" y="44" font-size="11" fill="#fbbf24" font-weight="700" text-anchor="middle">2 s raus</text></g>
-<text x="193.8" y="44" font-size="11" fill="#94a3b8" text-anchor="middle">5 s halten</text>
-<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.1400;0.3900;0.6200;0.8700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="193.8" y="44" font-size="11" fill="#fbbf24" font-weight="700" text-anchor="middle">5 s halten</text></g>
-<text x="273.9" y="44" font-size="11" fill="#94a3b8" text-anchor="middle">2 s zurück</text>
-<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.3900;0.4900;0.8700;0.9700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="273.9" y="44" font-size="11" fill="#fbbf24" font-weight="700" text-anchor="middle">2 s zurück</text></g>
-<text x="200" y="24" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Becken bleibt gerade – keine Rotation</text>
+<text x="112.6" y="44" font-size="12" fill="#94a3b8" text-anchor="middle">2 s raus</text>
+<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.0400;0.1400;0.5200;0.6200;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="112.6" y="44" font-size="12" fill="#fbbf24" font-weight="700" text-anchor="middle">2 s raus</text></g>
+<text x="193.3" y="44" font-size="12" fill="#94a3b8" text-anchor="middle">5 s halten</text>
+<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.1400;0.3900;0.6200;0.8700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="193.3" y="44" font-size="12" fill="#fbbf24" font-weight="700" text-anchor="middle">5 s halten</text></g>
+<text x="280.6" y="44" font-size="12" fill="#94a3b8" text-anchor="middle">2 s zurück</text>
+<g opacity="0"><animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0.0000;0.3900;0.4900;0.8700;0.9700;1.0000" calcMode="discrete" dur="20.0s" repeatCount="indefinite"/><text x="280.6" y="44" font-size="12" fill="#fbbf24" font-weight="700" text-anchor="middle">2 s zurück</text></g>
+<text x="200" y="24" font-size="14" fill="#94a3b8" text-anchor="middle" font-weight="400">Becken bleibt gerade – keine Rotation</text>
 </svg>

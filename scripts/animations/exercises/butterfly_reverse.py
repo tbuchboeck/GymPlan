@@ -117,7 +117,7 @@ def side_inset():
               Prim("circle", {"r": 4.5, "fill": PROP, "stroke": "#1e293b", "stroke-width": 1.5}, db),
               Prim("line", {"x1": back[0][0], "y1": back[0][1], "x2": back[1][0], "y2": back[1][1], "stroke": GOOD,
                             "stroke-width": 1.8, "stroke-dasharray": "3 3"}),
-              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 10, MUTED, anchor="start")]
+              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 12, MUTED, anchor="start")]
     return prims
 
 
@@ -151,6 +151,6 @@ def build():
         caption("Ausatmen – Arme seitlich anheben", 0.6, 1.9),
         caption("Oben kurz halten", 1.9, 2.6),
         caption("Einatmen – langsam senken", 2.6, 4.6),
-        static_text("Nur bis Schulterhöhe – Ellbogen leicht gebeugt", 200, 24, 13, MUTED),
+        static_text("Nur bis Schulterhöhe – Ellbogen leicht gebeugt", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, BENT, title="Butterfly reverse (vorgebeugt)")

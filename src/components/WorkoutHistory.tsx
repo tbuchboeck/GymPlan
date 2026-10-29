@@ -1,22 +1,55 @@
+import { useState } from 'react';
 import type { WorkoutSession } from '../types';
-import { Calendar, TrendingUp, Dumbbell, Clock, ArrowLeft, Award, Flame, Target, BarChart3, Download, Upload } from 'lucide-react';
+import type { Person } from '../lib/auth-service';
+import { Calendar, TrendingUp, Dumbbell, Clock, ArrowLeft, Award, Flame, Target, BarChart3, Download, Upload, FileText, Share2 } from 'lucide-react';
 import { calculateExtendedStatistics } from '../utils/statistics';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { exportToJSON, exportToCSV, importFromJSON } from '../utils/export';
+import { exportToJSON, exportToCSV, importFromJSON, downloadTextFile, getDateString } from '../utils/export';
+import { buildPhysioReport, physioReportTitle } from '../utils/physio-report';
 
 interface WorkoutHistoryProps {
   sessions: WorkoutSession[];
   onClose: () => void;
   onImport?: (sessions: WorkoutSession[]) => void;
+  person?: Person;
 }
 
-export function WorkoutHistory({ sessions, onClose, onImport }: WorkoutHistoryProps) {
+export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutHistoryProps) {
   const stats = calculateExtendedStatistics(sessions);
+  const [reportHint, setReportHint] = useState<{ text: string; ok: boolean } | null>(null);
 
   const handleImport = () => {
     if (onImport) {
-      importFromJSON(onImport);
+      importFromJSON(onImport, { currentPerson: person, existingIds: sessions.map((s) => s.id) });
     }
+  };
+
+  const handleShareReport = async () => {
+    const now = new Date();
+    const title = physioReportTitle(now);
+    const text = buildPhysioReport(sessions, now);
+    setReportHint(null);
+
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({ title, text });
+        return;
+      } catch (err) {
+        // Vom Benutzer abgebrochen: nichts weiter tun
+        if (err instanceof DOMException && err.name === 'AbortError') return;
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setReportHint({ ok: true, text: 'Bericht in die Zwischenablage kopiert – du kannst ihn jetzt z. B. in eine Nachricht einfügen.' });
+    } catch {
+      setReportHint({ ok: false, text: 'Teilen nicht möglich. Lade den Bericht als Textdatei herunter.' });
+    }
+  };
+
+  const handleDownloadReport = () => {
+    downloadTextFile(buildPhysioReport(sessions), `physio-bericht-${getDateString()}.txt`);
   };
 
   return (
@@ -48,7 +81,7 @@ export function WorkoutHistory({ sessions, onClose, onImport }: WorkoutHistoryPr
             {sessions.length > 0 && (
               <>
                 <button
-                  onClick={() => exportToJSON(sessions)}
+                  onClick={() => exportToJSON(sessions, person)}
                   className="flex items-center gap-2 px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all text-sm border border-slate-600"
                   title="Als JSON exportieren"
                 >
@@ -73,6 +106,39 @@ export function WorkoutHistory({ sessions, onClose, onImport }: WorkoutHistoryPr
       </div>
 
       <div className="mx-4 py-6">
+        {/* Bericht für die Physio (nur Thomas) */}
+        {person === 'thomas' && (
+          <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 mb-6">
+            <div className="flex items-center gap-3 mb-1">
+              <FileText className="text-indigo-400 w-5 h-5" />
+              <h2 className="text-lg font-bold text-white">Bericht für die Physio</h2>
+            </div>
+            <p className="text-sm text-slate-400 mb-3">
+              Letzte 4 Wochen: Einheiten je Woche, Befinden und abgebrochene Übungen für @rücken, @nacken und @morgen.
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={handleShareReport}
+                className="flex-1 flex items-center justify-center gap-2 bg-indigo-500 hover:bg-indigo-400 text-white py-3 rounded-xl font-semibold transition-colors"
+              >
+                <Share2 className="w-5 h-5" />
+                Bericht für die Physio
+              </button>
+              <button
+                onClick={handleDownloadReport}
+                className="flex items-center gap-2 px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-all text-sm border border-slate-600"
+                title="Als Textdatei herunterladen"
+              >
+                <Download className="w-4 h-4" />
+                .txt
+              </button>
+            </div>
+            {reportHint && (
+              <p className={`text-sm mt-3 ${reportHint.ok ? 'text-emerald-300' : 'text-amber-300'}`} role="status">{reportHint.text}</p>
+            )}
+          </div>
+        )}
+
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4">

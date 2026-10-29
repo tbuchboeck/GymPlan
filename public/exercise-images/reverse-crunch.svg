@@ -9,5 +9,5 @@
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.1509;0.3774;1.0000" calcMode="discrete" dur="5.3s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Ausatmen – Knie zur Brust ziehen</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.3774;0.5094;1.0000" calcMode="discrete" dur="5.3s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Becken rollt leicht ein – halten</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0" keyTimes="0.0000;0.5094;1.0000" calcMode="discrete" dur="5.3s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Langsam absenken – Füße nicht ablegen</text></g>
-<text x="200" y="24" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Aus dem Bauch rollen – nicht mit Schwung</text>
+<text x="200" y="24" font-size="14" fill="#94a3b8" text-anchor="middle" font-weight="400">Aus dem Bauch rollen – nicht mit Schwung</text>
 </svg>

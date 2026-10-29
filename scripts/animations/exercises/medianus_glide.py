@@ -55,9 +55,9 @@ def build():
     label = [
         Prim("line", {"x1": 40, "y1": 196, "x2": 54, "y2": 196, "stroke": NERVE, "stroke-width": 2,
                       "stroke-dasharray": "3 3"}),
-        static_text("Nerv gleitet", 60, 200, 10.5, NERVE, anchor="start"),
-        static_text("Arm und Kopf", 78, 218, 11, MUTED),
-        static_text("bewegen sich gegengleich", 78, 232, 11, MUTED),
+        static_text("Nerv gleitet", 60, 200, 12, NERVE, anchor="start"),
+        static_text("Arm und Kopf", 78, 218, 12, MUTED),
+        static_text("gegengleich", 78, 232, 12, MUTED),
     ]
     prims = [fig, *label, caption_band(),
              *captions2([
@@ -66,6 +66,6 @@ def build():
                  ("Strecken – Handgelenk kippt nach hinten", "Kopf zur selben Seite · rhythmisch, nie halten", T[2], T[3]),
                  ("Beugen, Kopf zurück zur Mitte", "nur leichter Zug, nie Schmerz", T[3], T[4]),
              ]),
-             static_text(TOP_HINT, 200, 24, 13, MUTED)]
+             static_text(TOP_HINT, 200, 24, LEAD_SIZE, MUTED)]
     clip = '<clipPath id="clipM"><rect x="0" y="0" width="400" height="258"/></clipPath>'
     return compact(render(prims, tl, SK, fps=15, title="Nerve Glide Medianus", extra_defs=clip))

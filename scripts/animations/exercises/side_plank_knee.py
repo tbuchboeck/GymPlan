@@ -161,6 +161,6 @@ def build():
         caption("Halten – Becken nicht kippen", T1, T2),
         caption("Kontrolliert absetzen", T2, T3),
         caption("Seite wechseln – beide Seiten!", T3, END),
-        static_text("Schulter–Hüfte–Knie in einer Linie", 200, 24, 13, MUTED),
+        static_text("Schulter–Hüfte–Knie in einer Linie", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Seitstütz (Knie-Variante)", fps=10)

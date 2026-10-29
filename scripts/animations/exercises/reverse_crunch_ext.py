@@ -64,6 +64,6 @@ def build():
         caption("Rücken rund – Bauch fest", 2.2, 2.9),
         caption("Beine lang nach hinten strecken", 2.9, 4.4),
         caption("Gestreckt langsam ablegen", 4.4, 6.4),
-        static_text("Ellbogen unter den Schultern – Kraft aus dem Bauch", 200, 24, 13, MUTED),
+        static_text("Ellbogen unter den Schultern – Kraft aus dem Bauch", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Reverse Crunch (gestreckt)")

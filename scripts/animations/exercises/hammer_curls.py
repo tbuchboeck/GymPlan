@@ -87,6 +87,6 @@ def build():
         caption("Ausatmen – hochbeugen", 0.7, 1.9),
         caption("Oben kurz halten", 1.9, 2.6),
         caption("Einatmen – langsam absenken", 2.6, 4.9),
-        static_text("Griff bleibt neutral – Handgelenk nicht drehen", 200, 24, 13, MUTED),
+        static_text("Griff bleibt neutral – Handgelenk nicht drehen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Hammer Curls")

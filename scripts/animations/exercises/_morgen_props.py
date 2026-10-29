@@ -65,27 +65,28 @@ def nose_badge(windows, x=308, y=36, label_in="Nase ein", label_out="Nase aus"):
                               "_show": [(t0, t1)]},
                      lambda c, s=sign: {"stroke-dashoffset": round(-s * (c["t"] * 14) % 5, 1)})
             out.append(p)
-        out.append(Prim("text", {"x": x + 56, "y": y + 15, "font-size": 11, "fill": GOOD if kind == "in" else TEXT,
+        out.append(Prim("text", {"x": x + 56, "y": y + 15, "font-size": 12, "fill": GOOD if kind == "in" else TEXT,
                                  "text-anchor": "middle", "font-weight": "600", "_show": [(t0, t1)]},
                         text=label_in if kind == "in" else label_out))
     return out
 
 
 def nose_note(x=350, y=72, text="100 % Nase"):
-    return Prim("text", {"x": x, "y": y, "font-size": 10, "fill": MUTED, "text-anchor": "middle"}, text=text)
+    return Prim("text", {"x": x, "y": y, "font-size": 12, "fill": MUTED, "text-anchor": "middle"}, text=text)
 
 
 # --------------------------------------------------------------------------
 # Draufsicht-Inset
 # --------------------------------------------------------------------------
 
-def top_inset(cx, cy, r, get, label="von oben", arms=None, sh_frac=0.62, hip_frac=0.5):
+def top_inset(cx, cy, r, get, label="von oben", arms=None, sh_frac=0.62, hip_frac=0.5,
+              hip_color=NEAR, sh_color=TORSO, nose_color=ACCENT, bar_w=1.0):
     """get(pose) -> (hip_yaw_deg, shoulder_yaw_deg). Gesicht zum Betrachter =
     nach unten im Inset. arms(pose) optional -> [(lat, fwd) Hand L, Hand R]
     in Körperkoordinaten (relativ zur Schultermitte, Rumpfdrehung eingerechnet)."""
     out = [Prim("circle", {"cx": cx, "cy": cy, "r": r, "fill": "#0b1220", "opacity": 0.55,
                            "stroke": "#334155", "stroke-width": 1}),
-           Prim("text", {"x": cx, "y": cy - r - 5, "font-size": 10, "fill": MUTED, "text-anchor": "middle"},
+           Prim("text", {"x": cx, "y": cy - r - 5, "font-size": 12, "fill": MUTED, "text-anchor": "middle"},
                 text=label),
            # Betrachter-Richtung
            Prim("path", {"d": f"M{cx - 4} {cy + r - 2}L{cx} {cy + r + 3}L{cx + 4} {cy + r - 2}",
@@ -105,7 +106,7 @@ def top_inset(cx, cy, r, get, label="von oben", arms=None, sh_frac=0.62, hip_fra
             return {"cx": cx + fx * rr, "cy": cy + fy * rr}
         return Prim("circle", {"r": 2.6, "fill": color}, f)
 
-    out.append(bar(r * hip_frac, 0, NEAR, 5))
+    out.append(bar(r * hip_frac, 0, hip_color, 5 * bar_w))
     if arms is not None:
         def arm_line(i):
             def f(c):
@@ -118,9 +119,9 @@ def top_inset(cx, cy, r, get, label="von oben", arms=None, sh_frac=0.62, hip_fra
                 return {"x1": sx, "y1": sy, "x2": cx + lat * k, "y2": cy + fwd * k}
             return Prim("line", {"stroke": HEAD, "stroke-width": 3, "stroke-linecap": "round", "opacity": 0.9}, f)
         out += [arm_line(0), arm_line(1)]
-    out.append(bar(r * sh_frac, 1, TORSO, 6))
+    out.append(bar(r * sh_frac, 1, sh_color, 6 * bar_w))
     out.append(Prim("circle", {"cx": cx, "cy": cy, "r": 5, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1}))
-    out.append(nose_tick(1, ACCENT, 8))
+    out.append(nose_tick(1, nose_color, 8 + 4 * (bar_w - 1)))
     return out
 
 

@@ -163,5 +163,5 @@ def build_hip(inner: bool, title: str):
                 caption("Kurz halten", T[2], T[3]),
                 caption("Langsam zurück – Gewicht nicht absetzen", T[3], T[5], size=14)]
         lead = "Becken bleibt ruhig – Kraft aus der Hüfte"
-    prims += [caption_band(), *caps, static_text(lead, 200, 24, 13, MUTED)]
+    prims += [caption_band(), *caps, static_text(lead, 200, 24, LEAD_SIZE, MUTED)]
     return render(prims, tl, SK, fps=15, title=title)

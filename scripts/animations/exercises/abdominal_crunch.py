@@ -128,7 +128,7 @@ def build():
         def f(c):
             x, y = fn(c)
             return {"x": x, "y": y}
-        return Prim("text", {"font-size": 11, "fill": ACCENT, "font-weight": "700", "text-anchor": "middle"},
+        return Prim("text", {"font-size": 12, "fill": ACCENT, "font-weight": "700", "text-anchor": "middle"},
                     f, text=txt)
 
     torso_ghost = ghost(limb(["lumbar", "thorax"], 30, TORSO) + limb(["neck"], 13, TORSO) + head_side(),
@@ -152,6 +152,6 @@ def build():
         caption("Ausatmen – Bauch einrollen", T[1], T[2]),
         caption("Kurz halten – Bauch fest", T[2], T[3]),
         caption("Langsam zurück, Spannung halten", T[3], T[5]),
-        static_text("Aus dem Bauch rollen – nicht mit den Armen ziehen", 200, 24, 13, MUTED),
+        static_text("Aus dem Bauch rollen – nicht mit den Armen ziehen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=12, title="Bauchpresse")

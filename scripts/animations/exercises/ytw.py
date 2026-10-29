@@ -258,8 +258,8 @@ def side_inset():
         Prim("path", {"fill": "none", "stroke": NEAR, "stroke-width": 6, "stroke-linecap": "round",
                       "stroke-linejoin": "round"}, arm_d),
         Prim("line", {"stroke": ACCENT, "stroke-width": 2}, gap),
-        static_text("Kopf bleibt in", IX + 10, IY + 15, 10, GOOD, anchor="start"),
-        static_text("Verlängerung", IX + 10, IY + 27, 10, GOOD, anchor="start"),
+        static_text("Kopf bleibt in", IX + 10, IY + 15, 12, GOOD, anchor="start"),
+        static_text("Verlängerung", IX + 10, IY + 27, 12, GOOD, anchor="start"),
     ]
     return prims
 
@@ -295,7 +295,7 @@ def build():
         sh_x = foot_x + (107 + 78) * S_
         return {"x": sh_x + (fx - sx) * S_ + 8}
 
-    lift_lbl = Prim("text", {"y": MAT_Y - 26, "font-size": 10, "fill": ACCENT,
+    lift_lbl = Prim("text", {"y": MAT_Y - 26, "font-size": 12, "fill": ACCENT,
                              "text-anchor": "middle", "font-weight": "600",
                              "_show": [(i * BLOCK + TRANS + PREP + 0.3, i * BLOCK + TRANS + PREP + LIFT + HOLD)
                                        for i in range(3)]}, lbl_pos, text="2–3 cm")

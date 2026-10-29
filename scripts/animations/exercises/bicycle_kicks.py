@@ -66,6 +66,6 @@ def build():
         caption("Ein Bein anziehen, das andere strecken", T0 - 0.5, T0 + CYCLE),
         caption("Im Wechsel treten – wie Radfahren", T0 + CYCLE, T1 + 0.4),
         caption("Beine ablegen, lösen", T1 + 0.4, END),
-        static_text("Ruhig treten – Becken bleibt auf der Matte", 200, 24, 13, MUTED),
+        static_text("Ruhig treten – Becken bleibt auf der Matte", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=15, title="Bicycle Kicks (Bauchlage)")

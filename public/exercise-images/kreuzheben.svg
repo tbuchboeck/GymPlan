@@ -12,5 +12,5 @@
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.4828;0.6034;1.0000" calcMode="discrete" dur="5.8s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Dehnung hinten – Rücken bleibt gerade</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0.0000;0.6034;0.8621;1.0000" calcMode="discrete" dur="5.8s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Ausatmen – Hüfte nach vorn, aufrichten</text></g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;0" keyTimes="0.0000;0.8621;1.0000" calcMode="discrete" dur="5.8s" repeatCount="indefinite"/><text x="200" y="284" font-size="15" fill="#e2e8f0" font-weight="600" text-anchor="middle">Oben Gesäß anspannen</text></g>
-<text x="200" y="24" font-size="13" fill="#94a3b8" text-anchor="middle" font-weight="400">Hüfte nach hinten – Rücken neutral</text>
+<text x="200" y="24" font-size="14" fill="#94a3b8" text-anchor="middle" font-weight="400">Hüfte nach hinten – Rücken neutral</text>
 </svg>

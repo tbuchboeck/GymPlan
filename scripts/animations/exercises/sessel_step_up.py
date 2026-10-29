@@ -81,6 +81,6 @@ def build():
         caption("Ausatmen – über die Ferse hochdrücken", 5.6, 7.0),
         caption("Oben aufrichten – Po fest", 7.0, 7.4),
         caption("Langsam zurück – hinteres Bein zuerst", 7.4, dur),
-        static_text("Ganzen Fuß aufsetzen – über die Ferse hochdrücken", 200, 24, 13, MUTED),
+        static_text("Ganzen Fuß aufsetzen – über die Ferse hochdrücken", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=10, title="Sessel Step-Up")

@@ -124,8 +124,8 @@ def side_inset():
         prims.append(Prim("circle", {"cx": WALL_X, "cy": yy, "r": 3, "fill": GOOD}))
     prims.append(Prim("ellipse", {"cx": WALL_X + 7, "cy": sh[1] + 16, "rx": 6, "ry": 11, "fill": ACCENT,
                                   "opacity": 0.5, "_pulse": True, "_show": [(3.8, 7.4)]}))
-    prims.append(static_text("Kopf · Rücken · Po", IN_X + IN_W / 2, IN_Y + IN_H + 13, 10, GOOD))
-    prims.append(static_text("an der Wand", IN_X + IN_W / 2, IN_Y + IN_H + 25, 10, GOOD))
+    prims.append(static_text("Kopf · Rücken · Po", IN_X + IN_W / 2, IN_Y + IN_H + 13, 12, GOOD))
+    prims.append(static_text("an der Wand", IN_X + IN_W / 2, IN_Y + IN_H + 25, 12, GOOD))
     return prims
 
 
@@ -157,6 +157,6 @@ def build():
         caption("Zurück in die U-Form", 7.4, 9.2),
         label("Schulterblätter", 20, 184, 3.8, 7.4, anchor="start"),
         label("nach unten", 20, 199, 3.8, 7.4, anchor="start"),
-        static_text("Rippen unten – kein Hohlkreuz", 200, 24, 13, MUTED),
+        static_text("Rippen unten – kein Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Wall Angels", fps=12)

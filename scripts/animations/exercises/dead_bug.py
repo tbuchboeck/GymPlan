@@ -79,6 +79,6 @@ def build():
         caption("Langsam zurück zur Mitte", B2, END),
         *tempo_chip([("3 s raus", [(A0, A1), (B0, B1)], None), ("1 s halten", [(A1, A2), (B1, B2)], None),
                      ("3 s zurück", [(A2, A3), (B2, B3)], None)]),
-        static_text("Lendenwirbel drückt in die Matte", 200, 24, 13, MUTED),
+        static_text("Lendenwirbel drückt in die Matte", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Dead Bug", fps=10)

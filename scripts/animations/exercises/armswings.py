@@ -65,14 +65,14 @@ def build():
         *nose_badge([(0, O, "in"), (O, q + O, "out"), (q + O, SWING + O, "in"), (SWING + O, SWING + q + O, "out"),
                       (SWING + q + O, DUR, "in")]),
         nose_note(),
-        static_text("Zieht/kribbelt der rechte Arm?", 14, 48, 10, WARN, anchor="start"),
-        static_text("→ kleiner schwingen", 14, 61, 10, WARN, anchor="start"),
+        static_text("Zieht/kribbelt der rechte Arm?", 14, 48, 12, WARN, anchor="start"),
+        static_text("→ kleiner schwingen", 14, 61, 12, WARN, anchor="start"),
         caption_band(),
         caption("Brust öffnen – einatmen", 0, O),
         caption("Vorne locker kreuzen – ausatmen", O, q + O),
         caption("Weit nach hinten öffnen – einatmen", q + O, SWING + O),
         caption("Kreuzen – andere Hand oben", SWING + O, SWING + q + O),
         caption("Brust öffnen – einatmen", SWING + q + O, DUR),
-        static_text("Schwung aus dem Oberkörper – nicht reißen", 200, 24, 13, MUTED),
+        static_text("Schwung aus dem Oberkörper – nicht reißen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Armswings", fps=15)

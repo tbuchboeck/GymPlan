@@ -134,7 +134,7 @@ def build():
         static_text("90°", kx + 4, ky - 20, 12, GOOD, weight="700"),
     ])
     soft = Prim("g", {"_show": [(T[2] - 0.2, T[3] + 0.2)]}, children=[
-        static_text("Knie bleibt weich", kx1 + 6, ky1 - 30, 11, WARN, weight="700"),
+        static_text("Knie bleibt weich", kx1 + 6, ky1 - 30, 12, WARN, weight="700"),
     ])
 
     figure = side_fig(extras_behind=machine_back() + [cable] + pulleys + stack + sled(),
@@ -153,6 +153,6 @@ def build():
         caption("Ausatmen – Platte wegdrücken", T[1], T[2]),
         caption("Nicht ganz durchstrecken", T[2], T[3]),
         caption("Langsam zurück bis 90°", T[3], T[5]),
-        static_text("Mind. 90° im Knie – oben nicht durchstrecken", 200, 24, 13, MUTED),
+        static_text("Mind. 90° im Knie – oben nicht durchstrecken", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Beinpresse horizontal")

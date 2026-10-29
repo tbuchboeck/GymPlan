@@ -124,7 +124,7 @@ def back_inset(x0=314, y0=40, w=74, h=84) -> list[Prim]:
         Prim("line", {"x1": cx, "y1": y0 + 18, "x2": cx, "y2": y0 + h - 8, "stroke": SKIN_LINE, "stroke-width": 2,
                       "stroke-dasharray": "2 3"}),
         trap, scap(-1), scap(1),
-        static_text("Rücken", cx, y0 + h + 13, 10, MUTED),
+        static_text("Rücken", cx, y0 + h + 13, 12, MUTED),
     ]
 
 
@@ -199,7 +199,7 @@ def build():
         scene,
         *back_inset(),
         caption_band(),
-        static_text("Schultern bleiben weg von den Ohren", 200, 24, 13, MUTED),
+        static_text("Schultern bleiben weg von den Ohren", 200, 24, LEAD_SIZE, MUTED),
         caption("Griffe vor der Brust, Arme leicht gebeugt", 0, 0.8),
         caption("Schulterblätter zurück & runter", 0.8, 2.0),
         caption("Arme im Bogen seitlich öffnen", 2.0, 3.6),

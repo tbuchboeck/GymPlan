@@ -69,6 +69,6 @@ def build():
         caption("Kurz halten – Po anspannen", 1.6, 2.3),
         caption("Langsam zurück in den Vierfüßler", 2.3, 3.4),
         caption("15× – dann Seite wechseln", 3.4, 4.4),
-        static_text("Becken bleibt waagrecht – kein Hohlkreuz", 200, 24, 13, MUTED),
+        static_text("Becken bleibt waagrecht – kein Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bauch Beine Po (Donkey Kicks)")

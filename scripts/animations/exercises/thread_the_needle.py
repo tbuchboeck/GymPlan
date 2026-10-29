@@ -118,6 +118,6 @@ def build():
         caption("Im Bogen zur Decke – Blick folgt", 6.2, 8.2),
         caption("Brust öffnet sich – kurz halten", 8.2, 9.8),
         caption("Zurück in den Vierfüßlerstand", 9.8, 12.0),
-        static_text("Hüfte bleibt über den Knien", 386, 24, 13, MUTED, anchor="end"),
+        static_text("Hüfte bleibt über den Knien", 386, 24, LEAD_SIZE, MUTED, anchor="end"),
     ]
     return render(prims, tl, SIDE, fps=12, title="Thread the Needle")

@@ -111,7 +111,7 @@ def side_inset():
               Prim("path", {"fill": "none", "stroke": NEAR, "stroke-width": 6, "stroke-linecap": "round"}, arm),
               Prim("rect", {"width": 10, "height": 5, "rx": 2, "fill": PROP, "stroke": "#1e293b", "stroke-width": 1.2},
                    lambda c: {"x": sx - 5, "y": sy - arm_len(c) - 2.5}),
-              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 10, MUTED, anchor="start")]
+              static_text("Seitansicht", IN_X + 8, IN_Y + 14, 12, MUTED, anchor="start")]
     return prims
 
 
@@ -145,6 +145,6 @@ def build():
         caption("Ellbogen tippt kurz auf", 2.1, 2.6),
         caption("Ausatmen – im Bogen zusammenführen", 2.6, 3.9),
         caption("Oben Brust anspannen", 3.9, 4.6),
-        static_text("Ellbogen leicht gebeugt – wie eine Umarmung", 200, 24, 13, MUTED),
+        static_text("Ellbogen leicht gebeugt – wie eine Umarmung", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, ARMS, title="Butterfly am Boden")

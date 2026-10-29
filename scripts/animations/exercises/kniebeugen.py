@@ -57,6 +57,6 @@ def build():
         caption("Kurz halten – Rücken gerade", 2.9, 3.5),
         caption("Ausatmen – über die Fersen hoch", 3.5, 5.0),
         caption("Aufrecht – nächste Wiederholung", 5.0, 6.0),
-        static_text("Hüfte nach hinten – Fersen bleiben am Boden", 200, 24, 13, MUTED),
+        static_text("Hüfte nach hinten – Fersen bleiben am Boden", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Kniebeugen")

@@ -105,13 +105,13 @@ def build():
         main,
         Prim("line", {"x1": gx + 10, "y1": gy, "x2": 292, "y2": gy, "stroke": GOOD, "stroke-width": 1.2,
                       "stroke-dasharray": "2 3", "opacity": 0.8}),
-        static_text("Ellbogen zeigt", 298, gy - 3, 11, GOOD, anchor="start"),
-        static_text("nach oben", 298, gy + 10, 11, GOOD, anchor="start"),
+        static_text("Ellbogen zeigt", 298, gy - 3, 12, GOOD, anchor="start"),
+        static_text("nach oben", 298, gy + 10, 12, GOOD, anchor="start"),
         caption_band(),
         caption("Hantel über Kopf, Arm lang", 0, 0.6),
         caption("Einatmen – hinter den Kopf senken", 0.6, 2.2),
         caption("Unten kurz halten", 2.2, 2.7),
         caption("Ausatmen – Unterarm nach oben strecken", 2.7, 4.6),
-        static_text("Ellbogen fix – nur der Unterarm bewegt sich", 200, 24, 13, MUTED),
+        static_text("Ellbogen fix – nur der Unterarm bewegt sich", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, TRI, title="Trizeps-Strecken über Kopf")

@@ -47,6 +47,6 @@ def build():
         caption("Wechseln – wie eine Schere", 1.4, 2.4),
         caption("Gleichmäßig weiteratmen", 2.4, 3.4),
         caption("Bauch fest – Füße nicht ablegen", 3.4, 5.0),
-        static_text("Unterer Rücken bleibt fest auf der Matte", 200, 24, 13, MUTED),
+        static_text("Unterer Rücken bleibt fest auf der Matte", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Beine Hoch (Schere)")

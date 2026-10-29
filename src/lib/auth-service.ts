@@ -12,7 +12,18 @@
 
 const APP_ID = 'gym';
 const AUTH_API = 'https://auth.apps.buchboeck.at/api/auth';
-const SESSION_KEY = 'gym.auth.session.v1';
+// Login bleibt bis zu 7 Tage gültig (auch offline / nach Kaltstart):
+// Token + Person + Ablauf liegen in localStorage. Der Ablauf ist das
+// Minimum aus JWT-exp und Login-Zeitpunkt + 7 Tage.
+const SESSION_KEY = 'gym.auth.session';
+const LEGACY_SESSION_KEY = 'gym.auth.session.v1'; // früher in sessionStorage
+const MAX_SESSION_MS = 7 * 24 * 60 * 60 * 1000;
+
+export interface StoredSession {
+  token: string;
+  person: Person;
+  expiresAt: number; // ms seit Epoch
+}
 
 /** Who is logging in. Must match the `label` of the auth_users row in the
  * shared auth-buchboeck Supabase project. */
@@ -192,27 +203,74 @@ interface RecoveryCodeResponse {
   bootstrap_token: string;
 }
 
+function readStoredSession(): StoredSession | null {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<StoredSession>;
+    if (
+      typeof parsed.token !== 'string' ||
+      (parsed.person !== 'neli' && parsed.person !== 'thomas') ||
+      typeof parsed.expiresAt !== 'number'
+    ) {
+      return null;
+    }
+    return parsed as StoredSession;
+  } catch {
+    return null;
+  }
+}
+
 class AuthService {
+  // Fallback, falls localStorage nicht beschreibbar ist (gilt bis zum Neuladen)
+  private memorySession: StoredSession | null = null;
+
+  /** Gespeicherte, noch gültige Sitzung – oder null (abgelaufene wird gelöscht). */
+  getSession(): StoredSession | null {
+    const session = readStoredSession() ?? this.memorySession;
+    if (!session) return null;
+    if (Date.now() >= session.expiresAt) {
+      this.clearSession();
+      return null;
+    }
+    return session;
+  }
+
   isSessionValid(): boolean {
-    const raw = sessionStorage.getItem(SESSION_KEY);
-    if (!raw) return false;
-    const payload = decodeJwtPayload(raw);
-    if (!payload || !payload.exp) return false;
-    return Date.now() / 1000 < payload.exp - 5;
+    return this.getSession() !== null;
   }
 
   /** Returns the authenticated user's UUID (the `sub` claim) or null if no
    * valid session. Used by session-sync to scope gym_sessions per user. */
   getCurrentUserId(): string | null {
-    const raw = sessionStorage.getItem(SESSION_KEY);
-    if (!raw) return null;
-    const payload = decodeJwtPayload(raw);
+    const session = this.getSession();
+    if (!session) return null;
+    const payload = decodeJwtPayload(session.token);
     if (!payload) return null;
     return typeof payload.sub === 'string' ? payload.sub : null;
   }
 
   clearSession(): void {
-    sessionStorage.removeItem(SESSION_KEY);
+    this.memorySession = null;
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(LEGACY_SESSION_KEY);
+    } catch {
+      // Speicher nicht verfügbar – nichts zu löschen
+    }
+  }
+
+  private storeSession(token: string, person: Person): void {
+    const payload = decodeJwtPayload(token);
+    const maxExpiry = Date.now() + MAX_SESSION_MS;
+    const expiresAt = payload?.exp ? Math.min(payload.exp * 1000, maxExpiry) : maxExpiry;
+    this.memorySession = { token, person, expiresAt };
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(this.memorySession));
+      sessionStorage.removeItem(LEGACY_SESSION_KEY);
+    } catch {
+      // Privater Modus o. Ä.: memorySession gilt bis zum Neuladen
+    }
   }
 
   /** Authenticate `person` with an existing passkey for this app. The label
@@ -227,7 +285,7 @@ class AuthService {
       app_id: APP_ID,
       assertion: encodeAssertionResponse(cred),
     });
-    sessionStorage.setItem(SESSION_KEY, verifyResp.session);
+    this.storeSession(verifyResp.session, person);
     return verifyResp.session;
   }
 
@@ -239,12 +297,12 @@ class AuthService {
       app_id: APP_ID,
       label: person,
     });
-    return this.enrollWithBootstrapToken(bootstrap_token);
+    return this.enrollWithBootstrapToken(bootstrap_token, person);
   }
 
   // The register flow derives the user from the bootstrap token (server-side),
-  // so it needs no label of its own.
-  private async enrollWithBootstrapToken(bootstrap_token: string): Promise<string> {
+  // so it needs no label of its own (person only tags the stored session).
+  private async enrollWithBootstrapToken(bootstrap_token: string, person: Person): Promise<string> {
     const optsResp = await api<OptionsResponse>('register?step=options', {
       bootstrap_token,
       app_id: APP_ID,
@@ -259,7 +317,7 @@ class AuthService {
       attestation: encodeAttestationResponse(cred),
       device_label: detectDeviceLabel(),
     });
-    sessionStorage.setItem(SESSION_KEY, verifyResp.session);
+    this.storeSession(verifyResp.session, person);
     return verifyResp.session;
   }
 }

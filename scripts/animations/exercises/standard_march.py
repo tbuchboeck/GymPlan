@@ -90,8 +90,8 @@ def build():
         caption_band(),
         caption("Linkes Knie hoch – rechte Hand tippt", 0, 1.2),
         caption("Rechtes Knie hoch – linke Hand tippt", 1.2, dur),
-        static_text("Aufrecht bleiben – Kinn leicht zurück", 200, 24, 13, MUTED),
-        label("Kinn zurück", 236, 68, 0, dur, size=11, anchor="start"),
+        static_text("Aufrecht bleiben – Kinn leicht zurück", 200, 24, LEAD_SIZE, MUTED),
+        label("Kinn zurück", 236, 68, 0, dur, size=12, anchor="start"),
         nose_hint(dur=dur),
     ]
     return render(prims, tl, SIDE, title="Standard March", fps=15)

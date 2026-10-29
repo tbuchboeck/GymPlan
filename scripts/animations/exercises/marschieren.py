@@ -53,7 +53,7 @@ def build():
         floor(FLOOR_Y, 40, 360),
         scene,
         caption_band(),
-        static_text("Locker marschieren – ruhig atmen", 200, 22, 13, MUTED),
+        static_text("Locker marschieren – ruhig atmen", 200, 22, LEAD_SIZE, MUTED),
         caption("Knie locker anheben", 0, 1.4),
         caption("Gegenarm schwingt mit", 1.4, 2.8),
         caption("Aufrecht, Rücken entspannt", 2.8, 4.2),

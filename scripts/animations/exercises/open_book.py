@@ -266,7 +266,7 @@ def inset():
                          "opacity": 0.7, "stroke": "#334155", "stroke-width": 1}),
            Prim("rect", {"x": 297, "y": 41, "width": 90, "height": 60, "rx": 4, "fill": "#3f4a7a", "opacity": 0.6})]
     return box + [group([fig], scale=0.37, origin=(200, 150), dx=156, dy=-62),
-                  static_text("Seitenlage von oben", 342, 112, 9.5, MUTED)]
+                  static_text("Seitenlage von oben", 342, 112, 12, MUTED)]
 
 
 def build():
@@ -321,7 +321,7 @@ def build():
         caption("Oberen Arm im Bogen öffnen – Blick folgt", 0.8, 3.2),
         caption("Brust zur Decke – 2 Atemzüge halten", 3.2, 5.4),
         caption("Langsam zurück – Knie bleiben zusammen", 5.4, 8.0),
-        static_text("Ansicht vom Kopfende", 16, 24, 12, MUTED, anchor="start"),
+        static_text("Ansicht vom Kopfende", 16, 24, LEAD_SIZE, MUTED, anchor="start"),
         static_text("Drehung aus der BWS", 16, 40, 12, MUTED, anchor="start"),
     ]
     return render(prims, tl, SIDE, title="Open Book", extra_defs=defs)

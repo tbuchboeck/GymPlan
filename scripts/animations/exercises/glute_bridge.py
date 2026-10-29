@@ -81,6 +81,6 @@ def build():
         caption("Oben halten – Knie, Hüfte, Schulter", T_UP1, T_H1),
         caption("Kontrolliert absenken", T_H1, T_END),
         *tempo_chip([("2 s hoch", T_UP0, T_UP1), ("4 s halten", T_UP1, T_H1), ("2 s runter", T_H1, T_DN1)]),
-        static_text("Gesäß anspannen – nicht ins Hohlkreuz", 200, 24, 13, MUTED),
+        static_text("Gesäß anspannen – nicht ins Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Glute Bridge")

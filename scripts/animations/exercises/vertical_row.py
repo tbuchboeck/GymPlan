@@ -117,7 +117,7 @@ def build():
         rhomb,
         pull_arrow,
         caption_band(),
-        static_text("Brust bleibt am Polster – Ellbogen nach hinten", 200, 22, 13, MUTED),
+        static_text("Brust bleibt am Polster – Ellbogen nach hinten", 200, 22, LEAD_SIZE, MUTED),
         caption("Brust ans Polster, Griffe auf Schulterhöhe", 0, T_PULL0),
         caption("Ausatmen – Ellbogen nach hinten ziehen", T_PULL0, T_PULL1),
         caption("Schulterblätter zusammen – kurz halten", T_PULL1, T_HOLD1),

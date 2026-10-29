@@ -140,7 +140,7 @@ def build():
     ])
     ang_txt = Prim("text", {"x": ex - 26, "y": ey + 22, "font-size": 12, "fill": GOOD, "font-weight": "600",
                             "text-anchor": "middle", "_show": [(0, T0 + 0.3), (T3 - 0.2, TE)]}, text="90°")
-    lock = Prim("text", {"x": c1["wx_f"] + 16, "y": c1["wy_f"] - 4, "font-size": 11, "fill": WARN,
+    lock = Prim("text", {"x": c1["wx_f"] + 16, "y": c1["wy_f"] - 4, "font-size": 12, "fill": WARN,
                          "text-anchor": "start", "_show": [(T1, T2)]}, text="nicht durchstrecken")
     neck_ok = Prim("g", {"_show": [(T0, T3)]}, children=[
         Prim("path", {"d": f"M{c0['sx'] + 6:.0f} {c0['sy'] - 12:.0f} Q{c0['sx'] + 12:.0f} {c0['sy'] - 22:.0f} 186 {c0['sy'] - 30:.0f}",
@@ -160,7 +160,7 @@ def build():
         *delts,
         ang, ang_txt, up_l, up_r,
         caption_band(),
-        static_text("Nacken locker – Schultern bleiben tief", 200, 22, 13, MUTED),
+        static_text("Nacken locker – Schultern bleiben tief", 200, 22, LEAD_SIZE, MUTED),
         caption("Griffe auf Schulterhöhe – Ellbogen 90°", 0, T0),
         caption("Ausatmen – kontrolliert nach oben", T0, T1),
         caption("Oben nicht ganz durchstrecken", T1, T2),

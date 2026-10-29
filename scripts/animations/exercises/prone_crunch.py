@@ -97,7 +97,7 @@ def build():
             arrow("M70 178 Q120 200 168 196", show=[(4.1, 5.3)]),
         ], scale=1.15, origin=(196, CY)),
         caption_band(),
-        static_text("Ansicht von oben", 30, 248, 11, MUTED, anchor="start"),
+        static_text("Ansicht von oben", 30, 248, 12, MUTED, anchor="start"),
         caption("Unterarme stützen, Becken liegt", 0, 0.8),
         caption("Knie seitlich zur Brust ziehen", 0.8, 2.0),
         caption("Kurz halten – Bauch fest", 2.0, 2.7),
@@ -105,6 +105,6 @@ def build():
         caption("Andere Seite – Knie zur Brust", 4.1, 5.3),
         caption("Kurz halten – Bauch fest", 5.3, 6.0),
         caption("Bein lang zurückschieben", 6.0, 7.4),
-        static_text("Knie gleitet über die Matte – Becken bleibt unten", 200, 24, 13, MUTED),
+        static_text("Knie gleitet über die Matte – Becken bleibt unten", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Bauchlage-Crunch")

@@ -121,7 +121,7 @@ def top_view():
         arm_top(-1), arm_top(1),
         Prim("circle", {"cx": OX, "cy": OY, "r": 6.5, "fill": "#4338ca", "stroke": SKIN_LINE, "stroke-width": 1.2}),
         Prim("path", {"d": f"M{OX - 3} {OY + 6}L{OX} {OY + 10}L{OX + 3} {OY + 6}", "fill": HEAD}),
-        static_text("von oben", OX, IY + IH - 6, 10, MUTED),
+        static_text("von oben", OX, IY + IH - 6, 12, MUTED),
     ]
 
 
@@ -165,6 +165,6 @@ def build():
         caption("Ausatmen – vor der Brust zusammenführen", 2.0, 3.8),
         caption("Einatmen – langsam öffnen", 3.8, 5.3),
         caption("Arme senken", 5.3, 6.8),
-        static_text("Ellbogen leicht gebeugt – Brust arbeitet", 150, 24, 13, MUTED),
+        static_text("Ellbogen leicht gebeugt – Brust arbeitet", 150, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Butterfly mit Kurzhanteln", fps=12)

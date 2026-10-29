@@ -109,7 +109,7 @@ def build():
     prims = [
         scene,
         caption_band(),
-        static_text("Ellbogen eng am Körper zur Hüfte", 200, 22, 13, MUTED),
+        static_text("Ellbogen eng am Körper zur Hüfte", 200, 22, LEAD_SIZE, MUTED),
         caption("Knie locker, Rücken gerade, Arme lang", 0, T0),
         caption("Ausatmen – Ellbogen zur Hüfte ziehen", T0, T1),
         caption("„Nussknacker“ – Schulterblätter zusammen", T1, T2),

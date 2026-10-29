@@ -40,6 +40,6 @@ def build():
         caption("Ausatmen – Knie zur Brust ziehen", 0.8, 2.0),
         caption("Becken rollt leicht ein – halten", 2.0, 2.7),
         caption("Langsam absenken – Füße nicht ablegen", 2.7, 5.3),
-        static_text("Aus dem Bauch rollen – nicht mit Schwung", 200, 24, 13, MUTED),
+        static_text("Aus dem Bauch rollen – nicht mit Schwung", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Reverse Crunch")

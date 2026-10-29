@@ -17,7 +17,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 50,
-      instructions: "5 Minuten auf Ellipsentrainer",
+      instructions: "5 Min. locker zum Aufwärmen. Aufrecht stehen, ganze Fußsohle bleibt auf den Pedalen, Griffe locker mitbewegen. Tempo so wählen, dass du dich noch unterhalten kannst.",
       imageUrl: "/exercise-images/ellipsentrainer.svg"
     },
     {
@@ -27,6 +27,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
+      instructions: "Aufrecht sitzen, Rücken am Polster, Polster an der Innenseite der Knie. Beine langsam zusammendrücken, kurz halten, kontrolliert wieder öffnen. Gewichte nicht aufschlagen lassen.",
       imageUrl: "/exercise-images/adduktion.svg"
     },
     {
@@ -36,6 +37,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
+      instructions: "Aufrecht sitzen, Rücken am Polster, Polster an der Außenseite der Knie. Beine langsam nach außen drücken, kurz halten, kontrolliert zurück. Oberkörper bleibt ruhig.",
       imageUrl: "/exercise-images/abduktion.svg"
     },
     {
@@ -45,27 +47,27 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 50,
       rest: 50,
-      instructions: "In den Beinen mind. rechter Winkel, nicht komplett durchstrecken",
+      instructions: "In den Beinen mind. rechter Winkel, nicht komplett durchstrecken.",
       imageUrl: "/exercise-images/beinpresse.svg"
     },
     {
       id: 5,
-      name: "Trizepszug",
+      name: "Rudern sitzend (Brust am Polster)",
       sets: 3,
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Brust an Polster, Griffe auf Schulterhöhe greifen, Ellbogen nach hinten ziehen, Schulterblätter zusammen",
+      instructions: "Brust an Polster, Griffe auf Schulterhöhe greifen, Ellbogen nach hinten ziehen, Schulterblätter zusammen.",
       imageUrl: "/exercise-images/vertical-row.svg"
     },
     {
       id: 6,
-      name: "Ruderzug Maschine",
+      name: "Ruderzug am Kabel",
       sets: 3,
       reps: 15,
       weight: 19,
       rest: 50,
-      instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Nussknacker hinten",
+      instructions: "Rudern beim Kabelturm, Ellbogen zur Hüfte, Schulterblätter hinten zusammenziehen.",
       imageUrl: "/exercise-images/ruderzug.svg"
     },
     {
@@ -75,7 +77,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Griffe auf Schulterhöhe, Ellbogen nicht über 90° hinaus, Nacken entspannen, kontrolliert nach oben drücken, nicht komplett durchstrecken",
+      instructions: "Griffe auf Schulterhöhe, Ellbogen nicht über 90° hinaus, Nacken entspannen, kontrolliert nach oben drücken, nicht komplett durchstrecken.",
       imageUrl: "/exercise-images/schulterpresse.svg"
     },
     {
@@ -85,7 +87,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Sitzend nach vorne drücken, Schultern bleiben hinten, kontrollierte Bewegung",
+      instructions: "Sitzend nach vorne drücken, Schultern bleiben hinten, kontrollierte Bewegung.",
       imageUrl: "/exercise-images/brustpresse-sitzend.svg"
     },
     {
@@ -95,7 +97,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Adjustable Pulley unten, Griff mit beiden Händen greifen, Rudern zur Hüfte, Rücken gerade, Schulterblätter zusammenziehen",
+      instructions: "Seilzug unten einstellen, Griff mit beiden Händen greifen, Rudern zur Hüfte, Rücken gerade, Schulterblätter zusammenziehen.",
       imageUrl: "/exercise-images/low-row.svg"
     },
     {
@@ -105,7 +107,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 15,
       rest: 50,
-      instructions: "Oberkörper-Rotation. 6 Sätze abwechselnd: Satz 1 Links, Satz 2 Rechts, Satz 3 Links, Satz 4 Rechts, Satz 5 Links, Satz 6 Rechts. Schulterpolster nutzen, kontrollierte Drehbewegung",
+      instructions: "Oberkörper-Rotation. 6 Sätze abwechselnd: Satz 1 links, Satz 2 rechts, Satz 3 links, Satz 4 rechts, Satz 5 links, Satz 6 rechts. Schulterpolster nutzen, kontrollierte Drehbewegung.",
       imageUrl: "/exercise-images/rotary-torso.svg"
     },
     {
@@ -115,7 +117,7 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 20,
       rest: 50,
-      instructions: "Rolle A hinter Schultern, Rolle B vorne. Kontrollierte Bewegung nach vorne, Bauchmuskeln anspannen",
+      instructions: "Rolle A hinter Schultern, Rolle B vorne. Kontrollierte Bewegung nach vorne, Bauchmuskeln anspannen.",
       imageUrl: "/exercise-images/abdominal-crunch-machine.svg"
     },
     {
@@ -125,8 +127,8 @@ export const gymWorkoutPlan: WorkoutPlan = {
       reps: 20, // 20 minutes
       unit: 'minutes',
       weight: 0,
-      rest: 50,
-      instructions: "20 Minuten auf Laufband",
+      rest: 0,
+      instructions: "20 Min. zügig gehen. Aufrecht bleiben, Blick nach vorn, Arme locker mitschwingen. Tempo so wählen, dass du dich noch unterhalten kannst.",
       imageUrl: "/exercise-images/laufband.svg"
     }
   ]
@@ -148,7 +150,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Arme seitlich anheben und vor der Brust zusammenführen",
+      instructions: "Arme seitlich anheben und vor der Brust zusammenführen.",
       imageUrl: "/exercise-images/hantel-butterfly.svg"
     },
     {
@@ -158,7 +160,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken",
+      instructions: "Hantel über Kopf, Ellbogen fixiert, Unterarm nach oben strecken.",
       imageUrl: "/exercise-images/hantel-trizeps.svg"
     },
     {
@@ -168,17 +170,17 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Bizeps Curls, Ellbogen am Körper fixiert",
+      instructions: "Bizeps-Curls, Ellbogen am Körper fixiert.",
       imageUrl: "/exercise-images/hantel-bizeps.svg"
     },
     {
       id: 4,
-      name: "Front Raises",
+      name: "Frontheben",
       sets: 3,
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Arme gestreckt nach vorne anheben bis Schulterhöhe",
+      instructions: "Arme gestreckt nach vorne anheben bis Schulterhöhe.",
       imageUrl: "/exercise-images/front-raises.svg"
     },
     {
@@ -188,7 +190,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Hanteln mit neutralem Griff (Daumen nach oben) beugen",
+      instructions: "Hanteln mit neutralem Griff (Daumen nach oben) beugen.",
       imageUrl: "/exercise-images/hammer-curls.svg"
     },
     {
@@ -198,7 +200,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 0,
       rest: 60,
-      instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze",
+      instructions: "Liegestütz-Position, Arme eng am Körper, Trizeps-Liegestütze.",
       imageUrl: "/exercise-images/trizeps-boden.svg"
     },
     {
@@ -208,7 +210,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Bizeps Curl mit anschließendem Überkopfdrücken",
+      instructions: "Bizeps-Curl mit anschließendem Überkopfdrücken.",
       imageUrl: "/exercise-images/bizeps-ueber-kopf.svg"
     },
     {
@@ -218,7 +220,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Rücken gerade, Hanteln vor dem Körper nach unten und wieder hoch",
+      instructions: "Füße hüftbreit, Knie leicht gebeugt. Hüfte nach hinten schieben und den Oberkörper mit geradem Rücken vorneigen, Hanteln nah an den Beinen nach unten führen. Über die Hüfte wieder aufrichten.",
       imageUrl: "/exercise-images/kreuzheben.svg"
     },
     {
@@ -228,7 +230,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Vorgebeugt, Arme seitlich nach außen anheben",
+      instructions: "Knie leicht gebeugt, Oberkörper mit geradem Rücken nach vorn geneigt. Arme leicht gebeugt seitlich bis Schulterhöhe anheben, Schulterblätter zusammen, langsam senken. Nacken bleibt lang.",
       imageUrl: "/exercise-images/butterfly-reverse.svg"
     },
     {
@@ -238,7 +240,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Abwechselnd seitlich und frontal anheben",
+      instructions: "Abwechselnd seitlich und frontal anheben.",
       imageUrl: "/exercise-images/seitheben-frontheben.svg"
     },
     {
@@ -248,7 +250,7 @@ export const homeWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 2,
       rest: 60,
-      instructions: "Hanteltraining 2kg - Auf dem Rücken liegend, Arme seitlich zusammenführen",
+      instructions: "Auf dem Rücken liegend, Arme seitlich zusammenführen.",
       imageUrl: "/exercise-images/butterfly-boden.svg"
     },
     {
@@ -257,8 +259,8 @@ export const homeWorkoutPlan: WorkoutPlan = {
       sets: 3,
       reps: 15,
       weight: 2,
-      rest: 60,
-      instructions: "Hanteltraining 2kg - Sit-ups mit Hantel vor der Brust",
+      rest: 0,
+      instructions: "Rückenlage, Beine aufgestellt, Hantel mit beiden Händen vor der Brust. Oberkörper langsam aufrollen und kontrolliert wieder ablegen. Nacken locker, ohne Schwung.",
       imageUrl: "/exercise-images/situps-hantel.svg"
     }
   ]
@@ -275,22 +277,23 @@ export const homeWorkoutPlan2: WorkoutPlan = {
   exercises: [
     {
       id: 1,
-      name: "Sit-Ups",
+      name: "Sit-ups",
       sets: 3,
       reps: 10,
       weight: 0,
       rest: 60,
-      instructions: "Kontrollierte Ausführung, Nacken entspannt",
+      instructions: "Kontrollierte Ausführung, Nacken entspannt.",
       imageUrl: "/exercise-images/situps.svg"
     },
     {
       id: 2,
-      name: "Beine Hoch",
+      name: "Beinschere (Rückenlage)",
       sets: 3,
-      reps: 30,
+      reps: 15, // pro Seite (30 gesamt)
+      perSide: true,
       weight: 0,
       rest: 60,
-      instructions: "Auf dem Rücken liegen, Beine abwechselnd anheben und senken (Schere)",
+      instructions: "Auf dem Rücken liegen, Beine abwechselnd anheben und senken (Schere).",
       imageUrl: "/exercise-images/beine-hoch.svg"
     },
     {
@@ -298,9 +301,10 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Bauch Beine Po",
       sets: 3,
       reps: 15,
+      perSide: true,
       weight: 0,
       rest: 60,
-      instructions: "Vierfüßlerstand, Bein nach hinten oben strecken (Donkey Kicks)",
+      instructions: "Vierfüßlerstand, Bein nach hinten oben strecken (Donkey Kicks).",
       imageUrl: "/exercise-images/bauch-beine-po.svg"
     },
     {
@@ -310,7 +314,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       reps: 10,
       weight: 0,
       rest: 60,
-      instructions: "Arme nach vorne gestreckt, Knie nicht über die Zehenspitzen",
+      instructions: "Arme nach vorne gestreckt, Knie zeigen Richtung Zehen, ganze Fußsohle bleibt am Boden.",
       imageUrl: "/exercise-images/kniebeugen.svg"
     },
     {
@@ -318,9 +322,10 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Knie Schritt",
       sets: 3,
       reps: 10,
+      perSide: true,
       weight: 0,
       rest: 60,
-      instructions: "Ausfallschritte, abwechselnd links und rechts",
+      instructions: "Ausfallschritte, abwechselnd links und rechts.",
       imageUrl: "/exercise-images/knie-schritt.svg"
     },
     {
@@ -328,9 +333,10 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       name: "Sessel Step-Up",
       sets: 3,
       reps: 10,
+      perSide: true,
       weight: 0,
       rest: 60,
-      instructions: "Po-Übung: Auf einen Sessel aufsteigen. 10 Wiederholungen pro Seite, abwechselnd links und rechts. Arme zur Balance nach vorne strecken.",
+      instructions: "Po-Übung: Auf einen Sessel aufsteigen. 10 Wdh. pro Seite, abwechselnd links und rechts. Arme zur Balance nach vorne strecken.",
       imageUrl: "/exercise-images/sessel-step-up.svg"
     },
     {
@@ -350,17 +356,17 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       reps: 15,
       weight: 0,
       rest: 60,
-      instructions: "Bauchlage auf der Matte, Oberkörper leicht angehoben, auf die Unterarme gestützt. Beide Beine gestreckt vom Boden anheben. Trainiert den unteren Rücken und die untere Bauchmuskulatur.",
+      instructions: "Bauchlage auf der Matte, Oberkörper leicht angehoben, auf die Unterarme gestützt. Beide Beine gestreckt nur wenige cm vom Boden anheben, Becken bleibt auf der Matte. Trainiert Gesäß und unteren Rücken.",
       imageUrl: "/exercise-images/prone-leg-lifts.svg"
     },
     {
       id: 9,
-      name: "Scissor Kicks (Schere)",
+      name: "Beinschere (Bauchlage)",
       sets: 3,
       reps: 15,
       weight: 0,
       rest: 60,
-      instructions: "Bauchlage, Oberkörper aufgestützt. Die gestreckten Beine abwechselnd auf und ab bewegen (Scherenbewegung). Zielt auf den unteren Bauch und die Hüftbeuger.",
+      instructions: "Bauchlage, Oberkörper aufgestützt. Die gestreckten Beine abwechselnd wenige cm auf und ab bewegen (Scherenbewegung), Becken bleibt auf der Matte. Trainiert Gesäß und unteren Rücken.",
       imageUrl: "/exercise-images/scissor-kicks.svg"
     },
     {
@@ -370,7 +376,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       reps: 10,
       weight: 0,
       rest: 60,
-      instructions: "Bauchlage, Oberkörper aufgestützt. Die Knie abwechselnd angewinkelt Richtung Brust ziehen. Trainiert den gesamten Core.",
+      instructions: "Bauchlage, Oberkörper auf die Unterarme gestützt. Ein Knie seitlich am Boden entlang Richtung Ellbogen ziehen, zurück, dann Seite wechseln. Trainiert die seitliche Rumpf- und Hüftmuskulatur.",
       imageUrl: "/exercise-images/prone-crunch.svg"
     },
     {
@@ -380,17 +386,17 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       reps: 15,
       weight: 0,
       rest: 60,
-      instructions: "Bauchlage, Oberkörper aufgestützt. Abwechselndes Anziehen und Strecken der Beine in einer Tretbewegung (ähnlich Fahrradfahren). Trainiert den unteren Bauch und die schrägen Bauchmuskeln.",
+      instructions: "Bauchlage, Oberkörper aufgestützt. Abwechselndes Anziehen und Strecken der Beine in einer Tretbewegung (ähnlich Fahrradfahren), Becken bleibt auf der Matte. Trainiert Gesäß, Hüfte und Rumpfstabilität.",
       imageUrl: "/exercise-images/bicycle-kicks-prone.svg"
     },
     {
       id: 12,
-      name: "Reverse Crunch (gestreckt)",
+      name: "Knie-Anzug im Unterarmstütz",
       sets: 3,
       reps: 10,
       weight: 0,
       rest: 60,
-      instructions: "Bauchlage, seitlich gestützt. Die Beine angewinkelt anziehen und dann gestreckt wieder absenken. Trainiert die gesamte Rumpfmuskulatur.",
+      instructions: "Unterarmstütz, Ellbogen unter den Schultern. Die Beine angewinkelt anziehen und dann gestreckt wieder absenken. Trainiert die gesamte Rumpfmuskulatur.",
       imageUrl: "/exercise-images/reverse-crunch-extended.svg"
     },
     {
@@ -401,7 +407,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 60,
-      instructions: "10 Minuten Hula Hoop - Hüften kreisen, Reifen in Bewegung halten",
+      instructions: "10 Min. Hula-Hoop – Hüften kreisen, Reifen in Bewegung halten.",
       imageUrl: "/exercise-images/hula-hoop.svg"
     },
     {
@@ -412,7 +418,7 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 60,
-      instructions: "20 Minuten zügiges Gehen auf dem Laufband",
+      instructions: "20 Min. zügiges Gehen auf dem Laufband.",
       imageUrl: "/exercise-images/laufband.svg"
     },
     {
@@ -422,8 +428,8 @@ export const homeWorkoutPlan2: WorkoutPlan = {
       reps: 20, // 20 minutes
       unit: 'minutes',
       weight: 0,
-      rest: 60,
-      instructions: "20 Minuten frei tanzen - Musik genießen und bewegen!",
+      rest: 0,
+      instructions: "20 Min. frei tanzen – Musik genießen und bewegen!",
       imageUrl: "/exercise-images/dancing.svg"
     }
   ]
@@ -435,7 +441,7 @@ export const backWorkoutPlan: WorkoutPlan = {
   duration: "Unbegrenzt",
   sessionsPerWeek: 4,
   goal: "Rumpfstabilität & Rückfallprävention",
-  trainer: "Physiotherapie-basiert",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
   createdAt: "16.02.2026",
   exercises: [
     {
@@ -446,7 +452,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 30,
-      instructions: "2 Minuten locker gehen oder am Stand marschieren. Ziel: Durchblutung, Rücken entspannt in Bewegung bringen. Ruhig atmen.",
+      instructions: "2 Min. locker gehen oder am Stand marschieren. Ziel: Durchblutung, Rücken entspannt in Bewegung bringen. Ruhig atmen.",
       imageUrl: "/exercise-images/marschieren.svg"
     },
     {
@@ -456,7 +462,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       reps: 15,
       weight: 0,
       rest: 45,
-      instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen, Becken anheben bis Knie–Hüfte–Schulter eine Linie bilden. Oben 3–5 Sek. halten, dann kontrolliert absenken. Druck über die Fersen, nicht ins Hohlkreuz kippen. Tempo: 2s hoch / 3–5s halten / 2s runter.",
+      instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen, Becken anheben, bis Knie–Hüfte–Schulter eine Linie bilden. Oben 3–5 s halten, dann kontrolliert absenken. Druck über die Fersen, nicht ins Hohlkreuz kippen. Tempo: 2 s hoch / 3–5 s halten / 2 s runter.",
       imageUrl: "/exercise-images/glute-bridge.svg"
     },
     {
@@ -467,7 +473,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 45,
-      instructions: "Rückenlage, Hüfte/Knie 90° (Tischposition), Arme Richtung Decke. Bauchspannung aufbauen, dann gegengleich: rechtes Bein strecken + linker Arm nach hinten. Rücken bleibt flach am Boden! Zurück zur Mitte, Seite wechseln. Tempo: 3s raus / 1s halten / 3s zurück. 10 Wdh. pro Seite.",
+      instructions: "Rückenlage, Hüfte/Knie 90° (Tischposition), Arme Richtung Decke. Bauchspannung aufbauen, dann gegengleich: rechtes Bein strecken + linker Arm nach hinten. Rücken bleibt flach am Boden! Zurück zur Mitte, Seite wechseln. Tempo: 3 s raus / 1 s halten / 3 s zurück.",
       imageUrl: "/exercise-images/dead-bug.svg"
     },
     {
@@ -478,7 +484,7 @@ export const backWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 45,
-      instructions: "Vierfüßlerstand: Hände unter Schultern, Knie unter Hüften. Bauchspannung setzen, dann rechtes Bein nach hinten + linker Arm nach vorne strecken. 5 Sek. halten, kontrolliert zurück. Becken bleibt gerade – keine Rotation! Tempo: 2s raus / 5s halten / 2s zurück. 8 Wdh. pro Seite.",
+      instructions: "Vierfüßlerstand: Hände unter Schultern, Knie unter Hüften. Bauchspannung setzen, dann rechtes Bein nach hinten + linker Arm nach vorne strecken. 5 s halten, kontrolliert zurück. Becken bleibt gerade – keine Rotation! Tempo: 2 s raus / 5 s halten / 2 s zurück.",
       imageUrl: "/exercise-images/bird-dog.svg"
     },
     {
@@ -490,18 +496,18 @@ export const backWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 45,
-      instructions: "Seitlage, Ellenbogen unter Schulter, Knie angewinkelt. Becken anheben bis Schulter–Hüfte–Knie eine Linie bilden. 20–30 Sek. halten, dann kontrolliert absetzen. Schulter weg vom Ohr, Becken nicht kippen. Ruhig atmen. Beide Seiten!",
+      instructions: "Seitlage, Ellbogen unter Schulter, Knie angewinkelt. Becken anheben, bis Schulter–Hüfte–Knie eine Linie bilden. 25 s pro Seite halten, dann kontrolliert absetzen. Schulter weg vom Ohr, Becken nicht kippen. Ruhig atmen.",
       imageUrl: "/exercise-images/side-plank-knee.svg"
     },
     {
       id: 6,
-      name: "Cool-Down – Entspanntes Gehen",
+      name: "Abwärmen – Entspanntes Gehen",
       sets: 1,
       reps: 2, // 2 Minuten
       unit: 'minutes',
       weight: 0,
       rest: 0,
-      instructions: "1–2 Minuten entspannt gehen. Kein aggressives Dehnen direkt nach der Einheit nötig. Wenn du dich morgen gleich gut oder besser fühlst, kannst du beim nächsten Mal leicht steigern.",
+      instructions: "1–2 Min. entspannt gehen. Kein aggressives Dehnen direkt nach der Einheit nötig. Wenn du dich morgen gleich gut oder besser fühlst, kannst du beim nächsten Mal leicht steigern.",
       imageUrl: "/exercise-images/walking.svg"
     }
   ]
@@ -513,8 +519,9 @@ export const neckWorkoutPlan: WorkoutPlan = {
   duration: "Unbegrenzt",
   sessionsPerWeek: 4,
   goal: "BWS-Mobilität, Schulterhaltung & Nackenentlastung",
-  trainer: "Physiotherapie-basiert",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
   createdAt: "29.10.2026",
+  notice: "Diese Übungen ersetzen keine ärztliche oder physiotherapeutische Abklärung. Sofort aufhören bei Einschießen, zunehmendem Kribbeln oder Taubheit. Ärztlich abklären lassen bei: zunehmender Taubheit oder Kraftverlust in Hand oder Arm, Ungeschicklichkeit der Hände, Gangunsicherheit, Schwindel oder Sehstörungen bei Kopfbewegungen, starken nächtlichen Schmerzen – oder wenn die Beschwerden häufiger werden oder weiter ausstrahlen.",
   exercises: [
     {
       id: 1,
@@ -524,7 +531,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Rückenlage mit aufgestellten Beinen oder aufrecht sitzen. Eine Hand auf dem Bauch, eine seitlich an den Rippen. Einatmen 4 s: Durch die Nase erst in den Bauch, dann seitlich in die Rippen atmen. Die Hände werden nach außen geschoben, die Schultern bleiben unten. Ausatmen 6 s: Langsam durch den Mund ausatmen, Rippen sinken zurück, Nacken und Schultern lösen. Täglich 3–5 Min., kombinierbar mit Rolle und Open Book: in die gedehnte Seite atmen. Wichtig: Hebt sich beim Einatmen die Schulter, arbeiten die Treppenmuskeln am Hals mit. Dann flacher und tiefer in Bauch und Rippen atmen. Entspannt die Treppenmuskeln am Hals, zwischen denen die Armnerven verlaufen. Bei akutem Ziehen im Arm: erst 5 tiefe Atemzüge, dann Chin Tucks.",
+      instructions: "Rückenlage mit aufgestellten Beinen oder aufrecht sitzen, eine Hand am Bauch, eine seitlich an den Rippen. 4 s durch die Nase in Bauch und Rippen einatmen, 6 s langsam durch den Mund aus. Auch an trainingsfreien Tagen gut. Wichtig: Schultern bleiben unten. Bei Ziehen im Arm: erst 5 tiefe Atemzüge, dann Chin Tucks.",
       imageUrl: "/exercise-images/bauch-rippenatmung.svg"
     },
     {
@@ -535,7 +542,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Rolle quer unter die mittlere BWS, Knie gebeugt, Füße und Gesäß am Boden. Hände am Hinterkopf, Ellbogen nach vorn, Kinn leicht zur Brust. Absinken: Oberkörper langsam über die Rolle nach hinten sinken lassen, ausatmen. Kein Hohlkreuz in der LWS. Endposition: 2–3 Atemzüge halten, zurück, Rolle eine Handbreit nach oben schieben. Segmentweise nach oben wandern, die LWS bleibt am Boden. Wichtig: Nur BWS, nie Lenden- oder Halswirbelsäule über die Rolle legen – nie unter den Nacken.",
+      instructions: "Rolle quer unter die mittlere BWS, Knie gebeugt, Gesäß am Boden, Hände am Hinterkopf. Ausatmend langsam über die Rolle nach hinten sinken, 2–3 Atemzüge halten, zurück. Rolle eine Handbreit höher schieben. Wichtig: Nur die BWS auf die Rolle, nie Lende oder Nacken. Kein Hohlkreuz.",
       imageUrl: "/exercise-images/bws-rolle.svg"
     },
     {
@@ -546,7 +553,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Seitenlage, Kopf auf einem Kissen, Knie 90° gebeugt und aufeinander, Arme gestreckt nach vorn, Handflächen zusammen. Aufdrehen: Oberen Arm im Bogen zur anderen Seite öffnen, Blick folgt der Hand. Knie bleiben zusammen. Endposition: Brust zeigt zur Decke, 2 Atemzüge halten, langsam zurück. Die Drehung kommt aus der BWS, nicht aus der Hüfte. 8–10 pro Seite. Wichtig: Knie dürfen nicht auseinanderrutschen, sonst dreht die LWS mit.",
+      instructions: "Seitenlage, Kopf auf einem Kissen, Knie 90° gebeugt und aufeinander, Arme gestreckt nach vorn. Oberen Arm im Bogen zur anderen Seite öffnen, Blick folgt der Hand. 2 Atemzüge halten, langsam zurück. Wichtig: Knie bleiben zusammen – die Drehung kommt aus der BWS, nicht aus Hüfte oder Lende.",
       imageUrl: "/exercise-images/open-book.svg"
     },
     {
@@ -556,7 +563,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       reps: 10,
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Runden: Zwischen den Schulterblättern nach oben schieben, Kopf locker hängen lassen. Strecken: Brustbein nach vorn-unten sinken lassen, Blick schräg nach vorn. Bewegung bewusst in den mittleren Rücken legen, langsam und mit der Atmung gekoppelt. Lendenbereich so ruhig wie möglich halten. Tipp: Wenn die BWS nicht mitgeht, Hände auf einen Stuhl – dann ist es leichter isoliert.",
+      instructions: "Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Zwischen den Schulterblättern rund machen, Kopf locker hängen lassen. Dann Brustbein nach vorn-unten sinken lassen. Langsam, mit der Atmung. Wichtig: Bewegung im mittleren Rücken, Lende ruhig. Leichter mit den Händen auf einem Stuhl.",
       imageUrl: "/exercise-images/katze-kuh.svg"
     },
     {
@@ -567,11 +574,21 @@ export const neckWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte, Gewicht gleichmäßig verteilt. Durchfädeln: Rechten Arm unter dem Körper nach links schieben, Schulter und Schläfe sinken Richtung Boden. Aufdrehen: Arm zurückholen und im Bogen zur Decke öffnen, Blick folgt der Hand, Brust öffnet sich. Hüfte bleibt über den Knien, nur der Oberkörper dreht. 8 pro Seite. Wichtig: Im Durchfädeln nicht auf den Nacken legen. Die Schulter trägt, nicht der Kopf.",
+      instructions: "Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Einen Arm unter dem Körper zur Gegenseite schieben, Schulter sinkt Richtung Boden. Dann den Arm im Bogen zur Decke öffnen, Blick folgt der Hand. Wichtig: Hüfte bleibt über den Knien. Die Schulter trägt, nicht Kopf oder Nacken.",
       imageUrl: "/exercise-images/thread-the-needle.svg"
     },
     {
       id: 6,
+      name: "Y-T-W in Bauchlage",
+      sets: 2,
+      reps: 10, // 8–10 pro Buchstabe
+      weight: 0,
+      rest: 45,
+      instructions: "Je 8–10 pro Buchstabe. Bauchlage, Stirn auf einem Handtuch. Erst Schulterblätter zurück und runter, dann Arme 2–3 cm heben, 2 s halten: Y schräg nach vorn, T seitlich (Daumen oben), W mit Ellbogen an den Rippen. Ohne Gewicht. Variante: Rückenstrecker-Bank. Wichtig: Kopf in Verlängerung der Wirbelsäule, nicht nach vorn schauen.",
+      imageUrl: "/exercise-images/ytw.svg"
+    },
+    {
+      id: 7,
       name: "Brustdehnung im Türrahmen",
       sets: 2,
       reps: 30, // Sekunden halten, pro Seite
@@ -579,18 +596,9 @@ export const neckWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Unterarm senkrecht am Türrahmen, Ellbogen 90° auf Schulterhöhe, ein Fuß vorn. Schulterblatt zurück und nach unten. Vorlehnen: Mit dem Körper langsam nach vorn lehnen (nicht mit der Schulter), bis die Brust zieht. Schulter bleibt unten. Halten: 30 Sekunden ruhig atmen, beide Seiten. Ellbogen etwas höher = mehr unterer Brustmuskel. Wichtig: Ziehen in der Brust ist ok – Kribbeln oder Einschießen in Hand oder Arm heißt: Nerv gereizt, Spannung sofort reduzieren.",
+      caution: true,
+      instructions: "Unterarm senkrecht am Türrahmen, Ellbogen 90° auf Schulterhöhe, ein Fuß vorn, Schulterblatt zurück und unten. Mit dem ganzen Körper nach vorn lehnen, bis die Brust zieht, 30 s ruhig atmen. Wichtig: Ziehen in der Brust ist ok. Kribbeln oder Einschießen in Hand oder Arm: Spannung sofort reduzieren.",
       imageUrl: "/exercise-images/tuerrahmen-dehnung.svg"
-    },
-    {
-      id: 7,
-      name: "Y-T-W in Bauchlage",
-      sets: 2,
-      reps: 10, // 8–10 pro Buchstabe
-      weight: 0,
-      rest: 45,
-      instructions: "Bauchlage, Stirn auf einem kleinen Handtuch, Beine lang. Y: Arme schräg nach vorn in Y-Form, Daumen nach oben. Schulterblätter zurück und runter, Arme 2–3 cm heben, 2 s halten. T: Arme seitlich ausstrecken, Daumen nach oben. Gleiche Bewegung: erst Schulterblätter, dann Arme heben. W: Ellbogen an die Rippen ziehen, Hände neben den Schultern. Ellbogen und Hände anheben, Schulterblätter zusammen. Langsam ablegen. Ohne Gewicht starten. Variante (mehr Bewegungsweg): auf der Hyperextension-Bank mit frei hängenden Armen. Wichtig: Kopf bleibt in Verlängerung der Wirbelsäule. Nicht nach vorn schauen, sonst arbeitet der Nacken mit.",
-      imageUrl: "/exercise-images/ytw.svg"
     },
     {
       id: 8,
@@ -599,27 +607,29 @@ export const neckWorkoutPlan: WorkoutPlan = {
       reps: 10,
       weight: 0,
       rest: 45,
-      instructions: "Startposition: Rücken, Hinterkopf und Gesäß an der Wand, Füße eine Fußlänge vor der Wand. Arme in U-Form an der Wand. Rippen unten halten, kein Hohlkreuz. Hochgleiten: Arme an der Wand langsam nach oben schieben, so weit Handrücken und Ellbogen Kontakt halten. Runterziehen: Ellbogen Richtung Rippen ziehen, Schulterblätter nach unten – das ist der eigentliche Arbeitsteil. Tipp: Bei steifer BWS ist der Bewegungsweg anfangs klein. Das ist normal und wird mit der Mobilisation besser.",
+      caution: true,
+      instructions: "Rücken, Hinterkopf und Gesäß an der Wand, Füße eine Fußlänge davor, Arme in U-Form, kein Hohlkreuz. Arme hochschieben, solange Handrücken und Ellbogen die Wand berühren, dann Ellbogen Richtung Rippen ziehen. Wichtig: Kleiner Weg ist anfangs normal. Kribbelt es in Ring- oder kleinem Finger: Arme tiefer.",
       imageUrl: "/exercise-images/wall-angels.svg"
     },
     {
       id: 9,
-      name: "Face Pulls (Sling)",
+      name: "Face Pulls (Schlingentrainer)",
       sets: 3,
       reps: 12, // 10–12
       weight: 0,
       rest: 45,
-      instructions: "Sling auf Kopfhöhe befestigen, Griffe mit gestreckten Armen fassen. Erst Schulterblätter zurück und nach unten Richtung Gesäßtasche, dann Griffe Richtung Gesicht ziehen, Ellbogen hoch und nach außen. Kurz halten, kontrolliert zurück. Wichtig: Schulterblätter zusätzlich nach unten ziehen, nicht nur zusammen – so arbeitet der mittlere und untere Trapez und der obere wird entlastet.",
+      caution: true,
+      instructions: "Schlingentrainer auf Kopfhöhe, Griffe mit gestreckten Armen. Erst Schulterblätter zurück und nach unten ziehen, dann Griffe Richtung Gesicht, Ellbogen hoch und außen. Kurz halten, langsam zurück. Wichtig: So arbeiten der mittlere und untere Trapezmuskel. Kribbelt es in Ring- oder kleinem Finger: Ellbogen tiefer.",
       imageUrl: "/exercise-images/face-pulls.svg"
     },
     {
       id: 10,
-      name: "Reverse Flys (Sling)",
+      name: "Reverse Flys (Schlingentrainer)",
       sets: 3,
       reps: 12, // 10–12
       weight: 0,
       rest: 45,
-      instructions: "Griffe mit leicht gebeugten Armen vor der Brust fassen. Erst Schulterblätter zurück und nach unten Richtung Gesäßtasche, dann Arme im Bogen seitlich öffnen. Kurz halten, kontrolliert zurück. Wichtig: Schulterblätter zusätzlich nach unten ziehen, nicht nur zusammen. Schultern bleiben weg von den Ohren.",
+      instructions: "Griffe mit leicht gebeugten Armen vor der Brust fassen. Erst Schulterblätter zurück und nach unten Richtung Gesäßtasche, dann Arme im Bogen seitlich öffnen. Kurz halten, kontrolliert zurück. Wichtig: Schulterblätter auch nach unten ziehen, nicht nur zusammen. Schultern weg von den Ohren.",
       imageUrl: "/exercise-images/reverse-flys.svg"
     },
     {
@@ -629,7 +639,7 @@ export const neckWorkoutPlan: WorkoutPlan = {
       reps: 10, // je 5 Sekunden halten
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Aufrecht sitzen oder stehen, Schultern locker, Blick geradeaus. Zurückschieben: Kinn waagrecht nach hinten schieben (Doppelkinn), nicht nach unten nicken. Blick bleibt auf Augenhöhe. Halten: 5 Sekunden halten, Nacken wird hinten lang. Locker lösen. Mehrmals täglich, auch am Schreibtisch: einmal pro Stunde ein paar Chin Tucks und Schulterkreise nach hinten bringen oft mehr als eine lange Einheit am Abend. Wichtig: Sanfter Zug im oberen Nacken ist gut. Kein Druck in den Kiefer.",
+      instructions: "Aufrecht sitzen oder stehen, Blick geradeaus. Kinn waagrecht nach hinten schieben (Doppelkinn), nicht nicken. 5 s halten, der Nacken wird hinten lang, dann lösen. Auch am Schreibtisch: stündlich ein paar Wdh. und Schulterkreise nach hinten. Wichtig: Sanfter Zug im oberen Nacken ist gut, kein Druck in den Kiefer.",
       imageUrl: "/exercise-images/chin-tuck.svg"
     },
     {
@@ -641,7 +651,8 @@ export const neckWorkoutPlan: WorkoutPlan = {
       perSide: true,
       weight: 0,
       rest: 30,
-      instructions: "Startposition: Auf einem Stuhl sitzen, rechte Hand unter das Gesäß klemmen – das fixiert die Schulter. Neigen: Kopf zur linken Seite neigen, Ohr Richtung Schulter, Schulter bleibt unten. Halten: Nase leicht Richtung linke Achsel drehen (für den Levator), 30 s halten, ruhig atmen. Kein Ziehen am Kopf mit der Hand. Dann Seite wechseln. Wichtig: Zieht es bis in den Arm, Neigung verringern – die Dehnung bleibt im Nacken.",
+      caution: true,
+      instructions: "Auf einem Stuhl sitzen, rechte Hand unter das Gesäß klemmen. Kopf nach links neigen, Schulter bleibt unten, Nase leicht Richtung linke Achsel drehen (Schulterblattheber). 30 s ruhig halten, Seite wechseln. Wichtig: Nicht mit der Hand am Kopf ziehen. Zieht es bis in den Arm, Neigung verringern.",
       imageUrl: "/exercise-images/nackendehnung.svg"
     },
     {
@@ -651,7 +662,8 @@ export const neckWorkoutPlan: WorkoutPlan = {
       reps: 10, // 5–10 sanft, nur rechts
       weight: 0,
       rest: 30,
-      instructions: "Nur rechts, wo Ring- und kleiner Finger betroffen sind. Erst die tiefe Atmung, dann der Glide. Startposition: Rechter Arm seitlich ausgestreckt auf Schulterhöhe, Handfläche nach vorn, Kopf neutral. Gleiten: Ellbogen beugen, Hand Richtung Ohr führen, Finger zeigen nach hinten (Maske ums Auge). Gleichzeitig Kopf nach rechts neigen. Zurück: Arm wieder strecken und Kopf nach links neigen. Rhythmisch hin und her, langsam, nie halten. Wichtig: Der Ulnaris reagiert empfindlich. Kein Einschießen, kein zunehmendes Kribbeln. Am nächsten Tag darf es nicht schlimmer sein. Ärztlich abklären, wenn Taubheit, Kribbeln oder Kraftverlust in Hand oder Arm dazukommen oder die Schmerzen häufiger werden. Hält es an, klärt eine NLG-Messung, ob der Nerv am Ellbogen oder an der HWS gereizt ist.",
+      caution: true,
+      instructions: "Nur rechts, nach der Atmung. Arm seitlich auf Schulterhöhe, Handfläche nach vorn. Ellbogen beugen, Hand zum Ohr (Finger zeigen nach hinten), Kopf nach rechts neigen. Zurück: Arm strecken, Kopf nach links. Langsam, nie halten. Wichtig: Kein Einschießen, kein zunehmendes Kribbeln. Wenn doch: sofort aufhören und erst wieder, wenn es 2 Tage ruhig ist – sonst Physio fragen.",
       imageUrl: "/exercise-images/ulnaris-glide.svg"
     },
     {
@@ -660,8 +672,9 @@ export const neckWorkoutPlan: WorkoutPlan = {
       sets: 1,
       reps: 10, // 5–10 sanft
       weight: 0,
-      rest: 30,
-      instructions: "Startposition: Arm seitlich auf Schulterhöhe, Ellbogen gebeugt, Handfläche zum Ohr. Kopf neutral. Gleiten: Ellbogen strecken und Handgelenk nach hinten kippen, gleichzeitig Kopf zur selben Seite neigen. Zurück: Ellbogen beugen und Kopf zur Gegenseite neigen. Rhythmisch hin und her, nie halten. Die Bewegung ist ein Gleiten, keine Dehnung – nur leichter Zug, nie Schmerz. Ulnaris- und Radialis-Varianten von der Physio zeigen lassen. Wichtig: Kein Einschießen, kein zunehmendes Kribbeln. Wenn doch: sofort aufhören, nicht mehr in dieser Woche.",
+      rest: 0,
+      caution: true,
+      instructions: "Arm seitlich auf Schulterhöhe, Ellbogen gebeugt, Handfläche zum Ohr. Ellbogen strecken, Handgelenk nach hinten kippen, Kopf zur selben Seite neigen. Zurück: beugen, Kopf zur Gegenseite. Nie halten, nur leichter Zug. Radialis-Variante von der Physio zeigen lassen. Wichtig: Kein Einschießen, kein zunehmendes Kribbeln. Wenn doch: sofort aufhören und erst wieder, wenn es 2 Tage ruhig ist – sonst Physio fragen.",
       imageUrl: "/exercise-images/medianus-glide.svg"
     }
   ]
@@ -678,13 +691,13 @@ export const morningWorkoutPlan: WorkoutPlan = {
   exercises: [
     {
       id: 1,
-      name: "Lymphatisches Hüpfen",
+      name: "Lockeres Hüpfen",
       sets: 1,
       reps: 1, // 1 Minute
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Locker auf den Fußballen hüpfen, Knie weich, Arme hängen entspannt. Beim Hochspringen einatmen, beim Landen ausatmen – durch die Nase. Schultern bleiben unten und locker. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Locker auf den Fußballen hüpfen, Knie weich, Arme hängen entspannt. Ruhig durch die Nase atmen, nicht im Hüpf-Takt. Schultern bleiben unten und locker. Die ganze Routine 100 % durch die Nase atmen.",
       imageUrl: "/exercise-images/morgen-huepfen.svg"
     },
     {
@@ -695,7 +708,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Sanfte Wellenbewegung von Becken über Bauch und Brust bis zum Kopf für eine geschmeidige Wirbelsäule. Die Welle vor allem durch den mittleren Rücken (BWS) laufen lassen, der Nacken folgt nur locker, kein Kopfnicken. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Sanfte Wellenbewegung von Becken über Bauch und Brust bis zum Kopf. Die Welle vor allem durch den mittleren Rücken (BWS) laufen lassen, der Nacken folgt nur locker, kein Kopfnicken.",
       imageUrl: "/exercise-images/bodywaves.svg"
     },
     {
@@ -706,7 +719,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Arme locker vor dem Körper kreuzen und weit nach hinten öffnen. Öffnet den Brustkorb und befreit die Schultern. Schwung aus dem Oberkörper, nicht reißen. Wichtig: Zieht oder kribbelt es im rechten Arm, Bewegung kleiner machen. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Arme locker vor dem Körper kreuzen und weit nach hinten öffnen, die Brust geht dabei mit auf. Schwung aus dem Oberkörper, nicht reißen. Wichtig: Zieht oder kribbelt es im rechten Arm, Bewegung kleiner machen.",
       imageUrl: "/exercise-images/armswings.svg"
     },
     {
@@ -717,7 +730,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Hüftbreit stehen, Oberkörper locker nach links und rechts drehen, die Arme schwingen mit. Rumpfrotation zur Aktivierung des Rückens. Die Drehung kommt aus der BWS, Knie weich, Becken bleibt ruhig. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Hüftbreit stehen, Oberkörper locker nach links und rechts drehen, die Arme schwingen mit. Die Drehung kommt aus der BWS, Knie weich, Becken bleibt ruhig.",
       imageUrl: "/exercise-images/trunk-twists.svg"
     },
     {
@@ -728,7 +741,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Kleine Hopser, bei denen sich Hüfte und Beine zur einen Seite drehen und der Oberkörper zur anderen. Dynamisch, aber leichtfüßig landen. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Kleine Hopser, bei denen sich Hüfte und Beine zur einen Seite drehen und der Oberkörper zur anderen. Klein und weich springen; bei Ziehen im Rücken ohne Hüpfen drehen.",
       imageUrl: "/exercise-images/hip-twist-hops.svg"
     },
     {
@@ -739,18 +752,18 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Arme komplett locker hängen lassen und aus Schultern und Oberkörper ausschütteln. Schüttelt festgefahrene Spannung aus den Armen. Schultern dabei bewusst weg von den Ohren sinken lassen. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Arme komplett locker hängen lassen und aus Schultern und Oberkörper ausschütteln, Hände und Finger schwingen locker mit. Schultern dabei bewusst weg von den Ohren sinken lassen.",
       imageUrl: "/exercise-images/dead-arms.svg"
     },
     {
       id: 7,
-      name: "Golferswings",
+      name: "Golfschwung",
       sets: 1,
       reps: 1, // 1 Minute
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Wie beim Golfschwung diagonal von unten-seitlich nach oben über die andere Schulter schwingen, Gewicht verlagert sich mit. Befreit die Diagonalketten des Körpers. Beide Seiten gleich oft. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Wie beim Golfschwung diagonal von unten-seitlich nach oben über die andere Schulter schwingen, Gewicht verlagert sich mit. Knie weich, Schwung aus Hüfte und Oberkörper. Beide Seiten gleich oft.",
       imageUrl: "/exercise-images/golferswings.svg"
     },
     {
@@ -761,7 +774,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Am Stand marschieren, Knie heben und mit der gegengleichen Hand antippen. Kreuzbewegungen zur Gehirn-Synchronisation. Aufrecht bleiben, Kinn leicht zurück. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Am Stand marschieren, Knie heben und mit der gegengleichen Hand antippen. Ruhiges, gleichmäßiges Tempo. Aufrecht bleiben, Kinn leicht zurück.",
       imageUrl: "/exercise-images/standard-march.svg"
     },
     {
@@ -772,7 +785,7 @@ export const morningWorkoutPlan: WorkoutPlan = {
       unit: 'minutes',
       weight: 0,
       rest: 10,
-      instructions: "Breiter Stand, Füße und Knie nach außen gedreht, langsam tief in die Hocke und wieder hoch. Kräftigt Beine und Beckenboden in tiefer Öffnung. Knie zeigen in Richtung der Zehen, Rücken lang. Die ganze Routine 100 % durch die Nase atmen.",
+      instructions: "Breiter Stand, Füße und Knie nach außen gedreht, langsam in die Hocke und wieder hoch – nur so tief, wie es angenehm ist. Knie zeigen in Richtung der Zehen, Rücken lang.",
       imageUrl: "/exercise-images/ballet-squat.svg"
     },
     {
@@ -782,8 +795,8 @@ export const morningWorkoutPlan: WorkoutPlan = {
       reps: 1, // 1 Minute
       unit: 'minutes',
       weight: 0,
-      rest: 10,
-      instructions: "Tief und breit stehen wie im Reitersitz, Hüfte bewusst nach vorne und hinten rollen, locker in Bewegung bleiben. Oberkörper aufrecht, Schultern entspannt. Die ganze Routine 100 % durch die Nase atmen.",
+      rest: 0,
+      instructions: "Tief und breit stehen wie im Reitersitz, Hüfte bewusst nach vorne und hinten rollen, locker in Bewegung bleiben. Oberkörper aufrecht, Schultern entspannt.",
       imageUrl: "/exercise-images/horse-stance.svg"
     }
   ]

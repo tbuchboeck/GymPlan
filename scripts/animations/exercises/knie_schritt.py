@@ -93,6 +93,6 @@ def build():
         caption("Absenken – hinteres Knie zum Boden", 5.7, 6.6),
         caption("Kurz halten – Oberkörper aufrecht", 6.6, 7.2),
         caption("Über die vordere Ferse zurück", 7.2, 9.0),
-        static_text("Oberkörper aufrecht – vorderes Knie über dem Knöchel", 200, 24, 13, MUTED),
+        static_text("Oberkörper aufrecht – vorderes Knie über dem Knöchel", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, fps=12, title="Knie Schritt (Ausfallschritt)")

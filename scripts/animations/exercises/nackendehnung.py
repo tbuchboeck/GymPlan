@@ -228,8 +228,8 @@ def build():
         Prim("circle", {"cx": 352, "cy": 150, "r": R, "fill": "none", "stroke": GOOD, "stroke-width": 4,
                         "stroke-dasharray": f"{circ:.1f}", "stroke-linecap": "round",
                         "transform": "rotate(-90 352 150)"}, ring),
-        static_text("30 s", 352, 154, 11, TEXT, weight="600"),
-        static_text("halten", 352, 180, 11, MUTED),
+        static_text("30 s", 352, 154, 12, TEXT, weight="600"),
+        static_text("halten", 352, 180, 12, MUTED),
     ])
 
     def caps(off, hand, seite, achsel):
@@ -245,7 +245,7 @@ def build():
         scene,
         caption_band(),
         timer,
-        static_text("Nicht am Kopf ziehen – Schulter bleibt unten", 200, 24, 13, MUTED),
+        static_text("Nicht am Kopf ziehen – Schulter bleibt unten", 200, 24, LEAD_SIZE, MUTED),
         *caps(0.0, "Rechte", "linken", "linke"),
         *caps(T, "Linke", "rechten", "rechte"),
     ]

@@ -67,13 +67,13 @@ def build():
         main,
         Prim("line", {"x1": gx - 12, "y1": gy, "x2": 92, "y2": gy, "stroke": GOOD, "stroke-width": 1.2,
                       "stroke-dasharray": "2 3", "opacity": 0.8}),
-        static_text("Ellbogen", 62, gy - 4, 11, GOOD),
-        static_text("bleibt fix", 62, gy + 9, 11, GOOD),
+        static_text("Ellbogen", 62, gy - 4, 12, GOOD),
+        static_text("bleibt fix", 62, gy + 9, 12, GOOD),
         caption_band(),
         caption("Arme lang, Handflächen nach vorn", 0, 0.7),
         caption("Ausatmen – hochcurlen", 0.7, 1.9),
         caption("Oben kurz anspannen", 1.9, 2.5),
         caption("Einatmen – langsam absenken", 2.5, 4.8),
-        static_text("Ellbogen am Körper – nicht schwingen", 200, 24, 13, MUTED),
+        static_text("Ellbogen am Körper – nicht schwingen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Bizeps Curls mit Kurzhanteln")

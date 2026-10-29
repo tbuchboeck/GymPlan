@@ -70,6 +70,6 @@ def build():
         caption("Ausatmen – Oberkörper aufrollen", 0.6, 2.1),
         caption("Oben kurz halten – Bauch fest", 2.1, 2.7),
         caption("Einatmen – langsam abrollen", 2.7, 4.9),
-        static_text("Langsam aufrollen – ohne Schwung", 200, 24, 13, MUTED),
+        static_text("Langsam aufrollen – ohne Schwung", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Sit-ups mit Kurzhantel")

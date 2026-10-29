@@ -117,20 +117,20 @@ def build():
         Prim("line", {"x1": ix + 8, "y1": iy + 52 + 0.42 * 82, "x2": ix + iw - 8, "y2": iy + 52 + 0.42 * 82,
                       "stroke": FLOOR, "stroke-width": 2}),
         inset,
-        static_text("von vorn: breit", ix + iw / 2, iy + ih - 6, 10, MUTED),
+        static_text("von vorn: breit", ix + iw / 2, iy + ih - 6, 12, MUTED),
     ]
 
     prims = [
         floor(FLOOR_Y + 1, 120, 360),
         *inset_box,
         main,
-        label("Steißbein unter", 142, 222, 0, 1.3, size=11, anchor="end"),
-        label("Po leicht raus", 142, 222, 1.3, 2.9, size=11, anchor="end"),
+        label("Steißbein unter", 142, 222, 0, 1.3, size=12, anchor="end"),
+        label("Po leicht raus", 142, 222, 1.3, 2.9, size=12, anchor="end"),
         caption_band(),
         caption("Becken nach vorne rollen", 0, 1.3),
         caption("Becken nach hinten rollen", 1.3, 2.9),
         caption("Locker weiter – Oberkörper bleibt ruhig", 2.9, dur),
-        static_text("Tief & breit – Schultern entspannt", 200, 24, 13, MUTED),
+        static_text("Tief & breit – Schultern entspannt", 200, 24, LEAD_SIZE, MUTED),
         nose_hint(dur=dur),
     ]
     return render(prims, tl, SIDE, title="Horse Stance", fps=15)

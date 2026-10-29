@@ -126,6 +126,6 @@ def build():
         caption("Step-Touch – locker zur Seite", 0, 2.0),
         caption("Arme hoch – im Takt mitwippen", 2.0, 4.0),
         caption("Disco-Point – einfach Spaß haben!", 4.0, DUR),
-        static_text("Locker bewegen – Musik genießen", 200, 24, 13, MUTED),
+        static_text("Locker bewegen – Musik genießen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, FRONT, title="Tanzen", fps=15)

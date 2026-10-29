@@ -67,12 +67,12 @@ def build():
             Prim("text", {"x": ex + 34, "y": ey - 72, "font-size": 12, "fill": ACCENT, "font-weight": "600",
                           "text-anchor": "middle"}, text="Ellbogen eng nach hinten"),
         ]),
-        static_text("Körper bleibt gerade", 62, 150, 11, GOOD, anchor="start"),
+        static_text("Körper bleibt gerade", 62, 150, 12, GOOD, anchor="start"),
         caption_band(),
         caption("Liegestütz – Hände unter den Schultern", 0, 0.6),
         caption("Einatmen – langsam absenken", 0.6, 2.0),
         caption("Arme eng am Körper", 2.0, 2.5),
         caption("Ausatmen – hochdrücken", 2.5, 4.3),
-        static_text("Ellbogen streifen die Rippen – nicht nach außen", 200, 24, 13, MUTED),
+        static_text("Ellbogen streifen die Rippen – nicht nach außen", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Trizeps-Liegestütze")

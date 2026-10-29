@@ -35,15 +35,13 @@ export function calculateExtendedStatistics(sessions: WorkoutSession[]): Extende
   const totalWorkouts = sessions.length;
   const totalMinutes = sessions.reduce((sum, s) => sum + s.duration, 0);
 
+  // Kalenderwoche (Mo–So) und Kalendermonat, jeweils lokal
   const now = new Date();
-  const weekAgo = new Date(now);
-  weekAgo.setDate(weekAgo.getDate() - 7);
-
-  const monthAgo = new Date(now);
-  monthAgo.setDate(monthAgo.getDate() - 30);
-
-  const thisWeek = sessions.filter(s => new Date(s.date) >= weekAgo).length;
-  const thisMonth = sessions.filter(s => new Date(s.date) >= monthAgo).length;
+  const thisWeek = sessions.filter(s => isInWeekOf(new Date(s.date), now)).length;
+  const thisMonth = sessions.filter(s => {
+    const d = new Date(s.date);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  }).length;
 
   // Durchschnittliche Dauer
   const averageDuration = totalWorkouts > 0 ? Math.round(totalMinutes / totalWorkouts) : 0;
@@ -86,77 +84,31 @@ export function calculateExtendedStatistics(sessions: WorkoutSession[]): Extende
 }
 
 function calculateStreaks(sessions: WorkoutSession[]): { currentStreak: number; longestStreak: number } {
-  if (sessions.length === 0) {
+  // Einzigartige Trainingstage als fortlaufende Tagesnummern (lokal)
+  const days = Array.from(new Set(sessions.map(s => dayNumber(localDayKey(new Date(s.date))))))
+    .sort((a, b) => b - a); // neueste zuerst
+
+  if (days.length === 0) {
     return { currentStreak: 0, longestStreak: 0 };
   }
 
-  // Sortiere Sessions nach Datum (neueste zuerst)
-  const sortedSessions = [...sessions].sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
-  // Extrahiere einzigartige Tage (mehrere Workouts am selben Tag = 1 Tag)
-  const uniqueDays = new Set<string>();
-  sortedSessions.forEach(session => {
-    const dateStr = new Date(session.date).toISOString().split('T')[0];
-    uniqueDays.add(dateStr);
-  });
-
-  const sortedDays = Array.from(uniqueDays).sort().reverse(); // Neueste zuerst
-
-  if (sortedDays.length === 0) {
-    return { currentStreak: 0, longestStreak: 0 };
-  }
-
-  // Berechne Current Streak
+  // Aktuelle Serie: muss heute oder gestern beginnen
+  const today = dayNumber(localDayKey(new Date()));
   let currentStreak = 0;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  const todayStr = today.toISOString().split('T')[0];
-  const yesterdayStr = yesterday.toISOString().split('T')[0];
-
-  // Streak kann heute oder gestern starten
-  if (sortedDays[0] !== todayStr && sortedDays[0] !== yesterdayStr) {
-    currentStreak = 0;
-  } else {
+  if (days[0] === today || days[0] === today - 1) {
     currentStreak = 1;
-    const expectedDate = new Date(sortedDays[0]);
-
-    for (let i = 1; i < sortedDays.length; i++) {
-      expectedDate.setDate(expectedDate.getDate() - 1);
-      const expectedStr = expectedDate.toISOString().split('T')[0];
-
-      if (sortedDays[i] === expectedStr) {
-        currentStreak++;
-      } else {
-        break;
-      }
+    for (let i = 1; i < days.length && days[i] === days[i - 1] - 1; i++) {
+      currentStreak++;
     }
   }
 
-  // Berechne Longest Streak
-  let longestStreak = 0;
+  // Längste Serie
+  let longestStreak = 1;
   let tempStreak = 1;
-
-  for (let i = 1; i < sortedDays.length; i++) {
-    const prevDate = new Date(sortedDays[i - 1]);
-    const currDate = new Date(sortedDays[i]);
-
-    const dayDiff = Math.floor((prevDate.getTime() - currDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (dayDiff === 1) {
-      tempStreak++;
-    } else {
-      longestStreak = Math.max(longestStreak, tempStreak);
-      tempStreak = 1;
-    }
+  for (let i = 1; i < days.length; i++) {
+    tempStreak = days[i] === days[i - 1] - 1 ? tempStreak + 1 : 1;
+    longestStreak = Math.max(longestStreak, tempStreak);
   }
-
-  longestStreak = Math.max(longestStreak, tempStreak);
 
   return { currentStreak, longestStreak };
 }
@@ -221,20 +173,11 @@ function calculateWorkoutsByWeekday(sessions: WorkoutSession[]): { day: string; 
 }
 
 function calculateWorkoutsOverTime(sessions: WorkoutSession[]): { date: string; count: number; totalMinutes: number }[] {
-  if (sessions.length === 0) {
-    return [];
-  }
-
-  // Gruppiere Sessions nach Woche (ISO-Woche)
+  // Gruppiere nach Woche; Schlüssel = lokaler Montag als YYYY-MM-DD
   const weeklyData = new Map<string, { count: number; totalMinutes: number }>();
 
   sessions.forEach(session => {
-    const date = new Date(session.date);
-
-    // Berechne ISO-Wochennummer und Jahr
-    const weekStart = getMonday(date);
-    const weekKey = weekStart.toISOString().split('T')[0];
-
+    const weekKey = localDayKey(startOfWeek(new Date(session.date)));
     const existing = weeklyData.get(weekKey) || { count: 0, totalMinutes: 0 };
     weeklyData.set(weekKey, {
       count: existing.count + 1,
@@ -242,29 +185,61 @@ function calculateWorkoutsOverTime(sessions: WorkoutSession[]): { date: string; 
     });
   });
 
-  // Konvertiere zu Array und sortiere nach Datum
-  const result = Array.from(weeklyData.entries())
-    .map(([date, data]) => ({
-      date: formatWeekLabel(date),
+  // Erst nach ISO-Schlüssel sortieren, dann Label formatieren; nur letzte 12 Wochen
+  return Array.from(weeklyData.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .slice(-12)
+    .map(([key, data]) => ({
+      date: formatWeekLabel(key),
       count: data.count,
       totalMinutes: data.totalMinutes,
-    }))
-    .sort((a, b) => a.date.localeCompare(b.date));
-
-  // Nimm nur die letzten 12 Wochen
-  return result.slice(-12);
+    }));
 }
 
-function getMonday(date: Date): Date {
+/** Lokaler Tagesschlüssel YYYY-MM-DD (nie toISOString – das wäre UTC). */
+export function localDayKey(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+/** Fortlaufende Tagesnummer zu einem Tagesschlüssel (sommerzeitsicher). */
+function dayNumber(key: string): number {
+  const [y, m, d] = key.split('-').map(Number);
+  return Math.round(Date.UTC(y, m - 1, d) / 86_400_000);
+}
+
+/** Montag 00:00 Ortszeit der Woche, in der `date` liegt. */
+export function startOfWeek(date: Date): Date {
   const d = new Date(date);
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Anpassung für Sonntag
-  return new Date(d.setDate(diff));
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay(); // 0 = Sonntag
+  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+  return d;
 }
 
-function formatWeekLabel(dateStr: string): string {
-  const date = new Date(dateStr);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+/** Index 0–6 (Mo–So) des Wochentags, lokal. */
+export function weekdayIndex(date: Date): number {
+  return (date.getDay() + 6) % 7;
+}
+
+/** Liegt `date` in derselben Kalenderwoche (Mo–So) wie `ref`? */
+export function isInWeekOf(date: Date, ref: Date = new Date()): boolean {
+  return localDayKey(startOfWeek(date)) === localDayKey(startOfWeek(ref));
+}
+
+/** Liegt `date` am selben lokalen Kalendertag wie `ref`? */
+export function isSameLocalDay(date: Date, ref: Date = new Date()): boolean {
+  return localDayKey(date) === localDayKey(ref);
+}
+
+/** „1 Tag“ bzw. „n Tage“ */
+export function formatDayCount(n: number): string {
+  return n === 1 ? '1 Tag' : `${n} Tage`;
+}
+
+function formatWeekLabel(key: string): string {
+  const [, month, day] = key.split('-');
   return `${day}.${month}`;
 }

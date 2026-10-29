@@ -61,7 +61,7 @@ def dyn_line(fn, color=GOOD, width=2, dash="5 5", opacity=0.8, show=None):
     return p
 
 
-def tempo_chip(parts, x=200, y=44, size=11):
+def tempo_chip(parts, x=200, y=44, size=12):
     """Kleine Tempo-Zeile; parts = [(text, t0, t1)], aktiver Teil leuchtet."""
     out = []
     total = sum(len(p[0]) for p in parts) + 3 * (len(parts) - 1)

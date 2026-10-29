@@ -164,8 +164,8 @@ def arm_inset():
               dx=IN_X + 40 - cx, dy=IN_Y + 66 - cy)
     clip = Prim("g", {"clip-path": "url(#clipArm)"}, children=[
         Prim("rect", {"x": IN_X, "y": IN_Y, "width": IN_W, "height": IN_H, "fill": "#0b1220", "opacity": 0.8}), g])
-    return [clip, static_text("Ellbogen auf Schulterhöhe", IN_X + IN_W / 2, IN_Y + 12, 9, GOOD),
-            static_text("Unterarm senkrecht", IN_X + IN_W / 2, IN_Y + 23, 9, GOOD)]
+    return [clip, static_text("Ellbogen auf Schulterhöhe", IN_X + IN_W / 2, IN_Y + 12, 12, GOOD),
+            static_text("Unterarm senkrecht", IN_X + IN_W / 2, IN_Y + 23, 12, GOOD)]
 
 
 def build():
@@ -192,10 +192,10 @@ def build():
         caption("Brust zieht – 30 s ruhig atmen", 3.4, 7.6),
         caption("Langsam zurück", 7.6, 9.6),
         label("Schulter bleibt unten", 16, 238, 3.4, 7.6),
-        static_text("Wand", 24, 111, 10, MUTED, anchor="start"),
-        static_text("Türrahmen", 302, 111, 10, MUTED, anchor="start"),
-        static_text("von oben", 16, 46, 11, MUTED, anchor="start"),
-        static_text("Kribbeln im Arm? Spannung sofort lösen", 200, 22, 12, MUTED),
+        static_text("Wand", 24, 111, 12, MUTED, anchor="start"),
+        static_text("Türrahmen", 302, 111, 12, MUTED, anchor="start"),
+        static_text("von oben", 16, 46, 12, MUTED, anchor="start"),
+        static_text("Kribbeln im Arm? Spannung sofort lösen", 200, 22, LEAD_SIZE, MUTED),
     ]
     clip = (f'<clipPath id="clipArm"><rect x="{IN_X}" y="{IN_Y}" width="{IN_W}" height="{IN_H}" rx="8"/>'
             '</clipPath>')

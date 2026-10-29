@@ -7,6 +7,7 @@ interface ExerciseCardProps {
   currentSet: number;
   onSetComplete: () => void;
   onStartTimer: () => void;
+  onAbort?: () => void;
   exerciseNumber: number;
 }
 
@@ -15,10 +16,12 @@ export function ExerciseCard({
   currentSet,
   onSetComplete,
   onStartTimer,
+  onAbort,
   exerciseNumber,
 }: ExerciseCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   const timerSeconds = holdSeconds(exercise);
+  const showImage = !!exercise.imageUrl && !imageFailed;
 
   return (
     <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 overflow-hidden animate-fade-in">
@@ -36,23 +39,24 @@ export function ExerciseCard({
         </div>
       </div>
 
-      {/* Exercise Image */}
-      {exercise.imageUrl && (
-        <div className={`bg-slate-800 p-3 ${imageLoaded ? '' : 'hidden'}`}>
-          <img
-            src={exercise.imageUrl}
-            alt={exercise.name}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(false)}
-            className="w-full max-h-72 object-contain rounded-lg mx-auto"
-          />
+      {/* Exercise Image – Platz reserviert, damit beim Laden nichts springt */}
+      {showImage && (
+        <div className="bg-slate-800 p-3">
+          <div className="w-full aspect-[4/3] max-h-72 mx-auto flex items-center justify-center">
+            <img
+              src={exercise.imageUrl}
+              alt={exercise.name}
+              onError={() => setImageFailed(true)}
+              className="max-w-full max-h-full object-contain rounded-lg"
+            />
+          </div>
         </div>
       )}
 
       {/* Instructions */}
       {exercise.instructions && (
         <div className="mx-4 mt-3 bg-slate-800 border-l-2 border-indigo-400 px-4 py-2 rounded-r-lg">
-          <p className="text-sm text-slate-300">{exercise.instructions}</p>
+          <p className="text-base text-slate-300">{exercise.instructions}</p>
         </div>
       )}
 
@@ -90,8 +94,9 @@ export function ExerciseCard({
         {/* Countdown for timed exercises (optional) */}
         {timerSeconds !== null && (
           <button
+            type="button"
             onClick={onStartTimer}
-            className="w-full mb-2 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
+            className="w-full mb-2 min-h-12 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
           >
             ▶ Timer starten ({formatAmount(exercise)})
           </button>
@@ -99,11 +104,23 @@ export function ExerciseCard({
 
         {/* Action button */}
         <button
+          type="button"
           onClick={onSetComplete}
-          className="w-full bg-indigo-500 hover:bg-indigo-400 text-white py-3 rounded-xl font-semibold transition-colors"
+          className="w-full min-h-14 bg-indigo-500 hover:bg-indigo-400 text-white text-lg py-4 rounded-xl font-semibold transition-colors"
         >
           Fertig ✓
         </button>
+
+        {/* Nerven-/Dehnübung: sofort abbrechen können */}
+        {exercise.caution && onAbort && (
+          <button
+            type="button"
+            onClick={onAbort}
+            className="w-full mt-3 min-h-11 px-4 py-2 rounded-xl border border-red-500/50 bg-red-500/10 hover:bg-red-500/20 text-red-300 font-medium transition-colors"
+          >
+            Kribbelt / zieht – abbrechen
+          </button>
+        )}
       </div>
     </div>
   );
