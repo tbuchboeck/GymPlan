@@ -5,6 +5,7 @@ Enthält auch die Helfer (Hand, Nerv, Skelett mit Verkürzung), die
 medianus_glide.py mitbenutzt.
 """
 import math
+import re
 
 from rig import *
 
@@ -156,6 +157,46 @@ def upper_body(active="L", hand_extra_front=()):
     return prims
 
 
+_NUM = re.compile(r"-?\d+(?:\.\d+)?")
+_ANIM = re.compile(r'<animate attributeName="([^"]+)" values="([^"]*)" dur="([^"]+)" repeatCount="indefinite"/>')
+
+
+def compact(svg, tol=0.35):
+    """Verkleinert die Ausgabe von render(): Frame-Werte, die sich linear aus
+    den Nachbarn ergeben (Abweichung < tol), werden weggelassen; die übrigen
+    bekommen keyTimes. Animationen ohne gleiche Zahlenstruktur bleiben."""
+    def shrink(m):
+        attr, vals, dur = m.group(1), m.group(2).split(";"), m.group(3)
+        n = len(vals) - 1
+        skel = [_NUM.sub("#", v) for v in vals]
+        if n < 3 or len(set(skel)) != 1:
+            return m.group(0)
+        nums = [[float(x) for x in _NUM.findall(v)] for v in vals]
+        tl = 0.02 if "opacity" in attr else tol
+        keep, i = [0], 0
+        while i < n:
+            j = i + 2
+            while j <= n:
+                ok = True
+                for k in range(i + 1, j):
+                    u = (k - i) / (j - i)
+                    if any(abs(a + (b - a) * u - c) > tl for a, b, c in zip(nums[i], nums[j], nums[k])):
+                        ok = False
+                        break
+                if not ok:
+                    break
+                j += 1
+            i = j - 1
+            keep.append(i)
+        if len(keep) > len(vals) * 0.85:
+            return m.group(0)
+        kt = ";".join(f"{k / n:.4f}".rstrip("0").rstrip(".") if k else "0" for k in keep)
+        vs = ";".join(vals[k] for k in keep)
+        return (f'<animate attributeName="{attr}" values="{vs}" keyTimes="{kt}" dur="{dur}" '
+                f'repeatCount="indefinite"/>')
+    return _ANIM.sub(shrink, svg)
+
+
 def captions2(items):
     out = []
     for main, sub, t0, t1 in items:
@@ -261,4 +302,4 @@ def build():
              ]),
              static_text(TOP_HINT, 200, 24, 13, MUTED)]
     clip = '<clipPath id="clipU"><rect x="0" y="0" width="400" height="258"/></clipPath>'
-    return render(prims, tl, SK, fps=12, title="Nerve Glide Ulnaris (rechts)", extra_defs=clip)
+    return compact(render(prims, tl, SK, fps=15, title="Nerve Glide Ulnaris (rechts)", extra_defs=clip))

@@ -34,7 +34,7 @@ def thumb(fore, hand, col):
         x, y, _ = grip_point(c["P"], hand)
         a = math.radians(c["P"][fore][4] + 90)
         return {"cx": x + 5.5 * math.cos(a), "cy": y - 5.5 * math.sin(a)}
-    return Prim("circle", {"r": 3.2, "fill": col, "stroke": SKIN_LINE, "stroke-width": 1.3}, f)
+    return Prim("circle", {"r": 3.8, "fill": HEAD if col == NEAR else col, "stroke": SKIN_LINE, "stroke-width": 1.3}, f)
 
 
 def build():
@@ -46,7 +46,7 @@ def build():
                   iks=iks, skeleton=SIDE)
 
     def db(hand, fore, col, dark, fcol, fr):
-        return (dumbbell_inplane(grip(hand), axis(fore), half=12, plate=17, color=col, dark=dark)
+        return (dumbbell_inplane(grip(hand), axis(fore), half=13, plate=16, color=col, dark=dark)
                 + [fist_prim(grip(hand), fcol, fr), thumb(fore, hand, fcol)])
 
     far_db = db("hand_f", "forearm_f", PLATE_F, "#334155", FAR, 5.5)
@@ -76,7 +76,7 @@ def build():
     hx, hy = CX + (hx - CX) * SC, FLOOR_Y + (hy - FLOOR_Y) * SC
     prims = [
         main,
-        Prim("g", {"_show": [(1.7, 3.0)]}, children=[
+        Prim("g", {"_show": [(1.9, 3.0)]}, children=[
             Prim("path", {"d": f"M{hx + 52:.1f} {hy - 14:.1f}Q{hx + 24:.1f} {hy - 30:.1f} {hx + 4:.1f} {hy - 16:.1f}",
                           "fill": "none", "stroke": ACCENT, "stroke-width": 1.8, "marker-end": "url(#arrowhead)"}),
             Prim("text", {"x": hx + 56, "y": hy - 8, "font-size": 12, "fill": ACCENT, "font-weight": "600"},

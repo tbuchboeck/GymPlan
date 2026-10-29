@@ -139,3 +139,48 @@ def weight_stack(x, top_y, bottom_y, lift, n=9, sel=3, w=32, plate_h=8, label=No
     if label:
         prims.append(static_text(label, x, bottom_y + 0, 10, MUTED))
     return prims, pulley
+
+
+# --- Figur mit klar sichtbaren Gelenken -------------------------------------
+
+def joint_points(P, names):
+    """Wie chain_points, aber innere Gelenke doppelt -> deutlicher Knick
+    (Knie/Ellbogen), statt dass smooth_path ihn wegrundet."""
+    pts = [pt(P, names[0], end=False)]
+    for i, n in enumerate(names):
+        pts.append(pt(P, n))
+        if i < len(names) - 1:
+            pts.append(pt(P, n))
+    return pts
+
+
+def limb_j(names, width, color, outline=True) -> list[Prim]:
+    out = []
+    f = lambda c, n=names: {"d": smooth_path(joint_points(c["P"], n))}
+    if outline:
+        out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"}, f))
+    return out
+
+
+def side_fig(torso_w=30, head=True, extras_behind=(), extras_mid=(), extras_front=(),
+             far_leg=True, far_arm=True) -> list[Prim]:
+    """side_figure mit sichtbaren Knie-/Ellbogenknicken. extras_mid liegt
+    zwischen Rumpf und nahen Gliedern (z. B. Polster an der nahen Seite)."""
+    prims: list[Prim] = list(extras_behind)
+    if far_leg:
+        prims += limb_j(["thigh_f", "shin_f", "foot_f"], 15, FAR)
+    if far_arm:
+        prims += limb_j(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
+    prims += limb(["neck"], 13, TORSO)
+    prims += limb(["lumbar", "thorax"], torso_w, TORSO)
+    prims += limb(["thorax", "chest"], torso_w - 4, TORSO, outline=False)
+    if head:
+        prims += head_side()
+    prims += list(extras_mid)
+    prims += limb_j(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
+    prims += limb_j(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    prims += list(extras_front)
+    return prims

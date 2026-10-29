@@ -8,6 +8,11 @@ SLUG = "kreuzheben"
 # (upperarm = -rot), die Hanteln gleiten dicht an Oberschenkel/Schienbein.
 
 FLOOR_Y = 250
+
+# Eigene Proportionen: etwas kürzerer Rumpf, längere Oberschenkel – sonst
+# hängen die Hanteln bei der Hüftbeuge weit vor dem Bein (Rig-Rumpf ist lang).
+_LEN = {"lumbar": 23, "thorax": 23, "chest": 24, "thigh_n": 53, "thigh_f": 53}
+SK = Skeleton([Seg(s.name, s.parent, _LEN.get(s.name, s.length), s.rest) for s in SIDE.segs])
 SC = 0.9
 ANK_N = (196, FLOOR_Y - 8)
 ANK_F = (190, FLOOR_Y - 8)
@@ -18,15 +23,15 @@ def hang(rot, spine=0.0):
     return dict(upperarm_n=-rot - spine + 3, upperarm_f=-rot - spine + 1, forearm_n=-3, forearm_f=-2)
 
 
-STAND = dict(x=194, y=FLOOR_Y - 8 - 97, rot=0, neck=2, head=0, **hang(0))
-HINGE = dict(x=150, y=FLOOR_Y - 8 - 86, rot=-50, lumbar=2, thorax=-2, chest=0, neck=14, head=4, **hang(-50))
+STAND = dict(x=194, y=FLOOR_Y - 8 - 100, rot=0, neck=2, head=0, **hang(0))
+HINGE = dict(x=156, y=FLOOR_Y - 8 - 87, rot=-58, lumbar=2, thorax=-2, chest=0, neck=14, head=4, **hang(-58))
 
 
 def hand_on_leg(side, reach=64.0, gap=14.0):
     """IK-Ziel für das Handgelenk: Punkt vor der Beinvorderseite im Abstand
     `reach` von der Schulter – so gleiten die Hanteln am Bein entlang."""
     def f(pose):
-        P = SIDE.fk(pose)
+        P = SK.fk(pose)
         sx, sy = pt(P, "chest")
         legs = [pt(P, "thigh_" + side, False), pt(P, "thigh_" + side), pt(P, "shin_" + side)]
         ty = sy + reach * 0.97
@@ -52,7 +57,7 @@ def build():
         IK("upperarm_f", "forearm_f", hand_on_leg("f", gap=12.0), bend=-1),
     ]
     tl = Timeline([(0, STAND), (0.8, STAND), (2.8, HINGE), (3.5, HINGE), (5.0, STAND), (5.8, STAND)],
-                  iks=iks, skeleton=SIDE)
+                  iks=iks, skeleton=SK)
 
     def back_line(c):
         P = c["P"]
@@ -81,7 +86,7 @@ def build():
     )
     stage = [
         Prim("rect", {"x": 120, "y": FLOOR_Y - 2, "width": 160, "height": 5, "rx": 2.5, "fill": "#3f4a7a"}),
-        ghost(side_fig(head=True), SIDE, tl.at(0), 0.13),
+        ghost(side_fig(head=True), SK, tl.at(0), 0.13),
         *figure,
         Prim("ellipse", {"rx": 9, "ry": 17, "fill": ACCENT, "opacity": 0.35, "_pulse": True,
                          "_show": [(0.8, 5.0)]}, ham),
@@ -95,8 +100,8 @@ def build():
     prims = [
         floor(FLOOR_Y + 2, 20, 380),
         group(stage, scale=SC, origin=(200, FLOOR_Y + 2)),
-        label("Rücken gerade", 300, 92, 2.8, 3.5, 12, GOOD),
-        label("Hanteln nah am Bein", 300, 160, 2.0, 3.5, 12, ACCENT),
+        label("Rücken gerade", 128, 116, 2.8, 3.5, 12, GOOD),
+        label("Hanteln nah am Bein", 296, 178, 2.0, 3.5, 12, ACCENT),
         caption_band(),
         caption("Stand: Hanteln vor den Oberschenkeln", 0, 0.8),
         caption("Einatmen – Hüfte nach hinten schieben", 0.8, 2.8),
@@ -105,4 +110,4 @@ def build():
         caption("Oben Gesäß anspannen", 5.0, 5.8),
         static_text("Hüfte nach hinten – Rücken neutral", 200, 24, 13, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Kreuzheben mit Kurzhanteln")
+    return render(prims, tl, SK, title="Kreuzheben mit Kurzhanteln")

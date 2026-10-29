@@ -79,7 +79,7 @@ def nose_note(x=350, y=72, text="100 % Nase"):
 # Draufsicht-Inset
 # --------------------------------------------------------------------------
 
-def top_inset(cx, cy, r, get, label="von oben", arms=None):
+def top_inset(cx, cy, r, get, label="von oben", arms=None, sh_frac=0.62, hip_frac=0.5):
     """get(pose) -> (hip_yaw_deg, shoulder_yaw_deg). Gesicht zum Betrachter =
     nach unten im Inset. arms(pose) optional -> [(lat, fwd) Hand L, Hand R]
     in Körperkoordinaten (relativ zur Schultermitte, Rumpfdrehung eingerechnet)."""
@@ -105,20 +105,20 @@ def top_inset(cx, cy, r, get, label="von oben", arms=None):
             return {"cx": cx + fx * rr, "cy": cy + fy * rr}
         return Prim("circle", {"r": 2.6, "fill": color}, f)
 
-    out.append(bar(r * 0.5, 0, NEAR, 5))
+    out.append(bar(r * hip_frac, 0, NEAR, 5))
     if arms is not None:
         def arm_line(i):
             def f(c):
                 pose = c["pose"]
                 yaw = math.radians(get(pose)[1])
-                sh = (-1 if i == 0 else 1) * r * 0.62
+                sh = (-1 if i == 0 else 1) * r * sh_frac
                 sx, sy = cx + sh * math.cos(yaw), cy - sh * math.sin(yaw)
                 lat, fwd = arms(pose)[i]
-                k = r * 0.62 / 24.0
+                k = r * sh_frac / 24.0
                 return {"x1": sx, "y1": sy, "x2": cx + lat * k, "y2": cy + fwd * k}
             return Prim("line", {"stroke": HEAD, "stroke-width": 3, "stroke-linecap": "round", "opacity": 0.9}, f)
         out += [arm_line(0), arm_line(1)]
-    out.append(bar(r * 0.62, 1, TORSO, 6))
+    out.append(bar(r * sh_frac, 1, TORSO, 6))
     out.append(Prim("circle", {"cx": cx, "cy": cy, "r": 5, "fill": HEAD, "stroke": SKIN_LINE, "stroke-width": 1}))
     out.append(nose_tick(1, ACCENT, 8))
     return out
@@ -214,7 +214,7 @@ class Front3D:
             fdx, fz = rot_y(0.0, 1.0, hy + side * pose.get("toe_out", 8.0))
             K = ik3(Hp, A, self.TH, self.SH, (fdx, 0.0, fz))
             g["leg" + key] = [Hp, K, A]
-            toe_len = 13.0
+            toe_len = pose.get("toe_len", 13.0)
             g["foot" + key] = [(A[0], A[1] + 3, A[2]),
                                (A[0] + fdx * toe_len + side * 2, A[1] + 6 + 3 * (1 - abs(fz)), A[2] + fz * toe_len)]
             g["hip" + key] = Hp
@@ -261,7 +261,7 @@ class Front3D:
         out += self._arm_layer("R", False, FAR)
         # Beine (Fuß dahinter, dann Bein)
         for key in ("L", "R"):
-            out += self._stroke(lambda c, k=key: self.geo(c["pose"])["foot" + k], 11, NEAR)
+            out += self._stroke(lambda c, k=key: self.geo(c["pose"])["foot" + k], 12, HEAD)
             out += self._stroke(lambda c, k=key: self.geo(c["pose"])["leg" + k], 16, NEAR)
         # Becken
         def pelvis(c):

@@ -8,8 +8,9 @@ const { chromium } = require('playwright');
   const [svgPath, outPath, framesArg] = process.argv.slice(2);
   const frames = Number(framesArg || 8);
   const svg = fs.readFileSync(svgPath, 'utf8');
-  const durMatch = svg.match(/dur="([\d.]+)s"/);
-  const dur = durMatch ? Number(durMatch[1]) : 4;
+  // Loop-Dauer = längste dur im Dokument (Puls-Effekte sind kürzer)
+  const durs = [...svg.matchAll(/dur="([\d.]+)s"/g)].map((m) => Number(m[1]));
+  const dur = durs.length ? Math.max(...durs) : 4;
   const cells = Array.from({ length: frames }, (_, i) => {
     const t = (dur * i) / frames;
     return `<div class="c"><div class="t">t=${t.toFixed(1)}s</div>${svg.replace(/<\?xml[^>]*>/, '')}</div>`;

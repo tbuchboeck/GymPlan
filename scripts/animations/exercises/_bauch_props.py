@@ -74,7 +74,9 @@ class PinTimeline(Timeline):
 
     def at(self, t):
         pose = self._interp(t)
-        pose = pin_pose(self.skeleton, pose, self.pin, self.joint)
+        if self.pin is not None:
+            pose = pin_pose(self.skeleton, pose, self.pin, self.joint)
+        pose = apply_abs(self.skeleton, pose)
         for ik in self.iks:
             pose = solve_anchor(self.skeleton, pose, ik) if isinstance(ik, Anchor) else solve_ik(self.skeleton, pose, ik)
         return pose
@@ -97,4 +99,22 @@ def pin_pose(skel, pose, pin, joint="chest"):
     out = dict(pose)
     out["rot"] = rot
     out["x"] = pin[0] - L * math.cos(a)
+    return out
+
+
+def apply_abs(skel, pose):
+    """Schlüssel "<segment>@" = absoluter Weltwinkel dieses Segments (statt
+    relativ). Praktisch für Beine, wenn sich das Becken mitdreht."""
+    if not any(k.endswith("@") for k in pose):
+        return pose
+    out = dict(pose)
+    for s in skel.segs:
+        k = s.name + "@"
+        if k in out:
+            P = skel.fk(out)
+            if s.parent is None:
+                pa = out.get("rot", 0.0)
+            else:
+                pa = P[s.parent][4]
+            out[s.name] = out[k] - pa - s.rest
     return out

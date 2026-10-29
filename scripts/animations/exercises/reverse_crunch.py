@@ -7,14 +7,14 @@ SLUG = "reverse-crunch"
 # Knie zur Brust ziehen – das Becken rollt leicht ein und hebt ab, Schultern und
 # Hände bleiben liegen. Langsam zurück, ohne die Füße abzulegen.
 SHOULDER = (160, FLOOR_Y - 15)
-WRIST = (222, FLOOR_Y - 6)
+WRIST = (226, FLOOR_Y - 8)
 
 START = dict(y=FLOOR_Y - 15, rot=90, neck=-8, head=8,
-             thigh_n=42, shin_n=-86, foot_n=-14,
-             thigh_f=38, shin_f=-82, foot_f=-14)
-CURL = dict(START, y=FLOOR_Y - 30, lumbar=-26, thorax=-6, chest=-2, neck=-10, head=8,
-            thigh_n=96, shin_n=-112, foot_n=-6,
-            thigh_f=92, shin_f=-108, foot_f=-6)
+             **{"thigh_n@": 42, "shin_n@": -44, "foot_n@": 18,
+                "thigh_f@": 37, "shin_f@": -40, "foot_f@": 22})
+CURL = dict(START, y=FLOOR_Y - 29, lumbar=-10, thorax=-6, chest=-2, neck=-10, head=8,
+            **{"thigh_n@": 118, "shin_n@": -10, "foot_n@": 52,
+               "thigh_f@": 113, "shin_f@": -6, "foot_f@": 56})
 
 
 def build():

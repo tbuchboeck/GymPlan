@@ -106,10 +106,10 @@ def build():
                   iks=iks, skeleton=SIDE)
 
     # Kabel: Schlitten -> Rolle unter den Knien -> Boden -> hinter dem Turm hoch -> Platten
-    STACK_X = 356
+    STACK_X = 334
     lift = lambda c: TRAVEL * c["pose"].get("push", 0.0)
     stack, pulley = weight_stack(STACK_X, 58, FLOOR_Y, lift, n=10, sel=4, w=30)
-    cable = dpath(lambda c: [(plate_x(c) - 8, 216), (190, 216), (190, 238), (378, 238), (378, 62),
+    cable = dpath(lambda c: [(plate_x(c) - 8, 216), (190, 216), (190, 238), (356, 238), (356, 62),
                              (pulley[0], pulley[1] - 5)], "#cbd5e1", 1.4, opacity=0.8)
     pulleys = [circle(190, 220, 4.5, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.2}),
                circle(190, 234, 4.5, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.2})]
@@ -134,18 +134,20 @@ def build():
         static_text("90°", kx + 4, ky - 20, 12, GOOD, weight="700"),
     ])
     soft = Prim("g", {"_show": [(T[2] - 0.2, T[3] + 0.2)]}, children=[
-        static_text("Knie bleibt weich", kx1 + 2, ky1 - 18, 11, WARN, weight="700"),
+        static_text("Knie bleibt weich", kx1 + 6, ky1 - 30, 11, WARN, weight="700"),
     ])
 
-    figure = side_figure(extras_behind=machine_back() + [cable] + pulleys + stack + sled(),
+    figure = side_fig(extras_behind=machine_back() + [cable] + pulleys + stack + sled(),
                          extras_front=grip())
-    prims = [
-        ghost(limb(["thigh_n", "shin_n", "foot_n"], 16, NEAR), SIDE, tl.at(T[2]), 0.12),
+    scene = group([
         *figure,
         focus_mid("thigh_n", 0.5, 17, 9, perp=-2, show=[(T[1], T[4])]),
-        arrow("M232 128 L262 128", show=[(T[1], T[2])]),
-        arrow("M262 128 L232 128", show=[(T[3], T[4])]),
+        arrow("M246 104 L276 104", show=[(T[1], T[2])]),
+        arrow("M276 104 L246 104", show=[(T[3], T[4])]),
         angle90, soft,
+    ], scale=1.12, origin=(190, 150), dy=-6)
+    prims = [
+        scene,
         caption_band(),
         caption("Rücken an die Lehne, Knie 90°", 0, T[1]),
         caption("Ausatmen – Platte wegdrücken", T[1], T[2]),

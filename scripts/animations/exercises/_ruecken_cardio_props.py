@@ -109,16 +109,31 @@ def rlimb(names, width, color, outline=True, r=7.0):
     return out
 
 
-def side_figure_r(torso_w=30, extras_behind=(), extras_front=(), r=7.0, far_color=FAR):
+def side_figure_r(torso_w=30, extras_behind=(), extras_front=(), r=7.0, far_color=FAR, round_arms=True):
     """side_figure mit deutlicheren Gelenkwinkeln an Armen/Beinen."""
     prims = list(extras_behind)
     prims += rlimb(["thigh_f", "shin_f", "foot_f"], 15, far_color, r=r)
-    prims += rlimb(["upperarm_f", "forearm_f", "hand_f"], 11, far_color, r=r)
+    arm = (lambda n, w, col: rlimb(n, w, col, r=r)) if round_arms else (lambda n, w, col: limb(n, w, col))
+    prims += arm(["upperarm_f", "forearm_f", "hand_f"], 11, far_color)
     prims += limb(["neck"], 13, TORSO)
     prims += limb(["lumbar", "thorax"], torso_w, TORSO)
     prims += limb(["thorax", "chest"], torso_w - 4, TORSO, outline=False)
     prims += head_side()
     prims += rlimb(["thigh_n", "shin_n", "foot_n"], 16, NEAR, r=r)
-    prims += rlimb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR, r=r)
+    prims += arm(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
     prims += list(extras_front)
     return prims
+
+
+def ik_blend(skel, pose, ik, w):
+    """IK nur mit Gewicht w (0 = freie Pose, 1 = voll auf Ziel)."""
+    if w <= 0:
+        return pose
+    sol = solve_ik(skel, pose, ik)
+    if w >= 1:
+        return sol
+    out = dict(pose)
+    for k in (ik.upper, ik.lower, ik.end_seg):
+        if k:
+            out[k] = pose.get(k, 0.0) + (sol.get(k, 0.0) - pose.get(k, 0.0)) * w
+    return out

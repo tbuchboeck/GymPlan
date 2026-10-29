@@ -17,7 +17,7 @@ BASE = dict(x=HIP_X, y=C, rot=90, neck=-8, head=4,
             upperarm_n=90, upperarm_f=86, forearm_n=0, forearm_f=0, hand_n=0, hand_f=0)
 
 LEG_LONG = dict(thigh=10, shin=0, foot=-8)
-ARM_BACK = dict(upperarm=166, forearm=0, hand=4)
+ARM_BACK = dict(upperarm=163, forearm=0, hand=4)
 
 
 def ext(base, leg, arm):
@@ -54,7 +54,7 @@ def build():
     out2 = [(B0, B1)]
     scene = group([
         mat(FLOOR_Y, 40, 340),
-        *side_figure_r(r=9),
+        *side_figure_r(r=9, round_arms=False),
         back,
         focus("lumbar", rx=22, ry=9, offset=(-4, -6), show=[(A0, A3), (B0, B3)]),
         # Bein raus (nach rechts unten), Arm nach hinten (über Kopf)

@@ -49,17 +49,22 @@ def timeline():
     t = 0.0
     for i, (_, p) in enumerate(SEQ):
         t += TRANS                 # Übergang (bzw. beim Y: kurz ruhig liegen)
+        t = round(t, 3)
         keys.append((t, p))
         t += PREP
+        t = round(t, 3)
         keys.append((t, sq(p)))
         t += LIFT
+        t = round(t, 3)
         keys.append((t, up(p)))
         t += HOLD
+        t = round(t, 3)
         keys.append((t, up(p)))
         t += DOWN
+        t = round(t, 3)
         keys.append((t, p))
     t += TRANS
-    keys.append((t, Y0))
+    keys.append((round(t, 3), Y0))
     return Timeline(keys, skeleton=FRONT)
 
 
@@ -252,8 +257,9 @@ def side_inset():
                       "stroke-linejoin": "round"}, arm_d),
         Prim("path", {"fill": "none", "stroke": NEAR, "stroke-width": 6, "stroke-linecap": "round",
                       "stroke-linejoin": "round"}, arm_d),
-        Prim("line", {"stroke": ACCENT, "stroke-width": 1.5}, gap),
-        static_text("Kopf bleibt in Verlängerung", IX + 10, IY + 15, 10, GOOD, anchor="start"),
+        Prim("line", {"stroke": ACCENT, "stroke-width": 2}, gap),
+        static_text("Kopf bleibt in", IX + 10, IY + 15, 10, GOOD, anchor="start"),
+        static_text("Verlängerung", IX + 10, IY + 27, 10, GOOD, anchor="start"),
     ]
     return prims
 
@@ -281,10 +287,18 @@ def build():
     caps.append(caption("Zurück zum Y", 3 * BLOCK, dur, size=14))
     big[0].attrs["_show"] = [(0, BLOCK + 0.4), (3 * BLOCK + 0.4, dur)]
 
-    lift_lbl = Prim("text", {"x": IX + IW - 8, "y": MAT_Y - 20, "font-size": 10, "fill": ACCENT,
-                             "text-anchor": "end", "font-weight": "600",
+    def lbl_pos(c):
+        P = c["P"]
+        sx = pt(P, "clav_R")[0]
+        fx = pt(P, "hand_R")[0]
+        foot_x = IX + 22
+        sh_x = foot_x + (107 + 78) * S_
+        return {"x": sh_x + (fx - sx) * S_ + 8}
+
+    lift_lbl = Prim("text", {"y": MAT_Y - 26, "font-size": 10, "fill": ACCENT,
+                             "text-anchor": "middle", "font-weight": "600",
                              "_show": [(i * BLOCK + TRANS + PREP + 0.3, i * BLOCK + TRANS + PREP + LIFT + HOLD)
-                                       for i in range(3)]}, text="2–3 cm")
+                                       for i in range(3)]}, lbl_pos, text="2–3 cm")
 
     scene = group([*props(), *figure()], scale=GS, origin=GO)
     prims = [

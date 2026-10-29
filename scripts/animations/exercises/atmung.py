@@ -7,7 +7,7 @@ Schultern bleiben unten (feste Schulterlinie als Referenz).
 import math
 
 from rig import *
-from exercises.ulnaris_glide import SK, hand_prims, limb2, arm2, captions2, HAND_SKIN
+from exercises.ulnaris_glide import SK, hand_prims, limb2, arm2, captions2, compact, HAND_SKIN
 
 SLUG = "bauch-rippenatmung"
 
@@ -19,7 +19,7 @@ DUR = 10.0
 def torso_d(c):
     g = c["pose"]
     r, b = g.get("ribs", 0.0), g.get("belly", 0.0)
-    fx = 24 + 6 * r          # Rippen-Flanke (halbe Breite)
+    fx = 24 + 8 * r          # Rippen-Flanke (halbe Breite)
     wx = 18 + 3.5 * b + 1.5 * r   # Taille / Bauch
     hx = 21 + 1.0 * b
 
@@ -42,14 +42,19 @@ def ribs_d(c):
     r = c["pose"].get("ribs", 0.0)
     d = ""
     for y, w in [(136, 15), (146, 18), (156, 19)]:
-        ww = w + 5 * r
+        ww = w + 7 * r
         d += f"M{200 - ww:.1f} {y + 6:.1f}Q200 {y - 4 - 2 * r:.1f} {200 + ww:.1f} {y + 6:.1f}"
     return {"d": d}
 
 
+def ribs_style(c):
+    r = c["pose"].get("ribs", 0.0)
+    return {"opacity": 0.22 + 0.73 * r}
+
+
 def belly_zone(c):
     b = c["pose"].get("belly", 0.0)
-    return {"rx": 11 + 6 * b, "ry": 8 + 5 * b, "opacity": 0.1 + 0.35 * b}
+    return {"rx": 11 + 6 * b, "ry": 8 + 5 * b, "opacity": 0.08 + 0.4 * b}
 
 
 def belly_hand_target(p):
@@ -59,7 +64,7 @@ def belly_hand_target(p):
 
 def rib_hand_target(p):
     r = p.get("ribs", 0.0)
-    return (224 + 6.5 * r, 168)
+    return (229 + 6.5 * r, 169)
 
 
 BASE = dict(x=200, y=200, belly=0, ribs=0,
@@ -78,24 +83,29 @@ def build():
     tl = Timeline([(0, EMPTY), (2.2, BELLY), (4.0, FULL), (DUR, EMPTY)], iks=iks, skeleton=SK)
 
     shoulder_line = [
-        Prim("line", {"x1": 152, "y1": 116, "x2": 248, "y2": 116, "stroke": GOOD, "stroke-width": 1.4,
-                      "stroke-dasharray": "4 4", "opacity": 0.85}),
+        Prim("line", {"x1": x0, "y1": 115, "x2": x0 + 34, "y2": 115, "stroke": GOOD, "stroke-width": 1.4,
+                      "stroke-dasharray": "4 3", "opacity": 0.9}) for x0 in (154, 212)]
+    mouth = [
+        Prim("path", {"d": "M196 99.5Q200 101 204 99.5", "fill": "none", "stroke": SKIN_LINE,
+                      "stroke-width": 1.4, "stroke-linecap": "round", "_show": [(0, 4.0)]}),
+        Prim("ellipse", {"cx": 200, "cy": 100, "rx": 2.6, "ry": 2, "fill": SKIN_LINE, "_show": [(4.0, DUR)]}),
     ]
     body = [
         Prim("path", {"fill": TORSO, "stroke": SKIN_LINE, "stroke-width": 3, "stroke-linejoin": "round"}, torso_d),
         Prim("path", {"d": "M193 114Q200 121 207 114", "fill": "none", "stroke": SKIN_LINE,
                       "stroke-width": 1.5, "opacity": 0.7}),
-        Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": 1.6, "stroke-linecap": "round",
-                      "opacity": 0.45}, ribs_d),
-        Prim("ellipse", {"cx": 200, "cy": 186, "fill": GOOD, "stroke": GOOD, "stroke-width": 1}, belly_zone),
+        Prim("g", {}, lambda c: ribs_style(c), children=[
+            Prim("path", {"fill": "none", "stroke": GOOD, "stroke-width": 1.4, "stroke-linecap": "round"}, ribs_d)]),
+        Prim("ellipse", {"cx": 200, "cy": 191, "fill": GOOD, "stroke": GOOD, "stroke-width": 1}, belly_zone),
     ]
-    arms = (arm2(["upperarm_L", "forearm_L"], 11, NEAR) + arm2(["upperarm_R", "forearm_R"], 11, NEAR)
+    upper = arm2(["upperarm_L"], 11, NEAR) + arm2(["upperarm_R"], 11, NEAR)
+    arms = (arm2(["forearm_L"], 11, NEAR) + arm2(["forearm_R"], 11, NEAR)
             + hand_prims("hand_L", "a_", scale=1.15) + hand_prims("hand_R", "b_", scale=1.15))
     rib_arrows = [
-        arrow("M164 150L156 150", width=2, show=[(2.0, 4.0)]),
-        arrow("M252 150L260 150", width=2, show=[(2.0, 4.0)]),
+        arrow("M186 139L174 139", width=2, show=[(2.0, 4.0)]),
+        arrow("M214 139L226 139", width=2, show=[(2.0, 4.0)]),
     ]
-    fig = group(body + limb2(["neck"], 13, TORSO) + head_front() + shoulder_line + arms + rib_arrows,
+    fig = group(upper + body + limb2(["neck"], 13, TORSO) + head_front() + mouth + shoulder_line + arms + rib_arrows,
                 scale=1.55, origin=(200, 140), dx=8, dy=14)
     fig.attrs["clip-path"] = "url(#clipA)"
 
@@ -132,9 +142,10 @@ def build():
     labels = [
         static_text("Schultern", 338, 80, 11.5, GOOD, weight="600"),
         static_text("bleiben unten", 338, 94, 11.5, GOOD, weight="600"),
-        Prim("line", {"x1": 300, "y1": 88, "x2": 286, "y2": 98, "stroke": GOOD, "stroke-width": 1.2, "opacity": 0.7}),
-        static_text("Hand an den Rippen", 338, 140, 11, MUTED),
-        static_text("Hand auf dem Bauch", 338, 214, 11, MUTED),
+        Prim("line", {"x1": 300, "y1": 88, "x2": 284, "y2": 98, "stroke": GOOD, "stroke-width": 1.2, "opacity": 0.7}),
+        static_text("Hebt sich die", 338, 196, 10.5, MUTED),
+        static_text("Schulter? Flacher", 338, 209, 10.5, MUTED),
+        static_text("in Bauch und Rippen", 338, 222, 10.5, MUTED),
         static_text("aufrecht sitzen", 62, 214, 10.5, MUTED),
         static_text("oder Rückenlage", 62, 227, 10.5, MUTED),
     ]
@@ -146,4 +157,4 @@ def build():
                  ("Nacken und Schultern lösen", "täglich 3–5 Minuten", 7.0, DUR),
              ])]
     clip = '<clipPath id="clipA"><rect x="0" y="0" width="400" height="258"/></clipPath>'
-    return render(prims, tl, SK, fps=10, title="Bauch- und Rippenatmung", extra_defs=clip)
+    return compact(render(prims, tl, SK, fps=15, title="Bauch- und Rippenatmung", extra_defs=clip))

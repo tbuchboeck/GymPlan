@@ -170,9 +170,9 @@ def build():
                         + limb(["neck"], 13, TORSO) + head_side(), SIDE, tl.at(0), 0.16)
 
     chest = focus("chest", rx=11, ry=14, offset=(13, 6), color=GOOD, show=[(2.6, 7.6)])
-    scene = group([floor(FLOOR_Y, 40, 360), *door(), torso_ghost, *figure(), chest,
+    scene = group([floor(FLOOR_Y, 90, 360), *door(), torso_ghost, *figure(), chest,
                    arrow("M150 120 L176 120", show=[(1.4, 3.2)]),
-                   ], scale=0.92, origin=(200, FLOOR_Y))
+                   ], scale=0.92, origin=(200, FLOOR_Y), dx=28)
 
     prims = [
         scene,
@@ -182,7 +182,7 @@ def build():
         caption("Mit dem Körper langsam vorlehnen", 1.4, 3.4),
         caption("Brust zieht – 30 s ruhig atmen", 3.4, 7.6),
         caption("Langsam zurück", 7.6, 9.6),
-        label("Schulter bleibt unten", 236, 70, 3.4, 7.6),
+        label("Schulter bleibt unten", 262, 72, 3.4, 7.6),
         static_text("Kribbeln im Arm? Spannung sofort lösen", 258, 24, 12, MUTED),
     ]
     return render(prims, tl, SIDE, title="Brustdehnung im Türrahmen", fps=12,

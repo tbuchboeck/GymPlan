@@ -6,7 +6,7 @@ Helfer (Hand, Nerv, verkürzbares Skelett) aus ulnaris_glide.py.
 import math
 
 from rig import *
-from exercises.ulnaris_glide import (SK, BASE, MapTimeline, lerp, upper_body, captions2, limb,
+from exercises.ulnaris_glide import (SK, BASE, MapTimeline, lerp, upper_body, captions2, compact, limb,
                                      TOP_HINT, NERVE)
 
 SLUG = "medianus-glide"
@@ -68,4 +68,4 @@ def build():
              ]),
              static_text(TOP_HINT, 200, 24, 13, MUTED)]
     clip = '<clipPath id="clipM"><rect x="0" y="0" width="400" height="258"/></clipPath>'
-    return render(prims, tl, SK, fps=12, title="Nerve Glide Medianus", extra_defs=clip)
+    return compact(render(prims, tl, SK, fps=15, title="Nerve Glide Medianus", extra_defs=clip))

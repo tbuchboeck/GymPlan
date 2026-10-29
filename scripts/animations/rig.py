@@ -534,7 +534,7 @@ def _show_anim(windows, dur) -> str:
 
 def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
            title: str = "", extra_defs: str = "", background: list[Prim] | None = None) -> str:
-    dur = timeline.duration
+    dur = round(timeline.duration, 3)
     n = max(2, int(round(dur * fps)))
     frames = []
     for i in range(n + 1):

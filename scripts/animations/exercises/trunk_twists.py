@@ -12,7 +12,7 @@ FLOOR_Y = 250
 CX = 186
 SC = 0.8
 DUR = 3.2
-ANK_Y = FLOOR_Y - 8
+ANK_Y = FLOOR_Y - 15
 PEL_Y = ANK_Y - 94          # Knie weich
 YAW = 52                    # max. Schulterdrehung
 
@@ -53,12 +53,12 @@ def build():
         focus("thorax", rx=18, ry=11, offset=(0, -6), show=[(0, DUR)]),
     ], scale=SC, origin=(CX, FLOOR_Y))
     # Pfeile über den Schultern (Bildschirmkoordinaten nach Skalierung)
-    ay = FLOOR_Y - (FLOOR_Y - (PEL_Y - 92)) * SC
+    ay = FLOOR_Y - (FLOOR_Y - (PEL_Y - 127)) * SC - 6
     prims = [
         floor(FLOOR_Y, 40, 300),
         fig,
-        arrow(f"M{CX - 30} {ay:.0f} Q{CX} {ay - 12:.0f} {CX + 30} {ay:.0f}", show=[(0.15, h * 0.55)]),
-        arrow(f"M{CX + 30} {ay:.0f} Q{CX} {ay - 12:.0f} {CX - 30} {ay:.0f}", show=[(h + 0.15, h + h * 0.55)]),
+        arrow(f"M{CX - 30} {ay:.0f} Q{CX} {ay - 10:.0f} {CX + 30} {ay:.0f}", show=[(0.15, h * 0.55)]),
+        arrow(f"M{CX + 30} {ay:.0f} Q{CX} {ay - 10:.0f} {CX - 30} {ay:.0f}", show=[(h + 0.15, h + h * 0.55)]),
         *top_inset(345, 140, 27, lambda p: (p.get("hy", 0.0), p.get("sy", 0.0))),
         Prim("line", {"x1": 312, "y1": 186, "x2": 324, "y2": 186, "stroke": TORSO, "stroke-width": 5,
                       "stroke-linecap": "round"}),

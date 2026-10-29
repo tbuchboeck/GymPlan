@@ -15,7 +15,7 @@ SC = 0.86
 AY = FLOOR_Y - ANKLE_UP
 X0 = 128                       # Knöchel in der Grundstellung (nahes Bein)
 DZ = 5                         # fernes Bein minimal versetzt
-STEP = 128                     # Schrittlänge (Knöchel zu Knöchel)
+STEP = 120                     # Schrittlänge (Knöchel zu Knöchel)
 SY = AY - 97.4                 # Beckenhöhe im Stand
 
 HANDS = dict(upperarm_n=-32, forearm_n=80, hand_n=24, upperarm_f=-28, forearm_f=78, hand_f=24)
@@ -27,7 +27,7 @@ def lunge_keys(t0, front, back):
     s, h = f"s{front}", f"h{back}"
     off = 0 if front == "n" else -DZ
     plant = dict(STAND, x=X0 + 38 + off, y=SY + 6, rot=-2, **{s: 1, h: -22})
-    bottom = dict(STAND, x=X0 + STEP - 47 + off, y=AY - 52, rot=-4, neck=2, **{s: 1, h: -58})
+    bottom = dict(STAND, x=X0 + STEP - 46 + off, y=AY - 57, rot=-4, neck=2, **{s: 1, h: -58})
     return [(t0 + 0.4, STAND), (t0 + 1.3, plant), (t0 + 2.2, bottom), (t0 + 2.8, bottom),
             (t0 + 3.6, plant), (t0 + 4.4, STAND)]
 
@@ -60,7 +60,7 @@ def build():
 
     knee_line = Prim("line", {"stroke": GOOD, "stroke-width": 2, "stroke-dasharray": "5 5", "opacity": 0.75,
                               "_show": [(1.8, 3.0), (6.2, 7.4)]},
-                     lambda c: (lambda kx: {"x1": kx, "y1": FLOOR_Y - 4, "x2": kx, "y2": FLOOR_Y - 80})(
+                     lambda c: (lambda kx: {"x1": kx, "y1": FLOOR_Y - 4, "x2": kx, "y2": FLOOR_Y - 112})(
                          c["P"]["shin_n" if c["t"] < 4.4 else "shin_f"][2]))
     fig = figure()
     scene = scene_group([
@@ -70,7 +70,7 @@ def build():
         focus_mid("thigh_n", 0.45, 20, 9, show=[(1.3, 3.6)]),
         focus_mid("thigh_f", 0.45, 20, 9, show=[(5.7, 8.0)]),
         focus("root", rx=12, ry=12, offset=(-8, 2), show=[(2.2, 3.6), (6.6, 8.0)]),
-        arrow("M196 66 Q232 56 262 74", show=[(0.4, 1.3), (4.8, 5.7)]),
+        arrow("M172 196 Q210 180 250 194", show=[(0.4, 1.3), (4.8, 5.7)]),
         arrow("M246 120 L246 148", show=[(1.3, 2.2), (5.7, 6.6)]),
         arrow("M246 150 L246 122", show=[(2.8, 3.6), (7.2, 8.0)]),
     ], SC, FLOOR_Y)

@@ -94,22 +94,42 @@ def scene_group(children, scale, floor_y, cx=W / 2, dx=0.0):
     return Prim("g", {"transform": tf}, children=children)
 
 
-def figure(extras_behind=(), extras_front=(), torso_w=30, mid=()):
-    """Wie rig.side_figure, aber Füße als eigene Striche (deutlich sichtbarer
-    Fuß mit Ferse) und optionale Prims zwischen fernen und nahen Gliedern."""
+def poly_limb(names, width, color, outline=True):
+    """Gliedmaße als Polylinie mit runden Gelenken. Anders als rig.limb (glatte
+    Kurve über Mittelpunkte) läuft sie exakt durch Knie/Ellbogen, damit
+    starke Beugungen sichtbar bleiben."""
+    from rig import SKIN_LINE, chain_points
+
+    def d(c, n=tuple(names)):
+        pts = chain_points(c["P"], list(n))
+        return {"d": "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts)}
+    out = []
+    if outline:
+        out.append(Prim("path", {"fill": "none", "stroke": SKIN_LINE, "stroke-width": width + 3,
+                                 "stroke-linecap": "round", "stroke-linejoin": "round"}, d))
+    out.append(Prim("path", {"fill": "none", "stroke": color, "stroke-width": width,
+                             "stroke-linecap": "round", "stroke-linejoin": "round"}, d))
+    return out
+
+
+def figure(extras_behind=(), extras_front=(), torso_w=30, mid=(), front=()):
+    """Wie rig.side_figure, aber Beine/Arme als Polylinien (exakte Gelenke),
+    Füße als eigene Striche. mid = Prims zwischen fernen und nahen Gliedern,
+    front = zwischen Rumpf und nahen Gliedern."""
     from rig import FAR, NEAR, TORSO, head_side, limb
     prims = list(extras_behind)
-    prims += limb(["thigh_f", "shin_f"], 15, FAR)
-    prims += limb(["foot_f"], 12, FAR)
-    prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
+    prims += poly_limb(["thigh_f", "shin_f"], 15, FAR)
+    prims += poly_limb(["foot_f"], 12, FAR)
+    prims += poly_limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
     prims += list(mid)
     prims += limb(["neck"], 13, TORSO)
     prims += limb(["lumbar", "thorax"], torso_w, TORSO)
     prims += limb(["thorax", "chest"], torso_w - 4, TORSO, outline=False)
     prims += head_side()
-    prims += limb(["thigh_n", "shin_n"], 16, NEAR)
-    prims += limb(["foot_n"], 13, NEAR)
-    prims += limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
+    prims += list(front)
+    prims += poly_limb(["thigh_n", "shin_n"], 16, NEAR)
+    prims += poly_limb(["foot_n"], 13, NEAR)
+    prims += poly_limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
     prims += list(extras_front)
     return prims
 
