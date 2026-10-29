@@ -27,7 +27,7 @@ def arms(ua, fa=14.0, clav=0.0):
                 ua=ua)
 
 
-DOWN = dict(BASE, **arms(6, 18))
+DOWN = dict(BASE, **arms(10, 4))
 UP = dict(BASE, **arms(84, 12, clav=-3))
 
 

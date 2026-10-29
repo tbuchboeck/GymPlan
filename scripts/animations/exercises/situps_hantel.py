@@ -64,7 +64,7 @@ def build():
         arrow("M176 124 Q128 142 116 196", show=[(2.7, 4.4)]),
         Prim("path", {"d": f"M{ANK_N[0] - 14} {MAT_Y - 1}L{ANK_N[0] + 22} {MAT_Y - 1}", "stroke": GOOD,
                       "stroke-width": 3, "stroke-linecap": "round", "opacity": 0.8}),
-        label("Füße bleiben am Boden", 294, 236, 0.0, 4.9, 11, GOOD, anchor="start"),
+        label("Füße bleiben am Boden", 330, 212, 0.0, 4.9, 11, GOOD),
         caption_band(),
         caption("Rückenlage, Knie gebeugt, Hantel vor der Brust", 0, 0.6),
         caption("Ausatmen – Oberkörper aufrollen", 0.6, 2.1),

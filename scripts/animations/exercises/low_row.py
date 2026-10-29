@@ -10,7 +10,7 @@ SLUG = "low-row"
 
 FLOOR_Y = 250
 HIP = (128.0, 208.0)
-ANK_N, ANK_F = (228.0, 204.0), (224.0, 205.0)
+ANK_N, ANK_F = (216.0, 200.0), (212.0, 201.0)
 PULLEY = (302.0, 230.0)
 FAR_OFF = (-4.0, -1.0)
 
@@ -86,15 +86,15 @@ def build():
     tower = [
         R(296, 40, 14, FLOOR_Y - 40, PROP_DARK, rx=4),
         R(296, 36, 94, 10, PROP_DARK, rx=4),
-        R(232, FLOOR_Y - 7, 156, 7, PROP_DARK, rx=3),             # Bodenrahmen
+        R(222, FLOOR_Y - 7, 166, 7, PROP_DARK, rx=3),             # Bodenrahmen
         L(343, 50, 343, stack_top - 2, "#cbd5e1", 2),
         *pulley(343, 48, 5),
         R(290, PULLEY[1] - 11, 24, 22, PROP, rx=5),               # Schlitten unten
         *pulley(PULLEY[0], PULLEY[1], 6),
     ]
     plate = [
-        R(240, 176, 10, 60, "#0b1220", rx=4), R(241.5, 177.5, 7, 57, PROP, rx=3),     # Fußplatte
-        L(245, 236, 245, FLOOR_Y - 6, PROP_DARK, 6),
+        R(225, 172, 10, 62, "#0b1220", rx=4), R(226.5, 173.5, 7, 59, PROP, rx=3),     # Fußplatte
+        L(230, 234, 236, FLOOR_Y - 6, PROP_DARK, 6),
     ]
     bench = [
         R(70, 216, 96, 10, PROP, rx=5),
@@ -123,7 +123,6 @@ def build():
     prims = [
         floor(FLOOR_Y, 40, 388),
         *tower, *stack, *plate, *bench,
-        ghost(ghost_parts, SIDE, c0, 0.14),
         *figure,
         back_line, rhomb, pull_arrow,
         caption_band(),
