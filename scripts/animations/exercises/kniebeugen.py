@@ -49,8 +49,8 @@ def build():
     prims = [
         floor(FLOOR_Y, 40, 360),
         scene,
-        label("Knie bleibt hinter", 262, 214, 1.3, 5.0, 11, GOOD, "start"),
-        label("der Zehenlinie", 262, 228, 1.3, 5.0, 11, GOOD, "start"),
+        label("Knie bleibt hinter", 262, 214, 1.3, 5.0, 12, GOOD, "start"),
+        label("der Zehenlinie", 262, 228, 1.3, 5.0, 12, GOOD, "start"),
         caption_band(),
         caption("Hüftbreit stehen, Arme nach vorn", 0, 1.3),
         caption("Einatmen – Po nach hinten absenken", 1.3, 2.9),

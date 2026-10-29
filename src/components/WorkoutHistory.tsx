@@ -6,6 +6,7 @@ import { calculateExtendedStatistics, formatDayCount } from '../utils/statistics
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { exportToJSON, exportToCSV, importFromJSON, downloadTextFile, getDateString } from '../utils/export';
 import { buildPhysioReport, physioReportTitle } from '../utils/physio-report';
+import { planTitle } from '../utils/format';
 
 interface WorkoutHistoryProps {
   sessions: WorkoutSession[];
@@ -114,7 +115,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
               <h2 className="text-lg font-bold text-white">Bericht für die Physio</h2>
             </div>
             <p className="text-sm text-slate-400 mb-3">
-              Letzte 4 Wochen: Einheiten je Woche, Befinden und abgebrochene Übungen für @rücken, @nacken und @morgen.
+              Letzte 4 Wochen: Einheiten je Woche, Befinden und abgebrochene Übungen für Rücken-Aufbau, Nacken & Schulter und Morgen-Routine.
             </p>
             <div className="flex gap-2">
               <button
@@ -199,7 +200,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
                 <Target className="text-indigo-400 w-5 h-5" />
                 <h3 className="text-lg font-bold text-white">Lieblings-Plan</h3>
               </div>
-              <div className="text-2xl font-bold text-white mb-1">{stats.favoritePlan.name}</div>
+              <div className="text-2xl font-bold text-white mb-1">{planTitle(stats.favoritePlan.name)}</div>
               <div className="text-sm text-slate-400">{stats.favoritePlan.count}x absolviert</div>
             </div>
           )}
@@ -222,7 +223,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
                 <h3 className="text-lg font-bold text-white">Längstes Training</h3>
               </div>
               <div className="text-2xl font-bold text-white mb-1">{stats.longestWorkout.duration} min</div>
-              <div className="text-sm text-slate-400">{stats.longestWorkout.planName}</div>
+              <div className="text-sm text-slate-400">{planTitle(stats.longestWorkout.planName)}</div>
               <div className="text-xs text-slate-500 mt-1">
                 {new Date(stats.longestWorkout.date).toLocaleDateString('de-DE')}
               </div>
@@ -237,7 +238,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
                 <h3 className="text-lg font-bold text-white">Kürzestes Training</h3>
               </div>
               <div className="text-2xl font-bold text-white mb-1">{stats.shortestWorkout.duration} min</div>
-              <div className="text-sm text-slate-400">{stats.shortestWorkout.planName}</div>
+              <div className="text-sm text-slate-400">{planTitle(stats.shortestWorkout.planName)}</div>
               <div className="text-xs text-slate-500 mt-1">
                 {new Date(stats.shortestWorkout.date).toLocaleDateString('de-DE')}
               </div>
@@ -385,7 +386,7 @@ export function WorkoutHistory({ sessions, onClose, onImport, person }: WorkoutH
                   >
                     <div>
                       <div className="font-semibold text-white">
-                        {session.planName}
+                        {planTitle(session.planName)}
                       </div>
                       <div className="text-sm text-slate-400">
                         {new Date(session.date).toLocaleDateString('de-DE', {

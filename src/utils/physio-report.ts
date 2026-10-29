@@ -2,9 +2,9 @@ import type { Feeling, WorkoutSession } from '../types';
 
 // Pläne, die im Bericht für die Physio auftauchen (Kennung im Plan-Namen)
 export const PHYSIO_PLANS = [
-  { tag: '@rücken', label: 'Rücken-Aufbau (@rücken)' },
-  { tag: '@nacken', label: 'Nacken, Schulter & BWS (@nacken)' },
-  { tag: '@morgen', label: 'Morgen-Reset (@morgen)' },
+  { tag: '@rücken', label: 'Rücken-Aufbau' },
+  { tag: '@nacken', label: 'Nacken & Schulter' },
+  { tag: '@morgen', label: 'Morgen-Routine' },
 ] as const;
 
 // Pläne mit Befindens-Abfrage nach dem Training
@@ -97,7 +97,7 @@ export function buildPhysioReport(sessions: WorkoutSession[], now: Date = new Da
       lines.push(`  KW ${isoWeek(w.start)} (${fmtShort(w.start)}–${fmtShort(addDays(w.end, -1))}): ${count}`);
     }
 
-    if (hasFeelingCheck(plan.label)) {
+    if (hasFeelingCheck(`(${plan.tag})`)) {
       const rated = planSessions.filter((s) => s.feeling || typeof s.tingling === 'boolean');
       lines.push('Befinden nach dem Training:');
       if (rated.length === 0) {

@@ -137,7 +137,7 @@ def weight_stack(x, top_y, bottom_y, lift, n=9, sel=3, w=32, plate_h=8, label=No
     prims.append(dline(lambda c: ((x, stack_top - lift(c)), (x, pulley[1])), "#cbd5e1", 1.6))
     prims.append(circle(pulley[0], pulley[1], 5, PROP_DARK, stroke="#94a3b8", **{"stroke-width": 1.5}))
     if label:
-        prims.append(static_text(label, x, bottom_y + 0, 10, MUTED))
+        prims.append(static_text(label, x, bottom_y + 0, 12, MUTED))
     return prims, pulley
 
 

@@ -16,7 +16,7 @@ LIE = dict(y=PRONE["y"], rot=-90, lumbar=PRONE["lumbar"], thorax=PRONE["thorax"]
            neck=-12, head=-2,
            **{"thigh_n@": 183, "shin_n@": 182, "foot_n@": 204,
               "thigh_f@": 183, "shin_f@": 182, "foot_f@": 204})
-TUCK = dict(LIE, y=FLOOR_Y - 56, lumbar=-22, thorax=-8, chest=4, neck=-8, head=-4,
+TUCK = dict(LIE, y=FLOOR_Y - 56, lumbar=-22, thorax=-8, chest=4, neck=14, head=2,
             **{"thigh_n@": 302, "shin_n@": 186, "foot_n@": 210,
                "thigh_f@": 298, "shin_f@": 184, "foot_f@": 210})
 PLANK = dict(LIE, y=FLOOR_Y - 32, lumbar=0, thorax=0, chest=0, neck=-6, head=-4,

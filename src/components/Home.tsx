@@ -1,7 +1,7 @@
 import type { WorkoutPlan, WorkoutSession } from '../types';
 import type { Person } from '../lib/auth-service';
 import { clearWorkoutProgress, getResumableWorkout } from '../lib/workout-progress';
-import { formatAmount } from '../utils/format';
+import { formatAmount, planTitle } from '../utils/format';
 import { isInWeekOf, weekdayIndex } from '../utils/statistics';
 import { Play, BarChart3, Calendar, ArrowLeftRight, LogOut, TriangleAlert, ChevronDown, RotateCcw, Check } from 'lucide-react';
 
@@ -64,7 +64,7 @@ export function Home({
       {/* Plan Card */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl mx-4 mt-4 p-5">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold text-white">{workoutPlan.name}</h2>
+          <h2 className="text-lg font-semibold text-white">{planTitle(workoutPlan.name)}</h2>
           <button
             onClick={onSwitchPlan}
             className="min-h-11 -mr-2 px-3 flex items-center gap-1.5 rounded-lg text-sm text-indigo-400 hover:text-indigo-300 hover:bg-slate-700/40 transition-colors shrink-0"

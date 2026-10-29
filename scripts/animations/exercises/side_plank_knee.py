@@ -163,9 +163,9 @@ def build():
     lx, ly = T(ex + 22, ey)
     prims = [
         scene,
-        label("Ellbogen unter", lx + 12, 186, 0, T1, 12, GOOD, anchor="start"),
-        label("der Schulter", lx + 12, 200, 0, T1, 12, GOOD, anchor="start"),
-        Prim("path", {"d": f"M{lx + 18:.0f} 206 L{T(ex, ey)[0] + 8:.0f} {T(ex, ey)[1] - 10:.0f}", "stroke": GOOD,
+        label("Ellbogen unter", lx + 2, 186, 0, T1, 12, GOOD, anchor="start"),
+        label("der Schulter", lx + 2, 200, 0, T1, 12, GOOD, anchor="start"),
+        Prim("path", {"d": f"M{lx + 8:.0f} 206 L{T(ex, ey)[0] + 8:.0f} {T(ex, ey)[1] - 10:.0f}", "stroke": GOOD,
                       "stroke-width": 1.5, "fill": "none", "opacity": 0.8, "_show": [(0, T1)]}),
         label("Schulter weg", 352, 70, T1, T2, 12, ACCENT),
         label("vom Ohr", 352, 84, T1, T2, 12, ACCENT),

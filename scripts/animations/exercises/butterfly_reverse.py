@@ -10,7 +10,7 @@ SLUG = "butterfly-reverse"
 # als Projektion mitbewegt.
 
 FLOOR_Y = 250
-LEAN = 60.0                                  # Rumpfneigung aus der Senkrechten
+LEAN = 66.0                                  # Rumpfneigung aus der Senkrechten
 K = math.cos(math.radians(LEAN))
 _LEN = {"lumbar": 26 * K, "thorax": 26 * K, "chest": 26 * K, "neck": 17 * K, "head": 15 * K,
         "thigh_L": 44, "thigh_R": 44}
@@ -64,8 +64,8 @@ def head_down(r=17.0):
 
 
 # --- Seitansicht-Inset --------------------------------------------------------
-IN_X, IN_Y, IN_W, IN_H = 296, 40, 96, 112
-IS = 0.5
+IN_X, IN_Y, IN_W, IN_H = 280, 38, 114, 128
+IS = 0.6
 SIDE_POSE = dict(x=0, y=0, rot=-LEAN, neck=12, head=4, thigh_n=LEAN + 12, shin_n=-18, foot_n=6,
                  thigh_f=LEAN + 10, shin_f=-16, foot_f=6, upperarm_n=LEAN, upperarm_f=LEAN)
 

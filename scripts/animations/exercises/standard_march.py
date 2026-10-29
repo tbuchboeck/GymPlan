@@ -3,9 +3,9 @@ from exercises._morgen_b_props import nose_hint, label
 
 SLUG = "standard-march"
 
-# Seitansicht (Blick nach rechts – nahe Seite = linke Körperseite).
+# Seitansicht (Blick nach rechts – nahe Seite = rechte Körperseite).
 # Am Stand marschieren: Knie hoch, die gegengleiche Hand tippt aufs Knie.
-# Nahes (linkes) Knie <- ferne (rechte) Hand, fernes Knie <- nahe Hand.
+# Nahes (rechtes) Knie <- ferne (linke) Hand, fernes (linkes) Knie <- nahe Hand.
 # Die tippende Hand wird per IK auf das Knie geführt und weich eingeblendet
 # (Pose-Skalare tap_n / tap_f = 0..1). Rumpf aufrecht, Kinn leicht zurück.
 
@@ -14,7 +14,7 @@ CX = 196
 SC = 0.88
 STAND = dict(x=CX, y=FLOOR_Y - 107, neck=5, head=-6,
              upperarm_n=-4, forearm_n=10, upperarm_f=-2, forearm_f=10, tap_n=0, tap_f=0)
-# Nahes (linkes) Knie hoch, ferne Hand tippt; nahe Hand pendelt leicht zurück
+# Nahes (rechtes) Knie hoch, ferne (linke) Hand tippt; nahe Hand pendelt leicht zurück
 UP_N = dict(STAND, thigh_n=88, shin_n=-96, foot_n=-14, upperarm_n=-18, forearm_n=22, tap_f=1,
             y=FLOOR_Y - 106, lumbar=-1)
 UP_F = dict(STAND, thigh_f=88, shin_f=-96, foot_f=-14, upperarm_f=-18, forearm_f=22, tap_n=1,
@@ -61,8 +61,9 @@ def build():
         def f(c):
             x, y = pt(c["P"], f"thigh_{leg}")
             return {"cx": x - 6, "cy": y - 14}
-        return Prim("circle", {"r": 11, "fill": "none", "stroke": ACCENT, "stroke-width": 2.2, "_show": show,
-                               "opacity": 0.85}, f)
+        return Prim("g", {"_show": show}, children=[
+            Prim("circle", {"r": 15, "fill": ACCENT, "opacity": 0.16}, f),
+            Prim("circle", {"r": 15, "fill": "none", "stroke": ACCENT, "stroke-width": 3}, f)])
 
     def chin_cue():
         def f(c):
@@ -78,8 +79,8 @@ def build():
             *[Prim(q.tag, dict(q.attrs), (lambda c, d=q.dyn: {**d(c), "opacity": 1 if c["pose"]["tap_f"] > 0.35 else 0}))
               for q in limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)],
         ]),
-        tap_flash("f", "n", [(0.55, 0.8)]),
-        tap_flash("n", "f", [(1.75, 2.0)]),
+        tap_flash("f", "n", [(0.45, 0.95)]),
+        tap_flash("n", "f", [(1.65, 2.15)]),
         knee_arrow([(0.05, 0.55), (1.25, 1.75)]),
         chin_cue(),
     ], scale=SC, origin=(CX, FLOOR_Y))
@@ -88,8 +89,8 @@ def build():
         floor(FLOOR_Y + 1, 70, 330),
         main,
         caption_band(),
-        caption("Linkes Knie hoch – rechte Hand tippt", 0, 1.2),
-        caption("Rechtes Knie hoch – linke Hand tippt", 1.2, dur),
+        caption("Rechtes Knie hoch – linke Hand tippt", 0, 1.2),
+        caption("Linkes Knie hoch – rechte Hand tippt", 1.2, dur),
         static_text("Aufrecht bleiben – Kinn leicht zurück", 200, 24, LEAD_SIZE, MUTED),
         label("Kinn zurück", 236, 68, 0, dur, size=12, anchor="start"),
         nose_hint(dur=dur),

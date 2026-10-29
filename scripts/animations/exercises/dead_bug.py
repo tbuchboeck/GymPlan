@@ -65,7 +65,7 @@ def build():
     bx, by = T(HIP_X - 30, FLOOR_Y)
     prims = [
         scene,
-        label("Rücken bleibt flach am Boden", bx, by + 15, A0, B3, 11, GOOD),
+        label("Rücken bleibt flach am Boden", bx, by + 15, A0, B3, 12, GOOD),
         label("rechtes Bein + linker Arm", 200, 66, A0, A3, 12, TEXT),
         label("linkes Bein + rechter Arm", 200, 66, B0, B3, 12, TEXT),
         caption_band(),

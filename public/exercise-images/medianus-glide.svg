@@ -6,7 +6,7 @@
 <line x1="40" y1="196" x2="54" y2="196" stroke="#fde68a" stroke-width="2" stroke-dasharray="3 3"/>
 <text x="60" y="200" font-size="12" fill="#fde68a" text-anchor="start" font-weight="400">Nerv gleitet</text>
 <text x="78" y="218" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400">Arm und Kopf</text>
-<text x="78" y="232" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400">bewegen sich gegengleich</text>
+<text x="78" y="232" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400">gegengleich</text>
 <rect x="0" y="258" width="400" height="42" fill="#0b1220" opacity="0.8"/>
 <g opacity="0"><animate attributeName="opacity" values="1;0;0" keyTimes="0.0000;0.2500;1.0000" calcMode="discrete" dur="7.6s" repeatCount="indefinite"/><text x="200" y="279" font-size="14" fill="#e2e8f0" font-weight="600" text-anchor="middle">Ellbogen strecken, Handgelenk nach hinten</text></g>
 <g opacity="0"><animate attributeName="opacity" values="1;0;0" keyTimes="0.0000;0.2500;1.0000" calcMode="discrete" dur="7.6s" repeatCount="indefinite"/><text x="200" y="295" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">gleichzeitig Kopf zur selben Seite neigen</text></g>

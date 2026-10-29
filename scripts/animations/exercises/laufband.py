@@ -82,8 +82,9 @@ def treadmill_back() -> list[Prim]:
         line(334, DECK_Y - 10, 318, 112, PROP_DARK, 10),
         poly([(300, 96), (340, 92), (346, 112), (300, 118)], PROP_DARK, 3, fill=PROP),
         rect(306, 100, 26, 10, "#0b1220", 2),
-        Prim("text", {"x": 319, "y": 108.5, "font-size": 12, "fill": GOOD, "text-anchor": "middle",
-                      "font-weight": "700"}, text="5.5"),
+        # Anzeige (nur angedeutet – Ziffern wären am Handy unlesbar)
+        Prim("rect", {"x": 310, "y": 103, "width": 12, "height": 4, "rx": 1, "fill": GOOD, "opacity": 0.8}),
+        Prim("rect", {"x": 324, "y": 103, "width": 4, "height": 4, "rx": 1, "fill": GOOD, "opacity": 0.5}),
         # ferner Handlauf
         poly([(318, 124), (262, 140), (248, 146)], "#3a4659", 6),
     ]
