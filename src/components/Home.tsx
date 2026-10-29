@@ -1,7 +1,10 @@
 import type { WorkoutPlan, WorkoutSession } from '../types';
+import type { Person } from '../lib/auth-service';
+import { formatAmount } from '../utils/format';
 import { Play, BarChart3, Calendar, Bell, Dumbbell, ArrowLeftRight } from 'lucide-react';
 
 interface HomeProps {
+  person: Person;
   workoutPlan: WorkoutPlan;
   sessions: WorkoutSession[];
   onStartWorkout: () => void;
@@ -12,6 +15,7 @@ interface HomeProps {
 }
 
 export function Home({
+  person,
   workoutPlan,
   sessions,
   onStartWorkout,
@@ -37,7 +41,7 @@ export function Home({
       <div className="bg-slate-800 border-b border-slate-700/50 px-4 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Neli</h1>
+            <h1 className="text-2xl font-bold text-white">{person === 'thomas' ? 'Thomas' : 'Neli'}</h1>
             <p className="text-sm text-slate-400">Dein persönlicher Trainingsplan</p>
           </div>
           <div className="bg-indigo-500/20 p-2 rounded-lg">
@@ -147,7 +151,7 @@ export function Home({
                 <span className="text-white text-sm">{exercise.name}</span>
               </div>
               <span className="text-xs text-slate-500">
-                {exercise.sets} &times; {exercise.reps}
+                {exercise.sets} &times; {formatAmount(exercise)}
               </span>
             </button>
           ))}

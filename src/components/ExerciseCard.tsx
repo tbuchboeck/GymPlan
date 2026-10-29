@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import type { Exercise } from '../types';
+import { formatAmount, holdSeconds } from '../utils/format';
 
 interface ExerciseCardProps {
   exercise: Exercise;
   currentSet: number;
   onSetComplete: () => void;
+  onStartTimer: () => void;
   exerciseNumber: number;
 }
 
@@ -12,9 +14,11 @@ export function ExerciseCard({
   exercise,
   currentSet,
   onSetComplete,
+  onStartTimer,
   exerciseNumber,
 }: ExerciseCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const timerSeconds = holdSeconds(exercise);
 
   return (
     <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 overflow-hidden animate-fade-in">
@@ -27,7 +31,7 @@ export function ExerciseCard({
           <h2 className="text-xl font-bold text-white leading-tight">{exercise.name}</h2>
         </div>
         <div className="text-sm text-indigo-200 ml-9">
-          {exercise.sets} × {exercise.reps} Wdh
+          {exercise.sets} × {formatAmount(exercise)}
           {exercise.weight > 0 && ` × ${exercise.weight} kg`}
         </div>
       </div>
@@ -79,9 +83,19 @@ export function ExerciseCard({
         <div className="text-center mb-4">
           <div className="text-sm font-medium text-slate-400">Satz {currentSet}</div>
           <div className="text-slate-300">
-            {exercise.reps} × {exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}
+            {formatAmount(exercise)} × {exercise.weight > 0 ? `${exercise.weight} kg` : 'Körpergewicht'}
           </div>
         </div>
+
+        {/* Countdown for timed exercises (optional) */}
+        {timerSeconds !== null && (
+          <button
+            onClick={onStartTimer}
+            className="w-full mb-2 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
+          >
+            ▶ Timer starten ({formatAmount(exercise)})
+          </button>
+        )}
 
         {/* Action button */}
         <button

@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 
 interface RestTimerProps {
   seconds: number;
+  label?: string;
+  skipLabel?: string;
   onComplete: () => void;
   onSkip: () => void;
 }
 
-export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
+export function RestTimer({ seconds, label = 'Pause', skipLabel = 'Überspringen →', onComplete, onSkip }: RestTimerProps) {
   const [timeLeft, setTimeLeft] = useState(seconds);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
@@ -37,7 +39,7 @@ export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
     <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl animate-fade-in max-w-xs w-full">
       {/* Label */}
       <div className="text-center mb-4">
-        <span className="text-sm text-slate-400 uppercase tracking-wider">Pause</span>
+        <span className="text-sm text-slate-400 uppercase tracking-wider">{label}</span>
       </div>
 
       {/* Circular progress */}
@@ -77,7 +79,7 @@ export function RestTimer({ seconds, onComplete, onSkip }: RestTimerProps) {
           onClick={onSkip}
           className="text-slate-400 hover:text-white transition-colors text-sm"
         >
-          Überspringen →
+          {skipLabel}
         </button>
       </div>
     </div>

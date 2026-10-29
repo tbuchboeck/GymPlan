@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan } from './data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
+import type { Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { pushSession, syncAllSessions } from './lib/session-sync';
 import { Home } from './components/Home';
@@ -13,13 +14,47 @@ import LocationSelector from './components/LocationSelector';
 const WorkoutHistory = lazy(() => import('./components/WorkoutHistory').then(m => ({ default: m.WorkoutHistory })));
 
 type AppView = 'home' | 'workout' | 'summary' | 'history' | 'reminders';
-type Location = 'gym' | 'home' | 'home2' | 'back' | null;
+type Location = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | null;
+
+// Legacy: sessions used to live under one key shared by everyone on the
+// device. Hand them to the first person who logs in here, once.
+const LEGACY_SESSIONS_KEY = 'workoutSessions';
+const sessionsKey = (person: Person) => `workoutSessions.${person}`;
+
+function migrateLegacySessions(person: Person) {
+  try {
+    const legacy = localStorage.getItem(LEGACY_SESSIONS_KEY);
+    if (legacy === null) return;
+    if (localStorage.getItem(sessionsKey(person)) === null) {
+      localStorage.setItem(sessionsKey(person), legacy);
+    }
+    localStorage.removeItem(LEGACY_SESSIONS_KEY);
+  } catch {
+    // localStorage unavailable — nothing to migrate.
+  }
+}
 
 function App() {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [person, setPerson] = useState<Person | null>(null);
+
+  if (!person) {
+    return (
+      <AuthScreen
+        onUnlock={(p) => {
+          migrateLegacySessions(p);
+          setPerson(p);
+        }}
+      />
+    );
+  }
+
+  return <PersonApp key={person} person={person} />;
+}
+
+function PersonApp({ person }: { person: Person }) {
   const [location, setLocation] = useState<Location>(null);
   const [currentView, setCurrentView] = useState<AppView>('home');
-  const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>('workoutSessions', []);
+  const [sessions, setSessions] = useLocalStorage<WorkoutSession[]>(sessionsKey(person), []);
   const [currentSession, setCurrentSession] = useState<WorkoutSession | null>(null);
   const [startExerciseIndex, setStartExerciseIndex] = useState<number>(0);
   const hasSynced = useRef(false);
@@ -31,7 +66,7 @@ function App() {
 
   // Sync with Supabase once after unlock
   useEffect(() => {
-    if (!isUnlocked || hasSynced.current) return;
+    if (hasSynced.current) return;
     hasSynced.current = true;
 
     syncAllSessions(sessions).then((merged) => {
@@ -39,12 +74,14 @@ function App() {
         setSessions(merged);
       }
     });
-  }, [isUnlocked]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const workoutPlan = useMemo(() => {
     if (location === 'home') return homeWorkoutPlan;
     if (location === 'home2') return homeWorkoutPlan2;
     if (location === 'back') return backWorkoutPlan;
+    if (location === 'neck') return neckWorkoutPlan;
+    if (location === 'morning') return morningWorkoutPlan;
     return gymWorkoutPlan;
   }, [location]);
 
@@ -82,18 +119,15 @@ function App() {
     }
   };
 
-  if (!isUnlocked) {
-    return <AuthScreen onUnlock={() => setIsUnlocked(true)} />;
-  }
-
   if (!location) {
-    return <LocationSelector onSelectLocation={(loc) => setLocation(loc)} />;
+    return <LocationSelector person={person} onSelectLocation={(loc) => setLocation(loc)} />;
   }
 
   return (
     <div className="min-h-dvh bg-slate-900">
       {currentView === 'home' && (
         <Home
+          person={person}
           workoutPlan={workoutPlan}
           sessions={sessions}
           onStartWorkout={handleStartWorkout}

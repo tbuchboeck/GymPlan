@@ -3,7 +3,7 @@ import { Dumbbell, Fingerprint, Key } from 'lucide-react';
 import { authService, type Person } from '../lib/auth-service';
 
 interface AuthScreenProps {
-  onUnlock: () => void;
+  onUnlock: (person: Person) => void;
 }
 
 interface AuthError extends Error {
@@ -76,7 +76,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
     setLoading(true);
     try {
       await authService.loginWithPasskey(person);
-      onUnlock();
+      onUnlock(person);
     } catch (err) {
       const e = err as AuthError;
       console.error('[auth] login error', e);
@@ -103,7 +103,7 @@ export function AuthScreen({ onUnlock }: AuthScreenProps) {
     setLoading(true);
     try {
       await authService.consumeRecoveryCode(formatted, person);
-      onUnlock();
+      onUnlock(person);
     } catch (err) {
       const e = err as AuthError;
       console.error('[auth] recovery error', e);

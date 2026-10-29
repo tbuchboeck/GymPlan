@@ -1,5 +1,8 @@
+import type { Person } from '../lib/auth-service';
+
 interface LocationSelectorProps {
-  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back') => void;
+  person: Person;
+  onSelectLocation: (location: 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning') => void;
 }
 
 const locations = [
@@ -26,10 +29,29 @@ const locations = [
     label: 'rücken',
     description: 'Rücken-Aufbau & Stabilität',
     gradient: 'from-teal-500 to-cyan-600',
+    onlyFor: 'thomas' as Person,
+  },
+  {
+    key: 'neck' as const,
+    label: 'nacken',
+    description: 'Nacken, Schulter & BWS',
+    gradient: 'from-sky-500 to-blue-600',
+    onlyFor: 'thomas' as Person,
+  },
+  {
+    key: 'morning' as const,
+    label: 'morgen',
+    description: 'Morgen-Reset (10 Teile)',
+    gradient: 'from-amber-400 to-orange-500',
+    onlyFor: 'thomas' as Person,
   },
 ] as const;
 
-function LocationSelector({ onSelectLocation }: LocationSelectorProps) {
+function LocationSelector({ person, onSelectLocation }: LocationSelectorProps) {
+  const visibleLocations = locations.filter(
+    (loc) => !('onlyFor' in loc) || loc.onlyFor === person
+  );
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-5">
       <div className="text-center max-w-[500px] w-full">
@@ -41,7 +63,7 @@ function LocationSelector({ onSelectLocation }: LocationSelectorProps) {
         </p>
 
         <div className="flex flex-col gap-5">
-          {locations.map(({ key, label, description, gradient }) => (
+          {visibleLocations.map(({ key, label, description, gradient }) => (
             <button
               key={key}
               onClick={() => onSelectLocation(key)}
