@@ -72,7 +72,7 @@ class RollTimeline(Timeline):
 
 
 BASE = dict(x=HIP[0], y=HIP[1], chest=-6, neck=-10, head=-8)
-EXT = dict(BASE, thorax=6, chest=30, neck=-4, head=-8)     # BWS sinkt über die Rolle
+EXT = dict(BASE, thorax=6, chest=30, neck=-30, head=-10)   # BWS sinkt über die Rolle, Kopf bleibt gestützt in Verlängerung
 
 
 def roll_prims():

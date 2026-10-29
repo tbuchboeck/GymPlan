@@ -7,11 +7,10 @@ SLUG = "reverse-flys"
 # Brusthöhe, die Person lehnt sich leicht zurück in die Bänder. Die Arme
 # (leicht gebeugt, auf Schulterhöhe) öffnen von vorn nach seitlich – in der
 # Seitansicht wird der nahe Arm dabei kürzer und kommt zum Betrachter (Hand
-# größer). Die Bandlänge bleibt konstant, darum richtet sich der Körper beim
-# Öffnen auf. Inset links oben: dieselbe Bewegung von oben.
+# größer). Der Körper richtet sich beim
+# Öffnen etwas auf. Inset links oben: dieselbe Bewegung von oben.
 
 ANCHOR = (372.0, 104.0)      # Brust-/Kopfhöhe, vor der Person
-STRAP = 200.0
 L_ARM = 64.0                 # Schulter -> Hand (leicht gebeugt)
 TH_OPEN = 84.0               # Armwinkel: 0 = nach vorn, 90 = seitlich
 
@@ -46,20 +45,9 @@ class FlyTimeline(Timeline):
     def at(self, t):
         base = self._interp(t)
 
-        def solve(lean):
-            p = _place(base, lean)
-            P = SIDE.fk(p)
-            e, h, dep = arm3(p, P)
-            return p, P, math.hypot(ANCHOR[0] - h[0], ANCHOR[1] - h[1])
-
-        lo, hi = 0.0, 45.0
-        for _ in range(28):
-            mid = (lo + hi) / 2
-            if solve(mid)[2] > STRAP:
-                hi = mid
-            else:
-                lo = mid
-        p, P, _ = solve((lo + hi) / 2)
+        # Neigung direkt aus dem Öffnungsgrad (der Körper richtet sich etwas auf)
+        p = _place(base, 24.0 - 9.0 * base.get("open", 0.0))
+        P = SIDE.fk(p)
         for far, k in ((False, "n"), (True, "f")):
             e, h, dep = arm3(p, P, far)
             p.update({f"ex_{k}": e[0], f"ey_{k}": e[1], f"hx_{k}": h[0], f"hy_{k}": h[1], f"dep_{k}": dep})

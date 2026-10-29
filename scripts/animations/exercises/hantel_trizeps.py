@@ -32,17 +32,21 @@ TRI = Skeleton([Seg(s.name, s.parent, 51 if s.name.startswith("upperarm") else s
                 for s in SIDE.segs])
 
 
+LOW_WIN = (1.1, 3.5)          # Unterarm hinter dem Kopf: Arm wird vor dem Kopf gezeichnet
+
+
 def figure(dbell, behind):
+    arm = limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR) + list(dbell)
     prims = list(behind)
     prims += limb_sharp(["thigh_f", "shin_f", "foot_f"], 15, FAR)
     prims += limb(["upperarm_f", "forearm_f", "hand_f"], 11, FAR)
     prims += limb(["neck"], 13, TORSO)
     prims += limb(["lumbar", "thorax"], 30, TORSO)
     prims += limb(["thorax", "chest"], 26, TORSO, outline=False)
+    prims.append(Prim("g", {"_show": [LOW_WIN]}, children=arm))       # Tiefphase: hinter dem Kopf
     prims += head_side()
     prims += limb_sharp(["thigh_n", "shin_n", "foot_n"], 16, NEAR)
-    prims += limb(["upperarm_n", "forearm_n", "hand_n"], 12, NEAR)
-    prims += list(dbell)
+    prims.append(Prim("g", {"_show": [(0, LOW_WIN[0]), (LOW_WIN[1], 4.6)]}, children=arm))
     return prims
 
 
