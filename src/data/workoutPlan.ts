@@ -890,6 +890,18 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Hyperextension-Bank (45°): reine Halteübung, ohne Auf und Ab
+const HYPEREXTENSION_HOLD: Omit<Exercise, 'id'> = {
+  name: "Hyperextension-Bank: isometrisch halten",
+  sets: 1,
+  reps: 3, // 3 Minuten durchgehend
+  unit: 'minutes',
+  weight: 0,
+  rest: 60,
+  instructions: "45°-Bank: Hüfte am Polster, Fersen unter der Rolle, Arme vor der Brust verschränkt. Der Körper bildet von den Fersen bis zum Kopf eine gerade Linie – so einsteigen und die Position halten, ohne Auf und Ab. 3 Min. durchgehend halten: Die Spannung in der Rückenmuskulatur baut sich langsam auf, darum lieber einmal lang als viele kurze Wiederholungen. Ruhig weiteratmen, Gesäß leicht mit anspannen, Kopf in Verlängerung der Wirbelsäule, kein Hohlkreuz. Zum Beenden mit den Händen am Polster abstützen und kontrolliert aussteigen. Wichtig: Nicht zu viel machen. Tut es weh, sofort aufhören – und wenn es schon vorher weh tut, die Übung heute weglassen.",
+  imageUrl: "/exercise-images/rueckenstrecker-bank.svg"
+};
+
 // Rücken akut – Entlastung bei Schutzspannung im unteren Rücken
 export const acuteBackWorkoutPlan: WorkoutPlan = {
   name: "Rücken akut (@akut)",
@@ -902,7 +914,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
     "Abends: vor dem Schlafen etwas Wärme (Wärmflasche, Kirschkernkissen oder warme Dusche).\n\n" +
     "Nachts: Seitenlage mit Kissen zwischen den Knien oder Rückenlage mit Kissen unter den Knien. Nicht flach auf dem Bauch schlafen, wenn es zieht. Zum Aufstehen erst auf die Seite drehen, dann mit den Armen hochdrücken („en bloc“).\n\n" +
     "Morgens: in der ersten Stunde kein Vorbeugen und kein tiefes Hinsetzen. Beim Zähneputzen und Anziehen abstützen. Vor dem Aufstehen die Routine „Morgen im Bett“, danach kurz spazieren.\n\n" +
-    "In den nächsten Tagen: die Halteübungen (Bird Dog, Seitstütz, Bridge, Curl-up) täglich, Gehpausen und Rolle beibehalten.\n\n" +
+    "In den nächsten Tagen: die Halteübungen (Hyperextension-Bank, Bird Dog, Seitstütz, Bridge, Curl-up) täglich, Gehpausen und Rolle beibehalten.\n\n" +
     "Ärztlich abklären bei: Taubheit oder Kraftverlust im Bein, Taubheit im Gesäß- oder Intimbereich, Problemen beim Wasserlassen oder Stuhlgang, Fieber, oder wenn es nach einigen Tagen nicht besser wird.",
   exercises: [
     {
@@ -958,8 +970,9 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       instructions: "Matte auf Bett oder Boden, langsam darauf ablegen, Knie aufgestellt oder Kissen unter den Knien. 10–20 Min. liegen und ruhig atmen, lang ausatmen. Die ersten Minuten sticht es, dann wird es warm und die Schutzspannung im Rücken lässt nach. Wichtig: Auf Gefühl gehen – angenehm, nicht schmerzhaft. Bei Bedarf ein dünnes T-Shirt drunter.",
       imageUrl: "/exercise-images/shakti-matte.svg"
     },
+    { id: 6, ...HYPEREXTENSION_HOLD },
     {
-      id: 6,
+      id: 7,
       name: "Bird Dog",
       sets: 2,
       reps: 6, // pro Seite, je 8–10 s halten
@@ -970,7 +983,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/bird-dog.svg"
     },
     {
-      id: 7,
+      id: 8,
       name: "Seitstütz (auf den Knien)",
       sets: 3,
       reps: 10, // Sekunden halten, pro Seite
@@ -982,7 +995,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/side-plank-knee.svg"
     },
     {
-      id: 8,
+      id: 9,
       name: "Bridge (Beckenheben)",
       sets: 2,
       reps: 8,
@@ -992,7 +1005,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/glute-bridge-3s.svg"
     },
     {
-      id: 9,
+      id: 10,
       name: "Curl-up",
       sets: 3,
       reps: 5, // je 8–10 s halten
@@ -1012,7 +1025,7 @@ const numbered = (list: ExerciseDraft[]): Exercise[] => list.map((e, i) => ({ ..
 const STARK_NOTICE_BASE =
   "Erst beginnen, wenn die akute Phase vorbei ist. Dann am besten jeden zweiten Tag, und dranbleiben.\n\n" +
   "Reihenfolge: Stufe 1 (Rumpf rundum, Gesäß und Hüfte). Nach 2–3 Wochen Stufe 2 (gegen Drehung stabilisieren, einseitig tragen). Stufe 3 (Heben lernen) zuletzt.\n\n" +
-  "Steigern nur, wenn es am nächsten Tag ruhig bleibt. Lieber oft kurz halten als einmal lang. Wenn es am nächsten Tag schlechter ist: eine Stufe oder Steigerung zurück.\n\n" +
+  "Steigern nur, wenn es am nächsten Tag ruhig bleibt. Bei Curl-up, Seitstütz und Bird Dog lieber oft kurz halten als einmal lang. Die Hyperextension-Bank dagegen einmal durchgehend halten (3 Min.), weil sich die Spannung dort langsam aufbaut. Tut etwas weh: sofort aufhören. Wenn es am nächsten Tag schlechter ist: eine Stufe oder Steigerung zurück.\n\n" +
   "Jeden Tag gehen, gern zügig. Die Bandscheibe hat keine eigene Blutversorgung und wird durch Bewegung versorgt.";
 
 const STARK_STAGE1: ExerciseDraft[] = [
@@ -1026,16 +1039,7 @@ const STARK_STAGE1: ExerciseDraft[] = [
     instructions: "5 Min. zügig gehen, aufrecht, Arme schwingen mit. Wärmt auf und bringt Bewegung in die Bandscheiben. An den anderen Tagen gern 20–30 Min. zügig spazieren.",
     imageUrl: "/exercise-images/walking.svg"
   },
-  {
-    name: "Rückenstrecker-Bank: isometrisch halten",
-    sets: 6,
-    reps: 10, // Sekunden halten
-    unit: 'seconds',
-    weight: 0,
-    rest: 10,
-    instructions: "Wie gewohnt auf der Bank: Hüfte am Polster, Fersen fixiert. Oberkörper so weit anheben, dass er mit den Beinen eine gerade Linie bildet – nicht höher, kein Hohlkreuz. 10 s halten, kurz absenken. 5–6× (Rückseite des Rumpfs). Wichtig: Gesäß mit anspannen, Kopf in Verlängerung der Wirbelsäule.",
-    imageUrl: "/exercise-images/rueckenstrecker-bank.svg",
-  },
+  HYPEREXTENSION_HOLD,
   {
     name: "Curl-up (vorne)",
     sets: 6,

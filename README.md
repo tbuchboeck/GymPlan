@@ -25,7 +25,7 @@ Erinnerungen per Push gibt es bewusst **nicht** (die frühere Einstellung war ei
 | Rücken-Aufbau | `@rücken` | 6 | 4 | Thomas |
 | Nacken, Schulter & BWS | `@nacken` | 14 | 4 | Thomas |
 | Morgen-Reset | `@morgen` | 10 | 7 | Thomas |
-| Rücken akut | `@akut` | 9 | 7 | Thomas |
+| Rücken akut | `@akut` | 10 | 7 | Thomas |
 | Morgen im Bett | `@bett` | 7 | 7 | Thomas |
 | Rücken stark – Stufe 1 | `@stark1` | 8 | 3 | Thomas |
 | Rücken stark – Stufe 2 | `@stark2` | 11 | 3 | Thomas |
