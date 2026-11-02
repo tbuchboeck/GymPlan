@@ -25,6 +25,9 @@ const PLAN_TITLES: Record<string, string> = {
   'Morgen-Reset (@morgen)': 'Morgen-Routine',
   'Rücken akut (@akut)': 'Rücken akut',
   'Morgen im Bett (@bett)': 'Morgen im Bett',
+  'Rücken stark – Stufe 1 (@stark1)': 'Rücken stark · Stufe 1',
+  'Rücken stark – Stufe 2 (@stark2)': 'Rücken stark · Stufe 2',
+  'Rücken stark – Stufe 3 (@stark3)': 'Rücken stark · Stufe 3',
 };
 
 export function planTitle(name: string): string {

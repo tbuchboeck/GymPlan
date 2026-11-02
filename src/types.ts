@@ -37,7 +37,7 @@ export interface WorkoutSession {
   totalExercises: number;
   duration: number; // in minutes
   notes?: string;
-  // Nur bei Plänen mit Befindens-Abfrage (Thomas: @rücken, @nacken, @akut)
+  // Nur bei Plänen mit Befindens-Abfrage (Thomas: @rücken, @nacken, @akut, @stark1–3)
   feeling?: Feeling;
   tingling?: boolean; // Kribbeln/Ziehen im Arm während oder nach dem Training
   abortedExercises?: string[]; // Namen der per „Kribbelt – abbrechen“ übersprungenen Übungen

@@ -1,4 +1,4 @@
-import type { WorkoutPlan } from '../types';
+import type { Exercise, WorkoutPlan } from '../types';
 
 // Gym Trainingsplan
 export const gymWorkoutPlan: WorkoutPlan = {
@@ -834,6 +834,7 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 5,
       instructions: "Rückenlage, Knie angewinkelt oder Beine lang. Beide Füße kräftig zu dir anziehen (Zehen Richtung Nase), dann weit strecken (Zehen weg). 20× im ruhigen Takt. Regt die Durchblutung an. Wichtig: Nur die Füße bewegen, Rücken bleibt entspannt liegen.",
+      imageUrl: "/exercise-images/fusspumpe.svg",
     },
     {
       id: 3,
@@ -997,6 +998,186 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       imageUrl: "/exercise-images/curl-up.svg"
     }
   ]
+};
+
+// Rücken stark – Aufbau in 3 Stufen nach der akuten Phase (Schutz für L4/L5)
+type ExerciseDraft = Omit<Exercise, 'id'>;
+
+const numbered = (list: ExerciseDraft[]): Exercise[] => list.map((e, i) => ({ ...e, id: i + 1 }));
+
+const STARK_NOTICE_BASE =
+  "Erst beginnen, wenn die akute Phase vorbei ist. Dann am besten jeden zweiten Tag, und dranbleiben.\n\n" +
+  "Reihenfolge: Stufe 1 (Rumpf rundum, Gesäß und Hüfte). Nach 2–3 Wochen Stufe 2 (gegen Drehung stabilisieren, einseitig tragen). Stufe 3 (Heben lernen) zuletzt.\n\n" +
+  "Steigern nur, wenn es am nächsten Tag ruhig bleibt. Lieber oft kurz halten als einmal lang. Wenn es am nächsten Tag schlechter ist: eine Stufe oder Steigerung zurück.\n\n" +
+  "Jeden Tag gehen, gern zügig. Die Bandscheibe hat keine eigene Blutversorgung und wird durch Bewegung versorgt.";
+
+const STARK_STAGE1: ExerciseDraft[] = [
+  {
+    name: "Zügig gehen (Aufwärmen)",
+    sets: 1,
+    reps: 5, // Minuten
+    unit: 'minutes',
+    weight: 0,
+    rest: 30,
+    instructions: "5 Min. zügig gehen, aufrecht, Arme schwingen mit. Wärmt auf und bringt Bewegung in die Bandscheiben. An den anderen Tagen gern 20–30 Min. zügig spazieren.",
+    imageUrl: "/exercise-images/walking.svg"
+  },
+  {
+    name: "Rückenstrecker-Bank: isometrisch halten",
+    sets: 6,
+    reps: 10, // Sekunden halten
+    unit: 'seconds',
+    weight: 0,
+    rest: 10,
+    instructions: "Wie gewohnt auf der Bank: Hüfte am Polster, Fersen fixiert. Oberkörper so weit anheben, dass er mit den Beinen eine gerade Linie bildet – nicht höher, kein Hohlkreuz. 10 s halten, kurz absenken. 5–6× (Rückseite des Rumpfs). Wichtig: Gesäß mit anspannen, Kopf in Verlängerung der Wirbelsäule.",
+  },
+  {
+    name: "Curl-up (vorne)",
+    sets: 6,
+    reps: 10, // Sekunden halten
+    unit: 'seconds',
+    weight: 0,
+    rest: 10,
+    instructions: "Rückenlage, ein Bein aufgestellt, das andere lang. Hände flach unter die Lende. Bauch leicht anspannen, Kopf und Schultern als Block nur wenige Zentimeter abheben, 10 s halten und weiteratmen, ablegen. 5–6×, nach der Hälfte Bein wechseln. Wichtig: Kein Sit-up – Kinn nicht zur Brust, die Lende bleibt ruhig.",
+    imageUrl: "/exercise-images/curl-up.svg"
+  },
+  {
+    name: "Seitstütz (seitlich)",
+    sets: 5,
+    reps: 10, // Sekunden halten, pro Seite
+    unit: 'seconds',
+    perSide: true,
+    weight: 0,
+    rest: 10,
+    instructions: "Seitlage, Ellbogen unter der Schulter, Knie angewinkelt. Becken anheben, bis Schulter, Hüfte und Knie eine Linie bilden. 10 s halten, absetzen, 5–6× pro Seite. Trainiert auch den quadratischen Lendenmuskel. Steigerung: Beine gestreckt, auf den Füßen. Wichtig: Becken nicht nach hinten kippen, Schulter weg vom Ohr.",
+    imageUrl: "/exercise-images/side-plank-knee.svg"
+  },
+  {
+    name: "Bird Dog (Koordination)",
+    sets: 5,
+    reps: 10, // Sekunden halten, pro Seite
+    unit: 'seconds',
+    perSide: true,
+    weight: 0,
+    rest: 10,
+    instructions: "Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Bauch leicht anspannen, gegengleich ein Bein nach hinten und den Arm nach vorn strecken. 10 s halten, zurück, Seite wechseln. 5–6× pro Seite. Wichtig: Rücken und Becken bleiben ruhig wie ein Tisch, kein Hohlkreuz.",
+    imageUrl: "/exercise-images/bird-dog.svg"
+  },
+  {
+    name: "Bridge (später einbeinig)",
+    sets: 3,
+    reps: 10,
+    weight: 0,
+    rest: 45,
+    instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen, Becken heben, bis Knie, Hüfte und Schulter eine Linie bilden. 3 s halten, langsam absenken. Steigerung, wenn 3×10 leicht geht: einbeinig, das andere Bein gestreckt in der Luft, Becken bleibt waagrecht. Wichtig: Kraft aus dem Gesäß, nicht aus dem Rücken.",
+    imageUrl: "/exercise-images/glute-bridge-3s.svg"
+  },
+  {
+    name: "Hip Thrust auf der Bank",
+    sets: 3,
+    reps: 10,
+    weight: 0,
+    rest: 60,
+    instructions: "Schulterblätter an die Kante einer Bank, Füße hüftbreit am Boden, Knie über den Füßen. Ausatmen, Gesäß anspannen und das Becken hochdrücken, bis Oberkörper und Oberschenkel eine Linie bilden. 2 s halten, langsam absenken. Erst ohne Gewicht, später eine Kurzhantel auf die Hüfte. Wichtig: Kinn leicht zur Brust, Rippen unten – kein Hohlkreuz oben.",
+    imageUrl: "/exercise-images/hip-thrust.svg",
+  },
+  {
+    name: "Clamshells (Muschel)",
+    sets: 2,
+    reps: 15, // pro Seite
+    perSide: true,
+    weight: 0,
+    rest: 30,
+    instructions: "Seitlage, Kopf auf dem Arm, Hüfte und Knie ca. 45° gebeugt, Fersen zusammen. Oberes Knie öffnen wie eine Muschel, Fersen bleiben aneinander, langsam schließen. Später mit Miniband über den Knien. Alternative: seitliches Beinheben mit gestrecktem oberen Bein. Wichtig: Becken nicht nach hinten kippen – die Bewegung kommt aus dem seitlichen Gesäß.",
+  },
+];
+
+const STARK_STAGE2_EXTRA: ExerciseDraft[] = [
+  {
+    name: "Pallof Press (gegen Drehung)",
+    sets: 3,
+    reps: 10, // pro Seite
+    perSide: true,
+    weight: 0,
+    rest: 45,
+    instructions: "Band oder Sling-Trainer seitlich auf Brusthöhe befestigt, seitlich dazu stellen, Füße hüftbreit, Knie locker. Griff mit beiden Händen vor die Brust. Bauch fest, Arme langsam gerade nach vorn strecken, 2 s halten, zurück. Der Zug will dich verdrehen – du lässt es nicht zu. Seite wechseln. Wichtig: Becken und Schultern bleiben gerade nach vorn.",
+  },
+  {
+    name: "Einarmiges Rudern am Sling-Trainer",
+    sets: 3,
+    reps: 10, // pro Seite
+    perSide: true,
+    weight: 0,
+    rest: 45,
+    instructions: "Einen Griff fassen, Körper schräg nach hinten lehnen, gespannt wie ein Brett. Schulterblatt zurück und unten, dann den Ellbogen eng am Körper nach hinten ziehen, langsam zurück. Wichtig: Nicht mitdrehen – Brust und Becken bleiben zum Anker gerichtet. Je aufrechter du stehst, desto leichter.",
+  },
+  {
+    name: "Einseitiges Tragen (Suitcase Carry)",
+    sets: 3,
+    reps: 30, // Sekunden gehen, pro Seite
+    unit: 'seconds',
+    perSide: true,
+    weight: 0,
+    rest: 45,
+    instructions: "Eine schwere Kurzhantel oder Tasche in eine Hand, 30 s aufrecht gehen, dann Seite wechseln. Aus der Hüfte in die Knie gehen zum Aufheben und Abstellen. Eine der besten Übungen für seitliche Rumpfstabilität. Wichtig: Nicht zur Last hin oder weg neigen, Schultern waagrecht, ruhig weiteratmen.",
+    imageUrl: "/exercise-images/suitcase-carry.svg",
+  },
+];
+
+const STARK_STAGE3_EXTRA: ExerciseDraft[] = [
+  {
+    name: "Hip Hinge (mit Stab)",
+    sets: 2,
+    reps: 10,
+    weight: 0,
+    rest: 45,
+    instructions: "Stab (Besenstiel) am Rücken: berührt Hinterkopf, Brustwirbelsäule und Kreuzbein. Füße hüftbreit, Knie leicht gebeugt. Hüfte nach hinten schieben und den Oberkörper vorneigen, bis hinten in den Beinen ein Zug kommt – alle drei Punkte bleiben am Stab. Über das Gesäß wieder aufrichten. Wichtig: Die Bewegung kommt aus der Hüfte, der Rücken bleibt neutral.",
+    imageUrl: "/exercise-images/kreuzheben.svg"
+  },
+  {
+    name: "Rumänisches Kreuzheben (leicht)",
+    sets: 3,
+    reps: 8,
+    weight: 0,
+    rest: 60,
+    instructions: "Erst wenn der Hip Hinge sicher sitzt. Leichte Kurzhanteln vor den Oberschenkeln, Füße hüftbreit, Knie leicht gebeugt. Einatmen, Hüfte nach hinten schieben, Hanteln nah an den Beinen bis knapp unter die Knie. Ausatmen, Gesäß anspannen, aufrichten. Langsam steigern. Wichtig: Rücken neutral, kein Runden – lieber weniger tief und weniger Gewicht.",
+    imageUrl: "/exercise-images/kreuzheben.svg"
+  },
+];
+
+const [STARK_WALK, ...STARK_STAGE1_CORE] = STARK_STAGE1;
+
+export const strongBackStage1Plan: WorkoutPlan = {
+  name: "Rücken stark – Stufe 1 (@stark1)",
+  duration: "2–3 Wochen, dann Stufe 2",
+  sessionsPerWeek: 3,
+  goal: "Rumpfausdauer rundum, Gesäß und Hüfte – L4/L5 schützen",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: STARK_NOTICE_BASE,
+  exercises: numbered(STARK_STAGE1),
+};
+
+export const strongBackStage2Plan: WorkoutPlan = {
+  name: "Rücken stark – Stufe 2 (@stark2)",
+  duration: "Ab Woche 3, dann Stufe 3",
+  sessionsPerWeek: 3,
+  goal: "Dazu: gegen Drehung stabilisieren und einseitig tragen",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: STARK_NOTICE_BASE,
+  exercises: numbered([STARK_WALK, ...STARK_STAGE1_CORE, ...STARK_STAGE2_EXTRA]),
+};
+
+export const strongBackStage3Plan: WorkoutPlan = {
+  name: "Rücken stark – Stufe 3 (@stark3)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 3,
+  goal: "Dazu: Heben lernen – aus der Hüfte, Rücken neutral",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: STARK_NOTICE_BASE,
+  exercises: numbered([STARK_WALK, ...STARK_STAGE1_CORE, ...STARK_STAGE2_EXTRA, ...STARK_STAGE3_EXTRA]),
 };
 
 // Default export für Kompatibilität

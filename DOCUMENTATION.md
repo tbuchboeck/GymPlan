@@ -5,7 +5,7 @@
 GymPlan ist eine PWA für geführtes Training mit zwei Personen:
 
 - **Neli** – Pläne `@gym`, `@hantel`, `@cardio`. Grundsatz: Sie trägt nichts ein, alles bleibt einfach.
-- **Thomas** – zusätzlich die Physio-Routinen `@rücken`, `@nacken`, `@morgen`, `@akut`, `@bett` (mit Befindens-Abfrage bei `@rücken`/`@nacken`/`@akut` und „Kribbelt – abbrechen“ bei Nerven-Übungen).
+- **Thomas** – zusätzlich die Physio-Routinen `@rücken`, `@nacken`, `@morgen`, `@akut`, `@bett`, `@stark1–3` (mit Befindens-Abfrage bei `@rücken`/`@nacken`/`@akut`/`@stark1–3` und „Kribbelt – abbrechen“ bei Nerven-Übungen).
 
 Die Daten liegen lokal (localStorage, primär) und werden im Hintergrund mit der Supabase-Tabelle `gym_sessions` abgeglichen. Gehostet auf Vercel als statischer Vite-Build.
 
@@ -66,6 +66,9 @@ Alle Tages- und Wochenberechnungen (`src/utils/statistics.ts`) laufen in **Ortsz
 | `morningWorkoutPlan` | Morgen-Reset (@morgen) | 10 | 7 |
 | `acuteBackWorkoutPlan` | Rücken akut (@akut) | 9 | 7 |
 | `bedMorningWorkoutPlan` | Morgen im Bett (@bett) | 7 | 7 |
+| `strongBackStage1Plan` | Rücken stark – Stufe 1 (@stark1) | 8 | 3 |
+| `strongBackStage2Plan` | Rücken stark – Stufe 2 (@stark2) | 11 | 3 |
+| `strongBackStage3Plan` | Rücken stark – Stufe 3 (@stark3) | 13 | 3 |
 
 Sessions werden über `planName` dem Plan zugeordnet – Plan-Namen daher nicht leichtfertig umbenennen (sonst passen Wochen-/Tagesanzeigen alter Trainings nicht mehr). Ein Plan kann einen `notice` (Warnhinweis) haben, der auf der Startseite in einer gelben, aufklappbaren Box vor den Übungen steht; Übungen mit `caution` bekommen im Training den Abbrechen-Knopf.
 

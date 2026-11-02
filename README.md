@@ -8,7 +8,7 @@ Progressive Web App (PWA) für geführtes Training – für **Neli** und **Thoma
 - **Plan-Auswahl** bei jedem Start: zeigt pro Plan „heute erledigt“ und „diese Woche x/y“. Der zuletzt gewählte Plan steht oben und ist hervorgehoben; bei Thomas stehen vor 11 Uhr `@bett` und danach `@morgen` ganz oben, solange sie heute noch nicht erledigt sind.
 - **Startseite**: Wochenübersicht Mo–So (Punkte für erledigte Tage, „x / Einheiten pro Woche“ für den aktuellen Plan), „Weitermachen bei Übung X/Y“ für ein angefangenes Training, Plan-Hinweis (z. B. wann ärztlich abklären), Übungsliste zum direkten Einstieg.
 - **Geführtes Training** Übung für Übung mit Satz-Abhaken, Pausen-Timer und animierten Übungsbildern (SVG).
-- **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`/`@akut`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
+- **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`/`@akut`/`@stark1–3`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
 - **Statistiken**: Verlauf, Serien (Streak), Wochentage, Diagramme; Export/Import als JSON/CSV.
 - **Synchronisation** der Trainings mit Supabase (lokal zuerst, Server im Hintergrund).
 - **Offline**: Service Worker speichert die App inkl. aller Übungsbilder.
@@ -27,6 +27,9 @@ Erinnerungen per Push gibt es bewusst **nicht** (die frühere Einstellung war ei
 | Morgen-Reset | `@morgen` | 10 | 7 | Thomas |
 | Rücken akut | `@akut` | 9 | 7 | Thomas |
 | Morgen im Bett | `@bett` | 7 | 7 | Thomas |
+| Rücken stark – Stufe 1 | `@stark1` | 8 | 3 | Thomas |
+| Rücken stark – Stufe 2 | `@stark2` | 11 | 3 | Thomas |
+| Rücken stark – Stufe 3 | `@stark3` | 13 | 3 | Thomas |
 
 Die Pläne stehen in `src/data/workoutPlan.ts`, die Sichtbarkeit pro Person (`onlyFor`) in `src/components/LocationSelector.tsx`. Neli soll nichts eintragen müssen – für sie bleibt alles so einfach wie möglich.
 
