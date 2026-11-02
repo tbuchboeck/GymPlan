@@ -38,10 +38,13 @@ DOWN = dict(lift=0.0)
 UP = dict(lift=1.0)
 
 # Tempo laut Plan: 2 s hoch / 3–5 s halten (hier 4) / 2 s runter
-T_UP0, T_UP1, T_H1, T_DN1, T_END = 0.8, 2.8, 6.8, 8.8, 9.6
+HOLD = 4
 
 
-def build():
+def build(hold=HOLD, slug_title="Glute Bridge"):
+    T_UP0, T_UP1 = 0.8, 2.8
+    T_H1 = T_UP1 + hold
+    T_DN1, T_END = T_H1 + 2.0, T_H1 + 2.8
     tl = FnTimeline([(0, DOWN), (T_UP0, DOWN), (T_UP1, UP), (T_H1, UP), (T_DN1, DOWN), (T_END, DOWN)],
                     iks=IKS, skeleton=SIDE, pre=pre)
     p_up = tl.at(T_UP1 + 0.1)
@@ -74,13 +77,13 @@ def build():
         scene,
         label("Druck über die Fersen", hx + 4, FLOOR_Y + 17, T_UP0, T_UP1, 12, GOOD),
         label("eine Linie", lx - 30, ly - 4, T_UP1, T_H1, 12, GOOD),
-        *counter(T_UP1, 4, lx + 2, ly - 34, size=18),
+        *counter(T_UP1, hold, lx + 2, ly - 34, size=18),
         caption_band(),
         caption("Rückenlage, Knie ca. 90°", 0, T_UP0),
         caption("Ausatmen – Po fest, Becken hoch", T_UP0, T_UP1),
         caption("Oben halten – Knie, Hüfte, Schulter", T_UP1, T_H1),
         caption("Kontrolliert absenken", T_H1, T_END),
-        *tempo_chip([("2 s hoch", T_UP0, T_UP1), ("4 s halten", T_UP1, T_H1), ("2 s runter", T_H1, T_DN1)]),
+        *tempo_chip([("2 s hoch", T_UP0, T_UP1), (f"{hold} s halten", T_UP1, T_H1), ("2 s runter", T_H1, T_DN1)]),
         static_text("Gesäß anspannen – nicht ins Hohlkreuz", 200, 24, LEAD_SIZE, MUTED),
     ]
-    return render(prims, tl, SIDE, title="Glute Bridge")
+    return render(prims, tl, SIDE, title=slug_title)

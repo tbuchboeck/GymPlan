@@ -862,7 +862,7 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 5,
       instructions: "Rückenlage, Füße hüftbreit auf der Matratze. Ausatmen, Gesäß anspannen und das Becken langsam heben, bis Knie, Hüfte und Schulter eine Linie bilden – oder weniger, wenn es zieht. 3 s halten, langsam absenken. 5×. Aktiviert Gesäß und Rumpf. Wichtig: Kraft aus dem Gesäß, kein Hohlkreuz.",
-      imageUrl: "/exercise-images/glute-bridge.svg"
+      imageUrl: "/exercise-images/glute-bridge-3s.svg"
     },
     {
       id: 6,
@@ -929,7 +929,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       reps: 12, // 10–15
       weight: 0,
       rest: 20,
-      instructions: "Rückenlage, Knie aufgestellt, Füße hüftbreit. Becken leicht nach vorn kippen, sodass ein kleines Hohlkreuz entsteht. Dann ausatmen und Becken einrollen, die Lende sinkt sanft in die Matte. 10–15× langsam hin und her, im Atemrhythmus. Wichtig: Kleine, weiche Bewegung, Gesäß bleibt liegen. Auch morgens im Bett gut.",
+      instructions: "Rückenlage, Knie aufgestellt, Füße hüftbreit. Becken leicht nach vorn kippen, sodass ein kleines Hohlkreuz entsteht. Dann ausatmen und das Becken sanft zurückkippen, die Lende sinkt leicht in die Matte. 10–15× langsam hin und her, im Atemrhythmus. Wichtig: Kleine, weiche Bewegung, Gesäß bleibt liegen. Auch morgens im Bett gut.",
       imageUrl: "/exercise-images/becken-kippen.svg"
     },
     {
@@ -984,7 +984,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 30,
       instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen und das Becken nur so weit anheben, wie es angenehm ist – oben 3 s halten, langsam absenken. Druck über die Fersen. Wichtig: Kraft aus dem Gesäß, nicht aus dem unteren Rücken. Kein Hohlkreuz.",
-      imageUrl: "/exercise-images/glute-bridge.svg"
+      imageUrl: "/exercise-images/glute-bridge-3s.svg"
     },
     {
       id: 9,
