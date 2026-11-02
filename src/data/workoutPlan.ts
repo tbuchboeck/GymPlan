@@ -854,6 +854,7 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 5,
       instructions: "Rückenlage, Knie angewinkelt und geschlossen, Füße auf der Matratze. Beide Knie langsam zu einer Seite sinken lassen, zurück zur Mitte, dann zur anderen Seite. 10× abwechselnd. Klein anfangen, mit jeder Wiederholung etwas weiter, solange es angenehm ist. Wichtig: Schultern bleiben liegen, nicht in den Schmerz hineindrehen.",
+      imageUrl: "/exercise-images/knie-ablegen.svg",
     },
     {
       id: 5,
@@ -874,6 +875,7 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 0,
       instructions: "Nabel sanft nach innen ziehen und den Rumpf leicht anspannen, etwa ein Viertel der vollen Kraft, wie ein Korsett. Normal weiteratmen. Diese Spannung jetzt halten und beim Aufstehen beibehalten. Wichtig: Nicht die Luft anhalten, nicht pressen.",
+      imageUrl: "/exercise-images/bauchspannung.svg",
     },
     {
       id: 7,
@@ -883,6 +885,7 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 0,
       instructions: "Bauchspannung halten. Als Ganzes („en bloc“) auf die Seite drehen, Knie bleiben zusammen. Beine aus dem Bett gleiten lassen und gleichzeitig mit den Armen den Oberkörper hochdrücken – nicht frontal aufsetzen. Kurz auf der Bettkante sitzen, dann aufstehen. Danach: erst ein paar Schritte gehen, bevor du dich setzt oder vorbeugst. Beim Zähneputzen und Anziehen abstützen und aus der Hüfte beugen.",
+      imageUrl: "/exercise-images/aufstehen.svg",
     }
   ]
 };
@@ -922,6 +925,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
       weight: 0,
       rest: 20,
       instructions: "Rückenlage, Knie aufgestellt und geschlossen, Füße flach am Boden, Arme seitlich ausgebreitet. Beide Knie langsam zu einer Seite sinken lassen, nur so weit es angenehm ist, Schultern bleiben am Boden. 2 Atemzüge, zurück zur Mitte, andere Seite. Langsam wie ein Pendel, im Atemrhythmus. Wichtig: Kleine Bewegung reicht – nicht in den Schmerz hineindrehen.",
+      imageUrl: "/exercise-images/knie-ablegen.svg",
     },
     {
       id: 3,
@@ -1030,6 +1034,7 @@ const STARK_STAGE1: ExerciseDraft[] = [
     weight: 0,
     rest: 10,
     instructions: "Wie gewohnt auf der Bank: Hüfte am Polster, Fersen fixiert. Oberkörper so weit anheben, dass er mit den Beinen eine gerade Linie bildet – nicht höher, kein Hohlkreuz. 10 s halten, kurz absenken. 5–6× (Rückseite des Rumpfs). Wichtig: Gesäß mit anspannen, Kopf in Verlängerung der Wirbelsäule.",
+    imageUrl: "/exercise-images/rueckenstrecker-bank.svg",
   },
   {
     name: "Curl-up (vorne)",
@@ -1089,6 +1094,7 @@ const STARK_STAGE1: ExerciseDraft[] = [
     weight: 0,
     rest: 30,
     instructions: "Seitlage, Kopf auf dem Arm, Hüfte und Knie ca. 45° gebeugt, Fersen zusammen. Oberes Knie öffnen wie eine Muschel, Fersen bleiben aneinander, langsam schließen. Später mit Miniband über den Knien. Alternative: seitliches Beinheben mit gestrecktem oberen Bein. Wichtig: Becken nicht nach hinten kippen – die Bewegung kommt aus dem seitlichen Gesäß.",
+    imageUrl: "/exercise-images/clamshells.svg",
   },
 ];
 
@@ -1101,6 +1107,7 @@ const STARK_STAGE2_EXTRA: ExerciseDraft[] = [
     weight: 0,
     rest: 45,
     instructions: "Band oder Sling-Trainer seitlich auf Brusthöhe befestigt, seitlich dazu stellen, Füße hüftbreit, Knie locker. Griff mit beiden Händen vor die Brust. Bauch fest, Arme langsam gerade nach vorn strecken, 2 s halten, zurück. Der Zug will dich verdrehen – du lässt es nicht zu. Seite wechseln. Wichtig: Becken und Schultern bleiben gerade nach vorn.",
+    imageUrl: "/exercise-images/pallof-press.svg",
   },
   {
     name: "Einarmiges Rudern am Sling-Trainer",
@@ -1110,6 +1117,7 @@ const STARK_STAGE2_EXTRA: ExerciseDraft[] = [
     weight: 0,
     rest: 45,
     instructions: "Einen Griff fassen, Körper schräg nach hinten lehnen, gespannt wie ein Brett. Schulterblatt zurück und unten, dann den Ellbogen eng am Körper nach hinten ziehen, langsam zurück. Wichtig: Nicht mitdrehen – Brust und Becken bleiben zum Anker gerichtet. Je aufrechter du stehst, desto leichter.",
+    imageUrl: "/exercise-images/einarm-rudern.svg",
   },
   {
     name: "Einseitiges Tragen (Suitcase Carry)",

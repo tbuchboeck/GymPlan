@@ -21,7 +21,7 @@ def pre(p):
     for k in ("n", "f"):
         set_abs(SIDE, p, "thigh_" + k, 2)
         set_abs(SIDE, p, "shin_" + k, -1)
-        set_abs(SIDE, p, "foot_" + k, 60 + 40 * f)
+        set_abs(SIDE, p, "foot_" + k, 58 + 34 * f)
     set_abs(SIDE, p, "upperarm_n", 0)
     set_abs(SIDE, p, "forearm_n", 0)
     set_abs(SIDE, p, "hand_n", 0)
