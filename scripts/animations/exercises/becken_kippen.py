@@ -4,7 +4,7 @@ from exercises._ruecken_cardio_props import *
 SLUG = "becken-kippen"
 
 # Rückenlage, Seitansicht, Kopf links. Skalar "tilt" -1..1:
-# -1 = leichtes Hohlkreuz (Lende hebt ab), +1 = Becken eingerollt (Lende flach
+# -1 = leichtes Hohlkreuz (Lende hebt ab), +1 = Becken sanft zurückgekippt (Lende flach
 # am Boden). Bewegung klein und schmerzfrei, Schultern und Füße bleiben liegen.
 FLOOR_Y = 236
 C = FLOOR_Y - 16
@@ -75,8 +75,8 @@ def build():
         caption_band(),
         caption("Rückenlage, Knie aufgestellt", 0, T[1]),
         caption("Becken nach vorn kippen – kleines Hohlkreuz", T[1], T[3]),
-        caption("Ausatmen – Becken einrollen, Lende flach", T[3], T[5]),
-        caption("Locker lösen – 10–15× im Atemrhythmus", T[5], T[6]),
+        caption("Ausatmen – Becken sanft zurückkippen", T[3], T[5]),
+        caption("Locker lösen – im Atemrhythmus wiederholen", T[5], T[6]),
         static_text("Kleine Bewegung, nur so weit es angenehm ist", 200, 24, LEAD_SIZE, MUTED),
     ]
     return render(prims, tl, SIDE, title="Becken kippen")
