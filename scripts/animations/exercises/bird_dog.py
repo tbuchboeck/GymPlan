@@ -22,6 +22,12 @@ IK_LN = IK("thigh_n", "shin_n", (KNEE_N[0] - 48, FLOOR_Y - 8), bend=1, end_seg="
 IK_LF = IK("thigh_f", "shin_f", (KNEE_F[0] - 48, FLOOR_Y - 8), bend=1, end_seg="foot_f", end_abs=180)
 
 
+def _near(a, ref):
+    """Winkel a so um 360° verschieben, dass er möglichst nah an ref liegt –
+    sonst dreht das Blenden ein Glied (z. B. den Fuß) einmal ganz herum."""
+    return ref + (a - ref + 180.0) % 360.0 - 180.0
+
+
 def solve(p):
     """Stütz-IK mit Gewicht; gestreckte Glieder in absoluten Winkeln."""
     q = dict(p)
@@ -36,14 +42,16 @@ def solve(p):
             set_abs(SIDE, ext, f"forearm_{s}", 9)
             set_abs(SIDE, ext, f"hand_{s}", 9)
             for k in (f"upperarm_{s}", f"forearm_{s}", f"hand_{s}"):
-                q[k] = ext[k] + (q[k] - ext[k]) * wa
+                e = _near(ext[k], q[k])
+                q[k] = e + (q[k] - e) * wa
         if wl < 1:
             ext = dict(q)
             set_abs(SIDE, ext, f"thigh_{s}", 179)
             set_abs(SIDE, ext, f"shin_{s}", 178)
-            set_abs(SIDE, ext, f"foot_{s}", 268)
+            set_abs(SIDE, ext, f"foot_{s}", 240)   # Fuß leicht gestreckt, Zehen Richtung Boden
             for k in (f"thigh_{s}", f"shin_{s}", f"foot_{s}"):
-                q[k] = ext[k] + (q[k] - ext[k]) * wl
+                e = _near(ext[k], q[k])
+                q[k] = e + (q[k] - e) * wl
     return q
 
 
