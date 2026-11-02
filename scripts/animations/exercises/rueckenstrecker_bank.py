@@ -32,14 +32,15 @@ def pre(p):
 
 
 def build():
-    T0, T1, T2, T3, END = 0.6, 2.6, 12.6, 14.6, 15.2
-    tl = FnTimeline([(0, dict(lift=0)), (T0, dict(lift=0)), (T1, dict(lift=1)), (T2, dict(lift=1)),
-                     (T3, dict(lift=0)), (END, dict(lift=0))], skeleton=SIDE, pre=pre)
+    # Reine Halteübung: Körper bleibt in der geraden Linie, kein Auf und Ab.
+    # Nur der Atem bewegt sich minimal; die Fokuszone pulsiert (Spannung baut sich auf).
+    DUR = 12.0
+    keys = [(0, dict(lift=1.0)), (3.0, dict(lift=0.985)), (6.0, dict(lift=1.0)), (9.0, dict(lift=0.985)),
+            (DUR, dict(lift=1.0))]
+    tl = FnTimeline(keys, skeleton=SIDE, pre=pre)
     r = math.radians(LEG_A)
     ux, uy = math.cos(r), -math.sin(r)
     ankle = (HIP[0] + 98 * ux, HIP[1] + 98 * uy)
-    # Polster vor der Hüfte (unter dem Körper), Rolle hinter den Fersen
-    nx, ny = uy, -ux                       # Normale Richtung Bauchseite? -> unten rechts
     pad_c = (HIP[0] - 4 * ux + 18 * uy, HIP[1] - 4 * uy - 18 * ux)   # Bauchseite
     bench = [
         Prim("line", {"x1": pad_c[0], "y1": pad_c[1], "x2": pad_c[0] + 10, "y2": FLOOR_Y, "stroke": PROP_DARK,
@@ -61,19 +62,26 @@ def build():
         floor(FLOOR_Y, 40, 360),
         *bench,
         *side_figure(),
-        dyn_line(line_pts, show=[(T1, T2)]),
-        focus("lumbar", rx=10, ry=16, offset=(-6, -6), end=False, show=[(T0, T2)]),
-        arrow("M262 206 Q292 170 276 122", show=[(T0, T1)]),
+        dyn_line(line_pts),
+        focus("lumbar", rx=10, ry=16, offset=(-6, -6), end=False),
     ], scale=1.0, origin=(200, FLOOR_Y))
-    prims = [
-        scene,
-        label("eine Linie – nicht höher", 318, 200, T1, T2, 12, GOOD),
-        *counter(T1, 10, 330, 170, size=20),
-        caption_band(),
-        static_text("Kein Hohlkreuz – Gesäß mit anspannen", 200, 24, LEAD_SIZE, MUTED),
-        caption("Hüfte am Polster, Fersen unter der Rolle", 0, T0),
-        caption("Oberkörper heben bis zur geraden Linie", T0, T1),
-        caption("10 s halten – Kopf in Verlängerung", T1, T2),
-        caption("Kurz absenken – 5–6×", T2, END),
+    # Uhr: 3 Minuten durchgehend
+    clock = [
+        Prim("circle", {"cx": 330, "cy": 150, "r": 26, "fill": "none", "stroke": FLOOR, "stroke-width": 6}),
+        Prim("circle", {"cx": 330, "cy": 150, "r": 26, "fill": "none", "stroke": GOOD, "stroke-width": 6,
+                        "stroke-dasharray": "163.4", "stroke-linecap": "round",
+                        "transform": "rotate(-90 330 150)"},
+             lambda c: {"stroke-dashoffset": 163.4 * (1 - c["t"] / DUR)}),
+        static_text("3 Min", 330, 156, 15, TEXT, weight="700"),
+        static_text("durchgehend", 330, 194, 12, MUTED),
     ]
-    return render(prims, tl, SIDE, fps=8, title="Rückenstrecker-Bank")
+    prims = [
+        scene, *clock,
+        static_text("eine Linie – nicht höher", 300, 226, 12, GOOD, weight="600"),
+        caption_band(),
+        static_text("Halten – kein Auf und Ab", 200, 24, LEAD_SIZE, MUTED),
+        caption("Fersen bis Kopf eine gerade Linie", 0, 4.0),
+        caption("Ruhig atmen – Spannung baut sich langsam auf", 4.0, 8.0),
+        caption("Tut es weh: sofort aufhören", 8.0, DUR, color=WARN),
+    ]
+    return render(prims, tl, SIDE, fps=6, title="Hyperextension-Bank halten")

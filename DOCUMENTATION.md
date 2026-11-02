@@ -64,7 +64,7 @@ Alle Tages- und Wochenberechnungen (`src/utils/statistics.ts`) laufen in **Ortsz
 | `backWorkoutPlan` | Rücken-Aufbau (@rücken) | 6 | 4 |
 | `neckWorkoutPlan` | Nacken, Schulter & BWS (@nacken) | 14 | 4 |
 | `morningWorkoutPlan` | Morgen-Reset (@morgen) | 10 | 7 |
-| `acuteBackWorkoutPlan` | Rücken akut (@akut) | 9 | 7 |
+| `acuteBackWorkoutPlan` | Rücken akut (@akut) | 10 | 7 |
 | `bedMorningWorkoutPlan` | Morgen im Bett (@bett) | 7 | 7 |
 | `strongBackStage1Plan` | Rücken stark – Stufe 1 (@stark1) | 8 | 3 |
 | `strongBackStage2Plan` | Rücken stark – Stufe 2 (@stark2) | 11 | 3 |
