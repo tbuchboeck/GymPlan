@@ -1,13 +1,13 @@
 import { Check, ChevronRight, ArrowRight } from 'lucide-react';
 import type { Person } from '../lib/auth-service';
 import type { WorkoutPlan, WorkoutSession } from '../types';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from '../data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan, acuteBackWorkoutPlan, bedMorningWorkoutPlan } from '../data/workoutPlan';
 import { isInWeekOf, isSameLocalDay } from '../utils/statistics';
 import { VersionBadge } from './VersionBadge';
 import { planTitle } from '../utils/format';
 import { planTheme } from '../utils/plan-theme';
 
-export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning';
+export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | 'acute' | 'bed';
 
 interface LocationSelectorProps {
   person: Person;
@@ -25,6 +25,12 @@ interface LocationOption {
 }
 
 const locations: LocationOption[] = [
+  {
+    key: 'bed',
+    description: '3–5 Min. im Bett, dann sicher aufstehen',
+    plan: bedMorningWorkoutPlan,
+    onlyFor: 'thomas',
+  },
   {
     key: 'gym',
     description: 'Ganzkörper an den Geräten',
@@ -60,6 +66,12 @@ const locations: LocationOption[] = [
     key: 'morning',
     description: 'Morgen-Reset in 10 Teilen',
     plan: morningWorkoutPlan,
+    onlyFor: 'thomas',
+  },
+  {
+    key: 'acute',
+    description: 'Entlasten, mobilisieren & stabilisieren',
+    plan: acuteBackWorkoutPlan,
     onlyFor: 'thomas',
   },
 ];
@@ -99,10 +111,13 @@ function LocationSelector({ person, sessions, onSelectLocation }: LocationSelect
       };
     });
 
-  // Reihenfolge: Thomas vor 11 Uhr die Morgen-Routine zuerst (falls heute offen),
+  // Reihenfolge: Thomas vor 11 Uhr zuerst „Morgen im Bett“, dann die
+  // Morgen-Routine (jeweils falls heute offen),
   // dann der zuletzt gewählte Plan, dann der Rest in fester Reihenfolge.
   const rank = (loc: (typeof withStatus)[number]) => {
-    if (person === 'thomas' && loc.key === 'morning' && now.getHours() < 11 && !loc.doneToday) return 0;
+    const earlyOpen = person === 'thomas' && now.getHours() < 11 && !loc.doneToday;
+    if (earlyOpen && loc.key === 'bed') return -1;
+    if (earlyOpen && loc.key === 'morning') return 0;
     if (loc.key === lastPlan) return 1;
     return 2;
   };

@@ -802,5 +802,202 @@ export const morningWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Morgen im Bett – 3–5 Min. vor dem Aufstehen, ohne Beugeübungen
+export const bedMorningWorkoutPlan: WorkoutPlan = {
+  name: "Morgen im Bett (@bett)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 7,
+  goal: "Sanft wach werden, Rumpf aktivieren, sicher aufstehen",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: "Noch im Bett machen, in Rückenlage mit angewinkelten Knien. 3–5 Minuten.\n\n" +
+    "Morgens keine starken Beugeübungen: kein Knie-zur-Brust, kein Einrollen. Die Bandscheibe ist nach der Nacht noch prall und empfindlich.\n\n" +
+    "Wichtiger als die Übungen ist die erste Stunde danach – da passieren die meisten Episoden:\n" +
+    "• Ein paar Schritte gehen, bevor du dich hinsetzt oder vorbeugst.\n" +
+    "• Beim Zähneputzen, Anziehen und am Badewannenrand abstützen und aus der Hüfte beugen, nicht aus dem Rücken.",
+  exercises: [
+    {
+      id: 1,
+      name: "Bauchatmung",
+      sets: 1,
+      reps: 5, // Atemzüge
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt, eine Hand auf dem Bauch. 5 tiefe Atemzüge: durch die Nase in den Bauch einatmen, sodass sich die Hand hebt, langsam ausatmen. Weckt den Körper und löst die Spannung. Wichtig: Schultern und Nacken bleiben locker.",
+      imageUrl: "/exercise-images/bauch-rippenatmung.svg"
+    },
+    {
+      id: 2,
+      name: "Fußpumpe",
+      sets: 1,
+      reps: 20,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt oder Beine lang. Beide Füße kräftig zu dir anziehen (Zehen Richtung Nase), dann weit strecken (Zehen weg). 20× im ruhigen Takt. Regt die Durchblutung an. Wichtig: Nur die Füße bewegen, Rücken bleibt entspannt liegen.",
+    },
+    {
+      id: 3,
+      name: "Becken kippen",
+      sets: 1,
+      reps: 10,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt, Füße auf der Matratze. Becken klein und langsam nach vorn kippen (kleines Hohlkreuz), dann ausatmen und sanft zurückkippen, bis die Lende leicht in die Matratze sinkt. 10× im Atemrhythmus. Wichtig: Kleine Bewegung, Gesäß bleibt liegen – kein Einrollen, kein Hochheben.",
+      imageUrl: "/exercise-images/becken-kippen.svg"
+    },
+    {
+      id: 4,
+      name: "Knie seitlich ablegen",
+      sets: 1,
+      reps: 10, // insgesamt, abwechselnd links/rechts
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt und geschlossen, Füße auf der Matratze. Beide Knie langsam zu einer Seite sinken lassen, zurück zur Mitte, dann zur anderen Seite. 10× abwechselnd. Klein anfangen, mit jeder Wiederholung etwas weiter, solange es angenehm ist. Wichtig: Schultern bleiben liegen, nicht in den Schmerz hineindrehen.",
+    },
+    {
+      id: 5,
+      name: "Bridge (Beckenheben)",
+      sets: 1,
+      reps: 5,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Füße hüftbreit auf der Matratze. Ausatmen, Gesäß anspannen und das Becken langsam heben, bis Knie, Hüfte und Schulter eine Linie bilden – oder weniger, wenn es zieht. 3 s halten, langsam absenken. 5×. Aktiviert Gesäß und Rumpf. Wichtig: Kraft aus dem Gesäß, kein Hohlkreuz.",
+      imageUrl: "/exercise-images/glute-bridge.svg"
+    },
+    {
+      id: 6,
+      name: "Bauchspannung",
+      sets: 1,
+      reps: 10, // Sekunden halten
+      unit: 'seconds',
+      weight: 0,
+      rest: 0,
+      instructions: "Nabel sanft nach innen ziehen und den Rumpf leicht anspannen, etwa ein Viertel der vollen Kraft, wie ein Korsett. Normal weiteratmen. Diese Spannung jetzt halten und beim Aufstehen beibehalten. Wichtig: Nicht die Luft anhalten, nicht pressen.",
+    },
+    {
+      id: 7,
+      name: "Aufstehen über die Seite",
+      sets: 1,
+      reps: 1,
+      weight: 0,
+      rest: 0,
+      instructions: "Bauchspannung halten. Als Ganzes („en bloc“) auf die Seite drehen, Knie bleiben zusammen. Beine aus dem Bett gleiten lassen und gleichzeitig mit den Armen den Oberkörper hochdrücken – nicht frontal aufsetzen. Kurz auf der Bettkante sitzen, dann aufstehen. Danach: erst ein paar Schritte gehen, bevor du dich setzt oder vorbeugst. Beim Zähneputzen und Anziehen abstützen und aus der Hüfte beugen.",
+    }
+  ]
+};
+
+// Rücken akut – Entlastung bei Schutzspannung im unteren Rücken
+export const acuteBackWorkoutPlan: WorkoutPlan = {
+  name: "Rücken akut (@akut)",
+  duration: "Bis es wieder ruhig ist",
+  sessionsPerWeek: 7,
+  goal: "Schutzspannung lösen, sanft mobilisieren, Rumpf stabilisieren",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: "Alles auf Gefühl – Hauptsache entspannend. Nur so weit bewegen, wie es angenehm ist, nichts durch Schmerz drücken.\n\n" +
+    "Abends: vor dem Schlafen etwas Wärme (Wärmflasche, Kirschkernkissen oder warme Dusche).\n\n" +
+    "Nachts: Seitenlage mit Kissen zwischen den Knien oder Rückenlage mit Kissen unter den Knien. Nicht flach auf dem Bauch schlafen, wenn es zieht. Zum Aufstehen erst auf die Seite drehen, dann mit den Armen hochdrücken („en bloc“).\n\n" +
+    "Morgens: in der ersten Stunde kein Vorbeugen und kein tiefes Hinsetzen. Beim Zähneputzen und Anziehen abstützen. Vor dem Aufstehen die Routine „Morgen im Bett“, danach kurz spazieren.\n\n" +
+    "In den nächsten Tagen: die Halteübungen (Bird Dog, Seitstütz, Bridge, Curl-up) täglich, Gehpausen und Rolle beibehalten.\n\n" +
+    "Ärztlich abklären bei: Taubheit oder Kraftverlust im Bein, Taubheit im Gesäß- oder Intimbereich, Problemen beim Wasserlassen oder Stuhlgang, Fieber, oder wenn es nach einigen Tagen nicht besser wird.",
+  exercises: [
+    {
+      id: 1,
+      name: "Kurze Runde gehen",
+      sets: 1,
+      reps: 10, // 10 Minuten
+      unit: 'minutes',
+      weight: 0,
+      rest: 30,
+      instructions: "10 Min. locker gehen, vor oder nach der Matte – abends wie morgens. Aufrecht, normale Schritte, Arme locker mitschwingen lassen. Kein Tempo, Ziel ist Bewegung und Durchblutung. Tut gut, auch wenn es am Anfang etwas steif ist.",
+      imageUrl: "/exercise-images/walking.svg"
+    },
+    {
+      id: 2,
+      name: "Knie seitlich ablegen",
+      sets: 1,
+      reps: 10, // pro Seite
+      perSide: true,
+      weight: 0,
+      rest: 20,
+      instructions: "Rückenlage, Knie aufgestellt und geschlossen, Füße flach am Boden, Arme seitlich ausgebreitet. Beide Knie langsam zu einer Seite sinken lassen, nur so weit es angenehm ist, Schultern bleiben am Boden. 2 Atemzüge, zurück zur Mitte, andere Seite. Langsam wie ein Pendel, im Atemrhythmus. Wichtig: Kleine Bewegung reicht – nicht in den Schmerz hineindrehen.",
+    },
+    {
+      id: 3,
+      name: "Becken kippen",
+      sets: 1,
+      reps: 12, // 10–15
+      weight: 0,
+      rest: 20,
+      instructions: "Rückenlage, Knie aufgestellt, Füße hüftbreit. Becken leicht nach vorn kippen, sodass ein kleines Hohlkreuz entsteht. Dann ausatmen und Becken einrollen, die Lende sinkt sanft in die Matte. 10–15× langsam hin und her, im Atemrhythmus. Wichtig: Kleine, weiche Bewegung, Gesäß bleibt liegen. Auch morgens im Bett gut.",
+      imageUrl: "/exercise-images/becken-kippen.svg"
+    },
+    {
+      id: 4,
+      name: "Katze-Kuh",
+      sets: 1,
+      reps: 10,
+      weight: 0,
+      rest: 30,
+      instructions: "Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Ausatmen: Rücken rund machen, Kopf locker hängen lassen. Einatmen: Brustbein nach vorn sinken lassen, Blick leicht nach vorn. Langsam, mit der Atmung, ohne Endposition zu erzwingen. Wichtig: Bewegung über die ganze Wirbelsäule verteilen, weich und schmerzfrei bleiben.",
+      imageUrl: "/exercise-images/katze-kuh.svg"
+    },
+    {
+      id: 5,
+      name: "Shakti-Matte",
+      sets: 1,
+      reps: 15, // 10–20 Minuten
+      unit: 'minutes',
+      weight: 0,
+      rest: 30,
+      instructions: "Matte auf Bett oder Boden, langsam darauf ablegen, Knie aufgestellt oder Kissen unter den Knien. 10–20 Min. liegen und ruhig atmen, lang ausatmen. Die ersten Minuten sticht es, dann wird es warm und die Schutzspannung im Rücken lässt nach. Wichtig: Auf Gefühl gehen – angenehm, nicht schmerzhaft. Bei Bedarf ein dünnes T-Shirt drunter.",
+      imageUrl: "/exercise-images/shakti-matte.svg"
+    },
+    {
+      id: 6,
+      name: "Bird Dog",
+      sets: 2,
+      reps: 6, // pro Seite, je 8–10 s halten
+      perSide: true,
+      weight: 0,
+      rest: 30,
+      instructions: "Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Bauch leicht anspannen, dann gegengleich ein Bein nach hinten und den Arm nach vorn strecken – nur so hoch, dass Rücken und Becken ruhig bleiben. 8–10 s halten, kontrolliert zurück, Seite wechseln. Wichtig: Kein Hohlkreuz, Becken nicht kippen. Anfangs reicht nur das Bein.",
+      imageUrl: "/exercise-images/bird-dog.svg"
+    },
+    {
+      id: 7,
+      name: "Seitstütz (auf den Knien)",
+      sets: 3,
+      reps: 10, // Sekunden halten, pro Seite
+      unit: 'seconds',
+      perSide: true,
+      weight: 0,
+      rest: 30,
+      instructions: "Seitlage, Ellbogen unter der Schulter, Knie angewinkelt. Becken anheben, bis Schulter, Hüfte und Knie eine Linie bilden. 10 s halten, absetzen, Seite wechseln. Wenn es gut geht, langsam auf 20–25 s steigern. Wichtig: Schulter weg vom Ohr, ruhig weiteratmen, Becken nicht nach hinten kippen.",
+      imageUrl: "/exercise-images/side-plank-knee.svg"
+    },
+    {
+      id: 8,
+      name: "Bridge (Beckenheben)",
+      sets: 2,
+      reps: 8,
+      weight: 0,
+      rest: 30,
+      instructions: "Rückenlage, Füße hüftbreit, Knie ca. 90°. Ausatmen, Gesäß anspannen und das Becken nur so weit anheben, wie es angenehm ist – oben 3 s halten, langsam absenken. Druck über die Fersen. Wichtig: Kraft aus dem Gesäß, nicht aus dem unteren Rücken. Kein Hohlkreuz.",
+      imageUrl: "/exercise-images/glute-bridge.svg"
+    },
+    {
+      id: 9,
+      name: "Curl-up",
+      sets: 3,
+      reps: 5, // je 8–10 s halten
+      weight: 0,
+      rest: 30,
+      instructions: "Rückenlage, ein Bein aufgestellt, das andere gestreckt. Hände flach unter die Lende, damit sie ihre natürliche Krümmung behält. Bauch leicht anspannen, Kopf und Schultern als Block nur wenige Zentimeter abheben, 8–10 s halten und dabei weiteratmen, ablegen. Pro Satz Bein wechseln. Wichtig: Kein Sit-up – Kinn nicht zur Brust ziehen, die Lende bleibt ruhig.",
+      imageUrl: "/exercise-images/curl-up.svg"
+    }
+  ]
+};
+
 // Default export für Kompatibilität
 export const workoutPlan = gymWorkoutPlan;

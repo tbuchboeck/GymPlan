@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, Building2, Dumbbell, HeartPulse, PersonStanding, Sunrise } from 'lucide-react';
+import { Activity, Building2, Dumbbell, HeartPulse, PersonStanding, Sunrise, Waves, BedDouble } from 'lucide-react';
 
 /**
  * Farbwelt je Trainingsplan. Alle Klassen stehen hier als volle Literale,
@@ -76,6 +76,24 @@ const THEMES: Record<string, PlanTheme> = {
     text: 'text-amber-300',
     soft: 'bg-amber-500/15 text-amber-200',
     glow: 'bg-amber-500/25',
+  },
+  'Rücken akut (@akut)': {
+    icon: Waves,
+    gradient: 'from-violet-500 to-fuchsia-600',
+    from: '#8b5cf6',
+    to: '#c026d3',
+    text: 'text-violet-300',
+    soft: 'bg-violet-500/15 text-violet-200',
+    glow: 'bg-violet-500/25',
+  },
+  'Morgen im Bett (@bett)': {
+    icon: BedDouble,
+    gradient: 'from-rose-400 to-amber-400',
+    from: '#fb7185',
+    to: '#fbbf24',
+    text: 'text-rose-300',
+    soft: 'bg-rose-500/15 text-rose-200',
+    glow: 'bg-rose-500/25',
   },
 };
 

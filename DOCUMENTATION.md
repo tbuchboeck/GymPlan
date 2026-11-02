@@ -5,7 +5,7 @@
 GymPlan ist eine PWA für geführtes Training mit zwei Personen:
 
 - **Neli** – Pläne `@gym`, `@hantel`, `@cardio`. Grundsatz: Sie trägt nichts ein, alles bleibt einfach.
-- **Thomas** – zusätzlich die Physio-Routinen `@rücken`, `@nacken`, `@morgen` (mit Befindens-Abfrage bei `@rücken`/`@nacken` und „Kribbelt – abbrechen“ bei Nerven-Übungen).
+- **Thomas** – zusätzlich die Physio-Routinen `@rücken`, `@nacken`, `@morgen`, `@akut`, `@bett` (mit Befindens-Abfrage bei `@rücken`/`@nacken`/`@akut` und „Kribbelt – abbrechen“ bei Nerven-Übungen).
 
 Die Daten liegen lokal (localStorage, primär) und werden im Hintergrund mit der Supabase-Tabelle `gym_sessions` abgeglichen. Gehostet auf Vercel als statischer Vite-Build.
 
@@ -64,6 +64,8 @@ Alle Tages- und Wochenberechnungen (`src/utils/statistics.ts`) laufen in **Ortsz
 | `backWorkoutPlan` | Rücken-Aufbau (@rücken) | 6 | 4 |
 | `neckWorkoutPlan` | Nacken, Schulter & BWS (@nacken) | 14 | 4 |
 | `morningWorkoutPlan` | Morgen-Reset (@morgen) | 10 | 7 |
+| `acuteBackWorkoutPlan` | Rücken akut (@akut) | 9 | 7 |
+| `bedMorningWorkoutPlan` | Morgen im Bett (@bett) | 7 | 7 |
 
 Sessions werden über `planName` dem Plan zugeordnet – Plan-Namen daher nicht leichtfertig umbenennen (sonst passen Wochen-/Tagesanzeigen alter Trainings nicht mehr). Ein Plan kann einen `notice` (Warnhinweis) haben, der auf der Startseite in einer gelben, aufklappbaren Box vor den Übungen steht; Übungen mit `caution` bekommen im Training den Abbrechen-Knopf.
 
