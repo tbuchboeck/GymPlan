@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, Building2, Dumbbell, HeartPulse, PersonStanding, Sunrise, Waves, BedDouble } from 'lucide-react';
+import { Activity, Building2, Dumbbell, HeartPulse, PersonStanding, Sunrise, Waves, BedDouble, Shield } from 'lucide-react';
 
 /**
  * Farbwelt je Trainingsplan. Alle Klassen stehen hier als volle Literale,
@@ -28,6 +28,16 @@ const INDIGO: PlanTheme = {
   text: 'text-indigo-300',
   soft: 'bg-indigo-500/15 text-indigo-200',
   glow: 'bg-indigo-500/25',
+};
+
+const STRONG: PlanTheme = {
+  icon: Shield,
+  gradient: 'from-lime-500 to-emerald-600',
+  from: '#84cc16',
+  to: '#059669',
+  text: 'text-lime-300',
+  soft: 'bg-lime-500/15 text-lime-200',
+  glow: 'bg-lime-500/25',
 };
 
 const THEMES: Record<string, PlanTheme> = {
@@ -95,6 +105,9 @@ const THEMES: Record<string, PlanTheme> = {
     soft: 'bg-rose-500/15 text-rose-200',
     glow: 'bg-rose-500/25',
   },
+  'Rücken stark – Stufe 1 (@stark1)': STRONG,
+  'Rücken stark – Stufe 2 (@stark2)': STRONG,
+  'Rücken stark – Stufe 3 (@stark3)': STRONG,
 };
 
 export function planTheme(planName: string): PlanTheme {

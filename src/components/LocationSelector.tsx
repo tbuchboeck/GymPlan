@@ -1,13 +1,13 @@
 import { Check, ChevronRight, ArrowRight } from 'lucide-react';
 import type { Person } from '../lib/auth-service';
 import type { WorkoutPlan, WorkoutSession } from '../types';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan, acuteBackWorkoutPlan, bedMorningWorkoutPlan } from '../data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan, acuteBackWorkoutPlan, bedMorningWorkoutPlan, strongBackStage1Plan, strongBackStage2Plan, strongBackStage3Plan } from '../data/workoutPlan';
 import { isInWeekOf, isSameLocalDay } from '../utils/statistics';
 import { VersionBadge } from './VersionBadge';
 import { planTitle } from '../utils/format';
 import { planTheme } from '../utils/plan-theme';
 
-export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | 'acute' | 'bed';
+export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | 'acute' | 'bed' | 'stark1' | 'stark2' | 'stark3';
 
 interface LocationSelectorProps {
   person: Person;
@@ -72,6 +72,24 @@ const locations: LocationOption[] = [
     key: 'acute',
     description: 'Entlasten, mobilisieren & stabilisieren',
     plan: acuteBackWorkoutPlan,
+    onlyFor: 'thomas',
+  },
+  {
+    key: 'stark1',
+    description: 'Aufbau nach der akuten Phase: Rumpf, Gesäß & Hüfte',
+    plan: strongBackStage1Plan,
+    onlyFor: 'thomas',
+  },
+  {
+    key: 'stark2',
+    description: 'Ab Woche 3: + gegen Drehung, einseitig tragen',
+    plan: strongBackStage2Plan,
+    onlyFor: 'thomas',
+  },
+  {
+    key: 'stark3',
+    description: 'Zuletzt: + Heben lernen (Hip Hinge, Kreuzheben)',
+    plan: strongBackStage3Plan,
     onlyFor: 'thomas',
   },
 ];
