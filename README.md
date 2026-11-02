@@ -8,7 +8,7 @@ Progressive Web App (PWA) für geführtes Training – für **Neli** und **Thoma
 - **Plan-Auswahl** bei jedem Start: zeigt pro Plan „heute erledigt“ und „diese Woche x/y“. Der zuletzt gewählte Plan steht oben und ist hervorgehoben; bei Thomas steht vor 11 Uhr `@morgen` ganz oben, solange er heute noch nicht erledigt ist.
 - **Startseite**: Wochenübersicht Mo–So (Punkte für erledigte Tage, „x / Einheiten pro Woche“ für den aktuellen Plan), „Weitermachen bei Übung X/Y“ für ein angefangenes Training, Plan-Hinweis (z. B. wann ärztlich abklären), Übungsliste zum direkten Einstieg.
 - **Geführtes Training** Übung für Übung mit Satz-Abhaken, Pausen-Timer und animierten Übungsbildern (SVG).
-- **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
+- **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`/`@akut`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
 - **Statistiken**: Verlauf, Serien (Streak), Wochentage, Diagramme; Export/Import als JSON/CSV.
 - **Synchronisation** der Trainings mit Supabase (lokal zuerst, Server im Hintergrund).
 - **Offline**: Service Worker speichert die App inkl. aller Übungsbilder.
@@ -25,6 +25,7 @@ Erinnerungen per Push gibt es bewusst **nicht** (die frühere Einstellung war ei
 | Rücken-Aufbau | `@rücken` | 6 | 4 | Thomas |
 | Nacken, Schulter & BWS | `@nacken` | 14 | 4 | Thomas |
 | Morgen-Reset | `@morgen` | 10 | 7 | Thomas |
+| Rücken akut | `@akut` | 9 | 7 | Thomas |
 
 Die Pläne stehen in `src/data/workoutPlan.ts`, die Sichtbarkeit pro Person (`onlyFor`) in `src/components/LocationSelector.tsx`. Neli soll nichts eintragen müssen – für sie bleibt alles so einfach wie möglich.
 

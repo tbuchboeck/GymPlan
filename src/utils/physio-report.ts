@@ -5,11 +5,12 @@ export const PHYSIO_PLANS = [
   { tag: '@rücken', label: 'Rücken-Aufbau' },
   { tag: '@nacken', label: 'Nacken & Schulter' },
   { tag: '@morgen', label: 'Morgen-Routine' },
+  { tag: '@akut', label: 'Rücken akut' },
 ] as const;
 
 // Pläne mit Befindens-Abfrage nach dem Training
 export function hasFeelingCheck(planName: string): boolean {
-  return planName.includes('(@rücken)') || planName.includes('(@nacken)');
+  return planName.includes('(@rücken)') || planName.includes('(@nacken)') || planName.includes('(@akut)');
 }
 
 export const FEELING_LABELS: Record<Feeling, string> = {
@@ -61,7 +62,7 @@ export function physioReportTitle(now: Date = new Date()): string {
 
 /**
  * Textbericht über die letzten 4 Kalenderwochen (inkl. laufender Woche)
- * für die Pläne @rücken, @nacken und @morgen.
+ * für die Pläne @rücken, @nacken, @morgen und @akut.
  */
 export function buildPhysioReport(sessions: WorkoutSession[], now: Date = new Date()): string {
   const currentWeek = startOfWeek(now);

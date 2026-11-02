@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef, lazy, Suspense } from 'react';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from './data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan, acuteBackWorkoutPlan } from './data/workoutPlan';
 import type { WorkoutSession } from './types';
 import { authService, type Person } from './lib/auth-service';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -90,6 +90,7 @@ function PersonApp({ person, onLogout }: { person: Person; onLogout: () => void 
     if (location === 'back') return backWorkoutPlan;
     if (location === 'neck') return neckWorkoutPlan;
     if (location === 'morning') return morningWorkoutPlan;
+    if (location === 'acute') return acuteBackWorkoutPlan;
     return gymWorkoutPlan;
   }, [location]);
 

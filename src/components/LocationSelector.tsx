@@ -1,13 +1,13 @@
 import { Check, ChevronRight, ArrowRight } from 'lucide-react';
 import type { Person } from '../lib/auth-service';
 import type { WorkoutPlan, WorkoutSession } from '../types';
-import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan } from '../data/workoutPlan';
+import { gymWorkoutPlan, homeWorkoutPlan, homeWorkoutPlan2, backWorkoutPlan, neckWorkoutPlan, morningWorkoutPlan, acuteBackWorkoutPlan } from '../data/workoutPlan';
 import { isInWeekOf, isSameLocalDay } from '../utils/statistics';
 import { VersionBadge } from './VersionBadge';
 import { planTitle } from '../utils/format';
 import { planTheme } from '../utils/plan-theme';
 
-export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning';
+export type LocationKey = 'gym' | 'home' | 'home2' | 'back' | 'neck' | 'morning' | 'acute';
 
 interface LocationSelectorProps {
   person: Person;
@@ -60,6 +60,12 @@ const locations: LocationOption[] = [
     key: 'morning',
     description: 'Morgen-Reset in 10 Teilen',
     plan: morningWorkoutPlan,
+    onlyFor: 'thomas',
+  },
+  {
+    key: 'acute',
+    description: 'Entlasten, mobilisieren & stabilisieren',
+    plan: acuteBackWorkoutPlan,
     onlyFor: 'thomas',
   },
 ];
