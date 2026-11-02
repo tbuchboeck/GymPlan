@@ -5,7 +5,7 @@ Progressive Web App (PWA) für geführtes Training – für **Neli** und **Thoma
 ## Funktionen
 
 - **Login mit Passkey** (Fingerabdruck/Face ID) über `auth.apps.buchboeck.at`, Person wählbar (Neli/Thomas). Der Login bleibt **7 Tage gültig** – auch offline und nach Neustart der App. „Abmelden“ auf der Startseite beendet die Sitzung (z. B. um die Person zu wechseln).
-- **Plan-Auswahl** bei jedem Start: zeigt pro Plan „heute erledigt“ und „diese Woche x/y“. Der zuletzt gewählte Plan steht oben und ist hervorgehoben; bei Thomas steht vor 11 Uhr `@morgen` ganz oben, solange er heute noch nicht erledigt ist.
+- **Plan-Auswahl** bei jedem Start: zeigt pro Plan „heute erledigt“ und „diese Woche x/y“. Der zuletzt gewählte Plan steht oben und ist hervorgehoben; bei Thomas stehen vor 11 Uhr `@bett` und danach `@morgen` ganz oben, solange sie heute noch nicht erledigt sind.
 - **Startseite**: Wochenübersicht Mo–So (Punkte für erledigte Tage, „x / Einheiten pro Woche“ für den aktuellen Plan), „Weitermachen bei Übung X/Y“ für ein angefangenes Training, Plan-Hinweis (z. B. wann ärztlich abklären), Übungsliste zum direkten Einstieg.
 - **Geführtes Training** Übung für Übung mit Satz-Abhaken, Pausen-Timer und animierten Übungsbildern (SVG).
 - **Befinden & Vorsicht** (nur Thomas, `@rücken`/`@nacken`/`@akut`): Abfrage „besser/gleich/schlechter“ und Kribbeln nach dem Training, „Kribbelt – abbrechen“ bei Nerven-Übungen.
@@ -26,6 +26,7 @@ Erinnerungen per Push gibt es bewusst **nicht** (die frühere Einstellung war ei
 | Nacken, Schulter & BWS | `@nacken` | 14 | 4 | Thomas |
 | Morgen-Reset | `@morgen` | 10 | 7 | Thomas |
 | Rücken akut | `@akut` | 9 | 7 | Thomas |
+| Morgen im Bett | `@bett` | 7 | 7 | Thomas |
 
 Die Pläne stehen in `src/data/workoutPlan.ts`, die Sichtbarkeit pro Person (`onlyFor`) in `src/components/LocationSelector.tsx`. Neli soll nichts eintragen müssen – für sie bleibt alles so einfach wie möglich.
 

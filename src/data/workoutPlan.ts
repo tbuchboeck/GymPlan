@@ -802,6 +802,90 @@ export const morningWorkoutPlan: WorkoutPlan = {
   ]
 };
 
+// Morgen im Bett – 3–5 Min. vor dem Aufstehen, ohne Beugeübungen
+export const bedMorningWorkoutPlan: WorkoutPlan = {
+  name: "Morgen im Bett (@bett)",
+  duration: "Unbegrenzt",
+  sessionsPerWeek: 7,
+  goal: "Sanft wach werden, Rumpf aktivieren, sicher aufstehen",
+  trainer: "Eigene Zusammenstellung (Physio-Übungen)",
+  createdAt: "02.11.2026",
+  notice: "Noch im Bett machen, in Rückenlage mit angewinkelten Knien. 3–5 Minuten.\n\n" +
+    "Morgens keine starken Beugeübungen: kein Knie-zur-Brust, kein Einrollen. Die Bandscheibe ist nach der Nacht noch prall und empfindlich.\n\n" +
+    "Wichtiger als die Übungen ist die erste Stunde danach – da passieren die meisten Episoden:\n" +
+    "• Ein paar Schritte gehen, bevor du dich hinsetzt oder vorbeugst.\n" +
+    "• Beim Zähneputzen, Anziehen und am Badewannenrand abstützen und aus der Hüfte beugen, nicht aus dem Rücken.",
+  exercises: [
+    {
+      id: 1,
+      name: "Bauchatmung",
+      sets: 1,
+      reps: 5, // Atemzüge
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt, eine Hand auf dem Bauch. 5 tiefe Atemzüge: durch die Nase in den Bauch einatmen, sodass sich die Hand hebt, langsam ausatmen. Weckt den Körper und löst die Spannung. Wichtig: Schultern und Nacken bleiben locker.",
+      imageUrl: "/exercise-images/bauch-rippenatmung.svg"
+    },
+    {
+      id: 2,
+      name: "Fußpumpe",
+      sets: 1,
+      reps: 20,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt oder Beine lang. Beide Füße kräftig zu dir anziehen (Zehen Richtung Nase), dann weit strecken (Zehen weg). 20× im ruhigen Takt. Regt die Durchblutung an. Wichtig: Nur die Füße bewegen, Rücken bleibt entspannt liegen.",
+    },
+    {
+      id: 3,
+      name: "Becken kippen",
+      sets: 1,
+      reps: 10,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt, Füße auf der Matratze. Becken klein und langsam nach vorn kippen (kleines Hohlkreuz), dann ausatmen und sanft zurückkippen, bis die Lende leicht in die Matratze sinkt. 10× im Atemrhythmus. Wichtig: Kleine Bewegung, Gesäß bleibt liegen – kein Einrollen, kein Hochheben.",
+      imageUrl: "/exercise-images/becken-kippen.svg"
+    },
+    {
+      id: 4,
+      name: "Knie seitlich ablegen",
+      sets: 1,
+      reps: 10, // insgesamt, abwechselnd links/rechts
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Knie angewinkelt und geschlossen, Füße auf der Matratze. Beide Knie langsam zu einer Seite sinken lassen, zurück zur Mitte, dann zur anderen Seite. 10× abwechselnd. Klein anfangen, mit jeder Wiederholung etwas weiter, solange es angenehm ist. Wichtig: Schultern bleiben liegen, nicht in den Schmerz hineindrehen.",
+    },
+    {
+      id: 5,
+      name: "Bridge (Beckenheben)",
+      sets: 1,
+      reps: 5,
+      weight: 0,
+      rest: 5,
+      instructions: "Rückenlage, Füße hüftbreit auf der Matratze. Ausatmen, Gesäß anspannen und das Becken langsam heben, bis Knie, Hüfte und Schulter eine Linie bilden – oder weniger, wenn es zieht. 3 s halten, langsam absenken. 5×. Aktiviert Gesäß und Rumpf. Wichtig: Kraft aus dem Gesäß, kein Hohlkreuz.",
+      imageUrl: "/exercise-images/glute-bridge.svg"
+    },
+    {
+      id: 6,
+      name: "Bauchspannung",
+      sets: 1,
+      reps: 10, // Sekunden halten
+      unit: 'seconds',
+      weight: 0,
+      rest: 0,
+      instructions: "Nabel sanft nach innen ziehen und den Rumpf leicht anspannen, etwa ein Viertel der vollen Kraft, wie ein Korsett. Normal weiteratmen. Diese Spannung jetzt halten und beim Aufstehen beibehalten. Wichtig: Nicht die Luft anhalten, nicht pressen.",
+    },
+    {
+      id: 7,
+      name: "Aufstehen über die Seite",
+      sets: 1,
+      reps: 1,
+      weight: 0,
+      rest: 0,
+      instructions: "Bauchspannung halten. Als Ganzes („en bloc“) auf die Seite drehen, Knie bleiben zusammen. Beine aus dem Bett gleiten lassen und gleichzeitig mit den Armen den Oberkörper hochdrücken – nicht frontal aufsetzen. Kurz auf der Bettkante sitzen, dann aufstehen. Danach: erst ein paar Schritte gehen, bevor du dich setzt oder vorbeugst. Beim Zähneputzen und Anziehen abstützen und aus der Hüfte beugen.",
+    }
+  ]
+};
+
 // Rücken akut – Entlastung bei Schutzspannung im unteren Rücken
 export const acuteBackWorkoutPlan: WorkoutPlan = {
   name: "Rücken akut (@akut)",
@@ -813,7 +897,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
   notice: "Alles auf Gefühl – Hauptsache entspannend. Nur so weit bewegen, wie es angenehm ist, nichts durch Schmerz drücken.\n\n" +
     "Abends: vor dem Schlafen etwas Wärme (Wärmflasche, Kirschkernkissen oder warme Dusche).\n\n" +
     "Nachts: Seitenlage mit Kissen zwischen den Knien oder Rückenlage mit Kissen unter den Knien. Nicht flach auf dem Bauch schlafen, wenn es zieht. Zum Aufstehen erst auf die Seite drehen, dann mit den Armen hochdrücken („en bloc“).\n\n" +
-    "Morgens: in der ersten Stunde kein Vorbeugen und kein tiefes Hinsetzen. Beim Zähneputzen und Anziehen abstützen. Erst ein paar Minuten mobilisieren (Knie ablegen, Becken kippen, Katze-Kuh), dann kurz spazieren.\n\n" +
+    "Morgens: in der ersten Stunde kein Vorbeugen und kein tiefes Hinsetzen. Beim Zähneputzen und Anziehen abstützen. Vor dem Aufstehen die Routine „Morgen im Bett“, danach kurz spazieren.\n\n" +
     "In den nächsten Tagen: die Halteübungen (Bird Dog, Seitstütz, Bridge, Curl-up) täglich, Gehpausen und Rolle beibehalten.\n\n" +
     "Ärztlich abklären bei: Taubheit oder Kraftverlust im Bein, Taubheit im Gesäß- oder Intimbereich, Problemen beim Wasserlassen oder Stuhlgang, Fieber, oder wenn es nach einigen Tagen nicht besser wird.",
   exercises: [

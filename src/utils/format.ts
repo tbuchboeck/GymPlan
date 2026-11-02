@@ -24,6 +24,7 @@ const PLAN_TITLES: Record<string, string> = {
   'Nacken, Schulter & BWS (@nacken)': 'Nacken & Schulter',
   'Morgen-Reset (@morgen)': 'Morgen-Routine',
   'Rücken akut (@akut)': 'Rücken akut',
+  'Morgen im Bett (@bett)': 'Morgen im Bett',
 };
 
 export function planTitle(name: string): string {
