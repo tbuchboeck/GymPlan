@@ -879,12 +879,12 @@ export const bedMorningWorkoutPlan: WorkoutPlan = {
     },
     {
       id: 7,
-      name: "Aufstehen über die Seite",
+      name: "Aufstehen über den Vierfüßlerstand",
       sets: 1,
       reps: 1,
       weight: 0,
       rest: 0,
-      instructions: "Bauchspannung halten. Als Ganzes („en bloc“) auf die Seite drehen, Knie bleiben zusammen. Beine aus dem Bett gleiten lassen und gleichzeitig mit den Armen den Oberkörper hochdrücken – nicht frontal aufsetzen. Kurz auf der Bettkante sitzen, dann aufstehen. Danach: erst ein paar Schritte gehen, bevor du dich setzt oder vorbeugst. Beim Zähneputzen und Anziehen abstützen und aus der Hüfte beugen.",
+      instructions: "Bauchspannung halten. Als Ganzes („en bloc“) auf die Seite drehen, Knie bleiben zusammen. Mit den Armen hochdrücken in den Vierfüßlerstand. Dann den Po nach hinten auf die Fersen setzen. Vorne mit den Händen abstützen, einen Fuß aus dem Bett auf den Boden stellen, den zweiten nachholen und mit den Händen hochdrücken, bis du aufrecht stehst – nicht frontal aufsetzen. Danach: erst ein paar Schritte gehen, bevor du dich setzt oder vorbeugst. Beim Zähneputzen und Anziehen abstützen und aus der Hüfte beugen.",
       imageUrl: "/exercise-images/aufstehen.svg",
     }
   ]
@@ -912,7 +912,7 @@ export const acuteBackWorkoutPlan: WorkoutPlan = {
   createdAt: "02.11.2026",
   notice: "Alles auf Gefühl – Hauptsache entspannend. Nur so weit bewegen, wie es angenehm ist, nichts durch Schmerz drücken.\n\n" +
     "Abends: vor dem Schlafen etwas Wärme (Wärmflasche, Kirschkernkissen oder warme Dusche).\n\n" +
-    "Nachts: Seitenlage mit Kissen zwischen den Knien oder Rückenlage mit Kissen unter den Knien. Nicht flach auf dem Bauch schlafen, wenn es zieht. Zum Aufstehen erst auf die Seite drehen, dann mit den Armen hochdrücken („en bloc“).\n\n" +
+    "Nachts: Seitenlage mit Kissen zwischen den Knien oder Rückenlage mit Kissen unter den Knien. Nicht flach auf dem Bauch schlafen, wenn es zieht. Zum Aufstehen als Ganzes („en bloc“) auf die Seite drehen, in den Vierfüßlerstand hochdrücken, Po auf die Fersen, dann vorne abstützen und einen Fuß nach dem anderen auf den Boden.\n\n" +
     "Morgens: in der ersten Stunde kein Vorbeugen und kein tiefes Hinsetzen. Beim Zähneputzen und Anziehen abstützen. Vor dem Aufstehen die Routine „Morgen im Bett“, danach kurz spazieren.\n\n" +
     "In den nächsten Tagen: die Halteübungen (Hyperextension-Bank, Bird Dog, Seitstütz, Bridge, Curl-up) täglich, Gehpausen und Rolle beibehalten.\n\n" +
     "Ärztlich abklären bei: Taubheit oder Kraftverlust im Bein, Taubheit im Gesäß- oder Intimbereich, Problemen beim Wasserlassen oder Stuhlgang, Fieber, oder wenn es nach einigen Tagen nicht besser wird.",
