@@ -545,7 +545,10 @@ def _show_anim(windows, dur) -> str:
 
 
 def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
-           title: str = "", extra_defs: str = "", background: list[Prim] | None = None) -> str:
+           title: str = "", extra_defs: str = "", background: list[Prim] | None = None,
+           compact: bool = False) -> str:
+    """compact=True lässt in Haltephasen doppelte Frames weg (kleinere Datei
+    bei langen Abläufen mit vielen Pausen)."""
     dur = round(timeline.duration, 3)
     n = max(2, int(round(dur * fps)))
     frames = []
@@ -566,6 +569,15 @@ def render(prims: list[Prim], timeline: Timeline, skeleton: Skeleton, fps=15,
                 vals = [fmt(s[key]) for s in series]
                 if len(set(vals)) == 1:
                     attrs[key] = vals[0]
+                elif compact:
+                    # Haltephasen zusammenfassen: Frames, deren Wert dem Vor- und
+                    # Nachfolger gleicht, entfallen (keyTimes hält die Zeit exakt).
+                    keep = [i for i in range(len(vals))
+                            if i in (0, len(vals) - 1) or not (vals[i] == vals[i - 1] == vals[i + 1])]
+                    attrs.pop(key, None)
+                    kt = ";".join(f"{frames[i]['u']:.4f}" for i in keep)
+                    anims.append(f'<animate attributeName="{key}" values="{";".join(vals[i] for i in keep)}" '
+                                 f'keyTimes="{kt}" dur="{dur}s" repeatCount="indefinite"/>')
                 else:
                     attrs.pop(key, None)
                     anims.append(f'<animate attributeName="{key}" values="{";".join(vals)}" '
