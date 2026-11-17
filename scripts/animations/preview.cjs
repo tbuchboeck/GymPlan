@@ -19,7 +19,7 @@ const { chromium } = require('playwright');
 <style>.g{display:grid;grid-template-columns:repeat(4,400px);gap:4px}.c{position:relative}
 .t{position:absolute;left:6px;top:4px;color:#0f0;font:11px monospace;z-index:2}svg{display:block}</style>
 <div class="g">${cells}</div></body></html>`;
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ channel: 'chrome', channel: 'chrome' });
   const page = await browser.newPage({ viewport: { width: 4 * 404, height: 800 } });
   await page.setContent(html);
   await page.evaluate((args) => {
